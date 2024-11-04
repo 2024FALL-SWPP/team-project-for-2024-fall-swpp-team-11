@@ -1,0 +1,6 @@
+root = true
+
+# C# files
+[*.cs]
+
+dotnet_diagnostic.IDE0130.severity=error # IDE0130 means namespace does not match folder structure 
