@@ -1,0 +1,53 @@
+#!/bin/sh
+LC_ALL=C
+echo "Running pre-commit hook"
+
+# 커밋으로 생성되는 파일을 나열하기 위해 현재 Index와 비교할 HEAD를 지정합니다
+if git rev-parse --verify HEAD >/dev/null
+then
+	against=HEAD
+else
+	# 새로 생성해서 커밋이 없는 저장소의 경우 HEAD가 없기 때문에 빈 Tree와 비교합니다
+	against=`git hash-object -t tree /dev/null`
+fi
+
+# Redirect output to stderr
+exec 1>&2
+
+# Index에서 ADD된 파일의 이름만 순회합니다. RENAME도 ADD에 포함됩니다
+echo "Checking for invalid characters in new files"
+git diff --cached --name-only --diff-filter=A -z $against | while IFS= read -r -d '' filename; do
+	if [[ $filename =~ "\\" ]]; then
+		# 사용자가 수정할 수 있도록 문제가 무엇인지 제대로 안내해야 합니다
+		>&2 echo "새로 생성된 파일 \"${filename}\" 의 이름 혹은 경로에 잘못된 문자 '\'이 포함됐습니다."
+		# 0이 아닌 Exit Code를 리턴해 커밋을 중단합니다
+		exit 2
+	fi
+done
+
+echo "Checking for .editorconfig file"
+if [ ! -f .editorconfig ]; then
+	echo "No .editorconfig file found"
+	exit 1
+fi
+
+echo "Checking for dotnet-format"
+# Find the solution file in the root directory
+SOLUTION_FILE=$(find . -maxdepth 1 -name "*.sln" | head -n 1)
+[ -z "$SOLUTION_FILE" ] && echo "Solution file not found!" && exit 1
+
+# Select files to format
+FILES=$(git diff --cached --name-only --diff-filter=ACM "*.cs" | sed 's| |\\ |g')
+[ -z "$FILES" ] && exit 0
+
+# Convert space-separated file paths into a comma-separated list
+FORMATTABLE_FILES=$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')
+
+# Format the selected files using the workspace option
+dotnet format "$SOLUTION_FILE" --verbosity diagnostic --include "$FORMATTABLE_FILES"
+
+# Add back the modified files to staging
+echo "$FILES" | xargs git add
+echo "Formatted files added to staging"
+
+exit 0
