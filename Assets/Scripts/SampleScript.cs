@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class BoxManager : MonoBehaviour {
+public class BoxManager : MonoBehaviour
+{
 
     // Start is called before the first frame update
     void Start()
