@@ -36,16 +36,16 @@ SOLUTION_FILE=$(find . -maxdepth 1 -name "*.sln" | head -n 1)
 
 # Select files to format
 FILES=$(git diff --cached --name-only --diff-filter=ACM "*.cs" | sed 's| |\\ |g')
-[ -z "$FILES" ] && exit 0
+if [ -n "$FILES" ]; then
+	# Convert space-separated file paths into a comma-separated list
+	FORMATTABLE_FILES=$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')
 
-# Convert space-separated file paths into a comma-separated list
-FORMATTABLE_FILES=$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')
+	# Format the selected files using the workspace option
+	dotnet format "$SOLUTION_FILE" --verbosity diagnostic --include "$FORMATTABLE_FILES"
 
-# Format the selected files using the workspace option
-dotnet format "$SOLUTION_FILE" --verbosity diagnostic --include "$FORMATTABLE_FILES"
-
-# Add back the modified files to staging
-echo "$FILES" | xargs git add
+	# Add back the modified files to staging
+	echo "$FILES" | xargs git add
+fi
 
 ### Check for large files
 # ensure that there's not a >100mb file in this checkin, which github won't allow
