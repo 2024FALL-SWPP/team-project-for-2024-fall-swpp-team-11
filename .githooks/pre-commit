@@ -1,6 +1,7 @@
 #!/bin/sh
 LC_ALL=C
 echo "Running pre-commit hook"
+ASSETS_DIR="$(git config --get unity3d.assets-dir || echo "Assets")"
 
 if git rev-parse --verify HEAD >/dev/null
 then
@@ -153,4 +154,5 @@ if [ "$ret" != 0 ]; then
 	exit "$ret"
 fi
 
+echo "Pre-commit hook passed"
 exit 0
