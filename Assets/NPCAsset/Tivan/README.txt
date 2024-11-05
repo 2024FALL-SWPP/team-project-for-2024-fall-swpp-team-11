@@ -1,1 +1,0 @@
-A Low poly 3D model male knight fantasy character perfect for adventure games.
