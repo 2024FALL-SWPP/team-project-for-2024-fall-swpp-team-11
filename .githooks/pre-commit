@@ -32,7 +32,7 @@ fi
 
 echo "Checking for dotnet-format"
 # Find the solution file in the root directory
-SOLUTION_FILE=$(find . -maxdepth 1 -name "*.sln" | head -n 1)
+SOLUTION_FILE=$(find . -maxdepth 2 -name "*.sln" | head -n 1)
 [ -z "$SOLUTION_FILE" ] && echo "Solution file not found!" && exit 1
 
 # Select files to format
