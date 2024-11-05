@@ -835,7 +835,8 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4566883161053653904, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
 --- !u!1001 &252623459
 PrefabInstance:
@@ -1138,7 +1139,8 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4566883161053653904, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
 --- !u!4 &320639726 stripped
 Transform:
@@ -2709,7 +2711,6 @@ GameObject:
   - component: {fileID: 961739753}
   - component: {fileID: 961739752}
   - component: {fileID: 961739751}
-  - component: {fileID: 961739750}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2717,18 +2718,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &961739750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961739749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &961739751
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3122,7 +3111,8 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4566883161053653904, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
 --- !u!1 &1048234110
 GameObject:
@@ -4645,7 +4635,8 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4566883161053653904, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d6cfbca0aa720344e9a0d920d30c1e75, type: 3}
 --- !u!4 &1550433567 stripped
 Transform:
