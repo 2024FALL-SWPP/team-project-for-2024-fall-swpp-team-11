@@ -23,8 +23,6 @@ git diff --cached --name-only --diff-filter=A -z $against | while IFS= read -r -
 	fi
 done
 
-### Format C# files
-
 # Select files to format
 FILES=$(git diff --cached --name-only --diff-filter=ACM "*.cs" | sed 's| |\\ |g')
 if [ -n "$FILES" ]; then
@@ -36,7 +34,7 @@ if [ -n "$FILES" ]; then
 
     echo "Checking for dotnet-format"
     # Find the solution file in the root directory
-    SOLUTION_FILE=$(find . -maxdepth 1 -name "*.sln" | head -n 1)
+    SOLUTION_FILE=$(find . -maxdepth 2 -name "*.sln" | head -n 1)
     [ -z "$SOLUTION_FILE" ] && echo "Solution file not found!" && exit 1
 
 	# Convert space-separated file paths into a comma-separated list
