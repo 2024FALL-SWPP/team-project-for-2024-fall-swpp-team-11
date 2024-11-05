@@ -23,21 +23,20 @@ git diff --cached --name-only --diff-filter=A -z $against | while IFS= read -r -
 	fi
 done
 
-### Format C# files
-echo "Checking for .editorconfig file"
-if [ ! -f .editorconfig ]; then
-	echo "No .editorconfig file found"
-	exit 1
-fi
-
-echo "Checking for dotnet-format"
-# Find the solution file in the root directory
-SOLUTION_FILE=$(find . -maxdepth 2 -name "*.sln" | head -n 1)
-[ -z "$SOLUTION_FILE" ] && echo "Solution file not found!" && exit 1
-
 # Select files to format
 FILES=$(git diff --cached --name-only --diff-filter=ACM "*.cs" | sed 's| |\\ |g')
 if [ -n "$FILES" ]; then
+    echo "C# files found. Checking for .editorconfig file"
+    if [ ! -f .editorconfig ]; then
+        echo "No .editorconfig file found"
+        exit 1
+    fi
+
+    echo "Checking for dotnet-format"
+    # Find the solution file in the root directory
+    SOLUTION_FILE=$(find . -maxdepth 2 -name "*.sln" | head -n 1)
+    [ -z "$SOLUTION_FILE" ] && echo "Solution file not found!" && exit 1
+
 	# Convert space-separated file paths into a comma-separated list
 	FORMATTABLE_FILES=$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')
 
@@ -52,6 +51,8 @@ if [ -n "$FILES" ]; then
 	if [ "$ret" != 0 ]; then
 		exit "$ret"
 	fi
+else 
+    echo "No C# files found. Skipping formatting"
 fi
 
 ### Check for large files
