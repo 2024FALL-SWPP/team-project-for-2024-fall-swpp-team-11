@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IInputHandler
 {
-    Vector3 GetKeyDirection();
-    Vector3 GetMouseDirection();
+    Vector3 GetMoveDir();
+    Vector3 GetViewDir();
 }

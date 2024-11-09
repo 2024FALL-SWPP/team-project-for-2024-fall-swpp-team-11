@@ -6,6 +6,7 @@ public class Character : MonoBehaviour
     private CharacterMovement characterMovement;
     private CharacterInteract characterInteract;
     private IInputHandler inputHandler;
+    private bool spacePressed = false;
     
     void Start()
     {
@@ -19,17 +20,57 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            characterInteract.TryInteract(transform.position);
+            Interact();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            spacePressed = true;
         }
     }
 
     void FixedUpdate()
     {
-        Vector3 moveDir = inputHandler.GetKeyDirection();
+        Move();
+        Turn();
+        if (spacePressed)
+        {
+            Jump();
+            spacePressed = false;
+        }
+    }
+
+    void Move()
+    {
+        if (inputHandler == null || !characterMovement || !characterAnimation) return;
+
+        Vector3 moveDir = inputHandler.GetMoveDir();
         characterMovement.Move(moveDir);
         characterAnimation.PlayMoveAnimation(moveDir);
+    }
 
-        Vector3 mouseDir = inputHandler.GetMouseDirection();
-        characterMovement.Turn(mouseDir);
+    void Turn()
+    {
+        if (inputHandler == null || !characterMovement) return;
+
+        Vector3 viewDir = inputHandler.GetViewDir();
+        characterMovement.Turn(viewDir);
+    }
+
+    void Jump()
+    {
+        if (!characterMovement || !characterAnimation) return;
+
+        if (characterMovement.IsJumpable())
+        {
+            characterMovement.Jump();
+            characterAnimation.PlayJumpAnimation();
+        }
+    }
+
+    void Interact()
+    {
+        if (!characterInteract) return;
+
+        characterInteract.TryInteract(transform.position);
     }
 }
