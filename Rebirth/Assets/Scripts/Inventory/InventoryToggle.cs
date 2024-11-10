@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InventoryToggle : MonoBehaviour
 {
-    public GameObject InventoryUI;
+    public GameObject InventoryCanvas;
     private bool isInventoryVisible = false;
 
     void Update()
@@ -10,7 +10,7 @@ public class InventoryToggle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             isInventoryVisible = !isInventoryVisible;
-            InventoryUI.SetActive(isInventoryVisible);
+            InventoryCanvas.SetActive(isInventoryVisible);
         }
     }
 }

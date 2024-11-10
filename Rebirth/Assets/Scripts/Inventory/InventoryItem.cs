@@ -3,9 +3,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public Item itemData;
+    public GameObject tooltip;
+    private Item itemData;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Canvas canvas;
@@ -19,16 +20,41 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>();
                 
-        viewportRectTransform = transform.parent.parent.GetComponent<RectTransform>(); // Viewport는 Content의 부모
+        viewportRectTransform = transform.parent.parent.GetComponent<RectTransform>();
     }
-    public void InitializeItem(Item item)
+    public void Initialize(Item item)
     {
         itemData = item;
-        var itemName = transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+        InitializeInventoryIcon(item);
+        InitializeTooltip(item);
+    }
+
+    private void InitializeInventoryIcon(Item item)
+    {        
         var itemIcon = transform.Find("ItemIcon").GetComponent<Image>();
 
-        itemName.text = item.itemName;
         itemIcon.sprite = item.icon;
+    }
+
+    private void InitializeTooltip(Item item)
+    {
+        var itemIcon = tooltip.transform.Find("ItemIcon").GetComponent<Image>();
+        var itemName = tooltip.transform.Find("ItemName").GetComponent<TMP_Text>();
+        var itemDescription = tooltip.transform.Find("ItemDescription").GetComponent<TMP_Text>();
+
+        itemIcon.sprite = item.icon;
+        itemName.text = item.itemName;
+        itemDescription.text = item.description;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        tooltip.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        tooltip.SetActive(false);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -80,14 +106,15 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private void SpawnItemInWorld()
     {
-        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+        Vector3 forwardFlat = Camera.main.transform.forward;
+        forwardFlat.y = 0;
+        forwardFlat = forwardFlat.normalized; 
+       
+        float spawnDistance = 4f; 
+        Vector3 spawnPosition = Camera.main.transform.position + forwardFlat * spawnDistance;
         GameObject worldItem = Instantiate(itemData.prefab, spawnPosition, Quaternion.identity);
-
-        GameObject worldItemsParent = GameObject.Find("WorldItemsParent");
-        if (worldItemsParent != null)
-        {
-            worldItem.transform.SetParent(worldItemsParent.transform);
-        }
+       
         worldItem.transform.localScale = Vector3.one;
     }
+
 }

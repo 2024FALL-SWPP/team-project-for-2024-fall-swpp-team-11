@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -39,7 +36,7 @@ public class Inventory : MonoBehaviour
         {
             GameObject obj = Instantiate(InventoryItem, InventoryContent);
             var inventoryItem = obj.GetComponent<InventoryItem>();
-            inventoryItem.InitializeItem(item);
+            inventoryItem.Initialize(item);
         }
     }
 }
