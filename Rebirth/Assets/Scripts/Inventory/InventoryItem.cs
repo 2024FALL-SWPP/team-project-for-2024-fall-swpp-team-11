@@ -5,8 +5,9 @@ using TMPro;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject tooltip;
-    private Item itemData;
+    [SerializeField] private GameObject itemSlot;
+    [SerializeField] private GameObject tooltip;
+    private ItemData itemData;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Canvas canvas;
@@ -22,29 +23,30 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 
         viewportRectTransform = transform.parent.parent.GetComponent<RectTransform>();
     }
-    public void Initialize(Item item)
+    
+    public void Initialize(ItemData _itemData)
     {
-        itemData = item;
-        InitializeInventoryIcon(item);
-        InitializeTooltip(item);
+        itemData = _itemData;
+        InitializeInventoryIcon(itemData);
+        InitializeTooltip(itemData);
     }
 
-    private void InitializeInventoryIcon(Item item)
+    private void InitializeInventoryIcon(ItemData itemData)
     {        
-        var itemIcon = transform.Find("ItemIcon").GetComponent<Image>();
+        var itemIcon = itemSlot.transform.Find("ItemIcon").GetComponent<Image>();
 
-        itemIcon.sprite = item.icon;
+        itemIcon.sprite = itemData.icon;
     }
 
-    private void InitializeTooltip(Item item)
+    private void InitializeTooltip(ItemData itemData)
     {
         var itemIcon = tooltip.transform.Find("ItemIcon").GetComponent<Image>();
         var itemName = tooltip.transform.Find("ItemName").GetComponent<TMP_Text>();
         var itemDescription = tooltip.transform.Find("ItemDescription").GetComponent<TMP_Text>();
 
-        itemIcon.sprite = item.icon;
-        itemName.text = item.itemName;
-        itemDescription.text = item.description;
+        itemIcon.sprite = itemData.icon;
+        itemName.text = itemData.itemName;
+        itemDescription.text = itemData.description;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -73,6 +75,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if (!IsPointerOverViewport(eventData))
+            Debug.Log("Out");
+        else
+            Debug.Log("In");
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -109,12 +115,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Vector3 forwardFlat = Camera.main.transform.forward;
         forwardFlat.y = 0;
         forwardFlat = forwardFlat.normalized; 
+
+        CameraController cameraController = Camera.main.GetComponent<CameraController>();
+        float spawnDistance = cameraController ? cameraController.hDist + 2f : 6f; 
        
-        float spawnDistance = 4f; 
         Vector3 spawnPosition = Camera.main.transform.position + forwardFlat * spawnDistance;
-        GameObject worldItem = Instantiate(itemData.prefab, spawnPosition, Quaternion.identity);
-       
-        worldItem.transform.localScale = Vector3.one;
+        Instantiate(itemData.prefab, spawnPosition, Quaternion.identity);
     }
 
 }

@@ -39,6 +39,7 @@ public class Character : MonoBehaviour
     void HandleRotation()
     {
         if (inputHandler == null || !characterMovement) return;
+        if (!GameStateManager.Instance.IsViewLocked) return;
 
         Quaternion viewRot = inputHandler.GetViewRot();
         characterMovement.Turn(viewRot);
@@ -60,6 +61,6 @@ public class Character : MonoBehaviour
     {
         if (!inputHandler.IsInteractRequested()) return;
         
-        characterInteract.TryInteract(transform.position);
+        characterInteract.TryInteract();
     }
 }

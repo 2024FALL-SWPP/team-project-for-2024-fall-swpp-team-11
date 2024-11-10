@@ -4,7 +4,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance;
-    public List<Item> Items = new List<Item>();
+    public List<ItemData> ItemDatas = new List<ItemData>();
     public Transform InventoryContent;
     public GameObject InventoryItem;
 
@@ -13,30 +13,30 @@ public class Inventory : MonoBehaviour
         Instance = this;
     }
 
-    public void Add(Item item)
+    public void Add(ItemData itemData)
     {
-        Items.Add(item);
+        ItemDatas.Add(itemData);
         ListItems();
     }
 
-    public void Remove(Item item)
+    public void Remove(ItemData itemData)
     {
-        Items.Remove(item);
+        ItemDatas.Remove(itemData);
         ListItems();
     }
 
     public void ListItems()
     {
-        foreach (Transform item in InventoryContent)
+        foreach (Transform itemData in InventoryContent)
         {
-            Destroy(item.gameObject);
+            Destroy(itemData.gameObject);
         }
         
-        foreach (var item in Items)
+        foreach (var itemData in ItemDatas)
         {
             GameObject obj = Instantiate(InventoryItem, InventoryContent);
             var inventoryItem = obj.GetComponent<InventoryItem>();
-            inventoryItem.Initialize(item);
+            inventoryItem.Initialize(itemData);
         }
     }
 }

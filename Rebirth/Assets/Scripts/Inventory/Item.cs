@@ -1,11 +1,36 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName ="Item/Create New Item")]
-public class Item : ScriptableObject
+public class Item : MonoBehaviour, IInteractable
 {
-    public string itemName;
-    public string description;
-    public int value;
-    public Sprite icon;
-    public GameObject prefab;
+    public ItemData itemData;
+    private Outline outline;
+
+    private void Awake()
+    {
+        outline = GetComponent<Outline>();
+    }
+
+    public void Interact()
+    {
+        if (itemData)
+        {
+            Inventory.Instance.Add(itemData);
+        }
+        
+        Destroy(gameObject);
+    }
+
+    public void OnFocus()
+    {
+        if (!outline) return;
+
+        outline.enabled = true;
+    }
+
+    public void OnDefocus()
+    {
+        if (!outline) return;
+
+        outline.enabled = false;
+    }
 }
