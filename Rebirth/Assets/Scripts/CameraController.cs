@@ -4,16 +4,17 @@ public class CameraController : MonoBehaviour
 {
     public Transform target;
     private IInputHandler inputHandler;
-    private float dist = 2f;
+    private float vDist = 2f;
+    private float hDist = 4f;
 
     void Start()
     {
         inputHandler = GetComponent<IInputHandler>();
     }
 
-    void LateUpdate()
+    void Update()
     {
-        this.transform.eulerAngles = inputHandler.GetMouseDirection();
-        transform.position = target.position - transform.forward * dist + transform.up * dist;
+        transform.rotation = inputHandler.GetViewRot();
+        transform.position = target.position - transform.forward * hDist + transform.up * vDist;
     }
 }
