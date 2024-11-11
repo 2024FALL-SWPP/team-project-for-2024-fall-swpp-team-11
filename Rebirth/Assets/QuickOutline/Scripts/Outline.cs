@@ -99,6 +99,7 @@ public class Outline : MonoBehaviour {
     needsUpdate = true;
 
     ColorUtility.TryParseHtmlString("#EEB300", out outlineColor);
+    outlineMode = Mode.OutlineVisible;
   }
 
   void OnEnable() {

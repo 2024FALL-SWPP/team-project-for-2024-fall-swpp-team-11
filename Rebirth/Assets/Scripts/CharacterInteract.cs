@@ -29,7 +29,6 @@ public class CharacterInteract : MonoBehaviour
             }
         }
 
-        // 이전 상호작용 대상과 다르다면 하이라이트를 업데이트합니다
         if (currentInteractable != closestInteractable)
         {
             if (currentInteractable != null)

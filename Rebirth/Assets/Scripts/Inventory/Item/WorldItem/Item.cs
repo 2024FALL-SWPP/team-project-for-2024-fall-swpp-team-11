@@ -14,9 +14,9 @@ public class Item : MonoBehaviour, IInteractable
     {
         if (itemData)
         {
-            Inventory.Instance.Add(itemData);
+            InventoryManager.Instance.AddItem(itemData);
         }
-        
+
         Destroy(gameObject);
     }
 
