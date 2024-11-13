@@ -9,9 +9,23 @@ public class CharacterAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void PlayMoveAnimation(Vector3 direction)
+    public void PlayMoveAnimation(Vector3 moveDir)
     {
-        float speed = direction.magnitude;
-        animator.SetFloat("Speed", speed);
+        if (DialogueManager.Instance.IsDialogueActive)
+        return;
+
+        if (!animator) return;
+        
+        animator.SetFloat("MoveForward", moveDir.z);
+        animator.SetFloat("MoveRight", moveDir.x);
+    }
+    public void PlayJumpAnimation()
+    {
+        if (DialogueManager.Instance.IsDialogueActive)
+        return;
+        
+        if (!animator) return;
+        
+        animator.SetTrigger("Jump");
     }
 }
