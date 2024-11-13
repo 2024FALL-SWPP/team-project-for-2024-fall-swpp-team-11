@@ -11,6 +11,9 @@ public class CharacterAnimation : MonoBehaviour
 
     public void PlayMoveAnimation(Vector3 moveDir)
     {
+        if (DialogueManager.Instance.IsDialogueActive)
+        return;
+
         if (!animator) return;
         
         animator.SetFloat("MoveForward", moveDir.z);
@@ -18,6 +21,9 @@ public class CharacterAnimation : MonoBehaviour
     }
     public void PlayJumpAnimation()
     {
+        if (DialogueManager.Instance.IsDialogueActive)
+        return;
+        
         if (!animator) return;
         
         animator.SetTrigger("Jump");

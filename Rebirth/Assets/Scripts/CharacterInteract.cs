@@ -43,6 +43,9 @@ public class CharacterInteract : MonoBehaviour
 
     public void TryInteract()
     {
+        if (DialogueManager.Instance.IsDialogueActive)
+        return;
+        
         if (currentInteractable != null)
         {
             currentInteractable.Interact();

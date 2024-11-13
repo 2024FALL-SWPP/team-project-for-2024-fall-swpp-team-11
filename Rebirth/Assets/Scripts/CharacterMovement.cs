@@ -6,7 +6,6 @@ public class CharacterMovement : MonoBehaviour
     private float jumpForce = 5f;
     private Rigidbody rb;
     private bool canJump = true;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,6 +21,9 @@ public class CharacterMovement : MonoBehaviour
 
     public void Move(Vector3 moveDir)
     {
+        if (!MovementEnabled())
+        return;
+
         if (!rb || moveDir == Vector3.zero) return;
 
         Vector3 moveDirection = transform.right * moveDir.x + transform.forward * moveDir.z;
@@ -30,12 +32,18 @@ public class CharacterMovement : MonoBehaviour
 
     public void Turn(Quaternion viewRot)
     {
+        if (!MovementEnabled())
+        return;
+
         Quaternion flatViewRot = Quaternion.Euler(0, viewRot.eulerAngles.y, 0);
         transform.rotation = flatViewRot;
     }
 
     public void Jump()
     {
+        if (!MovementEnabled())
+        return;
+        
         if (!rb) return;
 
         if (IsGrounded() && canJump)
@@ -56,5 +64,10 @@ public class CharacterMovement : MonoBehaviour
     public bool IsJumpable()
     {
         return IsGrounded() && canJump;
+    }
+
+    public bool MovementEnabled() 
+    {
+        return !DialogueManager.Instance.IsDialogueActive;
     }
 }
