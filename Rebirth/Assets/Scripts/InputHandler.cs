@@ -2,80 +2,34 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour, IInputHandler
 {
-    [Header("Mouse Sensitivity")]
-    [SerializeField] private float horizontalSensitivity = 5f;
-    [SerializeField] private float verticalSensitivity = 10f;
-    
-    [Header("Vertical Rotation Limits")]
-    [SerializeField] private float minVerticalAngle = -20f;
-    [SerializeField] private float maxVerticalAngle = 80f;
-    
-    private Vector2 viewRot;
-    private Vector3 moveInput;
-    private InputState currentState;
-    
-    private readonly struct InputState
-    {
-        public readonly bool jumpRequested;
-        public readonly bool interactRequested;
-        
-        public InputState(bool jump, bool interact)
-        {
-            jumpRequested = jump;
-            interactRequested = interact;
-        }
-    }
+    private float rotSensitive = 10f; 
+    private float Yaxis;
+    private float Xaxis;
+    private float RotationMin = -10f;
+    private float RotationMax = 80f;
+    private float smoothTime = 0.12f;
+    private Vector3 targetRotation;
+    private Vector3 currentVel;
 
     void Update()
     {
-        UpdateInputState();
-        UpdateMovement();
-        UpdateViewRot();
+        Yaxis = Yaxis + Input.GetAxis("Mouse X") * rotSensitive; 
+        Xaxis = Xaxis - Input.GetAxis("Mouse Y") * rotSensitive; 
+
+        Xaxis = Mathf.Clamp(Xaxis, RotationMin, RotationMax); 
     }
 
-    private void UpdateInputState()
+    public Vector3 GetKeyDirection()
     {
-        bool jump = currentState.jumpRequested || Input.GetKey(KeyCode.Space);
-        bool interact = currentState.interactRequested || Input.GetKeyDown(KeyCode.F);
-        currentState = new InputState(jump, interact);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        return new Vector3(horizontal, 0, vertical).normalized;
     }
 
-    private void UpdateMovement()
+    public Vector3 GetMouseDirection()
     {
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.z = Input.GetAxisRaw("Vertical");
-    }
+        targetRotation = Vector3.SmoothDamp(targetRotation, new Vector3(Xaxis, Yaxis), ref currentVel, smoothTime);
 
-    private void UpdateViewRot()
-    {
-        if (!GameStateManager.Instance.IsViewLocked) return;
-        
-        viewRot.y += Input.GetAxis("Mouse X") * verticalSensitivity; 
-        viewRot.x += -Input.GetAxis("Mouse Y") * horizontalSensitivity; 
-        viewRot.x = Mathf.Clamp(viewRot.x, minVerticalAngle, maxVerticalAngle); 
-    }
-
-    public Vector3 GetMoveInput()
-    {
-        return moveInput.normalized;
-    }
-
-    public Quaternion GetViewRot()
-    {
-        return Quaternion.Euler(viewRot.x, viewRot.y, 0f);
-    }
-
-    public bool IsJumpRequested()
-    {
-        bool wasRequested = currentState.jumpRequested;
-        currentState = new InputState(false, currentState.interactRequested);
-        return wasRequested;
-    }
-
-    public bool IsInteractRequested()
-    {
-        bool wasRequested = currentState.interactRequested;
-        currentState = new InputState(currentState.jumpRequested, false);
-        return wasRequested;
+        return targetRotation;
     }
 }

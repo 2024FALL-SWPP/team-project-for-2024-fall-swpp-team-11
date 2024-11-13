@@ -17,50 +17,19 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        HandleRotation();
-        HandleInteraction();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            characterInteract.TryInteract(transform.position);
+        }
     }
 
     void FixedUpdate()
     {
-        HandleMovement();
-        HandleJump();
-    }
+        Vector3 moveDir = inputHandler.GetKeyDirection();
+        characterMovement.Move(moveDir);
+        characterAnimation.PlayMoveAnimation(moveDir);
 
-    void HandleMovement()
-    {
-        if (inputHandler == null || !characterMovement || !characterAnimation) return;
-
-        Vector3 moveInput = inputHandler.GetMoveInput();
-        characterMovement.Move(moveInput);
-        characterAnimation.PlayMoveAnimation(moveInput);
-    }
-
-    void HandleRotation()
-    {
-        if (inputHandler == null || !characterMovement) return;
-        if (!GameStateManager.Instance.IsViewLocked) return;
-
-        Quaternion viewRot = inputHandler.GetViewRot();
-        characterMovement.Turn(viewRot);
-    }
-
-    void HandleJump()
-    {
-        if (!characterMovement || !characterAnimation) return;
-        if (!inputHandler.IsJumpRequested()) return;
-
-        if (characterMovement.IsJumpable())
-        {
-            characterMovement.Jump();
-            characterAnimation.PlayJumpAnimation();
-        }
-    }
-
-    private void HandleInteraction()
-    {
-        if (!inputHandler.IsInteractRequested()) return;
-        
-        characterInteract.TryInteract();
+        Vector3 mouseDir = inputHandler.GetMouseDirection();
+        characterMovement.Turn(mouseDir);
     }
 }

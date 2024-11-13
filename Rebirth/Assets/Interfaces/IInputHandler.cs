@@ -2,8 +2,6 @@ using UnityEngine;
 
 public interface IInputHandler
 {
-    Vector3 GetMoveInput();
-    Quaternion GetViewRot();
-    bool IsJumpRequested();
-    bool IsInteractRequested();
+    Vector3 GetKeyDirection();
+    Vector3 GetMouseDirection();
 }

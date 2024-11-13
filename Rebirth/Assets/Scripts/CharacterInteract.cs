@@ -1,26 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterInteract : MonoBehaviour
 {
-    private IInteractable currentInteractable;
-
-    private void Update()
+    public void TryInteract(Vector3 position)
     {
-        FindClosestInteractable();
-    }
-
-    private void FindClosestInteractable()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3f);
+        Collider[] hitColliders = Physics.OverlapSphere(position, 3f);
         IInteractable closestInteractable = null;
-        float closestDistance = Mathf.Infinity;
+        float closestDistance = Mathf.Infinity; 
 
+        // 가장 가까운 interactable
         foreach (var hitCollider in hitColliders)
         {
             IInteractable interactable = hitCollider.GetComponent<IInteractable>();
             if (interactable != null)
             {
-                float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                float distance = Vector3.Distance(position, hitCollider.transform.position);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
@@ -29,23 +25,10 @@ public class CharacterInteract : MonoBehaviour
             }
         }
 
-        if (currentInteractable != closestInteractable)
+        // interact
+        if (closestInteractable != null)
         {
-            if (currentInteractable != null)
-                currentInteractable.OnDefocus();
-            
-            currentInteractable = closestInteractable;
-            
-            if (currentInteractable != null)
-                currentInteractable.OnFocus();
-        }
-    }
-
-    public void TryInteract()
-    {
-        if (currentInteractable != null)
-        {
-            currentInteractable.Interact();
+            closestInteractable.Interact();
         }
     }
 }
