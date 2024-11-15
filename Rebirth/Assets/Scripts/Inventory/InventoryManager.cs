@@ -43,22 +43,6 @@ public class InventoryManager : MonoBehaviour
         inventoryData.RemoveItem(item);
         inventoryUI.RefreshInventoryDisplay();
     }
-
-    public void SaveInventory()
-    {
-        SaveSystem.SaveInventoryData(inventoryData);
-    }
-
-    public void LoadInventory()
-    {
-        InventoryData loadedData = SaveSystem.LoadInventoryData();
-        if (loadedData != null)
-        {
-            inventoryData = loadedData;
-            inventoryUI.RefreshInventoryDisplay();
-            Debug.Log("인벤토리가 로드되었습니다.");
-        }
-    }
     #endregion
 
     #region UI Management
@@ -72,6 +56,25 @@ public class InventoryManager : MonoBehaviour
     {
         Debug.Log("Hide tip");
         inventoryUI.HideTooltip();
+    }
+    #endregion
+
+    #region Save and Load
+    public void SaveInventory()
+    {
+        SaveSystem.SaveInventoryData(inventoryData);
+    }
+
+    public void LoadInventory()
+    {
+        InventoryData loadedData = SaveSystem.LoadInventoryData();
+        if (loadedData != null)
+        {
+            inventoryData = loadedData;
+            inventoryUI.Initialize(inventoryData);
+            inventoryUI.RefreshInventoryDisplay();
+            Debug.Log("인벤토리가 로드되었습니다.");
+        }
     }
     #endregion
 }

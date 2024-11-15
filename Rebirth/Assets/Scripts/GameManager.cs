@@ -14,8 +14,12 @@ public class GameManager : MonoBehaviour
     public void SaveGame()
     { 
         SaveSystem.SaveGame(gameData);
-        // InventoryManager.Instance.SaveInventory();
-        InventoryManager.Instance.LoadInventory();
+        InventoryManager.Instance.SaveInventory();
+    }
 
+    public void LoadGame()
+    { 
+        SaveSystem.LoadGame();
+        InventoryManager.Instance.LoadInventory();
     }
 }

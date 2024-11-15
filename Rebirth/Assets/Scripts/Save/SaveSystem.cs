@@ -25,7 +25,7 @@ public class SaveSystem
         }
         else
         {
-            Debug.Log("저장 파일을 찾을 수 없습니다!");
+            // Debug.Log("저장 파일을 찾을 수 없습니다!");
             return null;
         }
     }
@@ -50,22 +50,18 @@ public class SaveSystem
     {
         if (!File.Exists(InventorySavePath))
         {
-            Debug.LogWarning("Inventory JSON 파일이 존재하지 않습니다.");
+            Debug.Log("Inventory JSON 파일이 존재하지 않습니다.");
             return null;
         }
 
         string json = File.ReadAllText(InventorySavePath);
         List<string> itemNames = JsonConvert.DeserializeObject<List<string>>(json);
 
-        // Resources 폴더에서 모든 ItemData 로드return null;
-        ItemData[] allItems = Resources.LoadAll<ItemData>("ScriptableItem");
 
-        // 이름 목록과 일치하는 ItemData 필터링
-        // 이름 목록과 일치하는 ItemData 필터링
+        ItemData[] allItems = Resources.LoadAll<ItemData>("ScriptableItem");
         List<ItemData> loadedItems = new List<ItemData>();
         foreach (var itemName in itemNames)
         {
-            // 이름이 일치하는 아이템을 찾아서 추가
             ItemData foundItem = System.Array.Find(allItems, item => item.itemName == itemName);
             if (foundItem != null)
             {
@@ -76,7 +72,9 @@ public class SaveSystem
                 Debug.LogWarning($"아이템 '{itemName}'을(를) 찾을 수 없습니다.");
             }
         }
-        return null;
+        InventoryData inventoryData = new InventoryData(loadedItems);
+
+        return inventoryData;
     }
 
 }

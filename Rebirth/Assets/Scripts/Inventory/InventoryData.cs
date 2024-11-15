@@ -5,6 +5,16 @@ public class InventoryData
     public IReadOnlyList<ItemData> Items => items;
     private List<ItemData> items = new List<ItemData>();
 
+    public InventoryData(List<ItemData> initialItems)
+    {
+        items = new List<ItemData>(initialItems); 
+    }
+
+    public InventoryData()
+    {
+        items = new List<ItemData>();
+    }
+
     public void AddItem(ItemData item)
     {
         items.Add(item);
