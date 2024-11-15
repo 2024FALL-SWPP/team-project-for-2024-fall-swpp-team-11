@@ -43,6 +43,11 @@ public class InventoryManager : MonoBehaviour
         inventoryData.RemoveItem(item);
         inventoryUI.RefreshInventoryDisplay();
     }
+
+    public bool HasItem(ItemData item)
+    {
+        return inventoryData.HasItem(item);
+    }
     #endregion
 
     #region UI Management
