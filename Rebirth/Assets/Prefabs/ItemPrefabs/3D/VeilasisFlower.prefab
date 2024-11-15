@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 4114324885268775267}
   - component: {fileID: 4114324885258907267}
   - component: {fileID: 7453693475884137234}
-  - component: {fileID: 6916192588570066751}
-  - component: {fileID: 7371447444660888405}
   - component: {fileID: 1919057330042668357}
+  - component: {fileID: 7371447444660888405}
+  - component: {fileID: 6916192588570066751}
   m_Layer: 0
   m_Name: VeilasisFlower
   m_TagString: Untagged
@@ -161,6 +161,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1919057330042668357
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4114324885268421955}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04140873, y: 0.09895662, z: 0.06852603}
+  m_Center: {x: -0.0171134, y: -0.023429519, z: 0.0020610094}
+--- !u!114 &7371447444660888405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4114324885268421955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 16ea54b2a37074db181937185de17262, type: 2}
 --- !u!114 &6916192588570066751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,32 +205,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &7371447444660888405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4114324885268421955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 16ea54b2a37074db181937185de17262, type: 2}
---- !u!65 &1919057330042668357
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4114324885268421955}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.04140873, y: 0.09895662, z: 0.06852603}
-  m_Center: {x: -0.0171134, y: -0.023429519, z: 0.0020610094}
 --- !u!1 &4114324885268421957
 GameObject:
   m_ObjectHideFlags: 0

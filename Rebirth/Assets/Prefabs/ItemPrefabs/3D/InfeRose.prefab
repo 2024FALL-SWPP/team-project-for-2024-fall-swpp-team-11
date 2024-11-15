@@ -400,8 +400,8 @@ GameObject:
   - component: {fileID: 2179004628874008205}
   - component: {fileID: 643916635373455032}
   - component: {fileID: 7893087122500592132}
-  - component: {fileID: 5798377913753151181}
   - component: {fileID: 7788422815059107149}
+  - component: {fileID: 5798377913753151181}
   m_Layer: 0
   m_Name: InfeRose
   m_TagString: Untagged
@@ -479,6 +479,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.034113128, y: 0.08710831, z: 0.057492305}
   m_Center: {x: -0.0048928233, y: 0.0010112434, z: 0.00038466454}
+--- !u!114 &7788422815059107149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179004628864525645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 9afe63da74a6448eda18e47fc38932b9, type: 2}
 --- !u!114 &5798377913753151181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,19 +510,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &7788422815059107149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2179004628864525645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 9afe63da74a6448eda18e47fc38932b9, type: 2}
 --- !u!1 &2179004628864525647
 GameObject:
   m_ObjectHideFlags: 0

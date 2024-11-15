@@ -176,10 +176,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7838920813551633976}
   - component: {fileID: 7838920813561489880}
-  - component: {fileID: 5056317244122390025}
-  - component: {fileID: 6098761294380920693}
   - component: {fileID: 3667242576462565746}
   - component: {fileID: 5650704230807181680}
+  - component: {fileID: 5056317244122390025}
+  - component: {fileID: 6098761294380920693}
   m_Layer: 0
   m_Name: Pheonix Rose3D
   m_TagString: Untagged
@@ -228,6 +228,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &3667242576462565746
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838920813551999512}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &5650704230807181680
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838920813551999512}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.08042162, y: 0.09562874, z: 0.10060549}
+  m_Center: {x: 0.0020448565, y: 0.019135356, z: -0.011903233}
 --- !u!114 &5056317244122390025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,35 +288,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!54 &3667242576462565746
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7838920813551999512}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &5650704230807181680
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7838920813551999512}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.08042162, y: 0.09562874, z: 0.10060549}
-  m_Center: {x: 0.0020448565, y: 0.019135356, z: -0.011903233}
 --- !u!1 &7838920813551999514
 GameObject:
   m_ObjectHideFlags: 0
