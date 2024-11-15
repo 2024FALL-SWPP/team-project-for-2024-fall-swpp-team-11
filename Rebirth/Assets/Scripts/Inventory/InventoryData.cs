@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 public class InventoryData
-{
+{   
     public IReadOnlyList<ItemData> Items => items;
     private List<ItemData> items = new List<ItemData>();
 

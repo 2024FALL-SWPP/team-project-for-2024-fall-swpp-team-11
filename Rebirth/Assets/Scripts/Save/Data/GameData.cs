@@ -4,6 +4,6 @@ using System.Collections.Generic;
 public class GameData
 {
     public PlayerData playerData = new PlayerData();
-    public InventoryData inventoryData = new InventoryData();
     public List<QuestData> questDataList = new List<QuestData>();
+    public List<ItemData> inventoryItemsList = new List<ItemData>(); 
 }
