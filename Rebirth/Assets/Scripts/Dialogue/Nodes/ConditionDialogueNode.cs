@@ -10,8 +10,9 @@ public class ConditionDialogueNode : DialogueNode
 
     private void OnEnable()
     {
-        if (options == null || options.Count == 0)
+        // if (options == null || options.Count == 0)
         {
+            // TODO: better memeory management
             options = new List<DialogueOption>();
 
             DialogueOption option = new DialogueOption
@@ -23,8 +24,6 @@ public class ConditionDialogueNode : DialogueNode
             };
 
             options.Add(option);
-            Debug.Log("ConditionDialogueNode options: " + options.Count);
-            Debug.Log("Option text: " + options[0].optionText + " nextNode: " + options[0].nextNode + " fallbackNode: " + options[0].fallbackNode);
         }
     }
 }

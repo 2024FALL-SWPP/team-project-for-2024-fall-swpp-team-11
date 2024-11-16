@@ -104,8 +104,12 @@ public class DialogueManager : MonoBehaviour
 
     public void SelectOption(DialogueOption selectedOption)
     {
-        Debug.Log("Current node: " + currentNode.dialogueText);
-        Debug.Log("Selected option: " + selectedOption.optionText + " nextNode: " + selectedOption.nextNode + " fallbackNode: " + selectedOption.fallbackNode); 
+        if (selectedOption == null)
+        {
+            EndDialogue();
+            return;
+        }
+
         if (selectedOption.nextNode == null)
         {
             EndDialogue();
@@ -143,7 +147,6 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        Debug.Log("Dialogue ended.");
         IsDialogueActive = false;
         currentNode = null;
         OnDialogueEnd?.Invoke();
