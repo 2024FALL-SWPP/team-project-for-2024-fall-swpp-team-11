@@ -12,7 +12,7 @@ public class SaveSystem
     {
         string json = JsonUtility.ToJson(gameData, true);
         File.WriteAllText(SavePath, json);
-        Debug.Log("저장됨!");
+        Debug.Log("게임이 저장되었습니다.");
     
     }
 
@@ -25,12 +25,12 @@ public class SaveSystem
         }
         else
         {
-            // Debug.Log("저장 파일을 찾을 수 없습니다!");
             return null;
         }
     }
 
    
+   #region Inventory
     public static void SaveInventoryData(InventoryData inventoryData)
     {
         List<string> itemNames = new List<string>();
@@ -76,5 +76,6 @@ public class SaveSystem
 
         return inventoryData;
     }
+    #endregion
 
 }

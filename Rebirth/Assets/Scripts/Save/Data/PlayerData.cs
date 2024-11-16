@@ -7,7 +7,6 @@ public class PlayerData
     public int health = 1 ;
     public int experience;
     public int level;
-    // 기타 필요한 플레이어 속성
 }
 
 

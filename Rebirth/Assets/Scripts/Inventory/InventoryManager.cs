@@ -59,7 +59,7 @@ public class InventoryManager : MonoBehaviour
     }
     #endregion
 
-    #region Save and Load
+    #region Save Management
     public void SaveInventory()
     {
         SaveSystem.SaveInventoryData(inventoryData);
