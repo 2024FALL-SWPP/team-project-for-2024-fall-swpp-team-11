@@ -33,20 +33,12 @@ public class DialogueUI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            selectedOptionIndex--;
-            if (selectedOptionIndex < 0)
-            {
-                selectedOptionIndex = currentOptionButtons.Count - 1;
-            }
+            selectedOptionIndex = (selectedOptionIndex - 1 + currentOptionButtons.Count) % currentOptionButtons.Count;
             changed = true;
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            selectedOptionIndex++;
-            if (selectedOptionIndex >= currentOptionButtons.Count)
-            {
-                selectedOptionIndex = 0;
-            }
+            selectedOptionIndex = (selectedOptionIndex + 1) % currentOptionButtons.Count;
             changed = true;
         }
 
@@ -106,6 +98,8 @@ public class DialogueUI : MonoBehaviour
         }
         selectedOptionIndex = 0;
         UpdateSelectedOption();
+
+        GameStateManager.Instance.LockView();
         Debug.Log("ShowDialogue");
     }
 
@@ -113,6 +107,8 @@ public class DialogueUI : MonoBehaviour
     {
         dialoguePanel.SetActive(false);
         ClearOptions();
+
+        GameStateManager.Instance.UnlockView();
         Debug.Log("HideDialogue");
     }
 
