@@ -1,4 +1,3 @@
-// NPC.cs
 using UnityEngine;
 using System;
 using System.Collections;
@@ -28,11 +27,18 @@ public class NPC : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        DialogueManager.Instance.OnDialogueEnd += HandleDialogueEnd;
+
         DialogueManager.Instance.StartDialogue(startingDialogueNode);
-        NPCManager.Instance.MarkNPCAsMet(npcName); // Note: Order matters
-        
-        // TODO
     }
+
+    private void HandleDialogueEnd()
+    {
+        DialogueManager.Instance.OnDialogueEnd -= HandleDialogueEnd;
+
+        NPCManager.Instance.MarkNPCAsMet(npcName);
+    }
+
 
     public void OnFocus()
     {

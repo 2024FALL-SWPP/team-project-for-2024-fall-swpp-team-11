@@ -10,8 +10,6 @@ public class ConditionDialogueNode : DialogueNode
 
     private void OnEnable()
     {
-        Debug.Log("ConditionDialogueNode enabled");
-        Debug.Log("ConditionDialogueNode options: " + options.Count);
         if (options == null || options.Count == 0)
         {
             options = new List<DialogueOption>();

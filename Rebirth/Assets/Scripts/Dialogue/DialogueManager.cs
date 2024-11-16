@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class DialogueManager : MonoBehaviour
     public DialogueNode currentNode;
     public DialogueUI dialogueUI;
     public DialogueGraph activeDialogueGraph;
+
+    public event Action OnDialogueStart;
+    public event Action OnDialogueEnd;
 
     public static DialogueManager Instance { get; private set; }
     public bool IsDialogueActive;
@@ -94,6 +98,7 @@ public class DialogueManager : MonoBehaviour
 
         currentNode = startingNode;
         IsDialogueActive = true;
+        OnDialogueStart?.Invoke();
         DisplayCurrentDialogueNode();
     }
 
@@ -113,7 +118,6 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            // EndDialogue(); // TODO: fallback dialogue
             Debug.Log("Conditions not met.");
             currentNode = selectedOption.fallbackNode;
         }
@@ -142,6 +146,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Dialogue ended.");
         IsDialogueActive = false;
         currentNode = null;
+        OnDialogueEnd?.Invoke();
         dialogueUI.HideDialogue();
     }
 }

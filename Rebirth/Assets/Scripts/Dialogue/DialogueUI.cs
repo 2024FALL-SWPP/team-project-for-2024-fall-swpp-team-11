@@ -89,22 +89,28 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowDialogue(DialogueNode node)
     {
+        Debug.Log("ShowDialogue");
+        Debug.Log(node.dialogueText);
+        for (int i = 0; i < node.options.Count; i++)
+        {
+            Debug.Log(node.options[i].optionText);
+        }
+
         dialoguePanel.SetActive(true);
         dialogueText.text = node.dialogueText;
         ClearOptions();
 
         foreach (DialogueOption option in node.options)
         {
-            if (option.AreConditionsMet())
-            {
+            // if (option.AreConditionsMet())
+            // {
                 CreateOptionButton(option);
-            }
+            // }
         }
         selectedOptionIndex = 0;
         UpdateSelectedOption();
 
-        Debug.Log("ShowDialogue");
-        Debug.Log(node.dialogueText);
+
     }
 
     public void HideDialogue()
@@ -116,6 +122,7 @@ public class DialogueUI : MonoBehaviour
 
     private void CreateOptionButton(DialogueOption option)
     {
+        Debug.Log("CreateOptionButton");
         GameObject buttonObj = Instantiate(optionButtonPrefab, optionsContainer);
         Button button = buttonObj.GetComponent<Button>();
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();

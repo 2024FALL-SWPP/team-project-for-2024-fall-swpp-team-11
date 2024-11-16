@@ -5,7 +5,7 @@ public class NPCManager : MonoBehaviour
 {
     public static NPCManager Instance { get; private set; }
 
-    private Dictionary<string, bool> npcMetStatus = new();
+    private Dictionary<string, bool> npcMetStatus = new Dictionary<string, bool>();
 
     private void Awake()
     {
