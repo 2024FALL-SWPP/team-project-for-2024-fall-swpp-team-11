@@ -5,30 +5,7 @@ using Newtonsoft.Json;
 
 public class SaveSystem
 {
-    private static string SavePath => Application.persistentDataPath + "/savefile.json";
     private static string InventorySavePath => Application.persistentDataPath + "/inventory.json";
-
-    public static void SaveGame(GameData gameData)
-    {
-        string json = JsonUtility.ToJson(gameData, true);
-        File.WriteAllText(SavePath, json);
-        Debug.Log("게임이 저장되었습니다.");
-    
-    }
-
-    public static GameData LoadGame()
-    {
-        if (File.Exists(SavePath))
-        {
-            string json = File.ReadAllText(SavePath);
-            return JsonUtility.FromJson<GameData>(json);
-        }
-        else
-        {
-            return null;
-        }
-    }
-
    
    #region Inventory
     public static void SaveInventoryData(InventoryData inventoryData)
