@@ -16,77 +16,7 @@ public class DialogueUI : MonoBehaviour
     private List<GameObject> currentOptionButtons = new List<GameObject>();
     private int selectedOptionIndex = 0;
 
-    private void Update()
-    {
-        if (!dialoguePanel.activeSelf)
-        {
-            return;
-        }
-
-        HandleNavigationInput();
-        HandleSelectionInput();
-    }
-
-    private void HandleNavigationInput()
-    {
-        bool changed = false;
-
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            selectedOptionIndex = (selectedOptionIndex - 1 + currentOptionButtons.Count) % currentOptionButtons.Count;
-            changed = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            selectedOptionIndex = (selectedOptionIndex + 1) % currentOptionButtons.Count;
-            changed = true;
-        }
-
-        if (changed)
-        {
-            UpdateSelectedOption();
-        }
-    }
-
-    private void UpdateSelectedOption()
-    {
-        for (int i = 0; i < currentOptionButtons.Count; i++)
-        {
-            ColorBlock colors = currentOptionButtons[i].GetComponent<Button>().colors;
-            if (i == selectedOptionIndex)
-            {
-                colors.normalColor = selectedColor;
-            }
-            else
-            {
-                colors.normalColor = defaultColor;
-            }
-            currentOptionButtons[i].GetComponent<Button>().colors = colors;
-        }
-
-        if (currentOptionButtons.Count > 0)
-        {
-            currentOptionButtons[selectedOptionIndex].GetComponent<Button>().Select();
-        }
-    }
-
-    private void HandleSelectionInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
-        {
-            if (currentOptionButtons.Count == 0)
-            {
-                // No options, end dialogue
-                DialogueManager.Instance.SelectOption(null); // TODO better dependency handling
-                return;
-            }
-
-            Button button = currentOptionButtons[selectedOptionIndex].GetComponent<Button>();
-            button.onClick.Invoke();
-        }
-    }
-
-    public void ShowDialogue(DialogueNode node)
+    public void ShowDialogue(DialogueNode node, int initialSelectedIndex = 0)
     {
         dialoguePanel.SetActive(true);
         dialogueText.text = node.dialogueText;
@@ -96,11 +26,32 @@ public class DialogueUI : MonoBehaviour
         {
             CreateOptionButton(option);
         }
-        selectedOptionIndex = 0;
-        UpdateSelectedOption();
+        selectedOptionIndex = initialSelectedIndex;
+        UpdateOptionSelection();
 
         GameStateManager.Instance.LockView();
-        Debug.Log("ShowDialogue");
+        GameStateManager.Instance.LockMovement();
+        Debug.Log("ShowDialogue " + node.dialogueText + " number of options: " + node.options.Count);
+    }
+
+    public void UpdateSelectedOption(int newSelectedIndex)
+    {
+        selectedOptionIndex = newSelectedIndex;
+        UpdateOptionSelection();
+    }
+
+    private void UpdateOptionSelection()
+    {
+        for (int i = 0; i < currentOptionButtons.Count; i++)
+        {
+            Color color = i == selectedOptionIndex ? selectedColor : defaultColor;
+            currentOptionButtons[i].GetComponent<Image>().color = color;
+        }
+
+        if (currentOptionButtons.Count > 0 && selectedOptionIndex >= 0 && selectedOptionIndex < currentOptionButtons.Count)
+        {
+            currentOptionButtons[selectedOptionIndex].GetComponent<Button>().Select();
+        }
     }
 
     public void HideDialogue()
@@ -109,6 +60,7 @@ public class DialogueUI : MonoBehaviour
         ClearOptions();
 
         GameStateManager.Instance.UnlockView();
+        GameStateManager.Instance.UnlockMovement();
         Debug.Log("HideDialogue");
     }
 
@@ -120,10 +72,13 @@ public class DialogueUI : MonoBehaviour
 
         buttonText.text = option.optionText;
 
-        button.onClick.AddListener(() =>
-        {
-            OnOptionSelected(option);
-        });
+        // TODO space & arrows for now
+        // Debug.Log("Creating option button: " + option.optionText + " option next node: " + option.nextNode.dialogueText);
+        // button.onClick.AddListener(() =>
+        // {
+        //     Debug.Log("Option button clicked: " + option.optionText);
+        //     OnOptionSelected(option);
+        // });
 
         currentOptionButtons.Add(buttonObj);
     }

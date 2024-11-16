@@ -4,8 +4,8 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "Plain Next Dialogue Node", menuName = "Dialogue/Condition Dialogue Node")]
 public class ConditionDialogueNode : DialogueNode
 {
-    public DialogueNode conditionMetNode;
-    public DialogueNode conditionNotMetNode;
+    public DialogueNode conditionMetNextNode;
+    public DialogueNode conditionNotMetNextNode;
     public List<DialogueCondition> conditions;
 
     private void OnEnable()
@@ -18,8 +18,8 @@ public class ConditionDialogueNode : DialogueNode
             DialogueOption option = new DialogueOption
             {
                 optionText = "Continue",
-                nextNode = conditionMetNode,
-                fallbackNode = conditionNotMetNode,
+                nextNode = conditionMetNextNode,
+                fallbackNode = conditionNotMetNextNode,
                 conditions = conditions
             };
 

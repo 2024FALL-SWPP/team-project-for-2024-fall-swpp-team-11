@@ -30,6 +30,7 @@ public class Character : MonoBehaviour
     void HandleMovement()
     {
         if (inputHandler == null || !characterMovement || !characterAnimation) return;
+        if (!GameStateManager.Instance.IsMovementLocked) return;
 
         Vector3 moveInput = inputHandler.GetMoveInput();
         characterMovement.Move(moveInput);
@@ -49,6 +50,7 @@ public class Character : MonoBehaviour
     {
         if (!characterMovement || !characterAnimation) return;
         if (!inputHandler.IsJumpRequested()) return;
+        if (!GameStateManager.Instance.IsMovementLocked) return;
 
         if (characterMovement.IsJumpable())
         {

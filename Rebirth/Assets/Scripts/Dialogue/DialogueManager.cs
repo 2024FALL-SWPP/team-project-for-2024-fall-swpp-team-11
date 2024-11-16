@@ -14,8 +14,9 @@ public class DialogueManager : MonoBehaviour
     public event Action OnDialogueStart;
     public event Action OnDialogueEnd;
 
+    private int currentOptionIndex = 0;
+
     public static DialogueManager Instance { get; private set; }
-    public bool IsDialogueActive;
     private void Awake()
     {
         // use singleton pattern
@@ -46,6 +47,37 @@ public class DialogueManager : MonoBehaviour
         }
 
         // currentNode = startNode; // TODO: initialize
+    }
+
+    public void NavigateOption(int direction)
+    {
+        if (currentNode == null || currentNode.options.Count == 0)
+        {
+            Debug.LogError("No current node.");
+            return;
+        }
+
+        currentOptionIndex = (currentOptionIndex + direction + currentNode.options.Count) % currentNode.options.Count;
+
+        dialogueUI.UpdateSelectedOption(currentOptionIndex);
+    }
+
+    public void SelectCurrentOption()
+    {
+        if (currentNode == null)
+        {
+            Debug.LogError("No current node.");
+            return;
+        }
+
+        if (currentNode.options.Count == 0)
+        {
+            // leaf node
+            EndDialogue();
+            return;
+        }
+
+        SelectOption(currentOptionIndex);
     }
 
     private void LoadDefaultDialogueGraph()
@@ -97,13 +129,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         currentNode = startingNode;
-        IsDialogueActive = true;
         OnDialogueStart?.Invoke();
         DisplayCurrentDialogueNode();
     }
 
     public void SelectOption(DialogueOption selectedOption)
     {
+        Debug.Log("Selected option: " + selectedOption.optionText);
         if (selectedOption == null)
         {
             EndDialogue();
@@ -147,7 +179,6 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        IsDialogueActive = false;
         currentNode = null;
         OnDialogueEnd?.Invoke();
         dialogueUI.HideDialogue();
