@@ -37,7 +37,6 @@ public class NPC : MonoBehaviour, IInteractable
     public void OnFocus()
     {
         if (!outline) return;
-        Debug.Log("OnFocus");
 
         outline.enabled = true;
     }
@@ -45,7 +44,6 @@ public class NPC : MonoBehaviour, IInteractable
     public void OnDefocus()
     {
         if (!outline) return;
-        Debug.Log("OnDefocus");
 
         outline.enabled = false;
     }
