@@ -8,9 +8,7 @@ public class NPC : MonoBehaviour, IInteractable
     public string npcName;
     public DialogueNode startingDialogueNode;
 
-    private Outline outline;
-    public float interactRange = 3f;
-    
+    private Outline outline;    
     private void Awake()
     {
         outline = GetComponent<Outline>();
@@ -30,14 +28,16 @@ public class NPC : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        NPCManager.Instance.MarkNPCAsMet(npcName);
         DialogueManager.Instance.StartDialogue(startingDialogueNode);
+        NPCManager.Instance.MarkNPCAsMet(npcName); // Note: Order matters
+        
         // TODO
     }
 
     public void OnFocus()
     {
         if (!outline) return;
+        Debug.Log("OnFocus");
 
         outline.enabled = true;
     }
@@ -45,6 +45,7 @@ public class NPC : MonoBehaviour, IInteractable
     public void OnDefocus()
     {
         if (!outline) return;
+        Debug.Log("OnDefocus");
 
         outline.enabled = false;
     }

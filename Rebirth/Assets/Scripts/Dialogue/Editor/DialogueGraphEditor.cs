@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Collections.Generic;
 
 public class DialogueGraphEditor : EditorWindow
 {
@@ -21,9 +22,9 @@ public class DialogueGraphEditor : EditorWindow
         EditorGUILayout.Space();
 
         // Select DialogueGraph Asset
-        dialogueGraph = (DialogueGraph)EditorGUILayout.ObjectField("Dialogue Graph", dialogueGraph, typeof(DialogueGraph), false);
+        // dialogueGraph = (DialogueGraph)EditorGUILayout.ObjectField("Dialogue Graph", dialogueGraph, typeof(DialogueGraph), false);
 
-        EditorGUILayout.Space();
+        // EditorGUILayout.Space();
 
         if (dialogueGraph != null)
         {
@@ -72,8 +73,46 @@ public class DialogueGraphEditor : EditorWindow
         }
         else
         {
-            EditorGUILayout.HelpBox("Please assign a Dialogue Graph to manage its Dialogue Nodes.", MessageType.Info);
+            DrawNoDialogueGraphSelected();
         }
+    }
+
+    private void DrawNoDialogueGraphSelected()
+    {
+        EditorGUILayout.HelpBox("Please select a DialogueDataSO asset", MessageType.Info);
+
+        if (GUILayout.Button("Create New Dialogue Graph"))
+        {
+            CreateNewDialogueGraph();
+        }
+
+        dialogueGraph = EditorGUILayout.ObjectField(
+            "Dialogue Graph",
+            dialogueGraph,
+            typeof(DialogueGraph),
+            false
+        ) as DialogueGraph;
+    }
+
+    private void CreateNewDialogueGraph()
+    {
+        string path = EditorUtility.SaveFilePanelInProject(
+            "Save Dialogue Graph",
+            "New Dialogue Graph",
+            "asset",
+            "Please enter a file name to save the Dialogue Graph to"
+        );
+
+        if (string.IsNullOrEmpty(path))
+        {
+            return;
+        }
+
+        dialogueGraph = CreateInstance<DialogueGraph>();
+        dialogueGraph.dialogueNodes = new List<DialogueNode>();
+        AssetDatabase.CreateAsset(dialogueGraph, path);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     private void CreateDialogueNode()

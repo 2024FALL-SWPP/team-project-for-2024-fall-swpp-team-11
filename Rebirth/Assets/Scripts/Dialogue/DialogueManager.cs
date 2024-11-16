@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
-    public DialogueNode startNode;
+    // public DialogueNode startNode;
+
+    [HideInInspector]
     public DialogueNode currentNode;
     public DialogueUI dialogueUI;
     public DialogueGraph activeDialogueGraph;
@@ -31,7 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        // dialogueUI = GetComponent<DialogueUI>(); DialogueUI를 어디에 둘 것인가
+        // dialogueUI = GetComponent<DialogueUI>(); // DialogueUI를 어디에 둘 것인가
 
         // TODO default graph
         if (activeDialogueGraph == null)
@@ -39,7 +41,7 @@ public class DialogueManager : MonoBehaviour
             LoadDefaultDialogueGraph();
         }
 
-        currentNode = startNode; // TODO: initialize
+        // currentNode = startNode; // TODO: initialize
     }
 
     private void LoadDefaultDialogueGraph()
@@ -58,7 +60,7 @@ public class DialogueManager : MonoBehaviour
     public void LoadDialogueGraph(DialogueGraph graph)
     {
         activeDialogueGraph = graph;
-
+        Debug.Log("Loaded dialogue graph.");
         // TODO validate graph
     }
 
@@ -68,6 +70,7 @@ public class DialogueManager : MonoBehaviour
         if (Instance != null)
         {
             Instance.LoadDialogueGraph(graph);
+            Debug.Log("Editor loaded dialogue graph.");
         }
         else
         {
@@ -105,13 +108,14 @@ public class DialogueManager : MonoBehaviour
         if (selectedOption.AreConditionsMet())
         {
             currentNode = selectedOption.nextNode;
-            DisplayCurrentDialogueNode();
         }
         else
         {
-            EndDialogue(); // TODO: fallback dialogue
+            // EndDialogue(); // TODO: fallback dialogue
             Debug.Log("Conditions not met.");
+            currentNode = selectedOption.fallbackNode;
         }
+        DisplayCurrentDialogueNode();
     }
 
     public void SelectOption(int optionIndex)

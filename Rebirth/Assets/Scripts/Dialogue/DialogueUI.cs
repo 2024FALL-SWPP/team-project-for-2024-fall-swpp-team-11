@@ -14,23 +14,26 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowDialogue(DialogueNode node)
     {
-        dialoguePanel.SetActive(true);
-        dialogueText.text = node.dialogueText;
-        ClearOptions();
+        // dialoguePanel.SetActive(true);
+        // dialogueText.text = node.dialogueText;
+        // ClearOptions();
 
-        foreach (DialogueOption option in node.options)
-        {
-            if (option.AreConditionsMet())
-            {
-                CreateOptionButton(option);
-            }
-        }
+        // foreach (DialogueOption option in node.options)
+        // {
+        //     if (option.AreConditionsMet())
+        //     {
+        //         CreateOptionButton(option);
+        //     }
+        // }
+        Debug.Log("ShowDialogue");
+        Debug.Log(node.dialogueText);
     }
 
     public void HideDialogue()
     {
-        dialoguePanel.SetActive(false);
-        ClearOptions();
+        // dialoguePanel.SetActive(false);
+        // ClearOptions();
+        Debug.Log("HideDialogue");
     }
 
     private void CreateOptionButton(DialogueOption option)

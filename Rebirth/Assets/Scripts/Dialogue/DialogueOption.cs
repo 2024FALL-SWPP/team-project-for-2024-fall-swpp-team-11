@@ -6,6 +6,7 @@ public class DialogueOption
 {
     public string optionText;
     public DialogueNode nextNode;
+    public DialogueNode fallbackNode;
     public List<DialogueCondition> conditions;
 
     public bool AreConditionsMet()

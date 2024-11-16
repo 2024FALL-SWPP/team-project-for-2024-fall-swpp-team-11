@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlainNextDialogueNode : DialogueNode
 {
     public DialogueNode nextNode;
-    public AlwaysTrueCondition alwaysTrueCondition;
+    private AlwaysTrueCondition alwaysTrueCondition;
 
     private void OnEnable()
     {
@@ -23,10 +23,10 @@ public class PlainNextDialogueNode : DialogueNode
             conditions = new List<DialogueCondition>()
         };
 
-        if (alwaysTrueCondition == null)
-        {
-            alwaysTrueCondition = CreateInstance<AlwaysTrueCondition>();
-        }
+        // if (alwaysTrueCondition == null)
+        // {
+        alwaysTrueCondition = CreateInstance<AlwaysTrueCondition>();
+        // }
         option.conditions.Add(alwaysTrueCondition);
 
         options.Add(option);
