@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InputHandler : MonoBehaviour, IInputHandler
+public class InputHandler3D : MonoBehaviour, IInputHandler
 {
     [Header("Mouse Sensitivity")]
     [SerializeField] private float horizontalSensitivity = 5f;

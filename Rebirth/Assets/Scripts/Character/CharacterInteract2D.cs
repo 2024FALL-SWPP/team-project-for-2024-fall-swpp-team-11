@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class CharacterInteract : MonoBehaviour
+public class CharacterInteract2D : MonoBehaviour
 {
     private IInteractable currentInteractable;
 
-    private void Update()
+    void Update()
     {
         FindClosestInteractable();
     }
 
     private void FindClosestInteractable()
     {
+        // 3D 콜라이더와 상호작용하기 위해 Physics.OverlapSphere 사용
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3f);
         IInteractable closestInteractable = null;
         float closestDistance = Mathf.Infinity;
@@ -33,9 +34,9 @@ public class CharacterInteract : MonoBehaviour
         {
             if (currentInteractable != null)
                 currentInteractable.OnDefocus();
-            
+
             currentInteractable = closestInteractable;
-            
+
             if (currentInteractable != null)
                 currentInteractable.OnFocus();
         }

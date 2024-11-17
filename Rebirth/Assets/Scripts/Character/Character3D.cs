@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character3D : MonoBehaviour
 {
-    private CharacterAnimation characterAnimation;
-    private CharacterMovement characterMovement;
-    private CharacterInteract characterInteract;
+    private CharacterAnimation3D characterAnimation;
+    private CharacterMovement3D characterMovement;
+    private CharacterInteract3D characterInteract;
     private IInputHandler inputHandler;
-    
+
     void Start()
     {
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterMovement = GetComponent<CharacterMovement>();
-        characterInteract = GetComponent<CharacterInteract>();
+        characterAnimation = GetComponent<CharacterAnimation3D>();
+        characterMovement = GetComponent<CharacterMovement3D>();
+        characterInteract = GetComponent<CharacterInteract3D>();
         inputHandler = GetComponent<IInputHandler>();
     }
 
@@ -30,6 +30,7 @@ public class Character : MonoBehaviour
     void HandleMovement()
     {
         if (inputHandler == null || !characterMovement || !characterAnimation) return;
+        if (GameStateManager.Instance.IsMovementLocked) return;
 
         Vector3 moveInput = inputHandler.GetMoveInput();
         characterMovement.Move(moveInput);
@@ -48,6 +49,7 @@ public class Character : MonoBehaviour
     void HandleJump()
     {
         if (!characterMovement || !characterAnimation) return;
+        if (GameStateManager.Instance.IsMovementLocked) return;
         if (!inputHandler.IsJumpRequested()) return;
 
         if (characterMovement.IsJumpable())
@@ -59,8 +61,12 @@ public class Character : MonoBehaviour
 
     private void HandleInteraction()
     {
-        if (!inputHandler.IsInteractRequested()) return;
-        
-        characterInteract.TryInteract();
+        if (inputHandler == null || characterInteract == null) return;
+        if (GameStateManager.Instance.IsMovementLocked) return;
+
+        if (inputHandler.IsInteractRequested())
+        {
+            characterInteract.TryInteract();
+        }
     }
 }

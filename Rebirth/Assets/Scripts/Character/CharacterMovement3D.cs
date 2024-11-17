@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovement3D : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 5f;
+    public float jumpForce = 500f;
     private Rigidbody rb;
     private bool canJump = true;
 
