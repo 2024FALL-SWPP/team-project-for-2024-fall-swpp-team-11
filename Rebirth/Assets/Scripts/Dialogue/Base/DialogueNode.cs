@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class DialogueNode : ScriptableObject
 {
     public string nodeID;
+    
+    [TextArea(3, 10)]
     public string dialogueText;
     public List<DialogueOption> options = new List<DialogueOption>();
 

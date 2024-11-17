@@ -7,7 +7,7 @@ public class QuestRewardDialogueNode : QuestDialogueNode
 {
     [Header("Transition")]
     public DialogueNode nextNode;
-
+    
     private void OnEnable()
     {
         DialogueOption option = new QuestRewardOption(associatedQuest)

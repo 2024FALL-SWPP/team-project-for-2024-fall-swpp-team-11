@@ -15,7 +15,7 @@ public class QuestUI : MonoBehaviour
 
     private void Start()
     {
-        HideQuestUI();
+        // HideQuestUI();
     }
 
     public void ToggleQuestUI()
