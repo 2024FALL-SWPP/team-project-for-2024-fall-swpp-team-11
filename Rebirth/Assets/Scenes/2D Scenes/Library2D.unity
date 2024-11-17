@@ -2182,6 +2182,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2917308729187818131, guid: de88488d4097e41bcbdd7c1d572e511b, type: 3}
   m_PrefabInstance: {fileID: 373209293}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &377304335 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2916480177141318799, guid: 5485e27593f5243b5865f10625a4c9e6, type: 3}
+  m_PrefabInstance: {fileID: 391519085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &378515047 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6166134072364412576, guid: de88488d4097e41bcbdd7c1d572e511b, type: 3}
@@ -2200,11 +2205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2916480177141318799, guid: 5485e27593f5243b5865f10625a4c9e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.64
+      value: 10.14
       objectReference: {fileID: 0}
     - target: {fileID: 2916480177141318799, guid: 5485e27593f5243b5865f10625a4c9e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.03
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 2916480177141318799, guid: 5485e27593f5243b5865f10625a4c9e6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3697,6 +3702,7 @@ GameObject:
   - component: {fileID: 629282262}
   - component: {fileID: 629282261}
   - component: {fileID: 629282260}
+  - component: {fileID: 629282263}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3739,7 +3745,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3770,6 +3776,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &629282263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629282259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f2a0a5b57444380bdc0c0548c239fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 377304335}
+  offset: {x: 0, y: 1, z: 10}
+  minX: -8.8
+  maxX: 4
+  minY: -2.6
+  maxY: 1.58
 --- !u!1 &630662440
 GameObject:
   m_ObjectHideFlags: 0

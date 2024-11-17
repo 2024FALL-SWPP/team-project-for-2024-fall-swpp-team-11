@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "New Item", menuName ="Item/Create New Item")]
 public class ItemData : ScriptableObject
