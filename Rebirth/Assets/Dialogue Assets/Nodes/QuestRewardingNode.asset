@@ -10,17 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc5a05d94d315d14a8f42d9fba39860a, type: 3}
-  m_Name: QuestRewardNode
+  m_Name: QuestRewardingNode
   m_EditorClassIdentifier: 
-  nodeID: 
-  dialogueText: 
-  options:
-  - optionText: Continue
-    nextNode: {fileID: 0}
-    fallbackNode: {fileID: 0}
-    conditions:
-    - {fileID: 0}
-    onSelectActions:
-      m_PersistentCalls:
-        m_Calls: []
-  associatedQuest: {fileID: 0}
+  nodeID: 14
+  dialogueText: This is for you!
+  conversationNpcName: Librarian
+  associatedQuest: {fileID: 11400000, guid: d40f1368fb2e17e45b212bbd79cfcd0e, type: 2}
+  nextNode: {fileID: 11400000, guid: 243dfea67f12cf94ca0ed124c851e0a7, type: 2}

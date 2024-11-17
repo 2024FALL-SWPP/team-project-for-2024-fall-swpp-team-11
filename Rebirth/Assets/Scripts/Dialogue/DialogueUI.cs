@@ -16,8 +16,11 @@ public class DialogueUI : MonoBehaviour
     private List<GameObject> currentOptionButtons = new List<GameObject>();
     private int selectedOptionIndex = 0;
 
+    private static string logPrefix = "[DialogueUI] ";
+
     public void ShowDialogue(DialogueNode node, int initialSelectedIndex = 0)
     {
+        Debug.Log(logPrefix + "ShowDialogue " + node.dialogueText + " with " + node.options.Count + " options");
         dialoguePanel.SetActive(true);
         dialogueText.text = node.dialogueText;
         ClearOptions();
@@ -31,7 +34,6 @@ public class DialogueUI : MonoBehaviour
 
         GameStateManager.Instance.LockView();
         GameStateManager.Instance.LockMovement();
-        Debug.Log("ShowDialogue " + node.dialogueText + " number of options: " + node.options.Count);
     }
 
     public void UpdateSelectedOption(int newSelectedIndex)
@@ -61,7 +63,7 @@ public class DialogueUI : MonoBehaviour
 
         GameStateManager.Instance.UnlockView();
         GameStateManager.Instance.UnlockMovement();
-        Debug.Log("HideDialogue");
+        Debug.Log(logPrefix + "HideDialogue");
     }
 
     private void CreateOptionButton(DialogueOption option)

@@ -10,17 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
-  m_Name: QuestCompletedNode
+  m_Name: QuestCompletingNode
   m_EditorClassIdentifier: 
-  nodeID: 
-  dialogueText: 
-  options:
-  - optionText: Continue
-    nextNode: {fileID: 0}
-    fallbackNode: {fileID: 0}
-    conditions:
-    - {fileID: 0}
-    onSelectActions:
-      m_PersistentCalls:
-        m_Calls: []
-  nextNode: {fileID: 0}
+  nodeID: 9
+  dialogueText: Oh, is this for me? Thanks!
+  conversationNpcName: Librarian
+  nextNode: {fileID: 11400000, guid: 6ea72c9351d800e4c9ed8306903e90bc, type: 2}

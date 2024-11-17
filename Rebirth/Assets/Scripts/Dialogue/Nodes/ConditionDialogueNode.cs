@@ -10,20 +10,14 @@ public class ConditionDialogueNode : DialogueNode
 
     private void OnEnable()
     {
-        // if (options == null || options.Count == 0)
+        DialogueOption option = new DialogueOption
         {
-            // TODO: better memeory management
-            options = new List<DialogueOption>();
+            optionText = "Continue",
+            nextNode = conditionMetNextNode,
+            fallbackNode = conditionNotMetNextNode,
+            conditions = conditions
+        };
 
-            DialogueOption option = new DialogueOption
-            {
-                optionText = "Continue",
-                nextNode = conditionMetNextNode,
-                fallbackNode = conditionNotMetNextNode,
-                conditions = conditions
-            };
-
-            options.Add(option);
-        }
+        options.Add(option);
     }
 }

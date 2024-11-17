@@ -1,11 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum QuestStatus
+{
+    NotStarted,
+    Accepted,
+    Completed,
+}
+
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
     
-    public Dictionary<int, QuestData> activeQuests = new Dictionary<int, QuestData>();
+    public Dictionary<int, QuestData> quests = new Dictionary<int, QuestData>();
+    private Dictionary<int, QuestStatus> questStatuses = new Dictionary<int, QuestStatus>();
+
+    private static string logPrefix = "[QuestManager] ";
 
     public QuestUI questUI;
 
@@ -23,7 +33,7 @@ public class QuestManager : MonoBehaviour
 
         if (questUI == null)
         {
-            Debug.LogError("QuestUI not found.");
+            Debug.LogError(logPrefix + "QuestUI not found.");
         }
     }
 
@@ -35,51 +45,95 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void AddQuest(QuestData newQuest)
+    public void InitializeQuest(QuestData quest)
     {
-        Debug.Log($"AddQuest 호출됨: {newQuest.questTitle}", this);
-        if (newQuest == null)
+        if (quest == null)
         {
-            Debug.LogError("퀘스트가 null입니다.");
+            Debug.LogError(logPrefix + "퀘스트가 null입니다.");
             return;
         }
 
-        if (!activeQuests.ContainsKey(newQuest.questID))
+        if (!quests.ContainsKey(quest.questID))
         {
-            activeQuests.Add(newQuest.questID, newQuest);
-            Debug.Log("퀘스트 추가: " + newQuest.questTitle);
+            quests.Add(quest.questID, quest);
+            questStatuses.Add(quest.questID, QuestStatus.NotStarted);
+        }
+    }
+
+    public void AcceptQuest(QuestData newQuest)
+    {
+        if (newQuest == null)
+        {
+            Debug.LogError(logPrefix + "퀘스트가 null입니다.");
+            return;
+        }
+
+        if (!quests.ContainsKey(newQuest.questID))
+        {
+            InitializeQuest(newQuest);
+            questStatuses[newQuest.questID] = QuestStatus.Accepted;
+
+            Debug.Log(logPrefix + "퀘스트 추가: " + newQuest.questTitle);
 
             questUI.RefreshQuestDisplay();
         }
         else
         {
-            Debug.Log("이미 수락한 퀘스트입니다: " + newQuest.questTitle);
+            Debug.Log(logPrefix + "이미 수락한 퀘스트입니다: " + newQuest.questTitle);
         }
     }
 
     public void CompleteQuest(int questID)
     {
-        QuestData quest = activeQuests[questID];
-        if (quest != null && !quest.isCompleted)
+        QuestData quest = quests[questID];
+        if (quest != null && questStatuses[questID] == QuestStatus.Accepted)
         {
-            quest.isCompleted = true;
-            Debug.Log("퀘스트 완료: " + quest.questTitle);
-            // TODO: 보상 지급 로직 추가
+            questStatuses[questID] = QuestStatus.Completed;
 
+            Debug.Log(logPrefix + "퀘스트 완료: " + quest.questTitle);
             questUI.RefreshQuestDisplay();
+
+            Debug.Log(logPrefix + "퀘스트 보상 지급: " + quest.questTitle);
+            InventoryManager.Instance.AddItem(quest.rewardItem);
         }
         else
         {
-            Debug.Log("퀘스트를 찾을 수 없거나 이미 완료되었습니다.");
+            Debug.Log(logPrefix + "퀘스트를 찾을 수 없거나 이미 완료되었습니다.");
         }
     }
 
-    public void PrintActiveQuests()
+    public QuestStatus GetQuestStatus(int questID)
     {
-        Debug.Log("현재 활성화된 퀘스트: ");
-        foreach (KeyValuePair<int, QuestData> q in activeQuests)
+        if (questStatuses.ContainsKey(questID))
         {
-            Debug.Log($"ID: {q.Value.questID}, 제목: {q.Value.questTitle}, 완료 여부: {q.Value.isCompleted}");
+            return questStatuses[questID];
+        }
+        else
+        {
+            return QuestStatus.NotStarted; // TODO if quest not found
+        }
+    }
+
+    public QuestStatus GetQuestStatus(QuestData quest)
+    {
+        return GetQuestStatus(quest.questID);
+    }
+
+    public void ResetQuest(int questID)
+    {
+        if (quests.ContainsKey(questID))
+        {
+            questStatuses[questID] = QuestStatus.NotStarted;
+        }
+    }
+
+    public void PrintQuests()
+    {
+        Debug.Log(logPrefix + "현재 활성화된 퀘스트: ");
+        foreach (KeyValuePair<int, QuestData> q in quests)
+        {
+            QuestStatus qStatus = questStatuses[q.Key];
+            Debug.Log(logPrefix + $"ID: {q.Value.questID}, 제목: {q.Value.questTitle}, 상태: {qStatus}");
         }
     }
 }

@@ -8,6 +8,8 @@ public class DialogueInputHandler : MonoBehaviour
     private float debounceTime = 0.2f;
     private float lastInputTime = 0f;
 
+    private static string logPrefix = "[DialogueInputHandler] ";
+
     private void Start()
     {
         if (DialogueManager.Instance != null)
@@ -17,7 +19,7 @@ public class DialogueInputHandler : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("DialogueManager not found.");
+            Debug.LogWarning(logPrefix + "DialogueManager not found.");
             StartCoroutine(SubscribeToDialogueManager());
         }
     }
@@ -81,7 +83,6 @@ public class DialogueInputHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Selecting current option");
             DialogueManager.Instance.SelectCurrentOption();
             OnInputChanged();
         }

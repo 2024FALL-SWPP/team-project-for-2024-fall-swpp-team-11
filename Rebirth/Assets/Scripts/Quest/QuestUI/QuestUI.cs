@@ -31,7 +31,7 @@ public class QuestUI : MonoBehaviour
         isVisible = true;
         questUI.SetActive(true);
 
-        QuestManager.Instance.PrintActiveQuests();
+        QuestManager.Instance.PrintQuests();
         
         GameStateManager.Instance.LockView();
         RefreshQuestDisplay();
@@ -52,8 +52,14 @@ public class QuestUI : MonoBehaviour
             child.gameObject.SetActive(false);
         }
 
-        foreach (var quest in QuestManager.Instance.activeQuests.Values)
+        foreach (var quest in QuestManager.Instance.quests.Values)
         {
+            if (quest == null)
+                continue; 
+
+            if (QuestManager.Instance.GetQuestStatus(quest) == QuestStatus.Completed)
+                continue;
+
             GameObject questObj = GetPooledQuestItem();
             questObj.transform.SetParent(contentPanel, false);
             questObj.SetActive(true);

@@ -7,5 +7,8 @@ public class DialogueNode : ScriptableObject
 {
     public string nodeID;
     public string dialogueText;
-    public List<DialogueOption> options;
+    public List<DialogueOption> options = new List<DialogueOption>();
+
+    [HideInInspector]
+    public string conversationNpcName;
 }

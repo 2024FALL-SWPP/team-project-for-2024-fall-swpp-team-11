@@ -7,6 +7,8 @@ public class NPCManager : MonoBehaviour
 
     private Dictionary<string, bool> npcMetStatus = new Dictionary<string, bool>();
 
+    private static string logPrefix = "[NPCManager] ";
+
     private void Awake()
     {
         if (Instance == null)
@@ -36,7 +38,7 @@ public class NPCManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"NPCManager: NPC '{npcName}' not registered.");
+            Debug.LogWarning(logPrefix + $"NPC '{npcName}' not registered.");
         }
     }
 
@@ -46,7 +48,7 @@ public class NPCManager : MonoBehaviour
         {
             return hasMet;
         }
-        Debug.LogWarning($"NPCManager: NPC '{npcName}' not registered.");
+        Debug.LogWarning(logPrefix + $"NPC '{npcName}' not registered.");
         return false;
     }
 
@@ -57,7 +59,7 @@ public class NPCManager : MonoBehaviour
         {
             return npcObj.GetComponent<NPC>();
         }
-        Debug.LogWarning($"NPCManager: NPC '{npcName}' not found.");
+        Debug.LogWarning(logPrefix + $"NPC '{npcName}' not found.");
         return null;
     }
 }

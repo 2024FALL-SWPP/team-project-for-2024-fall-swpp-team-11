@@ -1,13 +1,18 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NPC : MonoBehaviour, IInteractable
 {   
     public string npcName;
-    public DialogueNode startingDialogueNode;
 
-    private Outline outline;    
+    [Header("NPC Quest")]
+    public QuestNodes questNodes;
+
+    private static string logPrefix = "[NPC] ";
+
+    private Outline outline;
     private void Awake()
     {
         outline = GetComponent<Outline>();
@@ -21,7 +26,7 @@ public class NPC : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.LogError("NPC: npcName is not set.");
+            Debug.LogError(logPrefix + "npcName is not set.");
         }
     }
 
@@ -29,7 +34,7 @@ public class NPC : MonoBehaviour, IInteractable
     {
         DialogueManager.Instance.OnDialogueEnd += HandleDialogueEnd;
 
-        DialogueManager.Instance.StartDialogue(startingDialogueNode);
+        DialogueManager.Instance.StartDialogue(this);
     }
 
     private void HandleDialogueEnd()

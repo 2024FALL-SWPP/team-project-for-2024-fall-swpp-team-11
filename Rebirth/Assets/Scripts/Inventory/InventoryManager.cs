@@ -6,6 +6,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryUI inventoryUI;
     private InventoryData inventoryData;
 
+    private static string logPrefix = "[InventoryManager] ";
+
     private void Awake()
     {
         if (Instance == null)
@@ -53,13 +55,13 @@ public class InventoryManager : MonoBehaviour
     #region UI Management
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
-        Debug.Log("show tool tip");
+        Debug.Log(logPrefix + "show tool tip");
         inventoryUI.ShowTooltip(itemData, position);
     }
 
     public void HideTooltip()
     {
-        Debug.Log("Hide tip");
+        Debug.Log(logPrefix + "Hide tip");
         inventoryUI.HideTooltip();
     }
     #endregion

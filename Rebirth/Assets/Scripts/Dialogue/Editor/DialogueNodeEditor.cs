@@ -17,8 +17,12 @@ public class DialogueNodeEditor : Editor
     SerializedProperty conditionNotMetNextNodeProp;
     SerializedProperty conditionsProp;
 
-    // QuestDialogueNode properties
+    // Quest DialogueNode properties
     SerializedProperty questProp;
+
+    // QuestOfferDialogueNode properties
+    SerializedProperty questAcceptedNodeProp;
+    SerializedProperty questRejectedNodeProp;
 
     private void OnEnable()
     {
@@ -37,8 +41,9 @@ public class DialogueNodeEditor : Editor
         // QuestDialogueNode properties
         questProp = serializedObject.FindProperty("associatedQuest");
 
-        // QuestRewardDialogueNode properties
-        questProp = serializedObject.FindProperty("associatedQuest");
+        // QuestOfferDialogueNode properties
+        questAcceptedNodeProp = serializedObject.FindProperty("questAcceptedNode");
+        questRejectedNodeProp = serializedObject.FindProperty("questRejectedNode");
     }
 
     public override void OnInspectorGUI()
@@ -71,10 +76,16 @@ public class DialogueNodeEditor : Editor
         else if (target is QuestDialogueNode)
         {
             EditorGUILayout.PropertyField(questProp);
-        }
-        else if (target is QuestRewardDialogueNode)
-        {
-            EditorGUILayout.PropertyField(questProp);
+
+            if (target is QuestOfferDialogueNode)
+            {
+                EditorGUILayout.PropertyField(questAcceptedNodeProp);
+                EditorGUILayout.PropertyField(questRejectedNodeProp);
+            }
+            else if (target is QuestRewardDialogueNode)
+            {
+                EditorGUILayout.PropertyField(nextNodeProp);
+            }
         }
         else
         {
