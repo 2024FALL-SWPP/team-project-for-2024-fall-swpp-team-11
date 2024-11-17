@@ -11,8 +11,8 @@ public class CharacterInteract2D : MonoBehaviour
 
     private void FindClosestInteractable()
     {
-        // 3D 콜라이더와 상호작용하기 위해 Physics.OverlapSphere 사용
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3f);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 3f);
+
         IInteractable closestInteractable = null;
         float closestDistance = Mathf.Infinity;
 
@@ -21,7 +21,7 @@ public class CharacterInteract2D : MonoBehaviour
             IInteractable interactable = hitCollider.GetComponent<IInteractable>();
             if (interactable != null)
             {
-                float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                float distance = Vector2.Distance(transform.position, hitCollider.transform.position);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
