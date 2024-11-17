@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -8,6 +9,9 @@ public class DialogueOption
     public DialogueNode nextNode;
     public DialogueNode fallbackNode;
     public List<DialogueCondition> conditions;
+
+    [Header("Option Actions")]
+    public UnityEvent onSelectActions;
 
     public bool AreConditionsMet()
     {

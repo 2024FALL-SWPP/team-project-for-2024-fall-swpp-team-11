@@ -17,6 +17,9 @@ public class DialogueNodeEditor : Editor
     SerializedProperty conditionNotMetNextNodeProp;
     SerializedProperty conditionsProp;
 
+    // QuestDialogueNode properties
+    SerializedProperty questProp;
+
     private void OnEnable()
     {
         nodeIDProp = serializedObject.FindProperty("nodeID");
@@ -30,6 +33,9 @@ public class DialogueNodeEditor : Editor
         conditionMetNextNodeProp = serializedObject.FindProperty("conditionMetNextNode");
         conditionNotMetNextNodeProp = serializedObject.FindProperty("conditionNotMetNextNode");
         conditionsProp = serializedObject.FindProperty("conditions");
+
+        // QuestDialogueNode properties
+        questProp = serializedObject.FindProperty("associatedQuest");
     }
 
     public override void OnInspectorGUI()
@@ -58,6 +64,10 @@ public class DialogueNodeEditor : Editor
         {
             EditorGUILayout.Space();
             EditorGUILayout.HelpBox("LeafDialogueNode has no options.", MessageType.Info);
+        }
+        else if (target is QuestDialogueNode)
+        {
+            EditorGUILayout.PropertyField(questProp);
         }
         else
         {

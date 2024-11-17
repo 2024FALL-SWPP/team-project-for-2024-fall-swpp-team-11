@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     public event Action OnDialogueEnd;
 
     private int currentOptionIndex = 0;
+    private bool isProcessingSelection = false;
 
     public static DialogueManager Instance { get; private set; }
     private void Awake()
@@ -135,12 +136,19 @@ public class DialogueManager : MonoBehaviour
 
     public void SelectOption(DialogueOption selectedOption)
     {
-        Debug.Log("Selected option: " + selectedOption.optionText);
+        if (isProcessingSelection)
+        {
+            return;
+        }
+        isProcessingSelection = true;
+
         if (selectedOption == null)
         {
             EndDialogue();
             return;
         }
+
+        selectedOption.onSelectActions?.Invoke();
 
         if (selectedOption.nextNode == null)
         {

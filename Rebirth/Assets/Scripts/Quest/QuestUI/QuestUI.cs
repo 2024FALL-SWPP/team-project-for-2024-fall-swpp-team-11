@@ -8,31 +8,13 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private GameObject questUI;
     [SerializeField] private Transform contentPanel;
     [SerializeField] private GameObject questPrefab;
-
-    public static QuestUI Instance { get; private set; }
     
     private bool isVisible = false;
-    private QuestManager questManager;
 
     private List<GameObject> questItemPool = new List<GameObject>();
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-
     private void Start()
     {
-        questManager = QuestManager.Instance;
         HideQuestUI();
     }
 
@@ -46,9 +28,11 @@ public class QuestUI : MonoBehaviour
 
     public void ShowQuestUI()
     {
-        questManager.PrintActiveQuests();
         isVisible = true;
         questUI.SetActive(true);
+
+        QuestManager.Instance.PrintActiveQuests();
+        
         GameStateManager.Instance.LockView();
         RefreshQuestDisplay();
     }
@@ -57,6 +41,7 @@ public class QuestUI : MonoBehaviour
     {
         isVisible = false;
         questUI.SetActive(false);
+        
         GameStateManager.Instance.UnlockView();
     }
 
@@ -67,7 +52,7 @@ public class QuestUI : MonoBehaviour
             child.gameObject.SetActive(false);
         }
 
-        foreach (var quest in questManager.activeQuests)
+        foreach (var quest in QuestManager.Instance.activeQuests.Values)
         {
             GameObject questObj = GetPooledQuestItem();
             questObj.transform.SetParent(contentPanel, false);
