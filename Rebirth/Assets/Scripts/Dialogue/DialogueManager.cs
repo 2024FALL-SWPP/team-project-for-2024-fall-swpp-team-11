@@ -166,6 +166,8 @@ public class DialogueManager : MonoBehaviour
             currentNode = selectedOption.fallbackNode;
         }
         DisplayCurrentDialogueNode();
+
+        isProcessingSelection = false;
     }
 
     public void SelectOption(int optionIndex)

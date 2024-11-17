@@ -68,6 +68,7 @@ public class DialogueNodeEditor : Editor
         else if (target is QuestDialogueNode)
         {
             EditorGUILayout.PropertyField(questProp);
+            // EditorGUILayout.PropertyField(optionsProp, true);
         }
         else
         {

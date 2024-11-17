@@ -44,6 +44,9 @@ public class QuestDialogueNode : DialogueNode
             noOption.onSelectActions.AddListener(() => { 
                 Debug.Log("Quest not added: " + associatedQuest.questTitle);
             });
+
+            options.Add(yesOption);
+            options.Add(noOption);
         }
     }
 }
