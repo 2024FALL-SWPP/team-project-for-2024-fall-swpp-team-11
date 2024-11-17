@@ -49,4 +49,15 @@ public class NPCManager : MonoBehaviour
         Debug.LogWarning($"NPCManager: NPC '{npcName}' not registered.");
         return false;
     }
+
+    public NPC GetNPC(string npcName)
+    {
+        GameObject npcObj = GameObject.Find(npcName); // TODO better way to find NPC object. For now, npcName should be matched with GameObject name.
+        if (npcObj != null)
+        {
+            return npcObj.GetComponent<NPC>();
+        }
+        Debug.LogWarning($"NPCManager: NPC '{npcName}' not found.");
+        return null;
+    }
 }

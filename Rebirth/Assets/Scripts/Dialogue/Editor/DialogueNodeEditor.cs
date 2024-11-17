@@ -36,6 +36,9 @@ public class DialogueNodeEditor : Editor
 
         // QuestDialogueNode properties
         questProp = serializedObject.FindProperty("associatedQuest");
+
+        // QuestRewardDialogueNode properties
+        questProp = serializedObject.FindProperty("associatedQuest");
     }
 
     public override void OnInspectorGUI()
@@ -68,7 +71,10 @@ public class DialogueNodeEditor : Editor
         else if (target is QuestDialogueNode)
         {
             EditorGUILayout.PropertyField(questProp);
-            // EditorGUILayout.PropertyField(optionsProp, true);
+        }
+        else if (target is QuestRewardDialogueNode)
+        {
+            EditorGUILayout.PropertyField(questProp);
         }
         else
         {
