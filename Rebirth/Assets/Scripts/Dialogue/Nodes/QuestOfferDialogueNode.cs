@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Plain Next Dialogue Node", menuName = "Dialogue/Quest Offer Dialogue Node")]
+[CreateAssetMenu(fileName = "New Quest Offer Dialogue Node", menuName = "Dialogue/Quest Offer Dialogue Node")]
 public class QuestOfferDialogueNode : QuestDialogueNode
 {
     [Header("Transition")]
