@@ -63,7 +63,7 @@ public class QuestUI : MonoBehaviour
             GameObject questObj = GetPooledQuestItem();
             questObj.transform.SetParent(contentPanel, false);
             questObj.SetActive(true);
-            var questUIComponent = questObj.GetComponent<QuestItemUI>();
+            var questUIComponent = questObj.GetComponent<QuestItem>();
             questUIComponent.Initialize(quest);
         }
     }

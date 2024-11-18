@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Plain Next Dialogue Node", menuName = "Dialogue/Condition Dialogue Node")]
-public class ConditionDialogueNode : DialogueNode
+[CreateAssetMenu(fileName = "New Conditions Dialogue Node", menuName = "Dialogue/Conditions Dialogue Node")]
+public class ConditionsDialogueNode : DialogueNode
 {
     public DialogueNode conditionMetNextNode;
     public DialogueNode conditionNotMetNextNode;
