@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6735815153753943075}
   - component: {fileID: 723143040319863466}
   - component: {fileID: 4030355478688594329}
+  - component: {fileID: 5960464912142077162}
   m_Layer: 0
   m_Name: '[3D item]Pikachu Feather'
   m_TagString: Untagged
@@ -114,8 +115,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.00052392005, y: 0.016586073, z: 0.019952139}
-  m_Center: {x: 0.000007020006, y: 0.00003189501, z: -0.000009109731}
+  m_Size: {x: 0.001307503, y: 0.016586073, z: 0.019952139}
+  m_Center: {x: -0.00016421478, y: 0.00003189494, z: -0.000009109577}
 --- !u!114 &723143040319863466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +148,16 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &5960464912142077162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485890258350460101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b0e60903cb94b1ca20247772a3eafc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: d179d6e6f5572449a95349e98b7c0613, type: 2}
