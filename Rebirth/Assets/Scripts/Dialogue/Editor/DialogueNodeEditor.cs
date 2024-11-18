@@ -31,7 +31,7 @@ public class DialogueNodeEditor : Editor
     {
         nodeIDProp = serializedObject.FindProperty("nodeID");
         dialogueTextProp = serializedObject.FindProperty("dialogueText");
-        optionsProp = serializedObject.FindProperty("options");
+        // optionsProp = serializedObject.FindProperty("options");
 
         // PlainNextDialogueNode properties
         nextNodeProp = serializedObject.FindProperty("nextNode");
