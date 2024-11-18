@@ -1,21 +1,9 @@
 using UnityEngine;
-public class GameStateManager : MonoBehaviour
+public class GameStateManager : SingletonManager<GameStateManager>
 {
-    public static GameStateManager Instance { get; private set; }
     public bool IsViewLocked { get; private set; }
     public bool IsMovementLocked { get; private set; }
 
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     void Start()
     {
         UnlockView();

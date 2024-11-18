@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEditorInternal;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : SingletonManager<DialogueManager>
 {
     // public DialogueNode startNode;
 
@@ -20,19 +20,9 @@ public class DialogueManager : MonoBehaviour
 
     private static string logPrefix = "[DialogueManager] ";
 
-    public static DialogueManager Instance { get; private set; }
-    private void Awake()
+    protected override void Awake()
     {
-        // use singleton pattern
-        if (Instance == null && Instance != this)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
 
         if (dialogueUI == null)
         {

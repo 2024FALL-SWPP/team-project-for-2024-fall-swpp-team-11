@@ -1,30 +1,15 @@
-// SceneTransitionManager.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
-public class SceneTransitionManager : MonoBehaviour
+public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 {
-    public static SceneTransitionManager Instance;
 
     public Animator fadeAnimator; // FadePanel의 Animator
     public float fadeDuration = 1f; // 페이드 애니메이션 길이
 
     private Vector3 playerTargetPosition; // 플레이어의 목표 위치 저장
-
-    private void Awake()
-    {
-        // 싱글톤 패턴 적용
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 시 유지
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {

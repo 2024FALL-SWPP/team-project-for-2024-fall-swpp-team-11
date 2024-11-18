@@ -18,12 +18,6 @@ public class InputHandler2D : MonoBehaviour, IInputHandler
 
     private void UpdateMovement()
     {
-        if (GameStateManager.Instance.IsMovementLocked)
-        {
-            moveInput = Vector2.zero;
-            return;
-        }
-        
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
     }

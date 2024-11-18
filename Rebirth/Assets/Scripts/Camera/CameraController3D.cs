@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController3D : MonoBehaviour
 {
     public float vDist { get; private set; } = 2f;
     public float hDist { get; private set; } = 4f;

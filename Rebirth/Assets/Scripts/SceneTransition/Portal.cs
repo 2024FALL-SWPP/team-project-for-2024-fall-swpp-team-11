@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PortalTransition3D : MonoBehaviour, IInteractable
+public class Portal : MonoBehaviour, IInteractable
 {
     public string targetScene; // 이동할 씬 이름
     public Vector3 targetPosition;
@@ -30,12 +30,12 @@ public class PortalTransition3D : MonoBehaviour, IInteractable
         }
     }
 
-    public void OnFocus()
+    public virtual void OnFocus()
     {
         // UI 업데이트 등 상호작용 가능 상태 표시 (선택 사항)
     }
 
-    public void OnDefocus()
+    public virtual void OnDefocus()
     {
         // UI 업데이트 등 상호작용 불가능 상태 표시 (선택 사항)
     }

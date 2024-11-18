@@ -8,9 +8,8 @@ public enum QuestStatus
     Completed,
 }
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : SingletonManager<QuestManager>
 {
-    public static QuestManager Instance { get; private set; }
     
     public Dictionary<int, QuestData> quests = new Dictionary<int, QuestData>();
     private Dictionary<int, QuestStatus> questStatuses = new Dictionary<int, QuestStatus>();
@@ -19,17 +18,9 @@ public class QuestManager : MonoBehaviour
 
     public QuestUI questUI;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null && Instance != this)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
 
         if (questUI == null)
         {
