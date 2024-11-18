@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Item : MonoBehaviour, IInteractable
+public class WorldItem : MonoBehaviour, IInteractable
 {
     public ItemData itemData;
     private Outline outline;

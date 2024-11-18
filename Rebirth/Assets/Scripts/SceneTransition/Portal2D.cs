@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PortalTransition2D : PortalTransition
+public class Portal2D : Portal
 {
     public override void OnFocus()
     {

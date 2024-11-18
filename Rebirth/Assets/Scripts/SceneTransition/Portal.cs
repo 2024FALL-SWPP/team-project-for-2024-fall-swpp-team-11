@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PortalTransition : MonoBehaviour, IInteractable
+public class Portal : MonoBehaviour, IInteractable
 {
     public string targetScene; // 이동할 씬 이름
     public Vector3 targetPosition;
