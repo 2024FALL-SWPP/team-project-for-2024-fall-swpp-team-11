@@ -40,7 +40,7 @@ public class Character3D : MonoBehaviour
     void HandleRotation()
     {
         if (inputHandler == null || !characterMovement) return;
-        if (!GameStateManager.Instance.IsViewLocked) return;
+        if (GameStateManager.Instance.IsViewLocked) return;
 
         Quaternion viewRot = inputHandler.GetViewRot();
         characterMovement.Turn(viewRot);

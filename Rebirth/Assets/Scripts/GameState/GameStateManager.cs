@@ -4,6 +4,7 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance { get; private set; }
     public bool IsViewLocked { get; private set; }
     public bool IsMovementLocked { get; private set; }
+
     void Awake()
     {
         if (Instance == null)
@@ -19,17 +20,18 @@ public class GameStateManager : MonoBehaviour
     {
         UnlockView();
         UnlockMovement();
+        UnlockMovement();
     }
     public void LockView()
     {
-        IsViewLocked = false;
+        IsViewLocked = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void UnlockView()
     {
-        IsViewLocked = true;
+        IsViewLocked = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -38,6 +40,7 @@ public class GameStateManager : MonoBehaviour
     {
         IsMovementLocked = true;
     }
+
     public void UnlockMovement()
     {
         IsMovementLocked = false;

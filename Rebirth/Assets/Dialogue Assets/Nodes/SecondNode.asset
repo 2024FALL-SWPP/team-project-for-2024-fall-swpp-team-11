@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6d0c1d868bc644beb05584e2785e6, type: 3}
+  m_Name: SecondNode
+  m_EditorClassIdentifier: 
+  nodeID: 2
+  dialogueText: "\uBAA9\uC774 \uB108\uBB34 \uB9D0\uB77C"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: c470d78294dbdcb43b1a64f12a1c6fa5, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 50b28399254adee4fb18ca68dc8fc64c, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: c173473b45c65074e859dcff46ebdb71, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: c470d78294dbdcb43b1a64f12a1c6fa5, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 50b28399254adee4fb18ca68dc8fc64c, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: c173473b45c65074e859dcff46ebdb71, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  conditionMetNextNode: {fileID: 11400000, guid: c470d78294dbdcb43b1a64f12a1c6fa5, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 50b28399254adee4fb18ca68dc8fc64c, type: 2}
+  conditions:
+  - {fileID: 11400000, guid: c173473b45c65074e859dcff46ebdb71, type: 2}
