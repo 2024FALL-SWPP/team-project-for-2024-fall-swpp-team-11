@@ -9,8 +9,19 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        inputHandler = GetComponent<IInputHandler>();
+        UpdateTarget();
     }
+
+    public void UpdateTarget()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            target = player.transform;
+            inputHandler = player.GetComponent<IInputHandler>();
+        }
+    }
+
 
     void Update()
     {
