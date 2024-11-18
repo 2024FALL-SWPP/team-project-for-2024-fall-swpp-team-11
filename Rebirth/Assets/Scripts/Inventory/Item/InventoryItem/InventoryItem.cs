@@ -41,7 +41,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
     private void InitializeInventoryIcon(ItemData itemData)
-    {        
+    {
         var itemIcon = itemSlot.transform.Find("ItemIcon").GetComponent<Image>();
         itemIcon.sprite = itemData.icon;
     }
@@ -79,8 +79,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Camera eventCamera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
 
         return RectTransformUtility.RectangleContainsScreenPoint(
-            viewportRectTransform, 
-            eventData.position, 
+            viewportRectTransform,
+            eventData.position,
             eventCamera);
     }
 
@@ -96,7 +96,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         forwardFlat.y = 0;
         forwardFlat = forwardFlat.normalized;
 
-        var cameraController = Camera.main.GetComponent<CameraController>();
+        var cameraController = Camera.main.GetComponent<CameraController3D>();
         float spawnDistance = cameraController ? cameraController.hDist + 2f : 6f;
 
         return Camera.main.transform.position + forwardFlat * spawnDistance;
