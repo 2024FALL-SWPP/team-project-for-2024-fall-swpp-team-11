@@ -60,6 +60,11 @@ public class InputHandler : MonoBehaviour, IInputHandler
         return moveInput.normalized;
     }
 
+    public Vector2 GetMoveInput2D()
+    {   
+        return new Vector2(moveInput.x, moveInput.z).normalized;
+    }
+
     public Quaternion GetViewRot()
     {
         return Quaternion.Euler(viewRot.x, viewRot.y, 0f);

@@ -11,8 +11,11 @@ GameObject:
   - component: {fileID: 6250874569761941020}
   - component: {fileID: 6250874569761941219}
   - component: {fileID: 6250874569761941218}
-  - component: {fileID: 6250874569761941022}
+  - component: {fileID: 5164125820947731798}
+  - component: {fileID: 108289759382101889}
+  - component: {fileID: -3871194864588636615}
   - component: {fileID: 6250874569761941021}
+  - component: {fileID: 6250874569761941022}
   - component: {fileID: 6250874569761941016}
   - component: {fileID: 6250874569761941023}
   m_Layer: 0
@@ -110,7 +113,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6250874569761941022
+--- !u!114 &5164125820947731798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +122,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 6250874569761941217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f498abccc1fb454faa531c73d294630, type: 3}
+  m_Script: {fileID: 11500000, guid: cb30140e3a1234d34a612573cc306e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 0.5
+--- !u!114 &108289759382101889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250874569761941217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0dbb48b4bf3d4896b2fefe725bd450e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalSensitivity: 5
+  verticalSensitivity: 10
+  minVerticalAngle: -20
+  maxVerticalAngle: 80
+--- !u!114 &-3871194864588636615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250874569761941217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e720fe5f8f7494221bf6139c6cb2a49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6250874569761941021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +166,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &6250874569761941022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250874569761941217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f498abccc1fb454faa531c73d294630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yOffset: 0.5
 --- !u!50 &6250874569761941016
 Rigidbody2D:
   serializedVersion: 4
