@@ -4,29 +4,18 @@ public class CharacterMovement2D : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
-    private Vector2 movement;
+    // private Vector2 moveDir2D;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Move(Vector3 moveInput)
+    public void Move(Vector3 moveDir)
     {
-        movement = new Vector2(moveInput.x, moveInput.y);
-    }
-
-    void FixedUpdate()
-    {
-        if (GameStateManager.Instance.IsMovementLocked)
-        {
-            movement = Vector2.zero;
-            return;
-        }
-        
-        if (movement != Vector2.zero)
-        {
-            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        }
+        if (!rb || moveDir == Vector3.zero) return;
+        Vector2 moveDir2D = new Vector2(moveDir.x, moveDir.y);
+        Vector2 moveDirection = transform.right * moveDir2D.x + transform.up * moveDir2D.y;
+        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 }
