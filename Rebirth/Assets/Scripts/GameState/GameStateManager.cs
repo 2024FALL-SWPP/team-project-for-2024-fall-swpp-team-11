@@ -1,9 +1,9 @@
 using UnityEngine;
-
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance { get; private set; }
     public bool IsViewLocked { get; private set; }
+    public bool IsMovementLocked { get; private set; }
 
     void Awake()
     {
@@ -16,23 +16,33 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     void Start()
     {
         UnlockView();
+        UnlockMovement();
+        UnlockMovement();
     }
-
     public void LockView()
     {
-        IsViewLocked = false;
+        IsViewLocked = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void UnlockView()
     {
-        IsViewLocked = true;
+        IsViewLocked = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void LockMovement()
+    {
+        IsMovementLocked = true;
+    }
+
+    public void UnlockMovement()
+    {
+        IsMovementLocked = false;
     }
 }

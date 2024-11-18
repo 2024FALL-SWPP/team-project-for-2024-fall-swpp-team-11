@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: StartNode
+  m_EditorClassIdentifier: 
+  nodeID: 1
+  dialogueText: "\uC548\uB155? (\uC2DC\uC791 \uB178\uB4DC)"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 873a81a1638d2db4995c66ffd2a3de31, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: Librarian
+  nextNode: {fileID: 11400000, guid: 873a81a1638d2db4995c66ffd2a3de31, type: 2}
