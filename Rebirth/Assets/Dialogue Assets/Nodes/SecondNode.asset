@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: SecondNode
   m_EditorClassIdentifier: 
   nodeID: 2
-  dialogueText: Second Node Text (Branch Node)
+  dialogueText: "\uBAA9\uC774 \uB108\uBB34 \uB9D0\uB77C"
   options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: c470d78294dbdcb43b1a64f12a1c6fa5, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 50b28399254adee4fb18ca68dc8fc64c, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: c173473b45c65074e859dcff46ebdb71, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
   - optionText: Continue
     nextNode: {fileID: 11400000, guid: c470d78294dbdcb43b1a64f12a1c6fa5, type: 2}
     fallbackNode: {fileID: 11400000, guid: 50b28399254adee4fb18ca68dc8fc64c, type: 2}

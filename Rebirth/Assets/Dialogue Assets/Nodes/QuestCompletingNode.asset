@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: QuestCompletingNode
   m_EditorClassIdentifier: 
   nodeID: 9
-  dialogueText: Oh, is this for me? Thanks!
+  dialogueText: "\uC624 \uAC00\uC838\uC654\uAD6C\uB098! \uACE0\uB9D9\uB2E4."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 6ea72c9351d800e4c9ed8306903e90bc, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
   conversationNpcName: Librarian
   nextNode: {fileID: 11400000, guid: 6ea72c9351d800e4c9ed8306903e90bc, type: 2}

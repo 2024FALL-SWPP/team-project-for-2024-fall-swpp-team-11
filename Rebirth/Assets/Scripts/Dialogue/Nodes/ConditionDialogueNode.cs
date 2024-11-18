@@ -10,6 +10,8 @@ public class ConditionDialogueNode : DialogueNode
 
     private void OnEnable()
     {
+        options.Clear();
+
         DialogueOption option = new DialogueOption
         {
             optionText = "Continue",

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Plain Next Dialogue Node", menuName = "Dialogue/Quest Dialogue Node")]
+[CreateAssetMenu(fileName = "Plain Next Dialogue Node", menuName = "Dialogue/Quest Offer Dialogue Node")]
 public class QuestOfferDialogueNode : QuestDialogueNode
 {
     [Header("Transition")]
@@ -12,6 +12,8 @@ public class QuestOfferDialogueNode : QuestDialogueNode
 
     private void OnEnable()
     {
+        options.Clear();
+
         QuestOfferAcceptOption yesOption = new QuestOfferAcceptOption(associatedQuest)
         {
             optionText = "Yes",

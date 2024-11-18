@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: StartNode
   m_EditorClassIdentifier: 
   nodeID: 1
-  dialogueText: "\uC548\uB155"
+  dialogueText: "\uC548\uB155? (\uC2DC\uC791 \uB178\uB4DC)"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 873a81a1638d2db4995c66ffd2a3de31, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
   conversationNpcName: Librarian
   nextNode: {fileID: 11400000, guid: 873a81a1638d2db4995c66ffd2a3de31, type: 2}

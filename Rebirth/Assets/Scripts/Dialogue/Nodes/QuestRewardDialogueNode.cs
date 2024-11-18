@@ -10,6 +10,8 @@ public class QuestRewardDialogueNode : QuestDialogueNode
     
     private void OnEnable()
     {
+        options.Clear();
+
         DialogueOption option = new QuestRewardOption(associatedQuest)
         {
             optionText = "Continue",

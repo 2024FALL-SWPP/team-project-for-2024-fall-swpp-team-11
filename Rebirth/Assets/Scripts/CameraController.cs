@@ -36,9 +36,8 @@ public class CameraController : MonoBehaviour
 
     private void FollowCharacterRotation()
     {
-        if (GameStateManager.Instance.IsViewLocked)
-        {
-            transform.rotation = inputHandler.GetViewRot();
-        }
+        if (GameStateManager.Instance.IsViewLocked) return;
+        
+        transform.rotation = inputHandler.GetViewRot();
     }
 }

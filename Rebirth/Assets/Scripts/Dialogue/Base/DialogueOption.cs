@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-// [CreateAssetMenu(fileName = "New Dialogue Option", menuName = "Dialogue/Dialogue Option")]
-public class DialogueOption // : ScriptableObject
+[System.Serializable]
+public class DialogueOption
 {
     public string optionText;
     public DialogueNode nextNode;

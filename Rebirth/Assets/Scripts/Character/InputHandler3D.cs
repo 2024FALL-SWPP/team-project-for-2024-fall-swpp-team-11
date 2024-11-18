@@ -48,7 +48,7 @@ public class InputHandler3D : MonoBehaviour, IInputHandler
 
     private void UpdateViewRot()
     {
-        if (!GameStateManager.Instance.IsViewLocked) return;
+        if (GameStateManager.Instance.IsViewLocked) return;
         
         viewRot.y += Input.GetAxis("Mouse X") * verticalSensitivity; 
         viewRot.x += -Input.GetAxis("Mouse Y") * horizontalSensitivity; 

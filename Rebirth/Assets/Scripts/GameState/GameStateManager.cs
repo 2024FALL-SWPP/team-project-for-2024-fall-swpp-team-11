@@ -24,25 +24,25 @@ public class GameStateManager : MonoBehaviour
     }
     public void LockView()
     {
-        IsViewLocked = false;
+        IsViewLocked = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void UnlockView()
     {
-        IsViewLocked = true;
+        IsViewLocked = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void LockMovement()
     {
-        IsMovementLocked = false;
+        IsMovementLocked = true;
     }
 
     public void UnlockMovement()
     {
-        IsMovementLocked = true;
+        IsMovementLocked = false;
     }
 }

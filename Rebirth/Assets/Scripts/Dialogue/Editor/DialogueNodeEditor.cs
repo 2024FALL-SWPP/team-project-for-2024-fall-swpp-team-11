@@ -54,6 +54,7 @@ public class DialogueNodeEditor : Editor
         // Draw the common fields
         EditorGUILayout.PropertyField(nodeIDProp);
         EditorGUILayout.PropertyField(dialogueTextProp);
+        EditorGUILayout.PropertyField(optionsProp, true);
 
         // Determine if the current target
         if (target is PlainNextDialogueNode)

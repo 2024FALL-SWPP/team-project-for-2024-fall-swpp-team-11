@@ -13,7 +13,24 @@ MonoBehaviour:
   m_Name: QuestInProgressNode
   m_EditorClassIdentifier: 
   nodeID: 6
-  dialogueText: Did you bring the blue potion?
+  dialogueText: "Blue potion\uC740 \uAC00\uC838\uC654\uB2C8?"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 2a60a38e9cbef2246bc624a54e3d2216, type: 2}
+    fallbackNode: {fileID: 11400000, guid: f6cdea9953ceb3a43aae4df904bfe701, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: b8a11364864337740b0678da3c3ffc96, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 2a60a38e9cbef2246bc624a54e3d2216, type: 2}
+    fallbackNode: {fileID: 11400000, guid: f6cdea9953ceb3a43aae4df904bfe701, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: b8a11364864337740b0678da3c3ffc96, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
   conversationNpcName: Librarian
   conditionMetNextNode: {fileID: 11400000, guid: 2a60a38e9cbef2246bc624a54e3d2216, type: 2}
   conditionNotMetNextNode: {fileID: 11400000, guid: f6cdea9953ceb3a43aae4df904bfe701, type: 2}

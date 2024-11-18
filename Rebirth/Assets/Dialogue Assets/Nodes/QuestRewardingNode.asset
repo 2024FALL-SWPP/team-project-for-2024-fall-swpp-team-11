@@ -13,7 +13,25 @@ MonoBehaviour:
   m_Name: QuestRewardingNode
   m_EditorClassIdentifier: 
   nodeID: 14
-  dialogueText: This is for you!
+  dialogueText: "\uC774\uAC74 \uB0B4 \uC120\uBB3C\uC774\uC57C!\n\n[\uBCF4\uC0C1:
+    MagicBox3D]"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 243dfea67f12cf94ca0ed124c851e0a7, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 243dfea67f12cf94ca0ed124c851e0a7, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
   conversationNpcName: Librarian
   associatedQuest: {fileID: 11400000, guid: d40f1368fb2e17e45b212bbd79cfcd0e, type: 2}
   nextNode: {fileID: 11400000, guid: 243dfea67f12cf94ca0ed124c851e0a7, type: 2}

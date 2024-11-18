@@ -13,7 +13,25 @@ MonoBehaviour:
   m_Name: QuestOfferNode
   m_EditorClassIdentifier: 
   nodeID: 4
-  dialogueText: Could you bring some water?
+  dialogueText: "\uB108 \uC800\uBC88\uC5D0 \uBCF8 \uC801 \uC788\uB294\uB370, \uBD80\uD0C1
+    \uD558\uB098 \uD558\uC790"
+  options:
+  - optionText: Yes
+    nextNode: {fileID: 11400000, guid: 4d3e26de4c6ce86448b973d7d964de92, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: No
+    nextNode: {fileID: 11400000, guid: 27a76080c8f29974f812e0f810236be6, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
   conversationNpcName: Librarian
   associatedQuest: {fileID: 11400000, guid: d40f1368fb2e17e45b212bbd79cfcd0e, type: 2}
   questAcceptedNode: {fileID: 11400000, guid: 4d3e26de4c6ce86448b973d7d964de92, type: 2}
