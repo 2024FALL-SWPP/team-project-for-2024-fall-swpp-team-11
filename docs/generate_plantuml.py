@@ -13,6 +13,7 @@ def gen_plant_uml():
 def merge_class_name_with_baseclass(class_name, baseclass_name='MonoBehaviour'):
     if ":" not in class_name:
         # first time merging
+        class_name = class_name.replace('"', '').strip()
         return f'"{class_name} : {baseclass_name}"'
     
     # already merged once. append the baseclass to the existing class name
@@ -25,7 +26,7 @@ def merge_class_name_with_baseclass(class_name, baseclass_name='MonoBehaviour'):
 
 def filter_baseclass(baseclass_name='MonoBehaviour'):
     plantuml_dir = os.path.join(os.getcwd(), 'PlantUML')
-    inheritance_pattern = re.compile(rf'^\s*{baseclass_name}\s*<\|--\s*(\w+)\s*$')
+    inheritance_pattern = re.compile(rf'^\s*{baseclass_name}\s*<\|--\s*(.+)\s*$')
 
     for root, dirs, files in os.walk(plantuml_dir):
         for file in files:
