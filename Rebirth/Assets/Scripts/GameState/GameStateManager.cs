@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance { get; private set; }
@@ -17,13 +16,12 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     void Start()
     {
         UnlockView();
         UnlockMovement();
+        UnlockMovement();
     }
-
     public void LockView()
     {
         IsViewLocked = false;
