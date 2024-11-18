@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 7294003707070773564}
   - component: {fileID: 4541910311196547862}
   - component: {fileID: 364971304615229168}
+  - component: {fileID: 2946048711660174890}
   m_Layer: 0
   m_Name: '[3D item]Serentis Flower'
   m_TagString: Untagged
@@ -371,6 +372,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2946048711660174890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551822426458870634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b0e60903cb94b1ca20247772a3eafc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 20fa8adf2e4524239805dd0e5b033740, type: 2}
 --- !u!1 &3551822426458870636
 GameObject:
   m_ObjectHideFlags: 0
