@@ -1,48 +1,15 @@
-// DoorTrigger.cs
 using UnityEngine;
 using System.Collections;
 
-public class PortalTransition2D : MonoBehaviour, IInteractable
+public class PortalTransition2D : PortalTransition
 {
-    public string targetScene; // 이동할 씬 이름
-    public Vector3 targetPosition;
-
-    public float animationDelay = 0.5f; // 씬 전환 전에 지연 시간
-
-    public void Interact()
+    public override void OnFocus()
     {
-        if (!string.IsNullOrEmpty(targetScene))
-        {
-            if (SceneTransitionManager.Instance != null)
-            {
-                SceneTransitionManager.Instance.LoadScene(targetScene, targetPosition);
-            }
-            else
-            {
-                Debug.LogError("SceneTransitionManager.Instance가 null입니다.");
-            }
-        }
-        else
-        {
-            // 같은 씬 내 위치 이동
-            Transform player = GameObject.FindWithTag("Player").transform;
-            StartCoroutine(MovePlayerAfterDelay(player, targetPosition, animationDelay));
-        }
+        Debug.Log("2D focus");
     }
 
-    public void OnFocus()
+    public override void OnDefocus()
     {
-        // UI 업데이트 등 상호작용 가능 상태 표시 (선택 사항)
-    }
-
-    public void OnDefocus()
-    {
-        // UI 업데이트 등 상호작용 불가능 상태 표시 (선택 사항)
-    }
-
-    private IEnumerator MovePlayerAfterDelay(Transform player, Vector3 newPosition, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        player.position = newPosition;
+        Debug.Log("2D defocus");
     }
 }
