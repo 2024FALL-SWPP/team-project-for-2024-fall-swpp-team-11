@@ -1,26 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCManager : MonoBehaviour
+public class NPCManager : SingletonManager<NPCManager>
 {
-    public static NPCManager Instance { get; private set; }
 
     private Dictionary<string, bool> npcMetStatus = new Dictionary<string, bool>();
 
     private static string logPrefix = "[NPCManager] ";
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void RegisterNPC(string npcName)
     {

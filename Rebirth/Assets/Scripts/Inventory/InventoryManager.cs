@@ -1,25 +1,15 @@
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : SingletonManager<InventoryManager>
 {
-    public static InventoryManager Instance;
     [SerializeField] private InventoryUI inventoryUI;
     private InventoryData inventoryData;
 
     private static string logPrefix = "[InventoryManager] ";
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        base.Awake();
 
         inventoryData = new InventoryData();
         inventoryUI.Initialize(inventoryData);

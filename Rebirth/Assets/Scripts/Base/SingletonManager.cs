@@ -13,6 +13,7 @@ public abstract class SingletonManager<T> : MonoBehaviour where T : SingletonMan
 
                 if (_instance == null)
                 {
+                    Debug.LogWarning("[SingletonManager] " + typeof(T).Name + " is not found. Creating a new one.");
                     GameObject singletonObject = new GameObject(typeof(T).Name);
                     _instance = singletonObject.AddComponent<T>();
                     DontDestroyOnLoad(singletonObject);

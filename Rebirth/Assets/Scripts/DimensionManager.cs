@@ -1,30 +1,14 @@
-// DimensionManager.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class DimensionManager : MonoBehaviour
+public class DimensionManager : SingletonManager<DimensionManager>
 {
-    public static DimensionManager Instance;
-
     public GameObject player2DPrefab;
     public GameObject player3DPrefab;
 
     private string anchorID;
     private bool isSwitching = false;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 간 유지
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Update()
     {
