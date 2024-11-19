@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6080038571229819867}
   - component: {fileID: 358214159554474592}
   - component: {fileID: 316734458706227827}
+  - component: {fileID: 8120292690848974933}
   m_Layer: 0
   m_Name: '[3D item]Dragon Feather'
   m_TagString: Untagged
@@ -147,3 +148,16 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8120292690848974933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7134703096229228532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b0e60903cb94b1ca20247772a3eafc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 50d4e3c83ca93425ea8fdf747b18d3be, type: 2}
