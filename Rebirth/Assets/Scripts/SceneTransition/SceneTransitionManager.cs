@@ -7,6 +7,7 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 {
 
     public Animator fadeAnimator; // FadePanel의 Animator
+    public Canvas canvas; // FadePanel의 Canvas
     public float fadeDuration = 1f; // 페이드 애니메이션 길이
 
     private Vector3 playerTargetPosition; // 플레이어의 목표 위치 저장
@@ -14,6 +15,7 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        canvas.enabled = false;
         FadeOut();
     }
 
@@ -45,6 +47,7 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
     {
         GameStateManager.Instance.LockView();
         GameStateManager.Instance.LockMovement();
+        Debug.Log("Transition to " + sceneName);
         FadeIn();
         yield return new WaitForSeconds(fadeDuration);
 
@@ -63,18 +66,22 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 
     public void FadeIn()
     {
-        if (fadeAnimator != null)
-        {
-            fadeAnimator.SetTrigger("FadeInTrigger");
-        }
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeInTrigger");
+        StartCoroutine(DisableCanvasAfterDelay());
     }
 
     public void FadeOut()
     {
-        if (fadeAnimator != null)
-        {
-            fadeAnimator.SetTrigger("FadeOutTrigger");
-        }
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeOutTrigger");
+        StartCoroutine(DisableCanvasAfterDelay());
+    }
+    
+    private IEnumerator DisableCanvasAfterDelay()
+    {
+        yield return new WaitForSeconds(fadeDuration);
+        canvas.enabled = false;
     }
 
     private void OnDestroy()

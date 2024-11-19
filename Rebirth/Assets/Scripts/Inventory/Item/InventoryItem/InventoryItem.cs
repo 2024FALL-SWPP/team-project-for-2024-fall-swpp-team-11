@@ -47,7 +47,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
     #region IItemInteraction Implementation
-    public void HandlePointerEnter(PointerEventData eventData) => InventoryManager.Instance.ShowTooltip(itemData, eventData.position);
+    public void HandlePointerEnter(PointerEventData eventData) 
+    {
+        Debug.Log("Pointer Enter");
+        InventoryManager.Instance.ShowTooltip(itemData, eventData.position);
+    }
     public void HandlePointerExit() => InventoryManager.Instance.HideTooltip();
     public void HandleDragStart(PointerEventData eventData) => dragHandler.StartDrag();
     public void HandleDrag(PointerEventData eventData) => dragHandler.Drag(eventData);
@@ -67,7 +71,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     #endregion
 
     #region Event System Callbacks
-    public void OnPointerEnter(PointerEventData eventData) => HandlePointerEnter(eventData);
+    public void OnPointerEnter(PointerEventData eventData) 
+    {
+        Debug.Log("Pointer Enter");
+        HandlePointerEnter(eventData);
+    }
     public void OnPointerExit(PointerEventData eventData) => HandlePointerExit();
     public void OnBeginDrag(PointerEventData eventData) => HandleDragStart(eventData);
     public void OnDrag(PointerEventData eventData) => HandleDrag(eventData);
