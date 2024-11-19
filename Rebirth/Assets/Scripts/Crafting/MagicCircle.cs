@@ -6,9 +6,9 @@ public class MagicCircle : MonoBehaviour
     [SerializeField] private GameObject stoneOfTruthPrefab;
     [SerializeField] private GameObject magicBoxPrefab;
     [SerializeField] private GameObject potionOfCurePrefab;
-    [SerializeField] private SpecialEffect specialEffect; 
-    [SerializeField] private Collider detectionCollider; 
-    [SerializeField] private KeyCode triggerKey = KeyCode.C; 
+    [SerializeField] private SpecialEffect specialEffect;
+    [SerializeField] private Collider detectionCollider;
+    [SerializeField] private KeyCode triggerKey = KeyCode.C;
     [SerializeField] private float craftCooldown = 2f; // Cooldown
     [SerializeField] private float activationRange = 5f; // craft dist
     [SerializeField] private Transform player; // player pos
@@ -37,10 +37,10 @@ public class MagicCircle : MonoBehaviour
             detectionCollider.bounds.extents);
 
         List<ItemHolder> itemsOnTable = new List<ItemHolder>();
-        List<Item> itemlist = new List<Item>();
+        List<WorldItem> itemlist = new List<WorldItem>();
         foreach (Collider collider in colliders)
         {
-            Item item = collider.GetComponent<Item>();
+            WorldItem item = collider.GetComponent<WorldItem>();
             itemlist.Add(item);
             //Debug.Log($"Item: {item.name}");
 
@@ -55,7 +55,7 @@ public class MagicCircle : MonoBehaviour
         Debug.Log(itemsOnTable.Count);
         GameObject newItemPrefab = null;
 
-        if (itemsOnTable.Count == 2) 
+        if (itemsOnTable.Count == 2)
         {
             newItemPrefab = CombineItems(itemsOnTable);
         }
