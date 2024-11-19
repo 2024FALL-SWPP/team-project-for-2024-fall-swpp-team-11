@@ -1,18 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class CraftRecipe
+{
+    public List<ItemData> ingredientsItems;
+    public WorldItem result;
+}
+
 public class MagicCircle : MonoBehaviour
 {
-    [SerializeField] private GameObject stoneOfTruthPrefab;
-    [SerializeField] private GameObject magicBoxPrefab;
-    [SerializeField] private GameObject potionOfCurePrefab;
+    public List<CraftRecipe> craftRecipes;
+
     [SerializeField] private SpecialEffect specialEffect;
-    [SerializeField] private Collider detectionCollider;
     [SerializeField] private KeyCode triggerKey = KeyCode.C;
     [SerializeField] private float craftCooldown = 2f; // Cooldown
     [SerializeField] private float activationRange = 5f; // craft dist
     [SerializeField] private Transform player; // player pos
     private float lastCraftTime = -Mathf.Infinity; // track time
+    private Collider detectionCollider;
+
+    private void Start()
+    {
+        detectionCollider = GetComponent<Collider>();
+        if (detectionCollider == null)
+        {
+            Debug.LogError("Detection collider not found.");
+        }
+
+        if (specialEffect == null)
+        {
+            Debug.LogError("Special effect not found.");
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("Player transform not found.");
+        }
+    }
 
     private void Update()
     {
@@ -30,83 +55,76 @@ public class MagicCircle : MonoBehaviour
         }
     }
 
-    private void Craft()
+    private List<WorldItem> GetItemsOnTable()
     {
         Collider[] colliders = Physics.OverlapBox(
             detectionCollider.bounds.center,
-            detectionCollider.bounds.extents);
+            detectionCollider.bounds.extents
+        );
 
-        List<ItemHolder> itemsOnTable = new List<ItemHolder>();
-        List<WorldItem> itemlist = new List<WorldItem>();
+        List<WorldItem> itemsOnTable = new List<WorldItem>();
         foreach (Collider collider in colliders)
         {
             WorldItem item = collider.GetComponent<WorldItem>();
-            itemlist.Add(item);
-            //Debug.Log($"Item: {item.name}");
-
-            Debug.Log(itemlist.Count);
-            ItemHolder itemHolder = collider.GetComponent<ItemHolder>();
-            if (itemHolder != null)
+            if (item != null)
             {
-                itemsOnTable.Add(itemHolder);
+                Debug.Log(item.itemData.itemName);
+                itemsOnTable.Add(item);
             }
         }
 
-        Debug.Log(itemsOnTable.Count);
-        GameObject newItemPrefab = null;
+        return itemsOnTable;
+    }
 
-        if (itemsOnTable.Count == 2)
+    private void Craft()
+    {
+        List<WorldItem> itemsOnTable = GetItemsOnTable();
+        Debug.Log($"Items on table: {itemsOnTable.Count}");
+
+        if (itemsOnTable.Count < 2)
         {
-            newItemPrefab = CombineItems(itemsOnTable);
+            specialEffect.TriggerFailureEffect(detectionCollider.bounds.center);
+            return;
         }
 
-        if (newItemPrefab != null)
+        WorldItem combinedWorldItem = CombineItems(itemsOnTable);
+        if (combinedWorldItem != null)
         {
             Vector3 spawnPosition = detectionCollider.bounds.center + Vector3.up * 1;
-
-            Instantiate(newItemPrefab, spawnPosition, Quaternion.identity);
+            Instantiate(combinedWorldItem, spawnPosition, Quaternion.identity);
             Debug.Log("Crafted item!");
 
             specialEffect.TriggerSuccessEffect(detectionCollider.bounds.center);
-
             ClearTable(itemsOnTable); // Destroy combination items
         }
-        else if (itemlist.Count >= 1)
+        else
         {
             specialEffect.TriggerFailureEffect(detectionCollider.bounds.center);
         }
     }
 
-    private GameObject CombineItems(List<ItemHolder> itemHolders)
+    private WorldItem CombineItems(List<WorldItem> itemsOnTable)
     {
-        Debug.Log($"Item 0: {itemHolders[0].itemData.itemName}");
-        Debug.Log($"Item 1: {itemHolders[1].itemData.itemName}");
-
-        HashSet<string> itemNames = new HashSet<string>
+        HashSet<ItemData> ingredientsSet = new HashSet<ItemData>();
+        foreach (WorldItem itemHolder in itemsOnTable)
         {
-            itemHolders[0].itemData.itemName,
-            itemHolders[1].itemData.itemName
-        };
-
-        if (itemNames.SetEquals(new HashSet<string> { "Pikachu", "Veilasis Flower" }))
-        {
-            return stoneOfTruthPrefab;
+            ingredientsSet.Add(itemHolder.itemData);
         }
-        else if (itemNames.SetEquals(new HashSet<string> { "Elixir Veil", "Dragon Feather" }))
+
+        foreach (CraftRecipe recipe in craftRecipes)
         {
-            return magicBoxPrefab;
-        }
-        else if (itemNames.SetEquals(new HashSet<string> { "Serentis Flower", "Pheonix Rose" }))
-        {
-            return potionOfCurePrefab;
+            if (ingredientsSet.SetEquals(recipe.ingredientsItems))
+            {
+                return recipe.result;
+            }
         }
 
         return null;
     }
 
-    private void ClearTable(List<ItemHolder> itemHolders)
+    private void ClearTable(List<WorldItem> itemsOnTable)
     {
-        foreach (ItemHolder itemHolder in itemHolders)
+        foreach (WorldItem itemHolder in itemsOnTable)
         {
             Debug.Log($"Destroying item: {itemHolder.itemData.itemName}");
             Destroy(itemHolder.gameObject); // Destroy the GameObject associated with the ItemHolder

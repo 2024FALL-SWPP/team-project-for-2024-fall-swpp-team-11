@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8592158606487543801
+--- !u!1 &485890258350460101
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8968542720011339075}
-  - component: {fileID: 5465524431944026854}
-  - component: {fileID: 7799538334219304492}
-  - component: {fileID: 4419794700287901610}
-  - component: {fileID: 521712157067926804}
-  - component: {fileID: 4564416674327684147}
-  - component: {fileID: 6296408993544038159}
-  - component: {fileID: 2753846818244409369}
+  - component: {fileID: 1005967588003223167}
+  - component: {fileID: 4204727783696505306}
+  - component: {fileID: 2143369196810202384}
+  - component: {fileID: 1147997672963881449}
+  - component: {fileID: 6735815153753943075}
+  - component: {fileID: 723143040319863466}
+  - component: {fileID: 4030355478688594329}
   m_Layer: 0
-  m_Name: '[3D item]Elixir Veil'
+  m_Name: '[3D item]Pikachu Feather'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8968542720011339075
+--- !u!4 &1005967588003223167
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.438}
+  m_GameObject: {fileID: 485890258350460101}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 15}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!33 &5465524431944026854
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!33 &4204727783696505306
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
-  m_Mesh: {fileID: -5872077933228866730, guid: e91da2c3d039c4971b2428db179f7813, type: 3}
---- !u!23 &7799538334219304492
+  m_GameObject: {fileID: 485890258350460101}
+  m_Mesh: {fileID: 8151603624791552501, guid: a0cc800b3b25740f58b3250ebb65c2c4, type: 3}
+--- !u!23 &2143369196810202384
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
+  m_GameObject: {fileID: 485890258350460101}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -66,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b3a79d8fedf24bd487b58b6d07eb5c1, type: 2}
+  - {fileID: 2100000, guid: 75ce3ab271d374c4f82971c0bcdc760b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,26 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4419794700287901610
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.015173549, y: 0.020045515, z: 0.0034383307}
-  m_Center: {x: 0.000009375623, y: -0.000019124715, z: -0.00001926482}
---- !u!54 &521712157067926804
+--- !u!54 &1147997672963881449
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
+  m_GameObject: {fileID: 485890258350460101}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -117,26 +103,39 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4564416674327684147
+--- !u!65 &6735815153753943075
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485890258350460101}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.001307503, y: 0.016586073, z: 0.019952139}
+  m_Center: {x: -0.00016421478, y: 0.00003189494, z: -0.000009109577}
+--- !u!114 &723143040319863466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
+  m_GameObject: {fileID: 485890258350460101}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 0b4ace43c5b4848ef97cf67fd443a852, type: 2}
---- !u!114 &6296408993544038159
+  itemData: {fileID: 11400000, guid: d179d6e6f5572449a95349e98b7c0613, type: 2}
+--- !u!114 &4030355478688594329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
+  m_GameObject: {fileID: 485890258350460101}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -148,16 +147,3 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &2753846818244409369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592158606487543801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b0e60903cb94b1ca20247772a3eafc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 0b4ace43c5b4848ef97cf67fd443a852, type: 2}
