@@ -5,20 +5,20 @@ public class InputHandler3D : MonoBehaviour, IInputHandler
     [Header("Mouse Sensitivity")]
     [SerializeField] private float horizontalSensitivity = 5f;
     [SerializeField] private float verticalSensitivity = 10f;
-    
+
     [Header("Vertical Rotation Limits")]
     [SerializeField] private float minVerticalAngle = -20f;
     [SerializeField] private float maxVerticalAngle = 80f;
-    
+
     private Vector2 viewRot;
     private Vector3 moveInput;
     private InputState currentState;
-    
+
     private readonly struct InputState
     {
         public readonly bool jumpRequested;
         public readonly bool interactRequested;
-        
+
         public InputState(bool jump, bool interact)
         {
             jumpRequested = jump;
@@ -48,8 +48,9 @@ public class InputHandler3D : MonoBehaviour, IInputHandler
 
     private void UpdateViewRot()
     {
-        viewRot.y += Input.GetAxis("Mouse X") * verticalSensitivity; 
-        viewRot.x += -Input.GetAxis("Mouse Y") * horizontalSensitivity; 
+        if (GameStateManager.Instance.IsViewLocked) return;
+        viewRot.y += Input.GetAxis("Mouse X") * verticalSensitivity;
+        viewRot.x += -Input.GetAxis("Mouse Y") * horizontalSensitivity;
         viewRot.x = Mathf.Clamp(viewRot.x, minVerticalAngle, maxVerticalAngle);
     }
 
@@ -59,7 +60,7 @@ public class InputHandler3D : MonoBehaviour, IInputHandler
     }
 
     public Vector2 GetMoveInput2D()
-    {   
+    {
         return new Vector2(moveInput.x, moveInput.z).normalized;
     }
 
