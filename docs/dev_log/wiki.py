@@ -15,7 +15,7 @@ def pull_repo(repo_url, local_repo_path):
         repo_git = git.Repo(local_repo_path)
         repo_git.remote().pull()
         
-def update_markdown(repo_path, md_name, comment, overwrite=False):
+def update_markdown(repo_path, md_name, comment, overwrite=False, idx=None):
     flag = "w" if overwrite else "a"
     
     json_data = comment['json_data']
@@ -24,7 +24,10 @@ def update_markdown(repo_path, md_name, comment, overwrite=False):
             # write header
             f.write("# Development Logs\n\n")
         
-        f.write(f"\n### Log ({comment['id']})\n\n")
+        if idx is not None:
+            f.write(f"\n### Log {idx+1}\n\n")
+        else:
+            f.write(f"\n### Log ({comment['id']})\n\n")
         f.write(f"|구분|내용|\n|---|--|\n")
         f.write(f"|Task ID|{', '.join(json_data['task_id'])}|\n")
         f.write(f"|작업자|{', '.join(json_data['workers'])}|\n")

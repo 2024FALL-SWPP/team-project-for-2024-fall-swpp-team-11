@@ -21,9 +21,10 @@ if __name__ == '__main__':
     tmp_dir = os.path.join(os.getcwd(), "tmp", "data")
     backup_dir = os.path.join(os.getcwd(), "tmp", "backup")
     os.makedirs(tmp_dir, exist_ok=True)
+    os.makedirs(backup_dir, exist_ok=True)
     
 
-    local_repo_path = "tmp/repo.wiki"
+    local_repo_path = os.path.join(os.getcwd(), "tmp", "repo.wiki")
     repo = os.getenv("GITHUB_WIKI_REPO_URL")
     md_file = os.getenv("GITHUB_WIKI_PAGE_NAME")
     
@@ -68,11 +69,20 @@ if __name__ == '__main__':
     try:
         msg.info(f"Saving parsed comments to {json_name}")
         serialized_comments = [serialize_comment(comment) for comment in parsed_comments]
-        with open(os.path.join(backup_dir, "parsed_comments.json"), "w") as f:
-            json.dump(parsed_comments, f, indent=4, ensure_ascii=False, sort_keys=True)
+        with open(os.path.join(backup_dir, json_name), "w", encoding="utf-8") as f:
+            json.dump(serialized_comments, f, indent=4, ensure_ascii=False, sort_keys=True)
         msg.good(f"parsed comments saved to {json_name}")
     except Exception as e:
         msg.fail(f"Failed to save parsed comments: {e}")
+        msg.info(f"Instead save as text file")
+        try:
+            txt_file_name_without_ext = os.path.splitext(json_name)[0]
+            txt_file_name = f"{txt_file_name_without_ext}.txt"
+            with open(os.path.join(backup_dir, txt_file_name), "w", encoding="utf-8") as f:
+                f.write("\n".join([str(comment) for comment in parsed_comments]))
+            msg.good(f"parsed comments saved to {txt_file_name}")
+        except Exception as e:
+            msg.fail(f"Failed to save parsed comments as text file: {e}")
 
     # # remove tmp directory
     # os.rmdir(tmp_dir)
@@ -83,7 +93,7 @@ if __name__ == '__main__':
         try:
             pull_repo(repo, local_repo_path)
             for i, comment in enumerate(parsed_comments):
-                update_markdown(local_repo_path, md_file, comment, overwrite=(i==0))
+                update_markdown(local_repo_path, md_file, comment, overwrite=(i==0), idx=i)
             push_repo(local_repo_path, "Update devlogs")
             msg.good("Wiki updated")
         except Exception as e:
