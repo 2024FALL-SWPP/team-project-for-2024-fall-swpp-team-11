@@ -13,17 +13,16 @@ public class ItemDragHandler : DragHandler
 
     override protected void HandleDragStart(PointerEventData eventData)
     {
-
     }
     
     override protected void HandleDragging(PointerEventData eventData)
     {
-
     }
     
     override protected void HandleDragEnd(PointerEventData eventData) 
     {
         Vector3? spawnPosition = CalculateSpawnPosition(eventData);
+        
         if (spawnPosition.HasValue)
         {
             Instantiate(itemData.prefab, spawnPosition.Value, Quaternion.identity);
@@ -44,15 +43,24 @@ public class ItemDragHandler : DragHandler
 
     private Vector3? CalculateSpawnPosition(PointerEventData eventData)
     {
-        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
-        RaycastHit hit;
-        
-        if (Physics.Raycast(ray, out hit))
-        {    
-            return hit.point;
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
+        {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(eventData.position);
+            worldPosition.z = 0;
+            return worldPosition;
         }
-        
-        return null;
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+            RaycastHit hit;
+            
+            if (Physics.Raycast(ray, out hit))
+            {
+                return hit.point;
+            }
+            
+            return null;
+        }
     }
 
 

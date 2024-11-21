@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
 public class InventoryItem : MonoBehaviour
 {
     [SerializeField] private GameObject itemSlot;

@@ -40,6 +40,11 @@ public class InventoryManager : SingletonManager<InventoryManager>
     {
         return inventoryDataContainer.HasItem(item);
     }
+
+    public void RefreshInventoryUI()
+    {
+        inventoryUI.RefreshInventoryDisplay();
+    }
     #endregion
 
     #region UI Management

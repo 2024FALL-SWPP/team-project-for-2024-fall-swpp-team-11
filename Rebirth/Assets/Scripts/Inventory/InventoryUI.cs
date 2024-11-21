@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
@@ -9,14 +10,15 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject tooltip;
     private bool isVisible = false;
     private ItemTooltip itemTooltip;
-    private InventoryDataContainer inventoryData;
+    private InventoryDataContainer inventoryDataContainer;
 
-    public void Initialize(InventoryDataContainer data)
+    public void Initialize(InventoryDataContainer dataContainer)
     {
-        inventoryData = data;
+        inventoryDataContainer = dataContainer;
         itemTooltip = new ItemTooltip(tooltip);
     }
 
+    #region Toggle Inventory
     public void ToggleInventory()
     {
         if (!isVisible)
@@ -39,27 +41,40 @@ public class InventoryUI : MonoBehaviour
         inventoryUI.SetActive(false);
         GameStateManager.Instance.UnlockView();
     }
+    #endregion
 
+    #region Draw Inventory UI
     public void RefreshInventoryDisplay()
+    {
+        ClearInventoryUI();
+        RegenerateInventoryUI();
+    }
+
+    private void ClearInventoryUI()
     {
         foreach (Transform child in contentPanel)
         {
             Destroy(child.gameObject);
         }
-
-        // Need to know current dimension
-        foreach (var item in inventoryData.ThreeDimensionalItems)
-        {
-            GameObject inventoryItem = Instantiate(inventoryItemPrefab, contentPanel);
-            inventoryItem.GetComponent<InventoryItem>().Initialize(item);
-        }
-        foreach (var item in inventoryData.TwoDimensionalItems)
-        {
-            GameObject inventoryItem = Instantiate(inventoryItemPrefab, contentPanel);
-            inventoryItem.GetComponent<InventoryItem>().Initialize(item);
-        }
     }
 
+    private void RegenerateInventoryUI()
+    {
+        IReadOnlyList<ItemData> itemDatas;
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
+            itemDatas = inventoryDataContainer.TwoDimensionalItems;
+        else
+            itemDatas = inventoryDataContainer.ThreeDimensionalItems;
+
+        foreach (var itemData in itemDatas)
+        {
+            GameObject inventoryItem = Instantiate(inventoryItemPrefab, contentPanel);
+            inventoryItem.GetComponent<InventoryItem>().Initialize(itemData);
+        }
+    }
+    #endregion
+
+    #region Tooltip
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
         itemTooltip.Show();
@@ -70,4 +85,5 @@ public class InventoryUI : MonoBehaviour
     {
         itemTooltip.Hide();
     }
+    #endregion
 }
