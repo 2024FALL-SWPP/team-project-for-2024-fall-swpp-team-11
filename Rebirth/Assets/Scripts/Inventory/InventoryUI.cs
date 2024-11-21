@@ -5,7 +5,7 @@ public class InventoryUI : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private Transform contentPanel;
-    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private GameObject inventoryItemPrefab;
     [SerializeField] private GameObject tooltip;
     private bool isVisible = false;
     private ItemTooltip itemTooltip;
@@ -49,9 +49,8 @@ public class InventoryUI : MonoBehaviour
 
         foreach (var item in inventoryData.Items)
         {
-            GameObject itemObj = Instantiate(itemPrefab, contentPanel);
-            var itemUI = itemObj.GetComponent<InventoryItem>();
-            itemUI.Initialize(item);
+            GameObject inventoryItem = Instantiate(inventoryItemPrefab, contentPanel);
+            inventoryItem.GetComponent<InventoryItem>().Initialize(item);
         }
     }
 
