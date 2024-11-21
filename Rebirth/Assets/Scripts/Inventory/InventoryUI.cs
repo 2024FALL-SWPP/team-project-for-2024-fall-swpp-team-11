@@ -9,9 +9,9 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject tooltip;
     private bool isVisible = false;
     private ItemTooltip itemTooltip;
-    private InventoryData inventoryData;
+    private InventoryDataContainer inventoryData;
 
-    public void Initialize(InventoryData data)
+    public void Initialize(InventoryDataContainer data)
     {
         inventoryData = data;
         itemTooltip = new ItemTooltip(tooltip);
@@ -47,7 +47,13 @@ public class InventoryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (var item in inventoryData.Items)
+        // Need to know current dimension
+        foreach (var item in inventoryData.ThreeDimensionalItems)
+        {
+            GameObject inventoryItem = Instantiate(inventoryItemPrefab, contentPanel);
+            inventoryItem.GetComponent<InventoryItem>().Initialize(item);
+        }
+        foreach (var item in inventoryData.TwoDimensionalItems)
         {
             GameObject inventoryItem = Instantiate(inventoryItemPrefab, contentPanel);
             inventoryItem.GetComponent<InventoryItem>().Initialize(item);
