@@ -38,14 +38,14 @@ public class DimensionManager : SingletonManager<DimensionManager>
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "3D";
             // even if scene changes with inventory turned on, UI will be refreshed
-            InventoryManager.Instance.RefreshInventoryUI();
             dimension = Dimension.THREE_DIMENSION;
+            InventoryManager.Instance.RefreshInventoryUI();
         }
         else if (currentSceneName.EndsWith("3D"))
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "2D";
-            InventoryManager.Instance.RefreshInventoryUI();
             dimension = Dimension.TWO_DIMENSION;
+            InventoryManager.Instance.RefreshInventoryUI();
         }
         else
         {

@@ -48,6 +48,7 @@ public class InventoryUI : MonoBehaviour
     {
         ClearInventoryUI();
         RegenerateInventoryUI();
+        HideTooltip(); // hide tooltip when inventory is refreshed
     }
 
     private void ClearInventoryUI()
