@@ -8,10 +8,14 @@ public class SaveSystem
     private static string InventorySavePath => Application.persistentDataPath + "/inventory.json";
    
    #region Inventory
-    public static void SaveInventoryData(InventoryData inventoryData)
+    public static void SaveInventoryData(InventoryDataContainer inventoryData)
     {
         List<string> itemNames = new List<string>();
-        foreach (var item in inventoryData.Items)
+        foreach (var item in inventoryData.ThreeDimensionalItems)
+        {
+            itemNames.Add(item.itemName);
+        }
+        foreach (var item in inventoryData.TwoDimensionalItems)
         {
             itemNames.Add(item.itemName);
         }
@@ -23,7 +27,7 @@ public class SaveSystem
         Debug.Log("인벤토리 아이템들이 파일로 저장되었습니다.");
     }
     
-    public static InventoryData LoadInventoryData()
+    public static InventoryDataContainer LoadInventoryData()
     {
         if (!File.Exists(InventorySavePath))
         {
@@ -36,20 +40,24 @@ public class SaveSystem
 
 
         ItemData[] allItems = Resources.LoadAll<ItemData>("ScriptableItem");
-        List<ItemData> loadedItems = new List<ItemData>();
+        List<ItemData> loaded2DItems = new List<ItemData>();
+        List<ItemData> loaded3DItems = new List<ItemData>();
         foreach (var itemName in itemNames)
         {
             ItemData foundItem = System.Array.Find(allItems, item => item.itemName == itemName);
             if (foundItem != null)
             {
-                loadedItems.Add(foundItem);
+                if (foundItem.dimension == Dimension.THREE_DIMENSION)
+                    loaded3DItems.Add(foundItem);
+                else
+                    loaded2DItems.Add(foundItem);
             }
             else
             {
                 Debug.LogWarning($"아이템 '{itemName}'을(를) 찾을 수 없습니다.");
             }
         }
-        InventoryData inventoryData = new InventoryData(loadedItems);
+        InventoryDataContainer inventoryData = new InventoryDataContainer(loaded2DItems, loaded3DItems);
 
         return inventoryData;
     }
