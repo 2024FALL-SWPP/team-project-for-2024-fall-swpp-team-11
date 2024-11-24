@@ -16,14 +16,15 @@ MonoBehaviour:
   dialogueText: "\uC544\uC774\uD15C\uC744 \uAC00\uC838 \uC628 \uAC70\uB0D0?"
   options:
   - optionText: Continue
-    nextNode: {fileID: 0}
-    fallbackNode: {fileID: 0}
-    conditions: []
+    nextNode: {fileID: 11400000, guid: 22d4d39c42c3148f694d8ee1371c2e82, type: 2}
+    fallbackNode: {fileID: 11400000, guid: ac5f14f70f6d641ceba68e760c13faaa, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: 12458d5682a1f497cb784cf5847235e3, type: 2}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: 
-  conditionMetNextNode: {fileID: 11400000, guid: 92492343331654ad7a6749d6d54a6922, type: 2}
-  conditionNotMetNextNode: {fileID: 11400000, guid: 8159a9b4a66ad419298109597d50cdab, type: 2}
+  conversationNpcName: Librarian
+  conditionMetNextNode: {fileID: 11400000, guid: 22d4d39c42c3148f694d8ee1371c2e82, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: ac5f14f70f6d641ceba68e760c13faaa, type: 2}
   conditions:
-  - {fileID: 11400000, guid: a4955b7f30bde49a69bc65b6f73eaa3b, type: 2}
+  - {fileID: 11400000, guid: 12458d5682a1f497cb784cf5847235e3, type: 2}

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5a05d94d315d14a8f42d9fba39860a, type: 3}
+  m_Name: '[Ketrix]giveCatComb'
+  m_EditorClassIdentifier: 
+  nodeID: 513
+  dialogueText: "\uACE0\uC591\uC774 \uBE57\uC744 \uB2EC\uB77C\uACE0? "
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: f782e37a995884e93865378a694db781, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  associatedQuest: {fileID: 11400000, guid: 1ae4500a5dde146fea251ae00daa3d18, type: 2}
+  nextNode: {fileID: 11400000, guid: f782e37a995884e93865378a694db781, type: 2}

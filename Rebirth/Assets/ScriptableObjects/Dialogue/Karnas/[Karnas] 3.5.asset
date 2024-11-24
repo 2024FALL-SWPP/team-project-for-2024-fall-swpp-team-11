@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e18459eaf9874d48836c3d2da192f26, type: 3}
+  m_Name: '[Karnas] 3.5'
+  m_EditorClassIdentifier: 
+  nodeID: 305
+  dialogueText: "\uD06C\uD760, \uC544\uBB34\uAC83\uB3C4 \uC544\uB2C8\uB2E4. \uBABB
+    \uB4E4\uC740 \uAC78\uB85C \uD574\uB77C. \n\uADF8\uB798\uC11C \uC65C \uB0A0 \uCC3E\uC544\uC628
+    \uAC70\uB0D0? "
+  options:
+  - optionText: "\uB3C4\uC6C0\uC774 \uD544\uC694\uD558\uB2E4.."
+    nextNode: {fileID: 11400000, guid: 1799dadc61c45484aa75d56cd2e44d97, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: Librarian
+  associatedQuest: {fileID: 0}
+  textNodePairs:
+  - optionText: "\uB3C4\uC6C0\uC774 \uD544\uC694\uD558\uB2E4.."
+    nextNode: {fileID: 11400000, guid: 1799dadc61c45484aa75d56cd2e44d97, type: 2}
