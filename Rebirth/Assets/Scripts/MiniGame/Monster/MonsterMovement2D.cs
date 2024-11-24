@@ -36,10 +36,8 @@ public class MonsterMovement2D : MonoBehaviour
         if (traveledDistance >= moveDistance)
         {
             direction *= -1; 
-            Vector3 clampedPosition = isVertical
-                ? new Vector3(transform.position.x, startPosition.y + moveDistance * direction, transform.position.z)
-                : new Vector3(startPosition.x + moveDistance * direction, transform.position.y, transform.position.z);
-            transform.position = clampedPosition;
+      
+            startPosition = transform.position; 
         }
 
         rb.velocity = isVertical
