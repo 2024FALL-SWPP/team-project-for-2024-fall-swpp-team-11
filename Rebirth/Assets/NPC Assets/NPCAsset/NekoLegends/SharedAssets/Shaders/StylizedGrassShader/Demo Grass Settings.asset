@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5330b9aa49efd424495407d6e28ed910, type: 3}
+  m_Name: Demo Grass Settings
+  m_EditorClassIdentifier: 
+  shaderToUse: {fileID: 7200000, guid: 589029951c2db6646b9ae420ed4aa925, type: 3}
+  materialToUse: {fileID: 2100000, guid: 5477f03c4e11cf345a53ad73add488a3, type: 2}
+  grassRandomHeightMin: -1.5175436
+  grassRandomHeightMax: 0.39473724
+  bladeRadius: 0
+  bladeForwardAmount: 1
+  bladeCurveAmount: 1
+  bottomWidth: 0.5
+  MinWidth: 0.01
+  MinHeight: 0.25
+  MaxWidth: 0.2
+  MaxHeight: 1
+  windSpeed: 2
+  windStrength: 0.05
+  allowedBladesPerVertex: 4
+  allowedSegmentsPerBlade: 2
+  affectStrength: 1
+  topTint: {r: 1, g: 1, b: 1, a: 1}
+  bottomTint: {r: 0.29102886, g: 0.29102886, b: 0.5660378, a: 1}
+  drawBounds: 0
+  minFadeDistance: 40
+  maxDrawDistance: 125
+  cullingTreeDepth: 1
+  castShadow: 0
