@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeID: 103
   dialogueText: "\uC0AC\uB78C\uB4E4\uC740 \uADF8 \uBE44\uBC00 \uC11C\uACE0\uAC00
-    \uB2E8\uC21C\uD788 \uC624\uB798\uB41C \uC774\uC57C\uAE30\uB77C\uACE0 \uCE58\uBD80\uD558\uC9C0\uB9CC,
-    \uC800\uB294 \uADF8\uB807\uAC8C \uC0DD\uAC01\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.
-    \uBD84\uBA85 \uC5B4\uB518\uAC00\uC5D0, \uC874\uC7AC\uD558\uACE0 \uC788\uC744\uAC70\uC5D0\uC694."
+    \uB2E8\uC21C\uD788 \uC624\uB798\uB41C \uC774\uC57C\uAE30\uB77C\uACE0 \uCE58\uBD80\uD558\uC9C0\uB9CC,..\n\uC800\uB294
+    \uADF8\uB807\uAC8C \uC0DD\uAC01\uD558\uC9C0 \uC54A\uC544\uC694. \n\uBD84\uBA85
+    \uC5B4\uB518\uAC00\uC5D0, \uC874\uC7AC\uD558\uACE0 \uC788\uC744\uAC70\uC5D0\uC694."
   options:
   - optionText: Continue
     nextNode: {fileID: 11400000, guid: 82d64a8ed89af43e0bcdcd467c335bb1, type: 2}
@@ -26,5 +26,5 @@ MonoBehaviour:
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: Librarian
+  conversationNpcName: Librarians
   nextNode: {fileID: 11400000, guid: 82d64a8ed89af43e0bcdcd467c335bb1, type: 2}
