@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Plain Next Dialogue Node", menuName = "Dialogue/Plain Next Dialogue Node")]
+[CreateAssetMenu(fileName = "New Plain Next Dialogue Node", menuName = "Dialogue/Plain Next Dialogue Node")]
 public class PlainNextDialogueNode : DialogueNode
 {
     [Header("Transition")]

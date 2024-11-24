@@ -1,34 +1,21 @@
-// SceneTransitionManager.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
-public class SceneTransitionManager : MonoBehaviour
+public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 {
-    public static SceneTransitionManager Instance;
 
     public Animator fadeAnimator; // FadePanel의 Animator
+    public Canvas canvas; // FadePanel의 Canvas
     public float fadeDuration = 1f; // 페이드 애니메이션 길이
 
     private Vector3 playerTargetPosition; // 플레이어의 목표 위치 저장
 
-    private void Awake()
-    {
-        // 싱글톤 패턴 적용
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 시 유지
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        canvas.enabled = false;
         FadeOut();
     }
 
@@ -60,6 +47,7 @@ public class SceneTransitionManager : MonoBehaviour
     {
         GameStateManager.Instance.LockView();
         GameStateManager.Instance.LockMovement();
+        Debug.Log("Transition to " + sceneName);
         FadeIn();
         yield return new WaitForSeconds(fadeDuration);
 
@@ -78,18 +66,22 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void FadeIn()
     {
-        if (fadeAnimator != null)
-        {
-            fadeAnimator.SetTrigger("FadeInTrigger");
-        }
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeInTrigger");
+        StartCoroutine(DisableCanvasAfterDelay());
     }
 
     public void FadeOut()
     {
-        if (fadeAnimator != null)
-        {
-            fadeAnimator.SetTrigger("FadeOutTrigger");
-        }
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeOutTrigger");
+        StartCoroutine(DisableCanvasAfterDelay());
+    }
+    
+    private IEnumerator DisableCanvasAfterDelay()
+    {
+        yield return new WaitForSeconds(fadeDuration);
+        canvas.enabled = false;
     }
 
     private void OnDestroy()

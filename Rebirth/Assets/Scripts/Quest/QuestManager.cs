@@ -8,10 +8,9 @@ public enum QuestStatus
     Completed,
 }
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : SingletonManager<QuestManager>
 {
-    public static QuestManager Instance { get; private set; }
-    
+
     public Dictionary<int, QuestData> quests = new Dictionary<int, QuestData>();
     private Dictionary<int, QuestStatus> questStatuses = new Dictionary<int, QuestStatus>();
 
@@ -19,17 +18,9 @@ public class QuestManager : MonoBehaviour
 
     public QuestUI questUI;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null && Instance != this)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
 
         if (questUI == null)
         {
@@ -91,6 +82,7 @@ public class QuestManager : MonoBehaviour
             questStatuses[questID] = QuestStatus.Completed;
 
             Debug.Log(logPrefix + "퀘스트 완료: " + quest.questTitle);
+            CleanUpQuestRequirements(quest);
             questUI.RefreshQuestDisplay();
 
             Debug.Log(logPrefix + "퀘스트 보상 지급: " + quest.questTitle);
@@ -99,6 +91,18 @@ public class QuestManager : MonoBehaviour
         else
         {
             Debug.Log(logPrefix + "퀘스트를 찾을 수 없거나 이미 완료되었습니다.");
+        }
+    }
+
+    private void CleanUpQuestRequirements(QuestData quest)
+    {
+        if (quest.requiredItem != null)
+        {
+            InventoryManager.Instance.RemoveItem(quest.requiredItem);
+        }
+        else
+        {
+            Debug.LogWarning(logPrefix + $"퀘스트 {quest.questTitle}에 필요한 아이템 {quest.requiredItem.itemName}이 없습니다.");
         }
     }
 

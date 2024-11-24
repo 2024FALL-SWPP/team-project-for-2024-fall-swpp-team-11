@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Character3D : MonoBehaviour
 {
-    private CharacterAnimation3D characterAnimation;
     private CharacterMovement3D characterMovement;
     private CharacterInteract3D characterInteract;
+    private CharacterAnimation3D characterAnimation;
     private IInputHandler inputHandler;
 
     void Start()

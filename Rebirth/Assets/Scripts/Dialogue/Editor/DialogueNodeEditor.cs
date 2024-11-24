@@ -17,6 +17,9 @@ public class DialogueNodeEditor : Editor
     SerializedProperty conditionNotMetNextNodeProp;
     SerializedProperty conditionsProp;
 
+    // OptionsDialogueNode properties
+    SerializedProperty textNodePairsProp;
+
     // Quest DialogueNode properties
     SerializedProperty questProp;
 
@@ -28,7 +31,7 @@ public class DialogueNodeEditor : Editor
     {
         nodeIDProp = serializedObject.FindProperty("nodeID");
         dialogueTextProp = serializedObject.FindProperty("dialogueText");
-        optionsProp = serializedObject.FindProperty("options");
+        // optionsProp = serializedObject.FindProperty("options");
 
         // PlainNextDialogueNode properties
         nextNodeProp = serializedObject.FindProperty("nextNode");
@@ -37,6 +40,9 @@ public class DialogueNodeEditor : Editor
         conditionMetNextNodeProp = serializedObject.FindProperty("conditionMetNextNode");
         conditionNotMetNextNodeProp = serializedObject.FindProperty("conditionNotMetNextNode");
         conditionsProp = serializedObject.FindProperty("conditions");
+
+        // OptionsDialogueNode properties
+        textNodePairsProp = serializedObject.FindProperty("textNodePairs");
 
         // QuestDialogueNode properties
         questProp = serializedObject.FindProperty("associatedQuest");
@@ -54,7 +60,7 @@ public class DialogueNodeEditor : Editor
         // Draw the common fields
         EditorGUILayout.PropertyField(nodeIDProp);
         EditorGUILayout.PropertyField(dialogueTextProp);
-        EditorGUILayout.PropertyField(optionsProp, true);
+        // EditorGUILayout.PropertyField(optionsProp, true);
 
         // Determine if the current target
         if (target is PlainNextDialogueNode)
@@ -63,11 +69,15 @@ public class DialogueNodeEditor : Editor
             EditorGUILayout.Space();
             EditorGUILayout.HelpBox("Options are managed automatically for PlainNextDialogueNode.", MessageType.Info);
         }
-        else if (target is ConditionDialogueNode)
+        else if (target is ConditionsDialogueNode)
         {
             EditorGUILayout.PropertyField(conditionMetNextNodeProp);
             EditorGUILayout.PropertyField(conditionNotMetNextNodeProp);
             EditorGUILayout.PropertyField(conditionsProp, true);
+        }
+        else if (target is OptionsDialogueNode)
+        {
+            EditorGUILayout.PropertyField(textNodePairsProp, true);
         }
         else if (target is LeafDialogueNode)
         {

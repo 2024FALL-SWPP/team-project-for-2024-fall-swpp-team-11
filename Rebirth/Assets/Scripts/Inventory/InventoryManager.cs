@@ -1,28 +1,18 @@
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : SingletonManager<InventoryManager>
 {
-    public static InventoryManager Instance;
     [SerializeField] private InventoryUI inventoryUI;
-    private InventoryData inventoryData;
+    private InventoryDataContainer inventoryDataContainer;
 
     private static string logPrefix = "[InventoryManager] ";
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        base.Awake();
 
-        inventoryData = new InventoryData();
-        inventoryUI.Initialize(inventoryData);
+        inventoryDataContainer = new InventoryDataContainer();
+        inventoryUI.Initialize(inventoryDataContainer);
     }
 
     private void Update()
@@ -36,19 +26,24 @@ public class InventoryManager : MonoBehaviour
     #region Inventory Data
     public void AddItem(ItemData item)
     {
-        inventoryData.AddItem(item);
+        inventoryDataContainer.AddItem(item);
         inventoryUI.RefreshInventoryDisplay();
     }
 
     public void RemoveItem(ItemData item)
     {
-        inventoryData.RemoveItem(item);
+        inventoryDataContainer.RemoveItem(item);
         inventoryUI.RefreshInventoryDisplay();
     }
 
     public bool HasItem(ItemData item)
     {
-        return inventoryData.HasItem(item);
+        return inventoryDataContainer.HasItem(item);
+    }
+
+    public void RefreshInventoryUI()
+    {
+        inventoryUI.RefreshInventoryDisplay();
     }
     #endregion
 
@@ -69,16 +64,16 @@ public class InventoryManager : MonoBehaviour
     #region Save Management
     public void SaveInventory()
     {
-        SaveSystem.SaveInventoryData(inventoryData);
+        SaveSystem.SaveInventoryData(inventoryDataContainer);
     }
 
     public void LoadInventory()
     {
-        InventoryData loadedData = SaveSystem.LoadInventoryData();
+        InventoryDataContainer loadedData = SaveSystem.LoadInventoryData();
         if (loadedData != null)
         {
-            inventoryData = loadedData;
-            inventoryUI.Initialize(inventoryData);
+            inventoryDataContainer = loadedData;
+            inventoryUI.Initialize(inventoryDataContainer);
             inventoryUI.RefreshInventoryDisplay();
             Debug.Log("인벤토리가 로드되었습니다.");
         }

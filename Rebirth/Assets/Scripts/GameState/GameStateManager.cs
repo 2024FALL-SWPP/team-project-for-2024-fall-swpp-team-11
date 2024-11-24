@@ -1,21 +1,11 @@
 using UnityEngine;
-public class GameStateManager : MonoBehaviour
+using UnityEngine.InputSystem;
+public class GameStateManager : SingletonManager<GameStateManager>
 {
-    public static GameStateManager Instance { get; private set; }
     public bool IsViewLocked { get; private set; }
     public bool IsMovementLocked { get; private set; }
+    private Vector2 savedMousePosition;
 
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     void Start()
     {
         UnlockView();
@@ -27,6 +17,12 @@ public class GameStateManager : MonoBehaviour
         IsViewLocked = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        Vector2 screenPosition = new Vector2(
+            savedMousePosition.x * Screen.width,
+            savedMousePosition.y * Screen.height
+        );
+        Mouse.current.WarpCursorPosition(screenPosition);
     }
 
     public void UnlockView()
@@ -34,6 +30,9 @@ public class GameStateManager : MonoBehaviour
         IsViewLocked = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        Vector2 currentPos = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
+        savedMousePosition = currentPos;
     }
 
     public void LockMovement()

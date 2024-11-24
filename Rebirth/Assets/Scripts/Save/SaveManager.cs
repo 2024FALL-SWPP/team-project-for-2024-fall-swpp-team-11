@@ -2,24 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : SingletonManager<SaveManager>
 {
-    public static SaveManager Instance;
     public float autoSaveInterval = 300f; 
     private bool isAutoSaveEnabled = true;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject); 
-        }
-    }
 
     private void Start()
     {
