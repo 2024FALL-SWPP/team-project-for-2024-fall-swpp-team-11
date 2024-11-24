@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: LibrarianDialogueNode2
+  m_EditorClassIdentifier: 
+  nodeID: 102
+  dialogueText: "\uD765\uBBF8\uB85C\uC6B4 \uC804\uC124 \uD558\uB098\uB97C \uB4E4\uB824\uB4DC\uB9B4\uAE4C\uC694?
+    \n\uC624\uB798\uC804 \uBD80\uD130, \uC774 \uB3C4\uC11C\uAD00 \uC5B4\uB518\uAC00
+    \uAE08\uC9C0\uB41C \uCC45\uB4E4\uC774 \uC313\uC5EC \uC788\uB294 \uBE44\uBC00
+    \uC11C\uACE0\uAC00 \uC874\uC7AC\uD55C\uB2E4\uB294 \uC774\uC57C\uAE30\uAC00 \uC804\uD574\uC838
+    \uB0B4\uB824\uC635\uB2C8\uB2E4. "
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 7870577f50bcc4377bd6ee9532386d57, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: Librarian
+  nextNode: {fileID: 11400000, guid: 7870577f50bcc4377bd6ee9532386d57, type: 2}
