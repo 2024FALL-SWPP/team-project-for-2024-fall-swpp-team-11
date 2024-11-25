@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53763bba51e4d4a2db46495c8ef910d5, type: 3}
+  m_Name: '[Well]6'
+  m_EditorClassIdentifier: 
+  nodeID: 1006
+  dialogueText: "\uC608\uB07C \uC774\uB188! \uAC70\uC9D3\uB9D0\uC744 \uD558\uBA74
+    \uC4F0\uB098! "
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 0}
+    fallbackNode: {fileID: 0}
+    conditions: []
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  nextNode: {fileID: 11400000, guid: 1a70c86bb16bd4c45af7e9f3e7e4090e, type: 2}
+  penaltyItem: {fileID: 11400000, guid: 7cc197d15763040d1af6efd8d54376cf, type: 2}
