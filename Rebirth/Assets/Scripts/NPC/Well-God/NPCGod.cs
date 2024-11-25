@@ -18,10 +18,11 @@ public class NPCGod : NPC
     public override void HandleDialogueEnd()
     {
         base.HandleDialogueEnd();
+        godMovesUp.MovingDown();
 
-        if(InventoryManager.Instance.HasItem(itemData)){
-            godMovesUp.MovingDown();
-        }
+        // if(InventoryManager.Instance.HasItem(itemData)){
+        //     godMovesUp.MovingDown();
+        // }
     }
 
 }
