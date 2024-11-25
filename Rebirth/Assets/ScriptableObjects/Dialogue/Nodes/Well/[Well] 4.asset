@@ -19,7 +19,7 @@ MonoBehaviour:
     \uB9DE\uB294 \uC0C1\uC744 \uB0B4\uB824\uC8FC\uB9AC\uB77C."
   options:
   - optionText: "\uB4DC\uB798\uACE4 \uAE43\uD138\uC6A9 \uBE57"
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: a4168e3b7d2b647ad80d7c64ee0b2c93, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
@@ -27,7 +27,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - optionText: "\uACE0\uC591\uC774 \uD138\uC6A9 \uBE57"
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: a4168e3b7d2b647ad80d7c64ee0b2c93, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
@@ -35,14 +35,14 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - optionText: "\uD3C9\uBC94\uD55C \uBE57"
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: 7ba31fb01f250494b9d60721d90a2c78, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: 
+  conversationNpcName: "\uC6B0\uBB3C "
   associatedQuest: {fileID: 0}
   textNodePairs:
   - optionText: "\uB4DC\uB798\uACE4 \uAE43\uD138\uC6A9 \uBE57"
@@ -50,4 +50,4 @@ MonoBehaviour:
   - optionText: "\uACE0\uC591\uC774 \uD138\uC6A9 \uBE57"
     nextNode: {fileID: 11400000, guid: a4168e3b7d2b647ad80d7c64ee0b2c93, type: 2}
   - optionText: "\uD3C9\uBC94\uD55C \uBE57"
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: 7ba31fb01f250494b9d60721d90a2c78, type: 2}
