@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
-  m_Name: '[Ketrix]A2'
+  m_Name: '[Lianna]N3'
   m_EditorClassIdentifier: 
-  nodeID: 524
-  dialogueText: "\uBB50\uC57C, \uC9C4\uC9DC \uB2E4 \uD588\uB2E4\uACE0?"
+  nodeID: 904
+  dialogueText: "\uB2F9\uC2E0\uC740 \uADF8 \uC6A9\uC0AC\uAD70\uC694. \uC6B4\uBA85\uC744
+    \uC9CA\uC5B4\uC9C4... \n\uB2F9\uC2E0\uC744 \uC54C\uACE0 \uC788\uB290\uB0D0\uACE0\uC694?\n\uC804
+    \uC774 \uC138\uACC4\uC758 \uBAA8\uB4E0 \uAC78 \uC54C\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: 750834945443e446ea6e055abb8d435d, type: 2}
+    nextNode: {fileID: 11400000, guid: c7c2301be54b44a3c90daa45b2f925f8, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: 
-  nextNode: {fileID: 11400000, guid: 750834945443e446ea6e055abb8d435d, type: 2}
+  conversationNpcName: "\uB9AC\uC548\uB098"
+  nextNode: {fileID: 11400000, guid: c7c2301be54b44a3c90daa45b2f925f8, type: 2}
