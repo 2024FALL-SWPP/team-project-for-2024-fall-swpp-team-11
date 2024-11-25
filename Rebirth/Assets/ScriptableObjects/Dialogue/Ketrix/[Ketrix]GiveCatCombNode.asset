@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5a05d94d315d14a8f42d9fba39860a, type: 3}
-  m_Name: '[Ketrix]giveCatComb'
+  m_Script: {fileID: 11500000, guid: 745979fd610664d58a49f621a049a433, type: 3}
+  m_Name: '[Ketrix]GiveCatCombNode'
   m_EditorClassIdentifier: 
-  nodeID: 513
-  dialogueText: "\uACE0\uC591\uC774 \uBE57\uC744 \uB2EC\uB77C\uACE0? "
+  nodeID: 514
+  dialogueText: "\uD760.. \uACE0\uC591\uC774\uC6A9 \uBE57? \n\uB0B4\uAC00 \uB9CE\uC774
+    \uC544\uB07C\uB294 \uAC70\uAE34 \uD55C\uB370..."
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: f782e37a995884e93865378a694db781, type: 2}
+    nextNode: {fileID: 11400000, guid: 65968b6a7749a4bb8a15f798614be0f8, type: 2}
     fallbackNode: {fileID: 0}
-    conditions:
-    - {fileID: 0}
+    conditions: []
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
-  associatedQuest: {fileID: 11400000, guid: 1ae4500a5dde146fea251ae00daa3d18, type: 2}
   nextNode: {fileID: 11400000, guid: f782e37a995884e93865378a694db781, type: 2}
+  rewardedItem: {fileID: 11400000, guid: bc775dfbddccb4435a9969c106874edf, type: 2}
