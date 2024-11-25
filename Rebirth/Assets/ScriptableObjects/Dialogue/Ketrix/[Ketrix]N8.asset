@@ -17,7 +17,31 @@ MonoBehaviour:
     \uC88B\uC740 \uBB3C\uAC74 \uD558\uB098 \uCC59\uACA8\uC904\uAC8C. \n\uD558\uB098
     \uACE8\uB77C\uBCF4\uB358\uAC00."
   options:
-  - optionText: "\uC774\uAC70 \uB9D0\uC774\uC57C? \uC904\uAE4C?"
+  - optionText: "\uACE0\uC591\uC774 \uC804\uC6A9 \uBE57"
+    nextNode: {fileID: 11400000, guid: fcd45423d281748cebd1f92be83e3513, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uD06C\uB9AC\uC2A4\uD0C8 \uBC14\uC778\uB4DC"
+    nextNode: {fileID: 11400000, guid: fd2f865851a8c425d8d1cccf6d7392b9, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uB2E8\uAC80"
+    nextNode: {fileID: 11400000, guid: fd2f865851a8c425d8d1cccf6d7392b9, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uD30C\uB780 \uBB3C\uC57D"
     nextNode: {fileID: 11400000, guid: fd2f865851a8c425d8d1cccf6d7392b9, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
@@ -29,10 +53,10 @@ MonoBehaviour:
   associatedQuest: {fileID: 0}
   textNodePairs:
   - optionText: "\uACE0\uC591\uC774 \uC804\uC6A9 \uBE57"
-    nextNode: {fileID: 11400000, guid: fcd45423d281748cebd1f92be83e3513, type: 2}
+    nextNode: {fileID: 11400000, guid: 69cded1f66d934002914dec35aac56d0, type: 2}
   - optionText: "\uD06C\uB9AC\uC2A4\uD0C8 \uBC14\uC778\uB4DC"
-    nextNode: {fileID: 11400000, guid: fd2f865851a8c425d8d1cccf6d7392b9, type: 2}
+    nextNode: {fileID: 11400000, guid: 9546886bc69d7415b9e371a516755321, type: 2}
   - optionText: "\uB2E8\uAC80"
-    nextNode: {fileID: 11400000, guid: fd2f865851a8c425d8d1cccf6d7392b9, type: 2}
+    nextNode: {fileID: 11400000, guid: e4a808b64d15d426ea21c4b2bc91fc96, type: 2}
   - optionText: "\uD30C\uB780 \uBB3C\uC57D"
-    nextNode: {fileID: 11400000, guid: fd2f865851a8c425d8d1cccf6d7392b9, type: 2}
+    nextNode: {fileID: 11400000, guid: 34af9bcff43d04ab1831aedd2c9b74d3, type: 2}
