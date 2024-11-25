@@ -12,6 +12,9 @@ public class DialogueNodeEditor : Editor
     // PlainNextDialogueNode properties
     SerializedProperty nextNodeProp;
 
+    // RewardDialogueNode properties
+    SerializedProperty rewardedItemProp;
+
     // ConditionDialogueNode properties
     SerializedProperty conditionMetNextNodeProp;
     SerializedProperty conditionNotMetNextNodeProp;
@@ -35,6 +38,9 @@ public class DialogueNodeEditor : Editor
 
         // PlainNextDialogueNode properties
         nextNodeProp = serializedObject.FindProperty("nextNode");
+
+        // RewardDialogueNode properties
+        rewardedItemProp = serializedObject.FindProperty("rewardedItem");
 
         // ConditionDialogueNode properties
         conditionMetNextNodeProp = serializedObject.FindProperty("conditionMetNextNode");
@@ -97,6 +103,13 @@ public class DialogueNodeEditor : Editor
             {
                 EditorGUILayout.PropertyField(nextNodeProp);
             }
+        }
+        else if (target is RewardDialogueNode)
+        {
+            EditorGUILayout.PropertyField(nextNodeProp);
+            EditorGUILayout.PropertyField(rewardedItemProp);
+            EditorGUILayout.Space();
+            EditorGUILayout.HelpBox("Options are managed automatically for RewardDialogueNode.", MessageType.Info);
         }
         else
         {
