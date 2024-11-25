@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-public class RewardOption : MonoBehaviour
+public class RewardOption : DialogueOption
 {
-    public RewardOption() 
+
+    public RewardOption(ItemData rewardedItem)
     {
-        onSelectActions.AddListener(() => { 
-            QuestManager.Instance.CompleteQuest(associatedQuest.questID);
+        onSelectActions.AddListener(() => {
+            InventoryManager.Instance.AddItem(rewardedItem);
         });
     }
+
 }
