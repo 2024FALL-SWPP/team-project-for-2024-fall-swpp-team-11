@@ -41,7 +41,7 @@ public class DialogueGraphEditor : EditorWindow
                 EditorUtility.DisplayDialog("Saved", "Dialogue Graph has been saved.", "OK");
 
                 // Inform DialogueManager to reload the Dialogue Graph
-                DialogueManager.EditorLoadDialogueGraph(dialogueGraph);
+                // DialogueManager.EditorLoadDialogueGraph(dialogueGraph);
             }
             EditorGUILayout.EndHorizontal();
 
@@ -160,10 +160,10 @@ public class DialogueGraphEditor : EditorWindow
 
             AssetDatabase.SaveAssets();
 
-            if (DialogueManager.Instance != null && DialogueManager.Instance.activeDialogueGraph == dialogueGraph)
-            {
-                DialogueManager.EditorLoadDialogueGraph(dialogueGraph);
-            }
+            // if (DialogueManager.Instance != null && DialogueManager.Instance.activeDialogueGraph == dialogueGraph)
+            // {
+            //     DialogueManager.EditorLoadDialogueGraph(dialogueGraph);
+            // }
         }
     }
 
