@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ReadingBook : MonoBehaviour, IInteractable
+public class ReadableBook : MonoBehaviour, IInteractable
 {
     private Outline outline;
 
