@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8991676091619463645}
   - component: {fileID: 8991676091619463644}
   - component: {fileID: 8991676091619463647}
-  - component: {fileID: 8991676091619463646}
+  - component: {fileID: -6885681773671337617}
   - component: {fileID: 8991676091619463640}
   m_Layer: 0
   m_Name: '[NPC]MagicList'
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 560475063
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e9185faadfad44467b42acb6c1581151, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,7 +113,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.3841267, y: 2.994928}
   m_EdgeRadius: 0
---- !u!114 &8991676091619463646
+--- !u!114 &-6885681773671337617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,11 +122,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8991676091619463635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fcf76b8cd81f048bc211121587e44a, type: 3}
+  m_Script: {fileID: 11500000, guid: 62f2ae4262c9e4d09ad1bacfd2cce027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: MagicList
   questNodes: {fileID: 11400000, guid: 5e5b25b6f3af94f35b4f09fd0e413e29, type: 2}
+  libraryPortal: {fileID: 0}
 --- !u!114 &8991676091619463640
 MonoBehaviour:
   m_ObjectHideFlags: 0
