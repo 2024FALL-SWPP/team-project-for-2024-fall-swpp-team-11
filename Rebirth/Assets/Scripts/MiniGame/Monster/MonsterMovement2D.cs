@@ -17,6 +17,12 @@ public class MonsterMovement2D : MonoBehaviour
     {
         startPosition = transform.position; 
         rb = GetComponent<Rigidbody2D>(); 
+
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody2D가 필요합니다!");
+        }
+
         rb.gravityScale = 0;
     }
 
