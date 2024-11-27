@@ -15,20 +15,23 @@ public class Portal : MonoBehaviour, IInteractable
         {
             if (SceneTransitionManager.Instance != null)
             {
-                SceneTransitionManager.Instance.LoadScene(targetScene, targetPosition);
-            }
-            else
-            {
-                Debug.LogError("SceneTransitionManager.Instance가 null입니다.");
+                StartCoroutine(InteractWithSceneTransition());
             }
         }
         else
         {
-            // 같은 씬 내 위치 이동
             Transform player = GameObject.FindWithTag("Player").transform;
             StartCoroutine(MovePlayerAfterDelay(player, targetPosition, animationDelay));
         }
     }
+
+    private IEnumerator InteractWithSceneTransition()
+    {
+        yield return StartCoroutine(SceneTransitionManager.Instance.FadeInCoroutine());
+        yield return StartCoroutine(SceneTransitionManager.Instance.LoadSceneCoroutine(targetScene));
+        yield return StartCoroutine(SceneTransitionManager.Instance.FadeOutCoroutine());
+    }
+
 
     public virtual void OnFocus()
     {

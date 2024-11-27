@@ -25,19 +25,99 @@ public class DimensionManager : SingletonManager<DimensionManager>
         }
     }
 
-    IEnumerator SwitchDimension()
+    public IEnumerator SwitchDimension()
     {
         isSwitching = true;
 
-        // 현재 씬 이름 가져오기
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        // 대상 씬 이름 결정 (마지막 두 글자를 교체)
         string targetSceneName;
+        if (!FindTargetSceneName(out targetSceneName)) yield break;
+        GameObject currentPlayer;
+        if (!FindCurrentPlayer(out currentPlayer)) yield break;
+        Anchor currentAnchor;
+        if (!FindCurrentAnchor(currentPlayer, out currentAnchor)) yield break;
+        GameObject playerPrefab;
+        if (!FindPlayerPrefab(targetSceneName, out playerPrefab)) yield break;
+
+        yield return StartCoroutine(SceneTransitionManager.Instance.FadeInCoroutine());
+        yield return StartCoroutine(SceneTransitionManager.Instance.LoadSceneCoroutine(targetSceneName));
+        
+        Anchor matchingAnchor;
+        if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) yield break;
+        MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
+
+        yield return StartCoroutine(SceneTransitionManager.Instance.FadeOutCoroutine());
+
+
+        isSwitching = false;
+    }
+
+    private void MoveOrSpawnPlayer(Anchor matchingAnchor, GameObject playerPrefab)
+    {
+        GameObject newPlayer = GameObject.FindWithTag("Player");
+        if (newPlayer == null)
+        {
+            newPlayer = Instantiate(playerPrefab, matchingAnchor.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            newPlayer.transform.position = matchingAnchor.transform.position;
+        }
+    }
+
+    private bool FindPlayerPrefab(string targetSceneName, out GameObject playerPrefab)
+    {
+        playerPrefab = GetPlayerPrefabForScene(targetSceneName);
+        if (playerPrefab == null)
+        {
+            Debug.LogError("Player prefab not found for the scene: " + targetSceneName);
+            isSwitching = false;
+            return false;
+        }
+        return true;
+    }
+
+    private bool FindCurrentAnchor(GameObject currentPlayer, out Anchor currentAnchor)
+    {
+        currentAnchor = FindClosestAnchor(currentPlayer.transform.position);
+        if (currentAnchor == null)
+        {
+            Debug.LogError("No anchor found in the current scene.");
+            isSwitching = false;
+            return false;
+        }
+        return true;
+    }
+    private bool FindMatchingAnchor(Anchor currentAnchor, out Anchor matchingAnchor)
+    {
+        anchorID = currentAnchor.anchorID;
+        matchingAnchor = FindAnchorByID(anchorID);
+        if (matchingAnchor == null)
+        {
+            Debug.LogError("Matching anchor not found in the target scene.");
+            isSwitching = false;
+            return false;
+        }
+        return true;
+    }
+
+    private bool FindCurrentPlayer(out GameObject currentPlayer)
+    {
+        currentPlayer = GameObject.FindGameObjectWithTag("Player");
+        if (currentPlayer == null)
+        {
+            Debug.LogError("Player not found in the current scene.");
+            isSwitching = false;
+            return false;
+        }
+        return true;
+    }
+
+    private bool FindTargetSceneName(out string targetSceneName)
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName.EndsWith("2D"))
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "3D";
-            // even if scene changes with inventory turned on, UI will be refreshed
             dimension = Dimension.THREE_DIMENSION;
             InventoryManager.Instance.RefreshInventoryUI();
         }
@@ -49,98 +129,12 @@ public class DimensionManager : SingletonManager<DimensionManager>
         }
         else
         {
-            Debug.LogError("현재 씬 이름이 '2D' 또는 '3D'로 끝나지 않습니다. 차원 전환 불가.");
+            Debug.LogError("Scene name must end with '2D' or '3D'.");
             isSwitching = false;
-            yield break;
+            targetSceneName = null;
+            return false;
         }
-
-        // 현재 플레이어 찾기
-        GameObject currentPlayer = GameObject.FindGameObjectWithTag("Player");
-        if (currentPlayer == null)
-        {
-            Debug.LogError("현재 씬에서 플레이어를 찾을 수 없습니다.");
-            isSwitching = false;
-            yield break;
-        }
-
-        // 현재 씬에서 가장 가까운 앵커 찾기
-        Anchor currentAnchor = FindClosestAnchor(currentPlayer.transform.position);
-
-        if (currentAnchor == null)
-        {
-            Debug.LogError("현재 씬에서 앵커를 찾을 수 없습니다.");
-            isSwitching = false;
-            yield break;
-        }
-
-        // 앵커 ID 저장
-        anchorID = currentAnchor.anchorID;
-
-        // 움직임 및 시야 잠금
-        GameStateManager.Instance.LockView();
-        GameStateManager.Instance.LockMovement();
-
-        // 페이드 인
-        SceneTransitionManager.Instance.FadeIn();
-        yield return new WaitForSeconds(SceneTransitionManager.Instance.fadeDuration);
-
-        // 씬 로드
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetSceneName);
-        asyncLoad.allowSceneActivation = false;
-
-        while (!asyncLoad.isDone)
-        {
-            if (asyncLoad.progress >= 0.9f)
-            {
-                asyncLoad.allowSceneActivation = true;
-            }
-            yield return null;
-        }
-
-        // 한 프레임 대기하여 씬이 완전히 로드되도록 함
-        yield return null;
-
-        // 대상 씬에서 대응되는 앵커 찾기
-        Anchor targetAnchor = FindAnchorByID(anchorID);
-
-        if (targetAnchor == null)
-        {
-            Debug.LogError("대상 씬에서 대응되는 앵커를 찾을 수 없습니다.");
-            isSwitching = false;
-            yield break;
-        }
-
-        // 플레이어 인스턴스화 또는 기존 플레이어 찾기
-        GameObject playerPrefab = GetPlayerPrefabForScene(targetSceneName);
-
-        if (playerPrefab == null)
-        {
-            Debug.LogError("씬에 대한 플레이어 프리팹을 찾을 수 없습니다: " + targetSceneName);
-            isSwitching = false;
-            yield break;
-        }
-
-        // 플레이어가 씬에 미리 배치되어 있는 경우
-        GameObject newPlayer = GameObject.FindWithTag("Player");
-        if (newPlayer == null)
-        {
-            // 플레이어 인스턴스화
-            newPlayer = Instantiate(playerPrefab, targetAnchor.transform.position, Quaternion.identity);
-        }
-        else
-        {
-            // 플레이어 위치 업데이트
-            newPlayer.transform.position = targetAnchor.transform.position;
-        }
-
-        // 페이드 아웃
-        SceneTransitionManager.Instance.FadeOut();
-
-        // 움직임 및 시야 잠금 해제
-        GameStateManager.Instance.UnlockView();
-        GameStateManager.Instance.UnlockMovement();
-
-        isSwitching = false;
+        return true;
     }
 
     Anchor FindClosestAnchor(Vector3 position)

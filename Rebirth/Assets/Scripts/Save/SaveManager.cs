@@ -1,14 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveManager : SingletonManager<SaveManager>
 {
+    public static event System.Action save;
+    public static event System.Action load;
     public float autoSaveInterval = 300f; 
     private bool isAutoSaveEnabled = true;
 
     private void Start()
     {
+        LoadGame();
         StartCoroutine(AutoSaveCoroutine()); 
     }
 
@@ -22,15 +24,13 @@ public class SaveManager : SingletonManager<SaveManager>
         }
     }
 
-
     public void SaveGame()
     { 
-        InventoryManager.Instance.SaveInventory();
+        save?.Invoke();
     }
 
     public void LoadGame()
-    { 
-        InventoryManager.Instance.LoadInventory();
+    {
+        load?.Invoke();
     }
-
 }

@@ -1,29 +1,30 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System;
 
 public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 {
-
-    public Animator fadeAnimator; // FadePanel의 Animator
-    public Canvas canvas; // FadePanel의 Canvas
-    public float fadeDuration = 1f; // 페이드 애니메이션 길이
-
-    private Vector3 playerTargetPosition; // 플레이어의 목표 위치 저장
+    public Animator fadeAnimator;
+    public Canvas canvas;
+    public float fadeDuration = 1f;
+    private Vector3 playerTargetPosition;
 
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
         canvas.enabled = false;
-        FadeOut();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GameStateManager.Instance.UnlockView();
         GameStateManager.Instance.UnlockMovement();
+        // SetPlayerPosition();
+    }
 
+    private void SetPlayerPosition()
+    {
         Transform player = GameObject.FindWithTag("Player")?.transform;
         if (player != null)
         {
@@ -33,24 +34,35 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         {
             Debug.LogError("플레이어를 찾을 수 없습니다.");
         }
-
-        FadeOut();
     }
 
-    public void LoadScene(string sceneName, Vector3 targetPosition)
+    public IEnumerator FadeInCoroutine()
     {
-        playerTargetPosition = targetPosition; // 목표 위치 저장
-        StartCoroutine(Transition(sceneName));
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeInTrigger");
+        yield return new WaitForSeconds(fadeDuration);
+        canvas.enabled = false;
     }
 
-    private IEnumerator Transition(string sceneName)
+    public IEnumerator LoadSceneCoroutine(string sceneName)
     {
         GameStateManager.Instance.LockView();
         GameStateManager.Instance.LockMovement();
-        Debug.Log("Transition to " + sceneName);
-        FadeIn();
-        yield return new WaitForSeconds(fadeDuration);
 
+        SceneDataManager.Instance.SaveCurrentSceneData();
+        yield return TransitionCoroutine(sceneName);
+    }
+
+    public IEnumerator FadeOutCoroutine()
+    {
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeOutTrigger");
+        yield return new WaitForSeconds(fadeDuration);
+        canvas.enabled = false;
+    }
+
+    private IEnumerator TransitionCoroutine(string sceneName)
+    {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
 
@@ -62,26 +74,6 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
             }
             yield return null;
         }
-    }
-
-    public void FadeIn()
-    {
-        canvas.enabled = true;
-        fadeAnimator.SetTrigger("FadeInTrigger");
-        StartCoroutine(DisableCanvasAfterDelay());
-    }
-
-    public void FadeOut()
-    {
-        canvas.enabled = true;
-        fadeAnimator.SetTrigger("FadeOutTrigger");
-        StartCoroutine(DisableCanvasAfterDelay());
-    }
-    
-    private IEnumerator DisableCanvasAfterDelay()
-    {
-        yield return new WaitForSeconds(fadeDuration);
-        canvas.enabled = false;
     }
 
     private void OnDestroy()

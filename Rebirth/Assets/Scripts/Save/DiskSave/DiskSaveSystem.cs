@@ -2,13 +2,14 @@ using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
-public class SaveSystem
+public class DiskSaveSystem
 {
     private static string InventorySavePath => Application.persistentDataPath + "/inventory.json";
    
-   #region Inventory
-    public static void SaveInventoryData(InventoryDataContainer inventoryData)
+    #region Inventory
+    public static void SaveInventoryDataToDisk(InventoryDataContainer inventoryData)
     {
         List<string> itemNames = new List<string>();
         foreach (var item in inventoryData.ThreeDimensionalItems)
@@ -21,25 +22,21 @@ public class SaveSystem
         }
 
         string json = JsonConvert.SerializeObject(itemNames, Formatting.Indented);
-        Debug.Log("Items in inventory:" + json);
 
         File.WriteAllText(InventorySavePath, json);
-        Debug.Log("인벤토리 아이템들이 파일로 저장되었습니다.");
     }
     
-    public static InventoryDataContainer LoadInventoryData()
+    public static InventoryDataContainer LoadInventoryDataFromDisk()
     {
         if (!File.Exists(InventorySavePath))
         {
-            Debug.Log("Inventory JSON 파일이 존재하지 않습니다.");
             return null;
         }
 
         string json = File.ReadAllText(InventorySavePath);
         List<string> itemNames = JsonConvert.DeserializeObject<List<string>>(json);
 
-
-        ItemData[] allItems = Resources.LoadAll<ItemData>("ScriptableItem");
+        ItemData[] allItems = Resources.LoadAll<ItemData>("ItemData");
         List<ItemData> loaded2DItems = new List<ItemData>();
         List<ItemData> loaded3DItems = new List<ItemData>();
         foreach (var itemName in itemNames)
@@ -52,10 +49,6 @@ public class SaveSystem
                 else
                     loaded2DItems.Add(foundItem);
             }
-            else
-            {
-                Debug.LogWarning($"아이템 '{itemName}'을(를) 찾을 수 없습니다.");
-            }
         }
         InventoryDataContainer inventoryData = new InventoryDataContainer(loaded2DItems, loaded3DItems);
 
@@ -63,4 +56,36 @@ public class SaveSystem
     }
     #endregion
 
+    public static string GetSceneDataPath(string sceneName) =>
+        Path.Combine(Application.persistentDataPath, $"{sceneName}_sceneData.json");
+
+    public static void SaveSceneDataToDisk(string path, SceneData sceneData)
+    {
+        var json = JsonUtility.ToJson(sceneData);
+        File.WriteAllText(path, json);
+    }
+
+    public static async Task<Dictionary<string, SceneData>> LoadAllSceneDataFromDisk()
+    {
+        var sceneDatas = new Dictionary<string, SceneData>();
+        var files = Directory.GetFiles(Application.persistentDataPath, "*_sceneData.json");
+
+        var tasks = new List<Task>();
+        foreach (var file in files)
+        {
+            tasks.Add(Task.Run(() =>
+            {
+                var sceneName = Path.GetFileNameWithoutExtension(file).Replace("_sceneData", "");
+                var json = File.ReadAllText(file);
+                var sceneData = JsonUtility.FromJson<SceneData>(json);
+                lock (sceneDatas)
+                {
+                    sceneDatas[sceneName] = sceneData;
+                }
+            }));
+        }
+        await Task.WhenAll(tasks);
+
+        return sceneDatas;
+    }
 }
