@@ -28,7 +28,7 @@ public class SpecialEffect2D : MonoBehaviour
     {
         if (effectPrefab == null)
         {
-            Debug.LogWarning("Effect prefab not assigned.");
+           // Debug.LogWarning("Effect prefab not assigned.");
             return;
         }
 

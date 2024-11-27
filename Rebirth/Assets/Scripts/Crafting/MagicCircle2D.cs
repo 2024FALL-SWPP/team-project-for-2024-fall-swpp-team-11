@@ -25,17 +25,17 @@ public class MagicCircle2D : MonoBehaviour
     {
         if (craftingTableCollider == null)
         {
-            Debug.LogError("Crafting table collider not found.");
+            //Debug.LogError("Crafting table collider not found.");
         }
 
         if (player == null)
         {
-            Debug.LogError("Player transform not assigned.");
+            //Debug.LogError("Player transform not assigned.");
         }
 
         if (specialEffect == null)
         {
-            Debug.LogError("Special effect handler not assigned.");
+            //Debug.LogError("Special effect handler not assigned.");
         }
     }
 
@@ -91,8 +91,8 @@ public class MagicCircle2D : MonoBehaviour
         {
             Vector3 spawnPosition = craftingTableCollider.bounds.center; // Crafting item at the center
             Instantiate(combinedWorldItem, spawnPosition, Quaternion.identity);
-            Debug.Log("Crafted item successfully!");
-            Debug.Log($"Crafted item: {combinedWorldItem.itemData.itemName}");
+           // Debug.Log("Crafted item successfully!");
+            //Debug.Log($"Crafted item: {combinedWorldItem.itemData.itemName}");
 
             // Trigger success effect
             specialEffect.TriggerSuccessEffect(spawnPosition);
@@ -101,7 +101,7 @@ public class MagicCircle2D : MonoBehaviour
         }
         else
         {
-            Debug.Log("Crafting failed. Recipe not found.");
+           // Debug.Log("Crafting failed. Recipe not found.");
             specialEffect.TriggerFailureEffect(craftingTableCollider.bounds.center);
         }
     }
@@ -129,7 +129,7 @@ public class MagicCircle2D : MonoBehaviour
     {
         foreach (WorldItem itemHolder in itemsOnTable)
         {
-            Debug.Log($"Destroying item: {itemHolder.itemData.itemName}");
+           // Debug.Log($"Destroying item: {itemHolder.itemData.itemName}");
             Destroy(itemHolder.gameObject); // Destroy the GameObject of the used items
         }
     }
