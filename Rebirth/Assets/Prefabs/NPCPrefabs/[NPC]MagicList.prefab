@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 9181877852138955905}
   - component: {fileID: 5368717780411707367}
   - component: {fileID: 5954958429588223851}
-  - component: {fileID: 5954958429588223852}
+  - component: {fileID: 7654155058079091805}
   m_Layer: 0
   m_Name: '[NPC]MagicList'
   m_TagString: Untagged
@@ -791,7 +791,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &5954958429588223852
+--- !u!114 &7654155058079091805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -800,11 +800,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6185260116792453776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fcf76b8cd81f048bc211121587e44a, type: 3}
+  m_Script: {fileID: 11500000, guid: 62f2ae4262c9e4d09ad1bacfd2cce027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: MagicList
+  npcName: "\uB9C8\uBC95 \uBA85\uBD80 "
   questNodes: {fileID: 11400000, guid: 5e5b25b6f3af94f35b4f09fd0e413e29, type: 2}
+  libraryPortal: {fileID: 0}
 --- !u!1 &6402437868562930647
 GameObject:
   m_ObjectHideFlags: 0
