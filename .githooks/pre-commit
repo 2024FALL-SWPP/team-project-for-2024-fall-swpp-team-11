@@ -49,6 +49,7 @@ if [ -n "$FILES" ]; then
 	# Check if the formatting was successful
 	ret="$?"
 	if [ "$ret" != 0 ]; then
+        echo "Formatting failed. Please check the error messages above."
 		exit "$ret"
 	fi
 else 
@@ -60,7 +61,7 @@ fi
 echo "Checking for >100MB files"
 CURRENT_DIR="$(pwd)"
 HAS_ERROR=""
-COMMIT_TEXT=$(git diff --cached --name-only | sort | uniq)
+COMMIT_TEXT=$(git diff --cached --name-only --diff-filter=ACM | sort | uniq)
 SAVEIFS=$IFS
 
 IFS="
@@ -75,7 +76,7 @@ done
 IFS=$SAVEIFS
 
 if [ "$HAS_ERROR" != "" ]; then
-    echo "Can't commit, fix errors first." >&2
+    echo "Please remove the large files from the commit and try again."
     exit 1
 fi
 
@@ -115,6 +116,7 @@ fi
 
 ret="$?"
 if [ "$ret" != 0 ]; then
+    echo "Error: Staged files and their meta files check failed"
 	exit "$ret"
 fi
 
@@ -152,6 +154,7 @@ fi
 
 ret="$?"
 if [ "$ret" != 0 ]; then
+    echo "Error: Deleted staged files and their meta files check failed"
 	exit "$ret"
 fi
 
