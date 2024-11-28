@@ -1,65 +1,78 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class CharacterStatus : MonoBehaviour
+public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 {
-    public static CharacterStatus Instance { get; private set; }
-
     // Health-related variables
     private int maxHealth = 100;
+    private int maxMoney = 99999;
     public int Health { get; private set; }
     public event Action<int> OnHealthChanged;
 
     // Money-related variables
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
 
-        Money = 99999; 
-        Health = maxHealth; 
-    }
+    private bool isInitialized = false;
 
-    private void Start()
+    protected override void Awake()
     {
-        // Initialize health and money
-        Debug.Log($"CharacterStatus initialized: Money = {Money}, Health = {Health}");
+        base.Awake();
 
         Health = maxHealth;
-        Money = 99999; // Starting money
+        Money = maxMoney;
+    }
+
+    private void Initialize()
+    {
+        isInitialized = true;
+        // Initialize health and money
+        Health = maxHealth;
+        Money = maxMoney;
+        Debug.Log($"CharacterStatus initialized: Money = {Money}, Health = {Health}");
+
         NotifyHealthChanged();
         NotifyMoneyChanged();
     }
 
     private void Update()
     {
+        if (!isInitialized && DimensionManager.Instance != null)
+        {
+            Initialize();
+        }
+        
+        // For testing purposes
         // Check if the space bar is pressed for health
-        if (Input.GetKeyDown(KeyCode.N)) //테스트용 
+        if (Input.GetKeyDown(KeyCode.N))
         {
             UpdateHealth(-10);
             Debug.Log("Health decreased by 10. Current Health: " + Health);
         }
 
-        // // Check if the 'M' key is pressed for money 테스트용
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            UpdateHealth(10);
+            Debug.Log("Health increased by 10. Current Health: " + Health);
+        }
+
+        // Check if the 'M' key is pressed for money 
         if (Input.GetKeyDown(KeyCode.M))
         {
             UpdateMoney(-10);
             Debug.Log("Money decreased by 10. Current Money: " + Money);
         }
 
-        // Check if the 'X' key is pressed for a big money deduction
-
+        // Check if the 'J' key is pressed for money 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            UpdateMoney(10);
+            Debug.Log("Money increased by 10. Current Money: " + Money);
+        }
     }
 
 
-    // Health-related methods
     public int GetMaxHealth()
     {
         return maxHealth;
