@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Threading.Tasks;
+using System.Data.Common;
 
 public class DimensionManager : SingletonManager<DimensionManager>
 {
@@ -16,6 +17,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
+        Debug.Log("DimensionManager: dimension = " + dimension);
     }
 
     async void Update()
