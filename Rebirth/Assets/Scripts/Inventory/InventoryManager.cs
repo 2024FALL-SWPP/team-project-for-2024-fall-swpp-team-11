@@ -7,10 +7,8 @@ public class InventoryManager : SingletonManager<InventoryManager>
 
     private static string logPrefix = "[InventoryManager] ";
 
-    protected override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
-
         inventoryDataContainer = new InventoryDataContainer();
         inventoryUI.Initialize(inventoryDataContainer);
     }

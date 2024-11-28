@@ -20,10 +20,8 @@ public class DialogueManager : SingletonManager<DialogueManager>
 
     private static string logPrefix = "[DialogueManager] ";
 
-    protected override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
-
         if (dialogueUI == null)
         {
             Debug.LogError(logPrefix + "DialogueUI not found.");
@@ -32,8 +30,6 @@ public class DialogueManager : SingletonManager<DialogueManager>
 
     private void Start()
     {
-        // dialogueUI = GetComponent<DialogueUI>(); // DialogueUI를 어디에 둘 것인가
-
         // TODO default graph
         if (activeDialogueGraph == null)
         {

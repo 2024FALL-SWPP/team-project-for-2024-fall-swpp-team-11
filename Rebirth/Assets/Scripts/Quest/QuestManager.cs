@@ -18,10 +18,8 @@ public class QuestManager : SingletonManager<QuestManager>
 
     public QuestUI questUI;
 
-    protected override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
-
         if (questUI == null)
         {
             Debug.LogError(logPrefix + "QuestUI not found.");

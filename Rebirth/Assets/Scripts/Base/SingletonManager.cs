@@ -13,10 +13,16 @@ public abstract class SingletonManager<T> : MonoBehaviour where T : SingletonMan
 
                 if (_instance == null)
                 {
-                    Debug.LogWarning("[SingletonManager] " + typeof(T).Name + " is not found. Creating a new one.");
-                    GameObject singletonObject = new GameObject(typeof(T).Name);
-                    _instance = singletonObject.AddComponent<T>();
-                    DontDestroyOnLoad(singletonObject);
+                    Debug.LogWarning("[SingletonManager] " + typeof(T).Name + " instance not found. Creating from prefab.");
+                    _instance = InstantiateFromPrefab();
+                    if (_instance != null)
+                    {
+                        DontDestroyOnLoad(_instance.gameObject);
+                    }
+                    else
+                    {
+                        Debug.LogError("[SingletonManager] " + typeof(T).Name + " instance not found. Prefab not found.");
+                    }
                 }
             }
             return _instance;
@@ -34,5 +40,22 @@ public abstract class SingletonManager<T> : MonoBehaviour where T : SingletonMan
         {
             Destroy(gameObject);
         }
+    }
+
+    public virtual void Initialize() { }
+
+    private static T InstantiateFromPrefab()
+    {
+        // Load a prefab holder using the manager's type name
+        SingletonManagerPrefabHolder prefabHolder = Resources.Load<SingletonManagerPrefabHolder>($"Managers/{typeof(T).Name}PrefabHolder");
+
+        if (prefabHolder != null && prefabHolder.Prefab != null)
+        {
+            GameObject instance = Instantiate(prefabHolder.Prefab);
+            return instance.GetComponent<T>();
+        }
+
+        Debug.LogError($"[SingletonManager] Prefab or prefab holder not found for {typeof(T).Name}. Ensure the asset is in the Resources folder.");
+        return null;
     }
 }

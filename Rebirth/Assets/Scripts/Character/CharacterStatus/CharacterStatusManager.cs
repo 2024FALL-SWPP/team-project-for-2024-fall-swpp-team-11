@@ -14,35 +14,17 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
 
-    private bool isInitialized = false;
-
-    protected override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
-
         Health = maxHealth;
         Money = maxMoney;
-    }
-
-    private void Initialize()
-    {
-        isInitialized = true;
-        // Initialize health and money
-        Health = maxHealth;
-        Money = maxMoney;
-        Debug.Log($"CharacterStatus initialized: Money = {Money}, Health = {Health}");
 
         NotifyHealthChanged();
         NotifyMoneyChanged();
     }
 
     private void Update()
-    {
-        if (!isInitialized && DimensionManager.Instance != null)
-        {
-            Initialize();
-        }
-        
+    {        
         // For testing purposes
         // Check if the space bar is pressed for health
         if (Input.GetKeyDown(KeyCode.N))

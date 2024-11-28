@@ -12,6 +12,7 @@ public class GameStateManager : SingletonManager<GameStateManager>
         UnlockMovement();
         UnlockMovement();
     }
+    
     public void LockView()
     {
         IsViewLocked = true;
