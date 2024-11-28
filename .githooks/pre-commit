@@ -1,6 +1,7 @@
 #!/bin/sh
 LC_ALL=C
-echo "Running pre-commit hook"
+PRECOMMIT_LOG_PREFIX="[PRE-COMMIT]"
+echo "$PRECOMMIT_LOG_PREFIX pre-commit hook"
 ASSETS_DIR="$(git config --get unity3d.assets-dir || echo "Assets")"
 
 if git rev-parse --verify HEAD >/dev/null
@@ -15,10 +16,10 @@ fi
 exec 1>&2
 
 ### Check for invalid characters in new files
-echo "Checking for invalid characters in new files"
+echo "$PRECOMMIT_LOG_PREFIX Checking for invalid characters in new files"
 git diff --cached --name-only --diff-filter=A -z $against | while IFS= read -r -d '' filename; do
 	if [[ $filename =~ "\\" ]]; then
-		>&2 echo "The generated file \"${filename}\" contains invalid character '\'."
+		>&2 echo "$PRECOMMIT_LOG_PREFIX The generated file \"${filename}\" contains invalid character '\'."
 		exit 2
 	fi
 done
@@ -26,16 +27,16 @@ done
 # Select files to format
 FILES=$(git diff --cached --name-only --diff-filter=ACM "*.cs" | sed 's| |\\ |g')
 if [ -n "$FILES" ]; then
-    echo "C# files found. Checking for .editorconfig file"
+    echo "$PRECOMMIT_LOG_PREFIX C# files found. Checking for .editorconfig file"
     if [ ! -f .editorconfig ]; then
-        echo "No .editorconfig file found"
+        echo "$PRECOMMIT_LOG_PREFIX No .editorconfig file found"
         exit 1
     fi
 
-    echo "Checking for dotnet-format"
+    echo "$PRECOMMIT_LOG_PREFIX Checking for dotnet-format"
     # Find the solution file in the root directory
     SOLUTION_FILE=$(find . -maxdepth 2 -name "*.sln" | head -n 1)
-    [ -z "$SOLUTION_FILE" ] && echo "Solution file not found!" && exit 1
+    [ -z "$SOLUTION_FILE" ] && echo "$PRECOMMIT_LOG_PREFIX Solution file not found!" && exit 1
 
 	# Convert space-separated file paths into a comma-separated list
 	FORMATTABLE_FILES=$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')
@@ -49,16 +50,16 @@ if [ -n "$FILES" ]; then
 	# Check if the formatting was successful
 	ret="$?"
 	if [ "$ret" != 0 ]; then
-        echo "Formatting failed. Please check the error messages above."
+        echo "$PRECOMMIT_LOG_PREFIX Formatting failed. Please check the error messages above."
 		exit "$ret"
 	fi
 else 
-    echo "No C# files found. Skipping formatting"
+    echo "$PRECOMMIT_LOG_PREFIX No C# files found. Skipping formatting"
 fi
 
 ### Check for large files
 # ensure that there's not a >100mb file in this checkin, which github won't allow
-echo "Checking for >100MB files"
+echo "$PRECOMMIT_LOG_PREFIX Checking for >100MB files"
 CURRENT_DIR="$(pwd)"
 HAS_ERROR=""
 COMMIT_TEXT=$(git diff --cached --name-only --diff-filter=ACM | sort | uniq)
@@ -69,19 +70,19 @@ IFS="
 for file in $COMMIT_TEXT; do
 	file_size=$(du -m $CURRENT_DIR/$file | awk '{print $1}')
 	if [ "$file_size" -ge 100 ]; then
-		echo "$file is over 100MB."
+		echo "$PRECOMMIT_LOG_PREFIX $file is over 100MB."
 		HAS_ERROR="1"
 	fi
 done
 IFS=$SAVEIFS
 
 if [ "$HAS_ERROR" != "" ]; then
-    echo "Please remove the large files from the commit and try again."
+    echo "$PRECOMMIT_LOG_PREFIX Please remove the large files from the commit and try again."
     exit 1
 fi
 
 ### Check for staged files and their meta files
-echo "Checking for staged files and their meta files"
+echo "$PRECOMMIT_LOG_PREFIX Checking for staged files and their meta files"
 assets_files=$(git diff --cached --name-only --diff-filter=A -z $against -- "$ASSETS_DIR")
 if [ -n "$assets_files" ]; then
     echo "$assets_files" | while read -d $'\0' f; do
@@ -116,7 +117,7 @@ fi
 
 ret="$?"
 if [ "$ret" != 0 ]; then
-    echo "Error: Staged files and their meta files check failed"
+    echo "$PRECOMMIT_LOG_PREFIX Error: Staged files and their meta files check failed"
 	exit "$ret"
 fi
 
@@ -154,9 +155,9 @@ fi
 
 ret="$?"
 if [ "$ret" != 0 ]; then
-    echo "Error: Deleted staged files and their meta files check failed"
+    echo "$PRECOMMIT_LOG_PREFIX Error: Deleted staged files and their meta files check failed"
 	exit "$ret"
 fi
 
-echo "Pre-commit hook passed"
+echo "$PRECOMMIT_LOG_PREFIX Pre-commit hook passed"
 exit 0
