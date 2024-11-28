@@ -113,6 +113,8 @@ EOF
             done
         fi
     done
+else
+    echo "$PRECOMMIT_LOG_PREFIX No new staged files found"
 fi
 
 ret="$?"
@@ -151,6 +153,8 @@ EOF
             done
         fi
     done
+else
+    echo "$PRECOMMIT_LOG_PREFIX No deleted staged files found"
 fi
 
 ret="$?"
