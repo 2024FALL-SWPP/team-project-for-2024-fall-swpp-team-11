@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueUI : MonoBehaviour
 {
     public GameObject dialoguePanel;
+    public TextMeshProUGUI dialogueNPCNameText;
     public TextMeshProUGUI dialogueText;
     public Transform optionsContainer;
     public GameObject optionButtonPrefab;
@@ -22,6 +23,7 @@ public class DialogueUI : MonoBehaviour
     {
         Debug.Log(logPrefix + "ShowDialogue " + node.dialogueText + " with " + node.options.Count + " options");
         dialoguePanel.SetActive(true);
+        dialogueNPCNameText.text = node.conversationNpcName;
         dialogueText.text = node.dialogueText;
         ClearOptions();
 
