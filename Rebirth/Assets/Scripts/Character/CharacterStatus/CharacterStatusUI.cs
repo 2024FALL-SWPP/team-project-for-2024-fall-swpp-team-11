@@ -15,14 +15,12 @@ public class CharacterStatusUI : MonoBehaviour, ICharacterStatusUI
 
     private ICharacterStatusUI currentCharacterStatusUI;
 
-    private void OnEnable()
-    {
-        CharacterStatusManager.Instance.OnMoneyChanged += UpdateMoneyUI;
-        CharacterStatusManager.Instance.OnHealthChanged += UpdateHealthUI;
-    }
 
     private void Start()
     {
+        CharacterStatusManager.Instance.OnMoneyChanged += UpdateMoneyUI;
+        CharacterStatusManager.Instance.OnHealthChanged += UpdateHealthUI;
+
         UpdateCurrentCharacterStatusUI();
         SetMaxHealth(CharacterStatusManager.Instance.GetMaxHealth());   
         UpdateMoneyUI(CharacterStatusManager.Instance.Money);
@@ -66,9 +64,14 @@ public class CharacterStatusUI : MonoBehaviour, ICharacterStatusUI
         characterStatusUI3D.SetMaxHealth(maxHealth);
     }
 
-    private void OnDisable()
+
+    private void OnDestroy()
     {
-        CharacterStatusManager.Instance.OnMoneyChanged -= UpdateMoneyUI;
-        CharacterStatusManager.Instance.OnHealthChanged -= UpdateHealthUI;
+        if (CharacterStatusManager.Instance != null)
+        {
+            CharacterStatusManager.Instance.OnMoneyChanged -= UpdateMoneyUI;
+            CharacterStatusManager.Instance.OnHealthChanged -= UpdateHealthUI;
+        }
     }
+
 }

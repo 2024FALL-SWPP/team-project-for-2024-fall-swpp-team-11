@@ -16,7 +16,6 @@ public class DimensionManager : SingletonManager<DimensionManager>
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
-        Debug.Log("DimensionManager: dimension = " + dimension);
     }
 
     void Update()
@@ -41,13 +40,11 @@ public class DimensionManager : SingletonManager<DimensionManager>
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "3D";
             // even if scene changes with inventory turned on, UI will be refreshed
             dimension = Dimension.THREE_DIMENSION;
-            InventoryManager.Instance.RefreshInventoryUI();
         }
         else if (currentSceneName.EndsWith("3D"))
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "2D";
             dimension = Dimension.TWO_DIMENSION;
-            InventoryManager.Instance.RefreshInventoryUI();
         }
         else
         {
@@ -137,6 +134,9 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
         // 페이드 아웃
         SceneTransitionManager.Instance.FadeOut();
+
+        InventoryManager.Instance.RefreshInventoryUI();
+        CharacterStatusManager.Instance.RefreshStatus();
 
         // 움직임 및 시야 잠금 해제
         GameStateManager.Instance.UnlockView();
