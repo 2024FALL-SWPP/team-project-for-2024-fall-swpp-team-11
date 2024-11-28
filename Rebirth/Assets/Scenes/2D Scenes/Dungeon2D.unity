@@ -3529,6 +3529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 914310355}
+  - component: {fileID: 914310356}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -3552,6 +3553,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &914310356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914310354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645d4a26fab5d1f4ea9b966fc35608de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: 
+  targetPosition: {x: 0, y: 0, z: 0}
+  animationDelay: 0.5
+  interactionSound: {fileID: 0}
 --- !u!1 &929433614
 GameObject:
   m_ObjectHideFlags: 0
@@ -5472,6 +5489,10 @@ PrefabInstance:
       propertyPath: targetScene
       value: Village2D
       objectReference: {fileID: 0}
+    - target: {fileID: 1023243556961765842, guid: ef85fbc2fb668ad478570658509b7993, type: 3}
+      propertyPath: interactionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
     - target: {fileID: 1023243556961765842, guid: ef85fbc2fb668ad478570658509b7993, type: 3}
       propertyPath: targetPosition.x
       value: 4.25

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5643116748636307158}
   - component: {fileID: 6911259129818702730}
   - component: {fileID: 7683001953769644697}
-  - component: {fileID: 406876704611352504}
   - component: {fileID: 1384924559466730456}
   m_Layer: 0
   m_Name: '[item]sword'
@@ -74,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 940620659
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4663f285545f64616b189fb00f79213a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -100,27 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0.5
---- !u!50 &406876704611352504
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128156717785298092}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &1384924559466730456
 BoxCollider2D:
   m_ObjectHideFlags: 0

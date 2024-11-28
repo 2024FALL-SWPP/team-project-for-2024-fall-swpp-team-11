@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CharacterMovement3D : MonoBehaviour
 {
@@ -7,25 +8,51 @@ public class CharacterMovement3D : MonoBehaviour
     private Rigidbody rb;
     private bool canJump = true;
 
+    [Header("Audio Clips")]
+    public AudioClip footstepSound;
+    public AudioClip jumpSound;
+    public AudioClip landSound;
+
+    private AudioSource audioSource;
+    private bool isPlayingFootstep = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         if (rb && rb.velocity.y <= 0 && IsGrounded())
         {
-            canJump = true;
+            if (!canJump)
+            {
+                canJump = true;
+
+                if (landSound != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(landSound); // 착지 소리 재생
+                }
+            }
         }
     }
 
     public void Move(Vector3 moveDir)
     {
-        if (!rb || moveDir == Vector3.zero) return;
+        if (!rb || moveDir == Vector3.zero)
+        {
+            isPlayingFootstep = false;
+            return;
+        }
 
         Vector3 moveDirection = transform.right * moveDir.x + transform.forward * moveDir.z;
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+
+        if (!isPlayingFootstep && IsGrounded())
+        {
+            StartCoroutine(PlayFootstepSound());
+        }
     }
 
     public void Turn(Quaternion viewRot)
@@ -38,10 +65,15 @@ public class CharacterMovement3D : MonoBehaviour
     {
         if (!rb) return;
 
-        if (IsGrounded() && canJump)
+        if (IsJumpable())
         {
             canJump = false;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            if (jumpSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(jumpSound); // 점프 소리 재생
+            }
         }
     }
 
@@ -56,5 +88,18 @@ public class CharacterMovement3D : MonoBehaviour
     public bool IsJumpable()
     {
         return IsGrounded() && canJump;
+    }
+
+    private IEnumerator PlayFootstepSound()
+    {
+        isPlayingFootstep = true;
+
+        if (footstepSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(footstepSound); // 발소리 재생
+        }
+
+        yield return new WaitForSeconds(0.3f); // 발소리 간격
+        isPlayingFootstep = false;
     }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7269046840437452491}
   - component: {fileID: 7269046840437452494}
   - component: {fileID: 7269046840437452493}
-  - component: {fileID: 7269046840437452492}
   - component: {fileID: 7269046840437452495}
   m_Layer: 0
   m_Name: '[item]Inferose'
@@ -74,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 940620659
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: ffa5ccca800c0411f9f0f37969fcf3c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,27 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2599583, y: 0.7566776}
   m_EdgeRadius: 0
---- !u!50 &7269046840437452492
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7269046840437452490}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &7269046840437452495
 MonoBehaviour:
   m_ObjectHideFlags: 0
