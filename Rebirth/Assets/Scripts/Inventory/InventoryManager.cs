@@ -12,7 +12,6 @@ public class InventoryManager : SingletonManager<InventoryManager>
         base.Awake();
 
         inventoryDataContainer = new InventoryDataContainer();
-        inventoryUI.Initialize(inventoryDataContainer);
     }
 
     private void Update()
@@ -24,26 +23,26 @@ public class InventoryManager : SingletonManager<InventoryManager>
     }
 
     #region Inventory Data
-    public void AddItem(ItemData item)
+    public void AddItem(ItemData itemData)
     {
-        inventoryDataContainer.AddItem(item);
-        inventoryUI.RefreshInventoryDisplay();
+        inventoryDataContainer.AddItem(itemData);
+        inventoryUI.AddItem(itemData);
     }
 
-    public void RemoveItem(ItemData item)
+    public void RemoveItem(ItemData itemData)
     {
-        inventoryDataContainer.RemoveItem(item);
-        inventoryUI.RefreshInventoryDisplay();
+        inventoryDataContainer.RemoveItem(itemData);
+        inventoryUI.RemoveItem(itemData);
     }
 
-    public bool HasItem(ItemData item)
+    public bool HasItem(ItemData itemData)
     {
-        return inventoryDataContainer.HasItem(item);
+        return inventoryDataContainer.HasItem(itemData);
     }
 
     public void RefreshInventoryUI()
     {
-        inventoryUI.RefreshInventoryDisplay();
+        // inventoryUI.RefreshInventoryDisplay();
     }
     #endregion
 
@@ -73,8 +72,9 @@ public class InventoryManager : SingletonManager<InventoryManager>
         if (loadedData != null)
         {
             inventoryDataContainer = loadedData;
-            inventoryUI.Initialize(inventoryDataContainer);
-            inventoryUI.RefreshInventoryDisplay();
+            // !LEGACY
+            // inventoryUI.Initialize(inventoryDataContainer);
+            // inventoryUI.RefreshInventoryDisplay();
             Debug.Log("인벤토리가 로드되었습니다.");
         }
     }

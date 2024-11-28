@@ -1,21 +1,46 @@
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
     [Header("UI References")]
-    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private Canvas inventoryCanvas;
     [SerializeField] private Transform contentPanel;
     [SerializeField] private GameObject inventoryItemPrefab;
     [SerializeField] private GameObject tooltip;
-    private bool isVisible = false;
-    private ItemTooltip itemTooltip;
-    private InventoryDataContainer inventoryDataContainer;
 
-    public void Initialize(InventoryDataContainer dataContainer)
+    [Header("Grid")]
+    [SerializeField] private GameObject gridCellPrefab;
+    [SerializeField] private int maxRow = 10;
+    [SerializeField] private int maxCol = 4;
+    private List<GridCell> gridCells = new List<GridCell>();
+
+    private ItemTooltip itemTooltip;
+    private bool isVisible;
+
+    private void Start()
     {
-        inventoryDataContainer = dataContainer;
+        InitializeGridCells();
         itemTooltip = new ItemTooltip(tooltip);
+    }
+
+    private void InitializeGridCells()
+    {
+        for (int row = 0; row < maxRow; row++) // 10 rows
+        {
+            for (int col = 0; col < maxCol; col++) // 4 columns
+            {
+                GameObject gridCellObj = Instantiate(gridCellPrefab, contentPanel);
+
+                // GridCell 컴포넌트 설정
+                GridCell gridCell = gridCellObj.GetComponent<GridCell>();
+                gridCell.row = row;
+                gridCell.column = col;
+
+                gridCells.Add(gridCell);
+            }
+        }
     }
 
     #region Toggle Inventory
@@ -30,50 +55,36 @@ public class InventoryUI : MonoBehaviour
     public void ShowInventory()
     {
         isVisible = true;
-        inventoryUI.SetActive(true);
+        inventoryCanvas.gameObject.SetActive(true);
         GameStateManager.Instance.LockView();
-        RefreshInventoryDisplay();
+        // RefreshInventoryDisplay();
     }
 
     public void HideInventory()
     {
         isVisible = false;
-        inventoryUI.SetActive(false);
+        inventoryCanvas.gameObject.SetActive(false);
         GameStateManager.Instance.UnlockView();
     }
     #endregion
 
-    #region Draw Inventory UI
-    public void RefreshInventoryDisplay()
+    public void AddItem(ItemData itemData)
     {
-        ClearInventoryUI();
-        RegenerateInventoryUI();
-        HideTooltip(); // hide tooltip when inventory is refreshed
-    }
-
-    private void ClearInventoryUI()
-    {
-        foreach (Transform child in contentPanel)
+        GridCell emptyCell = gridCells.Find(cell => cell.IsEmpty());
+        if (emptyCell != null)
         {
-            Destroy(child.gameObject);
+            GameObject inventoryItemObj = Instantiate(inventoryItemPrefab);
+            InventoryItem inventoryItem = inventoryItemObj.GetComponent<InventoryItem>();
+            inventoryItem.Initialize(itemData);
+
+            emptyCell.AddItem(inventoryItemObj);
         }
     }
 
-    private void RegenerateInventoryUI()
+    public void RemoveItem(ItemData itemData)
     {
-        IReadOnlyList<ItemData> itemDatas;
-        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
-            itemDatas = inventoryDataContainer.TwoDimensionalItems;
-        else
-            itemDatas = inventoryDataContainer.ThreeDimensionalItems;
-
-        foreach (var itemData in itemDatas)
-        {
-            GameObject inventoryItem = Instantiate(inventoryItemPrefab, contentPanel);
-            inventoryItem.GetComponent<InventoryItem>().Initialize(itemData);
-        }
+        // GridCell targetCell = gridCells.Find(cell => cell.inventoryItemObj.);
     }
-    #endregion
 
     #region Tooltip
     public void ShowTooltip(ItemData itemData, Vector2 position)

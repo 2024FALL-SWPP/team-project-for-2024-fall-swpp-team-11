@@ -3,18 +3,19 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    [SerializeField] private GameObject itemSlot;
-    private ItemDragHandler dragHandler;
+    private Image itemIcon;
+    private ItemDragHandler itemdragHandler;
     private ItemPointerHandler itemPointerHandler;
 
     private void Awake()
     {
+        itemIcon = GetComponent<Image>();
         SetupComponents();
     }
 
     private void SetupComponents()
     {
-        dragHandler = GetComponent<ItemDragHandler>();
+        itemdragHandler = GetComponent<ItemDragHandler>();
         itemPointerHandler = GetComponent<ItemPointerHandler>();
     }
 
@@ -22,13 +23,12 @@ public class InventoryItem : MonoBehaviour
     {
         SetupComponents();
         InitializeInventoryIcon(data);
-        dragHandler.itemData = data;
+        itemdragHandler.itemData = data;
         itemPointerHandler.itemData = data;
     }
 
     private void InitializeInventoryIcon(ItemData itemData)
     {
-        var itemIcon = itemSlot.transform.Find("ItemIcon").GetComponent<Image>();
         itemIcon.sprite = itemData.icon;
     }
 }
