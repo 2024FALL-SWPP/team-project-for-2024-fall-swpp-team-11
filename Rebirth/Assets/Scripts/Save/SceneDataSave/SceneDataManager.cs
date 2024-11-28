@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
@@ -13,7 +12,7 @@ public class SceneDataManager : SingletonManager<SceneDataManager>
     {
         base.Awake();
 
-        SceneManager.sceneLoaded += RestoreSceneData;
+        SceneManager.sceneLoaded += async (scene, mode) => await RestoreSceneDataAsync(scene);
 
         SaveManager.save += OnSave;
         SaveManager.load += OnLoad;
@@ -24,76 +23,54 @@ public class SceneDataManager : SingletonManager<SceneDataManager>
 
     private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= RestoreSceneData;
+        SceneManager.sceneLoaded -= async (scene, mode) => await RestoreSceneDataAsync(scene);
 
         SaveManager.save -= OnSave;
         SaveManager.load -= OnLoad;
     }
 
-    private void RestoreSceneData(Scene scene, LoadSceneMode mode)
-    {
-        StartCoroutine(RestoreWaitWrapper(scene));
-    }
-
-    private IEnumerator RestoreWaitWrapper(Scene scene)
-    {
-        yield return RestoreSceneDataRoutine(scene);
-    }
-
-    private IEnumerator RestoreSceneDataRoutine(Scene scene)
+    private async Task RestoreSceneDataAsync(Scene scene)
     {
         if (sceneDatas.TryGetValue(scene.name, out var sceneData))
         {
             CleanUpScene();
 
+            var tasks = new List<Task>();
             foreach (var handler in sceneDataHandlers)
             {
-                handler.ApplyData(sceneData);
-                yield return null;
+                tasks.Add(handler.ApplyDataAsync(sceneData));
             }
+            await Task.WhenAll(tasks);
         }
     }
 
-    public void SaveCurrentSceneData()
-    {
-        StartCoroutine(SaveWaitWrapper());
-    }
-
-    private IEnumerator SaveWaitWrapper()
-    {
-        yield return SaveCurrentSceneDataRoutine();
-    }
-
-    private IEnumerator SaveCurrentSceneDataRoutine()
+    public async Task SaveCurrentSceneDataAsync()
     {
         var scene = SceneManager.GetActiveScene();
         var sceneData = new SceneData();
 
+        var tasks = new List<Task>();
         foreach (var handler in sceneDataHandlers)
         {
-            handler.CaptureData(sceneData);
-            yield return null;
+            tasks.Add(handler.CaptureDataAsync(sceneData));
         }
+        await Task.WhenAll(tasks);
 
         sceneDatas[scene.name] = sceneData;
         dirtySceneNames.Add(scene.name);
     }
 
-
     public async void OnSave()
     {
-        StartCoroutine(SaveWaitWrapper());
-        
+        await SaveCurrentSceneDataAsync();
         await SaveSceneDatasToDisk();
     }
 
     public async void OnLoad()
     {
         await LoadSceneDatasFromDisk();
-
-        StartCoroutine(RestoreWaitWrapper(SceneManager.GetActiveScene()));
+        await RestoreSceneDataAsync(SceneManager.GetActiveScene());
     }
-
 
     public async Task SaveSceneDatasToDisk()
     {
@@ -126,4 +103,3 @@ public class SceneDataManager : SingletonManager<SceneDataManager>
         }
     }
 }
-

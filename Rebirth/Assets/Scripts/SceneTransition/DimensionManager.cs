@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class DimensionManager : SingletonManager<DimensionManager>
 {
@@ -17,36 +18,35 @@ public class DimensionManager : SingletonManager<DimensionManager>
         dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
     }
 
-    void Update()
+    async void Update()
     {
         if (Input.GetKeyDown(KeyCode.T) && !isSwitching)
         {
-            StartCoroutine(SwitchDimension());
+            await SwitchDimension();
         }
     }
 
-    public IEnumerator SwitchDimension()
+    public async Task SwitchDimension()
     {
         isSwitching = true;
 
         string targetSceneName;
-        if (!FindTargetSceneName(out targetSceneName)) yield break;
+        if (!FindTargetSceneName(out targetSceneName)) return;
         GameObject currentPlayer;
-        if (!FindCurrentPlayer(out currentPlayer)) yield break;
+        if (!FindCurrentPlayer(out currentPlayer)) return;
         Anchor currentAnchor;
-        if (!FindCurrentAnchor(currentPlayer, out currentAnchor)) yield break;
+        if (!FindCurrentAnchor(currentPlayer, out currentAnchor)) return;
         GameObject playerPrefab;
-        if (!FindPlayerPrefab(targetSceneName, out playerPrefab)) yield break;
+        if (!FindPlayerPrefab(targetSceneName, out playerPrefab)) return;
 
-        yield return StartCoroutine(SceneTransitionManager.Instance.FadeInCoroutine());
-        yield return StartCoroutine(SceneTransitionManager.Instance.LoadSceneCoroutine(targetSceneName));
+        await SceneTransitionManager.Instance.FadeInAsync();
+        await SceneTransitionManager.Instance.LoadSceneAsync(targetSceneName);
         
         Anchor matchingAnchor;
-        if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) yield break;
+        if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
 
-        yield return StartCoroutine(SceneTransitionManager.Instance.FadeOutCoroutine());
-
+        await SceneTransitionManager.Instance.FadeOutAsync();
 
         isSwitching = false;
     }

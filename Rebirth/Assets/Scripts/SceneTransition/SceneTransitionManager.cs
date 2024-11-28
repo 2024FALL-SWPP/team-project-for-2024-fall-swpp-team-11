@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,16 +11,7 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 
     private void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
         canvas.enabled = false;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        GameStateManager.Instance.UnlockView();
-        GameStateManager.Instance.UnlockMovement();
-        // SetPlayerPosition();
     }
 
     private void SetPlayerPosition()
@@ -36,48 +27,55 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         }
     }
 
-    public IEnumerator FadeInCoroutine()
-    {
-        canvas.enabled = true;
-        fadeAnimator.SetTrigger("FadeInTrigger");
-        yield return new WaitForSeconds(fadeDuration);
-        canvas.enabled = false;
-    }
-
-    public IEnumerator LoadSceneCoroutine(string sceneName)
+    public async Task FadeInAsync()
     {
         GameStateManager.Instance.LockView();
         GameStateManager.Instance.LockMovement();
 
-        SceneDataManager.Instance.SaveCurrentSceneData();
-        yield return TransitionCoroutine(sceneName);
-    }
-
-    public IEnumerator FadeOutCoroutine()
-    {
         canvas.enabled = true;
-        fadeAnimator.SetTrigger("FadeOutTrigger");
-        yield return new WaitForSeconds(fadeDuration);
+        fadeAnimator.SetTrigger("FadeInTrigger");
+
+        // 비동기 대기
+        await Task.Delay((int)(fadeDuration * 1000));
         canvas.enabled = false;
     }
 
-    private IEnumerator TransitionCoroutine(string sceneName)
+    public async Task LoadSceneAsync(string sceneName)
     {
+        // 현재 씬 데이터 저장
+        await SceneDataManager.Instance.SaveCurrentSceneDataAsync();
+
+        // 씬 전환 처리
+        await TransitionAsync(sceneName);
+    }
+
+    public async Task FadeOutAsync()
+    {
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeOutTrigger");
+
+        // 비동기 대기
+        await Task.Delay((int)(fadeDuration * 1000));
+        canvas.enabled = false;
+
+        GameStateManager.Instance.UnlockView();
+        GameStateManager.Instance.UnlockMovement();
+    }
+
+    private async Task TransitionAsync(string sceneName)
+    {
+        // 비동기로 씬 로드
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
 
+        // 로드 완료 대기
         while (!asyncLoad.isDone)
         {
             if (asyncLoad.progress >= 0.9f)
             {
                 asyncLoad.allowSceneActivation = true;
             }
-            yield return null;
+            await Task.Yield();
         }
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

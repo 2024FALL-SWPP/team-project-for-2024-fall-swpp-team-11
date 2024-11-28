@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,14 +7,12 @@ public class InventoryManager : SingletonManager<InventoryManager>
     [SerializeField] private InventoryUI inventoryUI;
     private InventoryDataContainer inventoryDataContainer;
 
-    // private static string logPrefix = "[InventoryManager] ";
-
     protected override void Awake()
     {
         base.Awake();
 
         SaveManager.save += SaveInventory;
-        SaveManager.load += LoadInventory;
+        SaveManager.load += async () => await LoadInventoryAsync();
 
         inventoryDataContainer = new InventoryDataContainer();
         inventoryUI.Initialize(inventoryDataContainer);
@@ -54,13 +53,11 @@ public class InventoryManager : SingletonManager<InventoryManager>
     #region UI Management
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
-        // Debug.Log(logPrefix + "show tool tip");
         inventoryUI.ShowTooltip(itemData, position);
     }
 
     public void HideTooltip()
     {
-        // Debug.Log(logPrefix + "Hide tip");
         inventoryUI.HideTooltip();
     }
     #endregion
@@ -71,9 +68,9 @@ public class InventoryManager : SingletonManager<InventoryManager>
         DiskSaveSystem.SaveInventoryDataToDisk(inventoryDataContainer);
     }
 
-    public void LoadInventory()
+    public async Task LoadInventoryAsync()
     {
-        InventoryDataContainer loadedData = DiskSaveSystem.LoadInventoryDataFromDisk();
+        InventoryDataContainer loadedData = await DiskSaveSystem.LoadInventoryDataFromDiskAsync();
         if (loadedData != null)
         {
             foreach (var item in loadedData.ThreeDimensionalItems)
@@ -91,6 +88,6 @@ public class InventoryManager : SingletonManager<InventoryManager>
     private void OnDestroy()
     {
         SaveManager.save -= SaveInventory;
-        SaveManager.load -= LoadInventory;
+        SaveManager.load -= async () => await LoadInventoryAsync();
     }
 }

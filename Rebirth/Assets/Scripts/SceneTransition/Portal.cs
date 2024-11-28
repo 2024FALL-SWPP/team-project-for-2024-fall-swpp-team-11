@@ -1,6 +1,7 @@
 // DoorTrigger.cs
 using UnityEngine;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class Portal : MonoBehaviour, IInteractable
 {
@@ -9,13 +10,13 @@ public class Portal : MonoBehaviour, IInteractable
 
     public float animationDelay = 0.5f; // 씬 전환 전에 지연 시간
 
-    public void Interact()
+    public async void Interact()
     {
         if (!string.IsNullOrEmpty(targetScene))
         {
             if (SceneTransitionManager.Instance != null)
             {
-                StartCoroutine(InteractWithSceneTransition());
+                await InteractWithSceneTransitionAsync();
             }
         }
         else
@@ -25,13 +26,12 @@ public class Portal : MonoBehaviour, IInteractable
         }
     }
 
-    private IEnumerator InteractWithSceneTransition()
+    private async Task InteractWithSceneTransitionAsync()
     {
-        yield return StartCoroutine(SceneTransitionManager.Instance.FadeInCoroutine());
-        yield return StartCoroutine(SceneTransitionManager.Instance.LoadSceneCoroutine(targetScene));
-        yield return StartCoroutine(SceneTransitionManager.Instance.FadeOutCoroutine());
+        await SceneTransitionManager.Instance.FadeInAsync();
+        await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
+        await SceneTransitionManager.Instance.FadeOutAsync();
     }
-
 
     public virtual void OnFocus()
     {

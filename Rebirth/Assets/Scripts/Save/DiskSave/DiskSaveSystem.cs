@@ -3,6 +3,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.AddressableAssets;
+using System.Linq;
 
 public class DiskSaveSystem
 {
@@ -26,7 +29,7 @@ public class DiskSaveSystem
         File.WriteAllText(InventorySavePath, json);
     }
     
-    public static InventoryDataContainer LoadInventoryDataFromDisk()
+    public static async Task<InventoryDataContainer> LoadInventoryDataFromDiskAsync()
     {
         if (!File.Exists(InventorySavePath))
         {
@@ -36,12 +39,30 @@ public class DiskSaveSystem
         string json = File.ReadAllText(InventorySavePath);
         List<string> itemNames = JsonConvert.DeserializeObject<List<string>>(json);
 
-        ItemData[] allItems = Resources.LoadAll<ItemData>("ItemData");
+        AsyncOperationHandle<IList<ItemData>> handle = Addressables.LoadAssetsAsync<ItemData>(
+            "ItemData",
+            null
+        );
+
+        await handle.Task;
+
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.LogError("Failed to load ItemData from Addressables.");
+            return null;
+        }
+
+        IList<ItemData> allItems = handle.Result;
+        foreach (var itemData in allItems)
+        {
+            Debug.Log(itemData.name);
+        }
+
         List<ItemData> loaded2DItems = new List<ItemData>();
         List<ItemData> loaded3DItems = new List<ItemData>();
         foreach (var itemName in itemNames)
         {
-            ItemData foundItem = System.Array.Find(allItems, item => item.itemName == itemName);
+            ItemData foundItem = System.Array.Find(allItems.ToArray(), item => item.itemName == itemName);
             if (foundItem != null)
             {
                 if (foundItem.dimension == Dimension.THREE_DIMENSION)
@@ -50,10 +71,14 @@ public class DiskSaveSystem
                     loaded2DItems.Add(foundItem);
             }
         }
+
         InventoryDataContainer inventoryData = new InventoryDataContainer(loaded2DItems, loaded3DItems);
+
+        Addressables.Release(handle);
 
         return inventoryData;
     }
+
     #endregion
 
     public static string GetSceneDataPath(string sceneName) =>
