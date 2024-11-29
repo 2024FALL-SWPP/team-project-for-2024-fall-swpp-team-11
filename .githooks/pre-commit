@@ -86,7 +86,7 @@ fi
 echo "$PRECOMMIT_LOG_PREFIX Checking for staged files and their meta files"
 assets_files=$(git diff --cached --name-only --diff-filter=A -z $against -- "$ASSETS_DIR")
 if [ -n "$assets_files" ]; then
-    echo "$assets_files" | while read -d $'\0' f; do
+    git diff --cached --name-only --diff-filter=A -z $against -- "$ASSETS_DIR" | while IFS= read -r -d '' f; do
         ext="${f##*.}"
         base="${f%.*}"
 
@@ -126,7 +126,7 @@ fi
 
 deleted_assets_files=$(git diff --cached --name-only --diff-filter=D -z $against -- "$ASSETS_DIR")
 if [ -n "$deleted_assets_files" ]; then
-    echo "$deleted_assets_files" | while read -d $'\0' f; do
+    git diff --cached --name-only --diff-filter=D -z $against -- "$ASSETS_DIR" | while IFS= read -r -d '' f; do
         ext="${f##*.}"
         base="${f%.*}"
 
