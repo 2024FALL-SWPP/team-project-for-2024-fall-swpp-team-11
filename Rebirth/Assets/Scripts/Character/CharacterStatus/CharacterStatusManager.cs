@@ -1,6 +1,18 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
+
+[System.Serializable]
+public class CharacterStatusData
+{
+    public int Money;
+    public int Health;
+
+    public CharacterStatusData()
+    {
+        Money = 0;
+        Health = 100;
+    }
+}
 
 public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 {
@@ -22,11 +34,31 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 
         Health = maxHealth;
         Money = maxMoney;
+
+        SaveManager.save += SaveCharacterStatusToDisk;
+        SaveManager.load += LoadCharacterStatusFromDisk;
+    }
+
+    private void SaveCharacterStatusToDisk()
+    {
+        DiskSaveSystem.SaveCharacterStatusToDisk();
+    }
+
+    private void LoadCharacterStatusFromDisk()
+    {
+        if (!isInitialized && DimensionManager.Instance != null)
+        {
+            Initialize();
+        }
+        CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
+        Health = data.Health;
+        Money = data.Money;
     }
 
     private void Initialize()
     {
         isInitialized = true;
+        
         // Initialize health and money
         Health = maxHealth;
         Money = maxMoney;
@@ -38,11 +70,6 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 
     private void Update()
     {
-        if (!isInitialized && DimensionManager.Instance != null)
-        {
-            Initialize();
-        }
-        
         // For testing purposes
         // Check if the space bar is pressed for health
         if (Input.GetKeyDown(KeyCode.N))
@@ -71,7 +98,6 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
             Debug.Log("Money increased by 10. Current Money: " + Money);
         }
     }
-
 
     public int GetMaxHealth()
     {

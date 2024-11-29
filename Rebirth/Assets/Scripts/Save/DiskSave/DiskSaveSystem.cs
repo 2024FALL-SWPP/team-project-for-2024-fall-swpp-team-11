@@ -53,10 +53,6 @@ public class DiskSaveSystem
         }
 
         IList<ItemData> allItems = handle.Result;
-        foreach (var itemData in allItems)
-        {
-            Debug.Log(itemData.name);
-        }
 
         List<ItemData> loaded2DItems = new List<ItemData>();
         List<ItemData> loaded3DItems = new List<ItemData>();
@@ -113,4 +109,35 @@ public class DiskSaveSystem
 
         return sceneDatas;
     }
+
+    private static string CharacterStatusSavePath => Application.persistentDataPath + "/character_status.json";
+
+    #region CharacterStatus
+    public static void SaveCharacterStatusToDisk()
+    {
+        CharacterStatusData characterStatusData = new CharacterStatusData
+        {
+            Money = CharacterStatusManager.Instance.Money,
+            Health = CharacterStatusManager.Instance.Health
+        };
+
+        string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);
+        File.WriteAllText(CharacterStatusSavePath, json);
+        Debug.Log("Character status saved to disk.");
+    }
+
+    public static CharacterStatusData LoadCharacterStatusFromDisk()
+    {
+        if (!File.Exists(CharacterStatusSavePath))
+        {
+            Debug.LogWarning("Character status file not found. Returning default values.");
+            return new CharacterStatusData(); // 기본값 반환
+        }
+
+        string json = File.ReadAllText(CharacterStatusSavePath);
+        CharacterStatusData characterStatusData = JsonConvert.DeserializeObject<CharacterStatusData>(json);
+        Debug.Log("Character status loaded from disk.");
+        return characterStatusData;
+    }
+    #endregion
 }
