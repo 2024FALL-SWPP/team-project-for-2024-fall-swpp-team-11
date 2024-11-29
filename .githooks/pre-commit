@@ -17,12 +17,13 @@ exec 1>&2
 
 ### Check for invalid characters in new files
 echo "$PRECOMMIT_LOG_PREFIX Checking for invalid characters in new files"
-for filename in $(git diff --cached --name-only --diff-filter=A -z $against); do
+git diff --cached --name-only --diff-filter=A -z $against | while IFS= read -r -d '' filename; do
+    echo "$PRECOMMIT_LOG_PREFIX Checking file: ${filename}"
     if [[ $filename =~ [\\/:*?\"\'\<\>\|\ ] ]]; then
-        >&2 echo "$PRECOMMIT_LOG_PREFIX The generated file \"${filename}\" contains invalid character."
+        >&2 echo "$PRECOMMIT_LOG_PREFIX The generated file \"${filename}\" contains invalid characters."
         exit 2
     fi
-done
+done || exit 2
 
 # Select files to format
 FILES=$(git diff --cached --name-only --diff-filter=ACM "*.cs" | sed 's| |\\ |g')
