@@ -17,7 +17,6 @@ public class DimensionManager : SingletonManager<DimensionManager>
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
-        Debug.Log("DimensionManager: dimension = " + dimension);
     }
 
     async void Update()
@@ -121,13 +120,11 @@ public class DimensionManager : SingletonManager<DimensionManager>
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "3D";
             dimension = Dimension.THREE_DIMENSION;
-            InventoryManager.Instance.RefreshInventoryUI();
         }
         else if (currentSceneName.EndsWith("3D"))
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "2D";
             dimension = Dimension.TWO_DIMENSION;
-            InventoryManager.Instance.RefreshInventoryUI();
         }
         else
         {

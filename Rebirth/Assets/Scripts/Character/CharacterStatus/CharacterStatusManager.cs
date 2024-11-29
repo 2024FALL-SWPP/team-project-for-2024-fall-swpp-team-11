@@ -99,6 +99,13 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         }
     }
 
+    public void RefreshStatus()
+    {
+        NotifyHealthChanged();
+        NotifyMoneyChanged();
+    }
+
+
     public int GetMaxHealth()
     {
         return maxHealth;
