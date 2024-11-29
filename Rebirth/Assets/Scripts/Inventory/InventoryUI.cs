@@ -7,17 +7,14 @@ public class InventoryUI : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Canvas inventoryCanvas;
     [SerializeField] private Transform contentPanel;
-    [SerializeField] private GameObject inventoryItemPrefab;
     [SerializeField] private GameObject tooltip;
 
     [Header("Grid")]
     [SerializeField] private GameObject gridCellPrefab;
-    [SerializeField] private int maxRow = 10;
-    [SerializeField] private int maxCol = 4;
     private List<GridCell> gridCells = new List<GridCell>();
-
     private ItemTooltip itemTooltip;
     private bool isVisible;
+    private int inventoryCapacity;
 
     private void Start()
     {
@@ -27,19 +24,11 @@ public class InventoryUI : MonoBehaviour
 
     private void InitializeGridCells()
     {
-        for (int row = 0; row < maxRow; row++) // 10 rows
+        for (int cnt = 0; cnt < inventoryCapacity; cnt++)
         {
-            for (int col = 0; col < maxCol; col++) // 4 columns
-            {
-                GameObject gridCellObj = Instantiate(gridCellPrefab, contentPanel);
-
-                // GridCell 컴포넌트 설정
-                GridCell gridCell = gridCellObj.GetComponent<GridCell>();
-                gridCell.row = row;
-                gridCell.column = col;
-
-                gridCells.Add(gridCell);
-            }
+            GameObject gridCellObj = Instantiate(gridCellPrefab, contentPanel);
+            GridCell gridCell = gridCellObj.GetComponent<GridCell>();
+            gridCells.Add(gridCell);
         }
     }
 
@@ -68,22 +57,19 @@ public class InventoryUI : MonoBehaviour
     }
     #endregion
 
-    public void AddItem(ItemData itemData)
+    public void AddItem(GameObject inventoryItemObj)
     {
         GridCell emptyCell = gridCells.Find(cell => cell.IsEmpty());
         if (emptyCell != null)
         {
-            GameObject inventoryItemObj = Instantiate(inventoryItemPrefab);
-            InventoryItem inventoryItem = inventoryItemObj.GetComponent<InventoryItem>();
-            inventoryItem.Initialize(itemData);
-
             emptyCell.AddItem(inventoryItemObj);
         }
     }
 
-    public void RemoveItem(ItemData itemData)
+    public void RemoveItem(GameObject inventoryItemObj)
     {
-        // GridCell targetCell = gridCells.Find(cell => cell.inventoryItemObj.);
+        GridCell parentCell = inventoryItemObj.transform.parent.GetComponent<GridCell>();
+        parentCell.RemoveItem();
     }
 
     #region Tooltip
@@ -98,4 +84,9 @@ public class InventoryUI : MonoBehaviour
         itemTooltip.Hide();
     }
     #endregion
+
+    public void SetCapacity(int capacity)
+    {
+        inventoryCapacity = capacity;
+    }
 }

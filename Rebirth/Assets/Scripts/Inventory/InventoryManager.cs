@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class InventoryManager : SingletonManager<InventoryManager>
 {
+    [SerializeField] private GameObject inventoryItemPrefab;
     [SerializeField] private InventoryUI inventoryUI;
     private InventoryDataContainer inventoryDataContainer;
+    private int inventoryCapcity = 32;
 
     private static string logPrefix = "[InventoryManager] ";
 
@@ -12,6 +14,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
         base.Awake();
 
         inventoryDataContainer = new InventoryDataContainer();
+        inventoryUI.SetCapacity(inventoryCapcity);
     }
 
     private void Update()
@@ -25,14 +28,25 @@ public class InventoryManager : SingletonManager<InventoryManager>
     #region Inventory Data
     public void AddItem(ItemData itemData)
     {
-        inventoryDataContainer.AddItem(itemData);
-        inventoryUI.AddItem(itemData);
+        if (inventoryDataContainer.GetTotalItemCount() > inventoryCapcity) return;
+
+        GameObject inventoryItemObj = Instantiate(inventoryItemPrefab);
+        InventoryItem inventoryItem = inventoryItemObj.GetComponent<InventoryItem>();
+        inventoryItem.Initialize(itemData);
+
+        inventoryDataContainer.AddItem(inventoryItemObj, itemData.dimension);
+        inventoryUI.AddItem(inventoryItemObj);
     }
 
     public void RemoveItem(ItemData itemData)
     {
-        inventoryDataContainer.RemoveItem(itemData);
-        inventoryUI.RemoveItem(itemData);
+        GameObject inventoryItemObj = inventoryDataContainer.FindItem(itemData);
+        if (inventoryItemObj)
+        {
+            inventoryDataContainer.RemoveItem(inventoryItemObj, itemData.dimension);
+            inventoryUI.RemoveItem(inventoryItemObj);
+            Destroy(inventoryItemObj);
+        }
     }
 
     public bool HasItem(ItemData itemData)
@@ -47,6 +61,25 @@ public class InventoryManager : SingletonManager<InventoryManager>
     #endregion
 
     #region UI Management
+
+    public void HideInventory()
+    {
+        inventoryUI.HideInventory();
+    }
+
+    public void SortInventory()
+    {
+        // Sort InventoyDataContainer
+
+        // Iterate InventoryDataContainer
+
+            // From first cell, put InventoryItemObj
+
+            // Check last cell,
+
+        // Empty All the cells after last cell
+    }
+
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
         Debug.Log(logPrefix + "show tool tip");

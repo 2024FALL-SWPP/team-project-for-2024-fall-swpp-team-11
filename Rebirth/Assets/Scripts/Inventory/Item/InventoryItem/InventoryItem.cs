@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
+    public ItemData itemData;
     private Image itemIcon;
     private ItemDragHandler itemdragHandler;
     private ItemPointerHandler itemPointerHandler;
@@ -22,13 +23,9 @@ public class InventoryItem : MonoBehaviour
     public void Initialize(ItemData data)
     {
         SetupComponents();
-        InitializeInventoryIcon(data);
+        itemData = data;
+        itemIcon.sprite = data.icon;
         itemdragHandler.itemData = data;
         itemPointerHandler.itemData = data;
-    }
-
-    private void InitializeInventoryIcon(ItemData itemData)
-    {
-        itemIcon.sprite = itemData.icon;
     }
 }

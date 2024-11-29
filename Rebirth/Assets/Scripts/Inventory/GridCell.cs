@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class GridCell : MonoBehaviour
 {
-    public int row;
-    public int column;
     public GameObject inventoryItemObj {get; private set;}
 
     public void AddItem(GameObject obj)
