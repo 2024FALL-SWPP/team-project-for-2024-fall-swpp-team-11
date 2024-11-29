@@ -9,6 +9,7 @@ using System.Linq;
 
 public class DiskSaveSystem
 {
+    private static string logPrefix = "[DiskSaveSystem] ";
     private static string InventorySavePath => Application.persistentDataPath + "/inventory.json";
    
     #region Inventory
@@ -27,6 +28,8 @@ public class DiskSaveSystem
         string json = JsonConvert.SerializeObject(itemNames, Formatting.Indented);
 
         File.WriteAllText(InventorySavePath, json);
+
+        Debug.Log(logPrefix + "Inventory data saved to disk.");
     }
     
     public static async Task<InventoryDataContainer> LoadInventoryDataFromDiskAsync()
@@ -72,6 +75,8 @@ public class DiskSaveSystem
 
         Addressables.Release(handle);
 
+        Debug.Log(logPrefix + "Inventory data loaded from disk.");
+
         return inventoryData;
     }
 
@@ -84,6 +89,8 @@ public class DiskSaveSystem
     {
         var json = JsonUtility.ToJson(sceneData);
         File.WriteAllText(path, json);
+
+        Debug.Log(logPrefix + $"Scene data saved to disk: {path}");
     }
 
     public static async Task<Dictionary<string, SceneData>> LoadAllSceneDataFromDisk()
@@ -107,6 +114,8 @@ public class DiskSaveSystem
         }
         await Task.WhenAll(tasks);
 
+        Debug.Log(logPrefix + "All scene data loaded from disk.");
+
         return sceneDatas;
     }
 
@@ -123,7 +132,7 @@ public class DiskSaveSystem
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);
         File.WriteAllText(CharacterStatusSavePath, json);
-        Debug.Log("Character status saved to disk.");
+        Debug.Log(logPrefix + "Character status saved to disk.");
     }
 
     public static CharacterStatusData LoadCharacterStatusFromDisk()
@@ -136,7 +145,8 @@ public class DiskSaveSystem
 
         string json = File.ReadAllText(CharacterStatusSavePath);
         CharacterStatusData characterStatusData = JsonConvert.DeserializeObject<CharacterStatusData>(json);
-        Debug.Log("Character status loaded from disk.");
+        
+        Debug.Log(logPrefix + "Character status loaded from disk.");
         return characterStatusData;
     }
     #endregion

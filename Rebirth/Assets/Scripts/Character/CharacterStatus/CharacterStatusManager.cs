@@ -16,6 +16,8 @@ public class CharacterStatusData
 
 public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 {
+    private static string logPrefix = "[CharacterStatusManager] ";
+
     // Health-related variables
     private int maxHealth = 100;
     private int maxMoney = 99999;
@@ -37,6 +39,12 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 
         SaveManager.save += SaveCharacterStatusToDisk;
         SaveManager.load += LoadCharacterStatusFromDisk;
+        Debug.Log(logPrefix + "SaveManager events subscribed.");
+    }
+
+    private void Start()
+    {
+        RefreshStatusUI();
     }
 
     private void SaveCharacterStatusToDisk()
@@ -46,10 +54,6 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 
     private void LoadCharacterStatusFromDisk()
     {
-        if (!isInitialized && DimensionManager.Instance != null)
-        {
-            Initialize();
-        }
         CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
         Health = data.Health;
         Money = data.Money;
@@ -62,7 +66,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         // Initialize health and money
         Health = maxHealth;
         Money = maxMoney;
-        Debug.Log($"CharacterStatus initialized: Money = {Money}, Health = {Health}");
+        // Debug.Log($"CharacterStatus initialized: Money = {Money}, Health = {Health}");
 
         NotifyHealthChanged();
         NotifyMoneyChanged();
@@ -70,39 +74,46 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 
     private void Update()
     {
+        if (!isInitialized && DimensionManager.Instance != null)
+        {
+            Initialize();
+        }
+
         // For testing purposes
         // Check if the space bar is pressed for health
         if (Input.GetKeyDown(KeyCode.N))
         {
             UpdateHealth(-10);
-            Debug.Log("Health decreased by 10. Current Health: " + Health);
+            Debug.Log(logPrefix + "Health decreased by 10. Current Health: " + Health);
         }
 
         if (Input.GetKeyDown(KeyCode.H))
         {
             UpdateHealth(10);
-            Debug.Log("Health increased by 10. Current Health: " + Health);
+            Debug.Log(logPrefix + "Health increased by 10. Current Health: " + Health);
         }
 
         // Check if the 'M' key is pressed for money 
         if (Input.GetKeyDown(KeyCode.M))
         {
             UpdateMoney(-10);
-            Debug.Log("Money decreased by 10. Current Money: " + Money);
+            Debug.Log(logPrefix + "Money decreased by 10. Current Money: " + Money);
         }
 
         // Check if the 'J' key is pressed for money 
         if (Input.GetKeyDown(KeyCode.J))
         {
             UpdateMoney(10);
-            Debug.Log("Money increased by 10. Current Money: " + Money);
+            Debug.Log(logPrefix + "Money increased by 10. Current Money: " + Money);
         }
     }
 
-    public void RefreshStatus()
+    public void RefreshStatusUI()
     {
         NotifyHealthChanged();
         NotifyMoneyChanged();
+
+        Debug.Log(logPrefix + "Status UI refreshed.");
     }
 
 
@@ -156,5 +167,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     {
         Money = Mathf.Max(0, startingAmount); // Reset money to a specific amount
         NotifyMoneyChanged();
+    }
+
+    private void OnDestroy()
+    {
+        SaveManager.save -= SaveCharacterStatusToDisk;
+        SaveManager.load -= LoadCharacterStatusFromDisk;
     }
 }

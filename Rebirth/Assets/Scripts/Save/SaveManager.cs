@@ -8,9 +8,15 @@ public class SaveManager : SingletonManager<SaveManager>
     public float autoSaveInterval = 300f; 
     private bool isAutoSaveEnabled = true;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        LoadGame();
+    }
+
     private void Start()
     {
-        LoadGame();
+        // LoadGame();
         StartCoroutine(AutoSaveCoroutine()); 
     }
 

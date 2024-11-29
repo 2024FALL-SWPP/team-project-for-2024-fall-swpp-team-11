@@ -47,9 +47,12 @@ public class DimensionManager : SingletonManager<DimensionManager>
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
 
+        // InventoryManager.Instance.RefreshInventoryUI();
+        InventoryManager.Instance.HideInventory(); // Hide inventory when switching dimensions
+        CharacterStatusManager.Instance.RefreshStatusUI();
+
         await SceneTransitionManager.Instance.FadeOutAsync();
 
-        InventoryManager.Instance.RefreshInventoryUI();
         isSwitching = false;
     }
 

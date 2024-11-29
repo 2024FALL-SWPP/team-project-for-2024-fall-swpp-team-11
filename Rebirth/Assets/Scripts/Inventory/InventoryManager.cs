@@ -13,6 +13,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
 
         SaveManager.save += SaveInventory;
         SaveManager.load += async () => await LoadInventoryAsync();
+        Debug.Log("[InventoryManager] SaveManager events subscribed.");
 
         inventoryDataContainer = new InventoryDataContainer();
         inventoryUI.Initialize(inventoryDataContainer);
@@ -51,6 +52,16 @@ public class InventoryManager : SingletonManager<InventoryManager>
     #endregion
 
     #region UI Management
+    public void ShowInventory()
+    {
+        inventoryUI.ShowInventory();
+    }
+
+    public void HideInventory()
+    {
+        inventoryUI.HideInventory();
+    }
+
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
         inventoryUI.ShowTooltip(itemData, position);
@@ -73,10 +84,10 @@ public class InventoryManager : SingletonManager<InventoryManager>
         InventoryDataContainer loadedData = await DiskSaveSystem.LoadInventoryDataFromDiskAsync();
         if (loadedData != null)
         {
-            foreach (var item in loadedData.ThreeDimensionalItems)
-            {
-                Debug.Log(item.name);
-            }
+            // foreach (var item in loadedData.ThreeDimensionalItems)
+            // {
+            //     Debug.Log(item.name);
+            // }
             inventoryDataContainer = loadedData;
             inventoryUI.Initialize(inventoryDataContainer);
             inventoryUI.RefreshInventoryDisplay();

@@ -1,9 +1,11 @@
+using UnityEngine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 public class SceneDataManager : SingletonManager<SceneDataManager>
 {
+    private static string logPrefix = "[SceneDataManager] ";
     private Dictionary<string, SceneData> sceneDatas = new();
     private HashSet<string> dirtySceneNames = new();
     private List<ISceneDataHandler> sceneDataHandlers = new();
@@ -16,6 +18,8 @@ public class SceneDataManager : SingletonManager<SceneDataManager>
 
         SaveManager.save += OnSave;
         SaveManager.load += OnLoad;
+
+        Debug.Log(logPrefix + "SaveManager events subscribed.");
 
         // Add components here
         sceneDataHandlers.Add(new ItemDataHandler());
