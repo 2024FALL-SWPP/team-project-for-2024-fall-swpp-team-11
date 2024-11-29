@@ -4,39 +4,26 @@ using UnityEngine;
 [System.Serializable]
 public class CraftRecipe2D
 {
-    public List<ItemData> ingredientsItems; // Required items for crafting
-    public WorldItem result;                // Result of crafting
+    public List<ItemData> ingredientsItems;
+    public WorldItem result;                
 }
 
 public class MagicCircle2D : MonoBehaviour
 {
-    public List<CraftRecipe2D> craftRecipes; // List of recipes available for crafting
+    public List<CraftRecipe2D> craftRecipes; 
 
-    [SerializeField] private KeyCode triggerKey = KeyCode.C; // Key to trigger crafting
+    [SerializeField] private KeyCode triggerKey = KeyCode.C; 
     [SerializeField] private float craftCooldown = 2f;       // Crafting cooldown time
-    [SerializeField] private float activationRange = 5f;     // Player must be within this range to craft
+    [SerializeField] private float activationRange = 5f;     
     [SerializeField] private Transform player;               // Player transform for distance checking
-    [SerializeField] private SpecialEffect2D specialEffect;  // Special effect handler for crafting
+    [SerializeField] private SpecialEffect specialEffect;  
     private float lastCraftTime = -Mathf.Infinity;           // Tracks last craft time
     
     [SerializeField] private Collider2D craftingTableCollider; // Specific collider for the crafting area
 
     private void Start()
     {
-        if (craftingTableCollider == null)
-        {
-            //Debug.LogError("Crafting table collider not found.");
-        }
-
-        if (player == null)
-        {
-            //Debug.LogError("Player transform not assigned.");
-        }
-
-        if (specialEffect == null)
-        {
-            //Debug.LogError("Special effect handler not assigned.");
-        }
+        
     }
 
     private void Update()
@@ -57,7 +44,7 @@ public class MagicCircle2D : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapBoxAll(
             craftingTableCollider.bounds.center,
             craftingTableCollider.bounds.size,
-            0f // No rotation for 2D
+            0f 
         );
 
         List<WorldItem> itemsOnTable = new List<WorldItem>();
@@ -66,7 +53,6 @@ public class MagicCircle2D : MonoBehaviour
             WorldItem item = collider.GetComponent<WorldItem>();
             if (item != null)
             {
-                Debug.Log($"Item found: {item.itemData.itemName}");
                 itemsOnTable.Add(item);
             }
         }
@@ -77,11 +63,16 @@ public class MagicCircle2D : MonoBehaviour
     private void Craft()
     {
         List<WorldItem> itemsOnTable = GetItemsOnTable();
-        Debug.Log($"Items on table: {itemsOnTable.Count}");
 
+        // Check if there are no items on the crafting table
+        if (itemsOnTable.Count == 0)
+        {
+            return; // Exit without triggering any effect
+        }
+
+        // Check if there are not enough items to craft
         if (itemsOnTable.Count < 2)
         {
-            Debug.Log("Not enough items to craft.");
             specialEffect.TriggerFailureEffect(craftingTableCollider.bounds.center);
             return;
         }
@@ -89,10 +80,8 @@ public class MagicCircle2D : MonoBehaviour
         WorldItem combinedWorldItem = CombineItems(itemsOnTable);
         if (combinedWorldItem != null)
         {
-            Vector3 spawnPosition = craftingTableCollider.bounds.center; // Crafting item at the center
+            Vector3 spawnPosition = craftingTableCollider.bounds.center; // Craft item at the center
             Instantiate(combinedWorldItem, spawnPosition, Quaternion.identity);
-           // Debug.Log("Crafted item successfully!");
-            //Debug.Log($"Crafted item: {combinedWorldItem.itemData.itemName}");
 
             // Trigger success effect
             specialEffect.TriggerSuccessEffect(spawnPosition);
@@ -101,10 +90,10 @@ public class MagicCircle2D : MonoBehaviour
         }
         else
         {
-           // Debug.Log("Crafting failed. Recipe not found.");
             specialEffect.TriggerFailureEffect(craftingTableCollider.bounds.center);
         }
     }
+
 
     private WorldItem CombineItems(List<WorldItem> itemsOnTable)
     {

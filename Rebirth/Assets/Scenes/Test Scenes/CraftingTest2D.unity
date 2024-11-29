@@ -1170,6 +1170,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &49054188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 49054190}
+  - component: {fileID: 49054189}
+  m_Layer: 0
+  m_Name: SpecialEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &49054189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49054188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2056a14e525e542ff8431c989611b2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  successEffectPrefab: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
+  successEffectScale: 1
+  successEffectDuration: 1
+  failureEffectPrefab: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
+  failureEffectScale: 1
+  failureEffectDuration: 1
+--- !u!4 &49054190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49054188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.4119625, y: -9.742605, z: 45.245728}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &51816967
 GameObject:
   m_ObjectHideFlags: 0
@@ -10347,7 +10397,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10363,21 +10413,21 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.37106776, y: 0.3528266}
-      - {x: 0.2666248, y: 0.46846437}
-      - {x: 0.2666248, y: 0.46846437}
-      - {x: 0.1111846, y: 0.5230613}
+      - {x: 0.2961278, y: 0.42884302}
+      - {x: 0.2073803, y: 0.478549}
+      - {x: 0.091407776, y: 0.5181899}
       - {x: -0.07319081, y: 0.52433085}
       - {x: -0.40703046, y: 0.45884037}
       - {x: -0.5831281, y: 0.30879524}
-      - {x: -0.5925048, y: 0.09568024}
-      - {x: -0.5726864, y: -0.08687687}
-      - {x: -0.5058946, y: -0.19458961}
+      - {x: -0.6911489, y: 0.14048052}
+      - {x: -0.66157025, y: -0.07668924}
+      - {x: -0.5603017, y: -0.21416092}
       - {x: -0.38240606, y: -0.35997438}
       - {x: -0.2156167, y: -0.4251089}
       - {x: -0.0446437, y: -0.4355029}
       - {x: 0.27891552, y: -0.34987473}
       - {x: 0.4326204, y: -0.21840906}
-      - {x: 0.5182892, y: -0.087212086}
+      - {x: 0.49357307, y: -0.09206629}
       - {x: 0.49154043, y: 0.18958372}
 --- !u!212 &505387928
 SpriteRenderer:
@@ -15257,58 +15307,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0.5
---- !u!1 &741360976
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 741360977}
-  - component: {fileID: 741360978}
-  m_Layer: 0
-  m_Name: SpecialEffectManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &741360977
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741360976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -82.89764, y: -14.257753, z: 11.476218}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &741360978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741360976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42abc67e4661d4bf8a32693d13957490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  successEffectPrefab: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
-  successEffectScale: {x: 1, y: 1, z: 1}
-  successEffectDuration: 0.4
-  successEffectSpeed: 10
-  failureEffectPrefab: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
-  failureEffectScale: {x: 1, y: 1, z: 1}
-  failureEffectDuration: 1
-  failureEffectSpeed: 2
 --- !u!1 &741390510
 GameObject:
   m_ObjectHideFlags: 0
@@ -23938,7 +23936,7 @@ MonoBehaviour:
   craftCooldown: 2
   activationRange: 5
   player: {fileID: 2033231870}
-  specialEffect: {fileID: 741360978}
+  specialEffect: {fileID: 49054189}
   craftingTableCollider: {fileID: 505387927}
 --- !u!1 &1177310396
 GameObject:

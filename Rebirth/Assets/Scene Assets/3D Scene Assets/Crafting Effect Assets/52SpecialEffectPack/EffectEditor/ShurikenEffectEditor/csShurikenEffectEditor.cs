@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-#if UNITY_EDITOR
 using UnityEditor;
+using System.Collections;
 
 [System.Serializable]
-
 public class csShurikenEffectEditor : EditorWindow
 {
     private float Scale = 1;
@@ -14,13 +11,13 @@ public class csShurikenEffectEditor : EditorWindow
     public Color ShurikenSystemColor = Color.white;
     static csShurikenEffectEditor myWindow;
 
-	[MenuItem("Window/Shuriken System Effect Editor")]
-
-	public static void Init()
-	{
-        myWindow = EditorWindow.GetWindowWithRect<csShurikenEffectEditor>(new Rect(100, 100, 300, 220)); //set Editor Position and Size
-		myWindow.title = "Scale Editor";
-	}
+    [MenuItem("Window/Shuriken System Effect Editor")]
+    public static void Init()
+    {
+        // Set Editor Window Position and Size
+        myWindow = EditorWindow.GetWindowWithRect<csShurikenEffectEditor>(new Rect(100, 100, 300, 220)); 
+        myWindow.titleContent = new GUIContent("Scale Editor"); // Set title using titleContent
+    }
 
     void OnGUI()
     {
@@ -49,6 +46,4 @@ public class csShurikenEffectEditor : EditorWindow
             DestroyImmediate(Effect.GetComponent<csShurikenEffectChanger>());
         }
     }
-
 }
-#endif
