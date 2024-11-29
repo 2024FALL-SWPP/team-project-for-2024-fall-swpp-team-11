@@ -2,7 +2,7 @@
 LC_ALL=C
 PRECOMMIT_LOG_PREFIX="[PRE-COMMIT]"
 echo "$PRECOMMIT_LOG_PREFIX pre-commit hook"
-ASSETS_DIR="$(git config --get unity3d.assets-dir || echo "Assets")"
+ASSETS_DIR="$(git config --get unity3d.assets-dir || echo "Rebirth/Assets")"
 
 if git rev-parse --verify HEAD >/dev/null
 then
