@@ -268,7 +268,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentNode: {fileID: 0}
   dialogueUI: {fileID: 3632384161203595237}
-  activeDialogueGraph: {fileID: 11400000, guid: 46dd2a5b4c8eb24418cd1f73de26ba74, type: 2}
 --- !u!114 &3632384161203595237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 3632384160824831883}
+  dialogueNPCNameText: {fileID: 3551267985535778125}
   dialogueText: {fileID: 3632384161397963221}
   optionsContainer: {fileID: 3632384160592989438}
   optionButtonPrefab: {fileID: 7784998499974210530, guid: b711635732201f040bcc96f8ce7fc4e7, type: 3}
