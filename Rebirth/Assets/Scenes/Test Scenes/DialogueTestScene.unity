@@ -1229,6 +1229,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45d0ca6837e774d7f9877a014fc699fd, type: 3}
+--- !u!1001 &1368854313
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.455
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.683
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.3360777
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180402117961562199, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561043506416837357, guid: 884012021d263664883e54929b99e3ff, type: 3}
+      propertyPath: m_Name
+      value: '[3D item]BluePotion'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 884012021d263664883e54929b99e3ff, type: 3}
 --- !u!4 &1381056981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4114324885268775267, guid: d8b3ffa4754654e479f9b103497fe65b, type: 3}
@@ -1948,6 +2005,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7571446396582767851, guid: 9d2d8058eb99af2458dcc6c39618df93, type: 3}
+      propertyPath: acceptQuestSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+    - target: {fileID: 7571446396582767851, guid: 9d2d8058eb99af2458dcc6c39618df93, type: 3}
+      propertyPath: completeQuestSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
     - target: {fileID: 7571446396582767853, guid: 9d2d8058eb99af2458dcc6c39618df93, type: 3}
       propertyPath: m_Name
       value: Quest Manager
