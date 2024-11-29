@@ -42,13 +42,14 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
         await SceneTransitionManager.Instance.FadeInAsync();
         await SceneTransitionManager.Instance.LoadSceneAsync(targetSceneName);
-        
+
         Anchor matchingAnchor;
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
 
         await SceneTransitionManager.Instance.FadeOutAsync();
 
+        InventoryManager.Instance.RefreshInventoryUI();
         isSwitching = false;
     }
 
