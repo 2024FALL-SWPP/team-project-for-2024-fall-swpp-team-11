@@ -19,7 +19,7 @@ exec 1>&2
 echo "$PRECOMMIT_LOG_PREFIX Checking for invalid characters in new files"
 git diff --cached --name-only --diff-filter=A -z $against | while IFS= read -r -d '' filename; do
     echo "$PRECOMMIT_LOG_PREFIX Checking file: ${filename}"
-    if [[ $filename =~ [\\/:*?\"\'\<\>\|\ ] ]]; then
+    if [[ $filename =~ [\\:*?\"\'\<\>\|] ]]; then
         >&2 echo "$PRECOMMIT_LOG_PREFIX The generated file \"${filename}\" contains invalid characters."
         exit 2
     fi
