@@ -26,11 +26,6 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
 
-    public static bool Dummy()
-    {
-        return true;
-    }
-
     protected override void Awake()
     {
         base.Awake();
