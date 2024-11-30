@@ -13,12 +13,7 @@ MonoBehaviour:
   m_Name: '[Karnas] 3'
   m_EditorClassIdentifier: 
   nodeID: 305
-  dialogueText: "..\uC65C \uC774\uB7F0 \uBAA8\uC2B5\uC774\uB0D0\uACE0? \n\uADF8\uC57C,
-    \uB300\uBD80\uBD84\uC758 \uC774\uC885\uC871\uC740 \uB9C8\uB825 \uC190\uC2E4\uC744
-    \uCD5C\uC18C\uD654 \uD558\uAE30 \uC704\uD574 \uD3C9\uC0C1\uC2DC\uC5D0\uB294 \uC778\uAC04\uD654\uB97C
-    \uD558\uACE0 \uC788\uAE30 \uB54C\uBB38.., \n\uC544\uB2C8 \uC774\uB7F0 \uAE30\uBCF8
-    \uC801\uC778 \uAC83\uB3C4 \uBAA8\uB974\uB294 \uAC70\uB0D0? \n\uD5C8\uC5B4, \uAE30\uC5B5\uC744
-    \uC783\uC73C\uBA70 \uBA4D\uCCAD\uC774\uAC00 \uB418\uBC84\uB9B0 \uAC74\uAC00.. "
+  dialogueText: 
   options:
   - optionText: "\uAE30\uC5B5\uC744 \uC783\uC5C8\uB2E4\uACE0?"
     nextNode: {fileID: 11400000, guid: ba5fb39a484854be58ea845d8424ed98, type: 2}
@@ -29,7 +24,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: Librarian
+  isSelfSpeak: 1
   associatedQuest: {fileID: 0}
   textNodePairs:
   - optionText: "\uAE30\uC5B5\uC744 \uC783\uC5C8\uB2E4\uACE0?"
-    nextNode: {fileID: 11400000, guid: ba5fb39a484854be58ea845d8424ed98, type: 2}
+    nextNode: {fileID: 11400000, guid: b2781430114774bf89103fc7dff62a9f, type: 2}

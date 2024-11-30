@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
-  m_Name: '[Lianna]N2.5'
+  m_Name: '[Karnas] 6'
   m_EditorClassIdentifier: 
-  nodeID: 903
-  dialogueText: "\uC815\uB839\uC758 \uC5B8\uC5B4\uB97C \uC774\uD574\uD560 \uC218
-    \uC788\uB294 \uC874\uC7AC\uB294 \uC544\uC8FC \uB4DC\uBB38\uB370..\n\uB2F9\uC2E0
-    \uBB54\uAC00 \uD2B9\uBCC4\uD55C \uC544\uC774\uD15C\uC744 \uAC16\uACE0 \uC788\uAD70\uC694?"
+  nodeID: 301
+  dialogueText: "\uADF8 \uB300\uC2E0 \uB0B4 \uC544\uB984\uB2E4\uC6B4 \uB0A0\uAC1C\uAE43\uD138\uC744
+    \uBE57\uC9C8\uD55C \uBE57\uC744 \uAC16\uB2E4\uC918\uC57C \uD55C\uB2E4!\n\uADF8
+    \uC815\uB3C4\uB294 \uD574\uC904 \uC218 \uC788\uC9C0..?"
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: b8887672d916e47148deac3f80dd6a8c, type: 2}
+    nextNode: {fileID: 11400000, guid: 574402eb7209142f9a555f47ff2ed857, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: "\uB9AC\uC548\uB098"
+  conversationNpcName: Librarian
   isSelfSpeak: 0
-  nextNode: {fileID: 11400000, guid: b8887672d916e47148deac3f80dd6a8c, type: 2}
+  nextNode: {fileID: 11400000, guid: 574402eb7209142f9a555f47ff2ed857, type: 2}

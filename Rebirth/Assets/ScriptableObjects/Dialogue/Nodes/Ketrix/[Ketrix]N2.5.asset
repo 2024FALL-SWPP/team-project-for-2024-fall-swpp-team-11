@@ -12,21 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39f756f7d20e4a8ea346c041512e5eb, type: 3}
   m_Name: '[Ketrix]N2.5'
   m_EditorClassIdentifier: 
-  nodeID: 
+  nodeID: 123
   dialogueText: "\uD639\uC2DC \uADF8\uAC70... \n\uADF8\uB798, \uB108 \uC8FC\uBA38\uB2C8\uC5D0
     \uC788\uB294 \uADF8 \uAE38\uB2E4\uB797\uACE0 \uB2EC\uB2EC\uD55C \uD5A5\uC744
     \uD48D\uAE30\uB294 \uADF8\uAC70 \uB9D0\uC774\uC57C. \n\uD639\uC2DC \uB098 \uC8FC\uB824\uACE0
     \uAC00\uC838\uC628\uAC70\uC57C? "
   options:
   - optionText: Continue
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: a5b3e6125fab2458192390cba94c7883, type: 2}
     fallbackNode: {fileID: 0}
-    conditions:
-    - {fileID: 0}
+    conditions: []
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: 
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
   isSelfSpeak: 0
   nextNode: {fileID: 11400000, guid: a5b3e6125fab2458192390cba94c7883, type: 2}
-  NPCName: 
+  NPCName: "\uCF00\uD2B8\uB9AD\uC2A4"

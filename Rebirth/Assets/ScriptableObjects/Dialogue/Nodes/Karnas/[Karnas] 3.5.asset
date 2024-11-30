@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: '[Karnas] 3.5'
   m_EditorClassIdentifier: 
   nodeID: 305
-  dialogueText: "\uD06C\uD760, \uC544\uBB34\uAC83\uB3C4 \uC544\uB2C8\uB2E4. \uBABB
-    \uB4E4\uC740 \uAC78\uB85C \uD574\uB77C. \n\uADF8\uB798\uC11C \uC65C \uB0A0 \uCC3E\uC544\uC628
-    \uAC70\uB0D0? "
+  dialogueText: 
   options:
   - optionText: "\uB3C4\uC6C0\uC774 \uD544\uC694\uD558\uB2E4.."
     nextNode: {fileID: 11400000, guid: 1799dadc61c45484aa75d56cd2e44d97, type: 2}
@@ -26,6 +24,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: Librarian
+  isSelfSpeak: 1
   associatedQuest: {fileID: 0}
   textNodePairs:
   - optionText: "\uB3C4\uC6C0\uC774 \uD544\uC694\uD558\uB2E4.."

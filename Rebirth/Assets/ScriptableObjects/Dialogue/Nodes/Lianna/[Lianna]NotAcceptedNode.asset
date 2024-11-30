@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: '[Lianna]NotAcceptedNode'
   m_EditorClassIdentifier: 
   nodeID: 901
-  dialogueText: '[][][][][][][][][][][][][][][]'
+  dialogueText: "\u25A1 \u25A1\u25A1\u25A1\u25A1 \u25A1\u25A1 \u25A1\u25A1\u25A1
+    \u25A1\u25A1\u25A1\u25A1"
   options:
   - optionText: Continue
     nextNode: {fileID: 11400000, guid: c32e95a97b0684a91a7bddd1a3951e7b, type: 2}
@@ -24,6 +25,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uB9AC\uC548\uB098"
+  isSelfSpeak: 0
   conditionMetNextNode: {fileID: 11400000, guid: c32e95a97b0684a91a7bddd1a3951e7b, type: 2}
   conditionNotMetNextNode: {fileID: 11400000, guid: eacdf2fcb7b0f4786b4c19904bcf67de, type: 2}
   conditions:
