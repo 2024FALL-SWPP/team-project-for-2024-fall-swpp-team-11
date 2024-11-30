@@ -18,6 +18,9 @@ public class DialogueNodeEditor : Editor
     // PenaltyDialogueNode properties
     SerializedProperty penaltyedItemProp;
 
+    // MarkNPCAsMetNode properties
+    SerializedProperty NPCnameProp;
+
     // ConditionDialogueNode properties
     SerializedProperty conditionMetNextNodeProp;
     SerializedProperty conditionNotMetNextNodeProp;
@@ -47,6 +50,9 @@ public class DialogueNodeEditor : Editor
 
         // PenaltyDialogueNode properties
         penaltyedItemProp = serializedObject.FindProperty("penaltyItem");
+
+        // MarkNPCAsMetNode properties
+        NPCnameProp = serializedObject.FindProperty("NPCName");
 
         // ConditionDialogueNode properties
         conditionMetNextNodeProp = serializedObject.FindProperty("conditionMetNextNode");
@@ -123,6 +129,11 @@ public class DialogueNodeEditor : Editor
             EditorGUILayout.PropertyField(penaltyedItemProp);
             EditorGUILayout.Space();
             EditorGUILayout.HelpBox("Options are managed automatically for PenaltyDialogueNode.", MessageType.Info);
+        }
+        else if (target is MarkNPCAsMetNode)
+        {
+            EditorGUILayout.PropertyField(nextNodeProp);
+            EditorGUILayout.PropertyField(NPCnameProp);
         }
         else
         {

@@ -13,14 +13,9 @@ MonoBehaviour:
   m_Name: '[Lianna]N10'
   m_EditorClassIdentifier: 
   nodeID: 911
-  dialogueText: "\uB2E4\uB9CC, \uCC45 \uD55C \uAD8C\uC774 \uD544\uC694\uD558\uAE34
-    \uD574\uC694.. \n[\uC815\uB839\uACFC \uD568\uAED8\uD558\uB294 \uB9C8\uBC95 \uBD80\uC5EC\uC758
-    \uBAA8\uB4E0 \uAC83] \uC774\uB77C\uB294 \uCC45\uC778\uB370, \uBA87 \uB144 \uC804
-    \uBD80\uD130 \uAE08\uC11C\uB85C \uC9C0\uC815\uB418\uC5B4\uC11C \uAD6C\uD560 \uC218
-    \uC788\uC744 \uC9C0\uB294 \uBAA8\uB974\uACA0\uB124\uC694.\n\n\uD639\uC2DC \uCC3E\uC544\uBD10
-    \uC904 \uC218 \uC788\uB098\uC694?"
+  dialogueText: 
   options:
-  - optionText: Yes
+  - optionText: "\uADF8\uB798 \uBB50.. \uC54C\uACA0\uC5B4."
     nextNode: {fileID: 11400000, guid: e6a9edfb9c0ba4e24be9a110fd97d97a, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
@@ -28,7 +23,7 @@ MonoBehaviour:
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  - optionText: No
+  - optionText: "\uB0B4\uAC00 \uC65C \uD574\uC57C \uD558\uB294\uB370?"
     nextNode: {fileID: 11400000, guid: 21f53c8ab2cac429da5bfa361d3649b6, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
@@ -37,6 +32,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uB9AC\uC548\uB098"
+  isSelfSpeak: 1
   associatedQuest: {fileID: 11400000, guid: 70810e8d76874431a8bb861ba21d5a36, type: 2}
   questAcceptedNode: {fileID: 11400000, guid: e6a9edfb9c0ba4e24be9a110fd97d97a, type: 2}
   questRejectedNode: {fileID: 11400000, guid: 21f53c8ab2cac429da5bfa361d3649b6, type: 2}

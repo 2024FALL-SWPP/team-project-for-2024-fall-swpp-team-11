@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e18459eaf9874d48836c3d2da192f26, type: 3}
+  m_Name: '[Lianna]NO1'
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: 
+  options:
+  - optionText: "\uB098\uD55C\uD14C \uC65C \uC774\uB807\uAC8C \uCE5C\uC808\uD55C
+      \uAC70\uC57C?"
+    nextNode: {fileID: 11400000, guid: 1226004f887ac484380faec4cf1a0432, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uB9AC\uC548\uB098"
+  isSelfSpeak: 1
+  associatedQuest: {fileID: 0}
+  textNodePairs:
+  - optionText: "\uB098\uD55C\uD14C \uC65C \uC774\uB807\uAC8C \uCE5C\uC808\uD55C
+      \uAC70\uC57C?"
+    nextNode: {fileID: 11400000, guid: 1226004f887ac484380faec4cf1a0432, type: 2}

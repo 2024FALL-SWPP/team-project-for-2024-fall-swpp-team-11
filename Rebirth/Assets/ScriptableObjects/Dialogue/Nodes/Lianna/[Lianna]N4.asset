@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: '[Lianna]N4'
   m_EditorClassIdentifier: 
   nodeID: 905
-  dialogueText: "\uC81C \uC18C\uAC1C\uB97C \uD574\uC57C\uACA0\uAD70\uC694. \uC800\uB294
-    \uB9AC\uC548\uB098\uC785\uB2C8\uB2E4. \n\uC774 \uB300\uB959\uC774 \uCC98\uC74C
-    \uD0DC\uB3D9\uD560 \uB54C\uBD80\uD130 \uC774 \uB300\uB959\uC758 \uACE0\uADC0\uD55C
-    \uB9C8\uB825\uC5D0 \uD798\uC785\uC5B4 \uC874\uC7AC\uD55C \uACE0\uB300 \uC815\uB839\uC774\uC8E0. "
+  dialogueText: "\uD07C, \uC6B0\uC120 \uC81C \uC18C\uAC1C\uB97C \uD574\uC57C\uACA0\uAD70\uC694.
+    \uC800\uB294 \uB9AC\uC548\uB098\uC785\uB2C8\uB2E4. \n\uC774 \uB300\uB959\uC774
+    \uCC98\uC74C \uD0DC\uB3D9\uD560 \uB54C\uBD80\uD130 \uC774 \uB300\uB959\uC758
+    \uACE0\uADC0\uD55C \uB9C8\uB825\uC5D0 \uD798\uC785\uC5B4 \uC874\uC7AC\uD55C \uACE0\uB300
+    \uC815\uB839\uC774\uC8E0. "
   options:
   - optionText: Continue
     nextNode: {fileID: 11400000, guid: 9a37822b6ae5e4dfc9fce7c4856301f9, type: 2}
@@ -27,4 +28,5 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uB9AC\uC548\uB098"
+  isSelfSpeak: 0
   nextNode: {fileID: 11400000, guid: 9a37822b6ae5e4dfc9fce7c4856301f9, type: 2}

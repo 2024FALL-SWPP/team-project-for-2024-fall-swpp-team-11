@@ -41,7 +41,7 @@ public class NPC : MonoBehaviour, IInteractable
     {
         DialogueManager.Instance.OnDialogueEnd -= HandleDialogueEnd;
 
-        NPCManager.Instance.MarkNPCAsMet(npcName);
+        // NPCManager.Instance.MarkNPCAsMet(npcName);
     }
 
 
