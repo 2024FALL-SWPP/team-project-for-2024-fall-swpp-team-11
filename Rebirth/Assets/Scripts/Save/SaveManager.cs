@@ -5,27 +5,30 @@ public class SaveManager : SingletonManager<SaveManager>
 {
     public static event System.Action save;
     public static event System.Action load;
-    public float autoSaveInterval = 300f; 
+    public float autoSaveInterval = 300f;
+    public bool isSaveMangerEnabled = false;
     private bool isAutoSaveEnabled = true;
 
     private void Start()
     {
+        if (!isSaveMangerEnabled) return;
+
         LoadGame();
-        StartCoroutine(AutoSaveCoroutine()); 
+        StartCoroutine(AutoSaveCoroutine());
     }
 
     private IEnumerator AutoSaveCoroutine()
     {
         while (isAutoSaveEnabled)
         {
-            yield return new WaitForSeconds(autoSaveInterval); 
-            SaveGame(); 
+            yield return new WaitForSeconds(autoSaveInterval);
+            SaveGame();
             Debug.Log("자동저장 되었습니다.");
         }
     }
 
     public void SaveGame()
-    { 
+    {
         save?.Invoke();
     }
 
