@@ -51,6 +51,15 @@ public class InventoryManager : SingletonManager<InventoryManager>
     #endregion
 
     #region UI Management
+    public void ShowInventory()
+    {
+        inventoryUI.ShowInventory();
+    }
+    public void HideInventory()
+    {
+        inventoryUI.HideInventory();
+    }
+
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
         inventoryUI.ShowTooltip(itemData, position);
@@ -73,10 +82,6 @@ public class InventoryManager : SingletonManager<InventoryManager>
         InventoryDataContainer loadedData = await DiskSaveSystem.LoadInventoryDataFromDiskAsync();
         if (loadedData != null)
         {
-            foreach (var item in loadedData.ThreeDimensionalItems)
-            {
-                Debug.Log(item.name);
-            }
             inventoryDataContainer = loadedData;
             inventoryUI.Initialize(inventoryDataContainer);
             inventoryUI.RefreshInventoryDisplay();

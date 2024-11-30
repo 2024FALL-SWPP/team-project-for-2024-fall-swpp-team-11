@@ -26,14 +26,9 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
 
-    private bool isInitialized = false;
-
     protected override void Awake()
     {
         base.Awake();
-
-        Health = maxHealth;
-        Money = maxMoney;
 
         SaveManager.save += SaveCharacterStatusToDisk;
         SaveManager.load += LoadCharacterStatusFromDisk;
@@ -46,26 +41,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 
     private void LoadCharacterStatusFromDisk()
     {
-        if (!isInitialized && DimensionManager.Instance != null)
-        {
-            Initialize();
-        }
         CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
         Health = data.Health;
         Money = data.Money;
-    }
 
-    private void Initialize()
-    {
-        isInitialized = true;
-        
-        // Initialize health and money
-        Health = maxHealth;
-        Money = maxMoney;
-        Debug.Log($"CharacterStatus initialized: Money = {Money}, Health = {Health}");
-
-        NotifyHealthChanged();
-        NotifyMoneyChanged();
+        RefreshStatusUI();
     }
 
     private void Update()
@@ -99,12 +79,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         }
     }
 
-    public void RefreshStatus()
+    public void RefreshStatusUI()
     {
         NotifyHealthChanged();
         NotifyMoneyChanged();
     }
-
 
     public int GetMaxHealth()
     {
@@ -156,5 +135,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     {
         Money = Mathf.Max(0, startingAmount); // Reset money to a specific amount
         NotifyMoneyChanged();
+    }
+
+    private void OnDestroy()
+    {
+        SaveManager.save -= SaveCharacterStatusToDisk;
+        SaveManager.load -= LoadCharacterStatusFromDisk;
     }
 }

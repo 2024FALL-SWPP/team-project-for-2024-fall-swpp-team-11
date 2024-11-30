@@ -13,8 +13,10 @@ public class DimensionManager : SingletonManager<DimensionManager>
     private bool isSwitching = false;
     private Dimension dimension;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         string currentSceneName = SceneManager.GetActiveScene().name;
         dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
     }
@@ -47,9 +49,11 @@ public class DimensionManager : SingletonManager<DimensionManager>
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
 
+        InventoryManager.Instance.HideInventory();
+        CharacterStatusManager.Instance.RefreshStatusUI();
+
         await SceneTransitionManager.Instance.FadeOutAsync();
 
-        InventoryManager.Instance.RefreshInventoryUI();
         isSwitching = false;
     }
 
