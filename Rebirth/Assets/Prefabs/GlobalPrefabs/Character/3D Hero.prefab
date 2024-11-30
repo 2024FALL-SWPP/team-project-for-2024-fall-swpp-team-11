@@ -371,6 +371,8 @@ MonoBehaviour:
   footstepSound: {fileID: 8300000, guid: 2352822feb4caa14ebdbc0c713289f8d, type: 3}
   jumpSound: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
   landSound: {fileID: 8300000, guid: eaae8fe8d600e1f459f34aa5757fa3b8, type: 3}
+  footstepDelay: 0.2
+  footstepInterval: 0.05
 --- !u!114 &4679539125755977952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +432,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2352822feb4caa14ebdbc0c713289f8d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

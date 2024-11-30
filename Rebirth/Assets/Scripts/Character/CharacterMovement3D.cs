@@ -16,6 +16,12 @@ public class CharacterMovement3D : MonoBehaviour
     private AudioSource audioSource;
     private bool isPlayingFootstep = false;
 
+    [Header("Footstep Settings")]
+    public float footstepDelay = 0.1f; // 발소리 딜레이 시간
+    public float footstepInterval = 0.3f; // 발소리 간격
+
+    private bool isMoving = false; // 플레이어가 움직이고 있는지 체크
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -40,18 +46,26 @@ public class CharacterMovement3D : MonoBehaviour
 
     public void Move(Vector3 moveDir)
     {
-        if (!rb || moveDir == Vector3.zero)
+        if (!rb)
         {
-            isPlayingFootstep = false;
             return;
         }
 
-        Vector3 moveDirection = transform.right * moveDir.x + transform.forward * moveDir.z;
-        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-
-        if (!isPlayingFootstep && IsGrounded())
+        if (moveDir != Vector3.zero)
         {
-            StartCoroutine(PlayFootstepSound());
+            isMoving = true;
+
+            Vector3 moveDirection = transform.right * moveDir.x + transform.forward * moveDir.z;
+            rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+
+            if (!isPlayingFootstep && IsGrounded())
+            {
+                StartCoroutine(PlayFootstepSound());
+            }
+        }
+        else
+        {
+            isMoving = false;
         }
     }
 
@@ -94,12 +108,14 @@ public class CharacterMovement3D : MonoBehaviour
     {
         isPlayingFootstep = true;
 
-        if (footstepSound != null && audioSource != null)
+        yield return new WaitForSeconds(footstepDelay); // 발소리 딜레이
+
+        if (isMoving && footstepSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(footstepSound); // 발소리 재생
         }
 
-        yield return new WaitForSeconds(0.3f); // 발소리 간격
+        yield return new WaitForSeconds(footstepInterval - footstepDelay); // 발소리 간격 조절
         isPlayingFootstep = false;
     }
 }
