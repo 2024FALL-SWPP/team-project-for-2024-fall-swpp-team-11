@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 [CreateAssetMenu(fileName = "Mark NPC As Met Node", menuName = "Dialogue/Mark NPC As Met Node")]
 public class MarkNPCAsMetNode : DialogueNode
@@ -12,15 +13,10 @@ public class MarkNPCAsMetNode : DialogueNode
     {
         options.Clear();
 
-        if (Application.isPlaying)
-        {
-            NPCManager.Instance.MarkNPCAsMet(NPCName);
-        }
-    
-        DialogueOption option = new AlwaysTrueOption()
+        DialogueOption option = new HasMetOption(NPCName)
         {
             optionText = "Continue",
-            nextNode = nextNode
+            nextNode = nextNode,
         };
 
         options.Add(option);

@@ -9,21 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Script: {fileID: 11500000, guid: b39f756f7d20e4a8ea346c041512e5eb, type: 3}
   m_Name: '[Lianna]N3'
   m_EditorClassIdentifier: 
-  nodeID: 904
+  nodeID: 302
   dialogueText: "\uB2E4\uC74C \uBC88\uC5D0\uB294 \uC544\uC774\uD15C\uC774 \uC5C6\uC5B4\uB3C4
     \uB0B4 \uB9D0\uC744 \uB4E4\uC744 \uC218 \uC788\uAC8C \uB9C8\uBC95\uC744 \uAC78\uC5B4\uC904\uAC8C\uC694."
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: c7c2301be54b44a3c90daa45b2f925f8, type: 2}
+    nextNode: {fileID: 0}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: "\uB9AC\uC548\uB098"
+  conversationNpcName: 
   isSelfSpeak: 0
   nextNode: {fileID: 11400000, guid: 6a7513ae2f56c4922b6ab3095a25ede6, type: 2}
+  NPCName: "\uB9AC\uC548\uB098"
