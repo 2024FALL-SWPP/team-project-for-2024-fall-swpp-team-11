@@ -115,6 +115,7 @@ public class QuestManager : SingletonManager<QuestManager>
             questStatuses[questID] = QuestStatus.Completed;
 
             Debug.Log(logPrefix + "퀘스트 완료: " + quest.questTitle);
+            CleanUpQuestRequirements(quest);
             questUI.RefreshQuestDisplay();
 
             Debug.Log(logPrefix + "퀘스트 보상 지급: " + quest.questTitle);
@@ -128,6 +129,7 @@ public class QuestManager : SingletonManager<QuestManager>
         }
     }
 
+
     private void PlayCompleteQuestSound()
     {
         if (audioSource != null && completeQuestSound != null)
@@ -137,6 +139,18 @@ public class QuestManager : SingletonManager<QuestManager>
         else
         {
             Debug.LogWarning(logPrefix + "사운드를 재생할 준비가 되지 않았습니다.");
+        }
+    }
+
+    private void CleanUpQuestRequirements(QuestData quest)
+    {
+        if (quest.requiredItem != null)
+        {
+            InventoryManager.Instance.RemoveItem(quest.requiredItem);
+        }
+        else
+        {
+            Debug.LogWarning(logPrefix + $"퀘스트 {quest.questTitle}에 필요한 아이템 {quest.requiredItem.itemName}이 없습니다.");
         }
     }
 

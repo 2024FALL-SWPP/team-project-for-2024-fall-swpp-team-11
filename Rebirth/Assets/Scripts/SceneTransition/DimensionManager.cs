@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Data.Common;
 
 public class DimensionManager : SingletonManager<DimensionManager>
 {
@@ -9,6 +10,13 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
     private string anchorID;
     private bool isSwitching = false;
+    private Dimension dimension;
+
+    void Start()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
+    }
 
     void Update()
     {
@@ -30,10 +38,13 @@ public class DimensionManager : SingletonManager<DimensionManager>
         if (currentSceneName.EndsWith("2D"))
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "3D";
+            // even if scene changes with inventory turned on, UI will be refreshed
+            dimension = Dimension.THREE_DIMENSION;
         }
         else if (currentSceneName.EndsWith("3D"))
         {
             targetSceneName = currentSceneName.Substring(0, currentSceneName.Length - 2) + "2D";
+            dimension = Dimension.TWO_DIMENSION;
         }
         else
         {
@@ -124,6 +135,9 @@ public class DimensionManager : SingletonManager<DimensionManager>
         // 페이드 아웃
         SceneTransitionManager.Instance.FadeOut();
 
+        InventoryManager.Instance.RefreshInventoryUI();
+        CharacterStatusManager.Instance.RefreshStatus();
+
         // 움직임 및 시야 잠금 해제
         GameStateManager.Instance.UnlockView();
         GameStateManager.Instance.UnlockMovement();
@@ -181,5 +195,10 @@ public class DimensionManager : SingletonManager<DimensionManager>
         }
 
         return null;
+    }
+
+    public Dimension GetCurrentDimension()
+    {
+        return dimension;
     }
 }
