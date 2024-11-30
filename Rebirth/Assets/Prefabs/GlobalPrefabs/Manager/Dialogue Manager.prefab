@@ -107,7 +107,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3632384160824831884}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -170,7 +170,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3632384160824831884}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -234,7 +234,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 383267365824394232}
-  - {fileID: 3632384161397963223}
   - {fileID: 3632384160592989438}
   - {fileID: 250702932408585502}
   m_Father: {fileID: 3632384162151626858}
@@ -294,6 +293,7 @@ GameObject:
   - component: {fileID: 3632384161203595232}
   - component: {fileID: 3632384161203595234}
   - component: {fileID: 3632384161203595237}
+  - component: {fileID: 6318285396034311363}
   m_Layer: 0
   m_Name: Dialogue Manager
   m_TagString: Untagged
@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94948dd4740949f4aa305b5a4c752df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueTyper: {fileID: 6318285396034311363}
   dialoguePanel: {fileID: 3632384160824831883}
   dialogueNPCNameText: {fileID: 3551267985535778125}
   dialogueText: {fileID: 3632384161397963221}
@@ -353,6 +354,20 @@ MonoBehaviour:
   nextButtonPrefab: {fileID: 7784998499974210530, guid: b711635732201f040bcc96f8ce7fc4e7, type: 3}
   selectedColor: {r: 1, g: 1, b: 1, a: 0.5529412}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &6318285396034311363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3632384161203595233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1685a512425d147a5810edb0cb856efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 3632384161397963221}
+  typingSpeed: 0.05
 --- !u!1 &3632384161397963218
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,17 +393,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3632384161397963218}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.1728246, y: 2.3391817, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3632384160824831884}
-  m_RootOrder: 1
+  m_Father: {fileID: 8432603108009819696}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -583, y: 17}
+  m_AnchoredPosition: {x: -53.161438, y: -465.96005}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3632384161397963220
@@ -665,7 +680,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9875, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3632384161397963223}
   m_Father: {fileID: 383267365824394232}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

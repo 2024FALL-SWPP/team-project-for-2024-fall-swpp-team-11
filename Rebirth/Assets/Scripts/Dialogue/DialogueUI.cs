@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
+    public DialogueTyper dialogueTyper;
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueNPCNameText;
-    public TextMeshProUGUI dialogueText;
+    // public TextMeshProUGUI dialogueText;
     public Transform optionsContainer;
     public GameObject optionButtonPrefab;
     public Transform nextContainer;
@@ -26,7 +27,8 @@ public class DialogueUI : MonoBehaviour
         Debug.Log(logPrefix + "ShowDialogue " + node.dialogueText + " with " + node.options.Count + " options");
         dialoguePanel.SetActive(true);
         dialogueNPCNameText.text = node.conversationNpcName;
-        dialogueText.text = node.dialogueText;
+        // dialogueText.text = node.dialogueText;
+        dialogueTyper.ShowDialogue(node.dialogueText);
         ClearOptions();
 
         if(node.isSelfSpeak){
