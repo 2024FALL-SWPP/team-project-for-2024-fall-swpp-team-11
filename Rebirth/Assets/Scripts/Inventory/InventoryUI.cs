@@ -6,12 +6,14 @@ public class InventoryUI : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Canvas inventoryCanvas;
-    [SerializeField] private Transform contentPanel;
+    [SerializeField] private Transform contentPanel2D;
+    [SerializeField] private Transform contentPanel3D;
     [SerializeField] private GameObject tooltip;
 
     [Header("Grid")]
     [SerializeField] private GameObject gridCellPrefab;
-    private List<GridCell> gridCells = new List<GridCell>();
+    private List<GridCell> gridCells2D = new List<GridCell>();
+    private List<GridCell> gridCells3D = new List<GridCell>();
     private ItemTooltip itemTooltip;
     private bool isVisible;
     private int inventoryCapacity;
@@ -24,11 +26,17 @@ public class InventoryUI : MonoBehaviour
 
     private void InitializeGridCells()
     {
+        GameObject gridCellObj;
+        GridCell gridCell;
         for (int cnt = 0; cnt < inventoryCapacity; cnt++)
         {
-            GameObject gridCellObj = Instantiate(gridCellPrefab, contentPanel);
-            GridCell gridCell = gridCellObj.GetComponent<GridCell>();
-            gridCells.Add(gridCell);
+            gridCellObj = Instantiate(gridCellPrefab, contentPanel2D);
+            gridCell = gridCellObj.GetComponent<GridCell>();   
+            gridCells2D.Add(gridCell);
+
+            gridCellObj = Instantiate(gridCellPrefab, contentPanel3D);
+            gridCell = gridCellObj.GetComponent<GridCell>();
+            gridCells3D.Add(gridCell);
         }
     }
 
@@ -46,7 +54,7 @@ public class InventoryUI : MonoBehaviour
         isVisible = true;
         inventoryCanvas.gameObject.SetActive(true);
         GameStateManager.Instance.LockView();
-        // RefreshInventoryDisplay();
+        RefreshInventoryDisplay();
     }
 
     public void HideInventory()
@@ -57,9 +65,14 @@ public class InventoryUI : MonoBehaviour
     }
     #endregion
 
-    public void AddItem(GameObject inventoryItemObj)
+    public void AddItem(GameObject inventoryItemObj, Dimension dimension)
     {
-        GridCell emptyCell = gridCells.Find(cell => cell.IsEmpty());
+        GridCell emptyCell;
+        if (dimension == Dimension.TWO_DIMENSION)
+            emptyCell = gridCells2D.Find(cell => cell.IsEmpty());
+        else
+            emptyCell = gridCells3D.Find(cell => cell.IsEmpty());
+
         if (emptyCell != null)
         {
             emptyCell.AddItem(inventoryItemObj);
@@ -84,6 +97,20 @@ public class InventoryUI : MonoBehaviour
         itemTooltip.Hide();
     }
     #endregion
+
+    public void RefreshInventoryDisplay()
+    {
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
+        {
+            contentPanel2D.gameObject.SetActive(true);
+            contentPanel3D.gameObject.SetActive(false);
+        }
+        else
+        {
+            contentPanel2D.gameObject.SetActive(false);
+            contentPanel3D.gameObject.SetActive(true);
+        }
+    }
 
     public void SetCapacity(int capacity)
     {

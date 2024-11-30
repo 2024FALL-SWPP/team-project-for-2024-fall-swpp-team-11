@@ -35,7 +35,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
         inventoryItem.Initialize(itemData);
 
         inventoryDataContainer.AddItem(inventoryItemObj, itemData.dimension);
-        inventoryUI.AddItem(inventoryItemObj);
+        inventoryUI.AddItem(inventoryItemObj, itemData.dimension);
     }
 
     public void RemoveItem(ItemData itemData)
@@ -56,7 +56,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
 
     public void RefreshInventoryUI()
     {
-        // inventoryUI.RefreshInventoryDisplay();
+        inventoryUI.RefreshInventoryDisplay();
     }
     #endregion
 

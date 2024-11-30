@@ -8,7 +8,10 @@ public class GridCell : MonoBehaviour
     {
         inventoryItemObj = obj;
         obj.transform.SetParent(transform);
-        obj.transform.localPosition = Vector3.zero;
+        if (obj.TryGetComponent<RectTransform>(out RectTransform rectTransform))
+        {
+            rectTransform.anchoredPosition = Vector3.zero;
+        }
     }
 
     public void RemoveItem()
