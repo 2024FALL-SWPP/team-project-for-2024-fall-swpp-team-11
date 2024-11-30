@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Character
+  m_Name: Character And Camera
   m_EditorClassIdentifier: 
-  m_GroupName: Character
+  m_GroupName: Character And Camera
   m_Data:
     m_SerializedData: []
   m_GUID: bd346dbf5ed7a9b4f835114d3333b5a0
@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Character
+  - m_GUID: e7981f126be6e4b4b98905a77221c484
+    m_Address: Assets/Prefabs/GlobalPrefabs/Camera/MainCamera3D.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Camera
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3a8cb2799d23c48e0947c44f93ce8718, type: 2}
   m_SchemaSet:
