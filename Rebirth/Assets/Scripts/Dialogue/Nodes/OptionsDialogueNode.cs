@@ -13,10 +13,12 @@ public class OptionsDialogueNode : QuestDialogueNode
 {
     [Header("Transition")]
     [SerializeField] private List<TextNodePair> textNodePairs = new List<TextNodePair>();
+    
 
     private void OnEnable()
     {
         options.Clear();
+        isSelfSpeak = true;
 
         foreach (TextNodePair pair in textNodePairs)
         {

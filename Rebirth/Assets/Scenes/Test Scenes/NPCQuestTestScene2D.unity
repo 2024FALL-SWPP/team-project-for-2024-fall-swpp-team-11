@@ -177,6 +177,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3632384161203595237, guid: 43a40bc1f431bd748974ed0773e82af4, type: 3}
+      propertyPath: defaultColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632384161203595237, guid: 43a40bc1f431bd748974ed0773e82af4, type: 3}
+      propertyPath: selectedColor.a
+      value: 0.5058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632384161203595237, guid: 43a40bc1f431bd748974ed0773e82af4, type: 3}
+      propertyPath: selectedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632384161203595237, guid: 43a40bc1f431bd748974ed0773e82af4, type: 3}
+      propertyPath: selectedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632384161203595237, guid: 43a40bc1f431bd748974ed0773e82af4, type: 3}
+      propertyPath: selectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43a40bc1f431bd748974ed0773e82af4, type: 3}
 --- !u!1001 &70976026
@@ -846,6 +866,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 837712843672237753, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
+      propertyPath: questNodes
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e6f2e74c58ce4f4b9a2e7ac1751e927, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
 --- !u!1001 &850888700007553545
