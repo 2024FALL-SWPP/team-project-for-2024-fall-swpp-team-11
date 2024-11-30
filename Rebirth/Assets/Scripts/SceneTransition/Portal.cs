@@ -1,6 +1,7 @@
 // DoorTrigger.cs
 using UnityEngine;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class Portal : MonoBehaviour, IInteractable
 {
@@ -9,25 +10,31 @@ public class Portal : MonoBehaviour, IInteractable
 
     public float animationDelay = 0.5f; // 씬 전환 전에 지연 시간
 
-    public void Interact()
+    public async void Interact()
     {
         if (!string.IsNullOrEmpty(targetScene))
         {
             if (SceneTransitionManager.Instance != null)
             {
-                SceneTransitionManager.Instance.LoadScene(targetScene, targetPosition);
-            }
-            else
-            {
-                Debug.LogError("SceneTransitionManager.Instance가 null입니다.");
+                await InteractWithSceneTransitionAsync();
             }
         }
         else
         {
-            // 같은 씬 내 위치 이동
             Transform player = GameObject.FindWithTag("Player").transform;
             StartCoroutine(MovePlayerAfterDelay(player, targetPosition, animationDelay));
         }
+    }
+
+    private async Task InteractWithSceneTransitionAsync()
+    {
+        await SceneTransitionManager.Instance.FadeInAsync();
+        await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
+        
+        InventoryManager.Instance.HideInventory();
+        CharacterStatusManager.Instance.RefreshStatusUI();
+        
+        await SceneTransitionManager.Instance.FadeOutAsync();
     }
 
     public virtual void OnFocus()

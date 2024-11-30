@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : SingletonManager<InventoryManager>
@@ -12,6 +14,9 @@ public class InventoryManager : SingletonManager<InventoryManager>
     protected override void Awake()
     {
         base.Awake();
+
+        SaveManager.save += SaveInventory;
+        SaveManager.load += async () => await LoadInventoryAsync();
 
         inventoryDataContainer = new InventoryDataContainer();
         inventoryUI.SetCapacity(inventoryCapcity);
@@ -82,13 +87,11 @@ public class InventoryManager : SingletonManager<InventoryManager>
 
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
-        Debug.Log(logPrefix + "show tool tip");
         inventoryUI.ShowTooltip(itemData, position);
     }
 
     public void HideTooltip()
     {
-        Debug.Log(logPrefix + "Hide tip");
         inventoryUI.HideTooltip();
     }
     #endregion
@@ -96,12 +99,12 @@ public class InventoryManager : SingletonManager<InventoryManager>
     #region Save Management
     public void SaveInventory()
     {
-        SaveSystem.SaveInventoryData(inventoryDataContainer);
+        DiskSaveSystem.SaveInventoryDataToDisk(inventoryDataContainer);
     }
 
-    public void LoadInventory()
+    public async Task LoadInventoryAsync()
     {
-        InventoryDataContainer loadedData = SaveSystem.LoadInventoryData();
+        InventoryDataContainer loadedData = await DiskSaveSystem.LoadInventoryDataFromDiskAsync();
         if (loadedData != null)
         {
             inventoryDataContainer = loadedData;
@@ -112,4 +115,10 @@ public class InventoryManager : SingletonManager<InventoryManager>
         }
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        SaveManager.save -= SaveInventory;
+        SaveManager.load -= async () => await LoadInventoryAsync();
+    }
 }

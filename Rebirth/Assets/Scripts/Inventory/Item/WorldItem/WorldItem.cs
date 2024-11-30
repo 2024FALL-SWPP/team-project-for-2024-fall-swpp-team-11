@@ -12,11 +12,9 @@ public class WorldItem : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (itemData)
-        {
-            InventoryManager.Instance.AddItem(itemData);
-        }
-
+        if (!itemData) return;
+        
+        InventoryManager.Instance.AddItem(itemData);
         Destroy(gameObject);
     }
 

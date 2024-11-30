@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-#if UNITY_EDITOR
 using UnityEditor;
+using System.Collections;
 
 [System.Serializable]
 public class csShurikenEffectEditor : EditorWindow
@@ -16,8 +14,9 @@ public class csShurikenEffectEditor : EditorWindow
     [MenuItem("Window/Shuriken System Effect Editor")]
     public static void Init()
     {
-        myWindow = EditorWindow.GetWindowWithRect<csShurikenEffectEditor>(new Rect(100, 100, 300, 220)); // Set Editor Position and Size
-        myWindow.titleContent = new GUIContent("Scale Editor"); // Updated to use titleContent
+        // Set Editor Window Position and Size
+        myWindow = EditorWindow.GetWindowWithRect<csShurikenEffectEditor>(new Rect(100, 100, 300, 220)); 
+        myWindow.titleContent = new GUIContent("Scale Editor"); // Set title using titleContent
     }
 
     void OnGUI()
@@ -38,9 +37,7 @@ public class csShurikenEffectEditor : EditorWindow
         if (GUILayout.Button("Scale Apply", GUILayout.Height(70)))
         {
             if (Effect.GetComponent<csShurikenEffectChanger>() != null)
-            {
                 Effect.GetComponent<csShurikenEffectChanger>().ShurikenParticleScaleChange(Scale);
-            }
             else
             {
                 Effect.AddComponent<csShurikenEffectChanger>();
@@ -50,4 +47,3 @@ public class csShurikenEffectEditor : EditorWindow
         }
     }
 }
-#endif
