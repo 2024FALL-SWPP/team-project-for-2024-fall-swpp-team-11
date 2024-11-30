@@ -12,14 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4853014ce9283488495d1f03d394b4, type: 3}
   m_Name: '[Ketrix]N-QuestOfferNode'
   m_EditorClassIdentifier: 
-  nodeID: 
-  dialogueText: "\uADF8\uB798, \uC8FC\uAE30\uB85C \uD588\uC73C\uB2C8\uAE4C \uC8FC\uAE34
-    \uC904 \uAC74\uB370... \uB9E8\uC785\uC73C\uB860 \uC548 \uB418\uACA0\uC5B4!\n\uB0B4
-    \uBD80\uD0C1 \uD558\uB098\uB9CC \uB4E4\uC5B4\uC918.\n\uAC04\uB2E8\uD55C\uAC70\uB2C8\uAE4C
-    \uD22C\uB35C\uB300\uC9C0\uB9D0\uACE0!\n\uC2EB\uC73C\uBA74 \uADF8\uB0E5\uD3EC\uAE30
-    \uD558\uACE0 \uAC00\uB358 \uAE38\uC774\uB098 \uAC00."
+  nodeID: 234
+  dialogueText: 
   options:
-  - optionText: Yes
+  - optionText: "\uADF8\uB798 \uBB50.. \uC54C\uACA0\uC5B4."
     nextNode: {fileID: 11400000, guid: 75d94279383ac400dab4c5b673ce6a38, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
@@ -27,7 +23,7 @@ MonoBehaviour:
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  - optionText: No
+  - optionText: "\uB0B4\uAC00 \uC65C \uD574\uC57C \uD558\uB294\uB370?"
     nextNode: {fileID: 11400000, guid: f0823366d39434180a9a7fd5d9721f98, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
@@ -36,6 +32,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  isSelfSpeak: 1
   associatedQuest: {fileID: 11400000, guid: 634b6a10bc62847c089de2d85c5e4072, type: 2}
   questAcceptedNode: {fileID: 11400000, guid: 75d94279383ac400dab4c5b673ce6a38, type: 2}
   questRejectedNode: {fileID: 11400000, guid: f0823366d39434180a9a7fd5d9721f98, type: 2}

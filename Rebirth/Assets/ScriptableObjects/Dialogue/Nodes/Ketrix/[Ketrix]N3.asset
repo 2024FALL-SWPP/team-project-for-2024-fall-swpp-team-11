@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: '[Ketrix]N3'
   m_EditorClassIdentifier: 
   nodeID: 503
-  dialogueText: "\uD639\uC2DC \uADF8\uAC70... \n\uADF8\uB798, \uB108 \uC8FC\uBA38\uB2C8\uC5D0
-    \uC788\uB294 \uADF8 \uAE38\uB2E4\uB797\uACE0 \uB2EC\uB2EC\uD55C \uD5A5\uC744
-    \uD48D\uAE30\uB294 \uADF8\uAC70 \uB9D0\uC774\uC57C. \n\uD639\uC2DC \uB098 \uC8FC\uB824\uACE0
-    \uAC00\uC838\uC628\uAC70\uC57C? "
-  options: []
-  conversationNpcName: 
+  dialogueText: 
+  options:
+  - optionText: "\uC774\uAC70 \uB9D0\uC774\uC57C? \uC904\uAE4C?"
+    nextNode: {fileID: 11400000, guid: df15fa4ad6be34abfb1a0af3c44c865e, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  isSelfSpeak: 1
   associatedQuest: {fileID: 0}
   textNodePairs:
   - optionText: "\uC774\uAC70 \uB9D0\uC774\uC57C? \uC904\uAE4C?"
-    nextNode: {fileID: 11400000, guid: fd2f865851a8c425d8d1cccf6d7392b9, type: 2}
+    nextNode: {fileID: 11400000, guid: df15fa4ad6be34abfb1a0af3c44c865e, type: 2}

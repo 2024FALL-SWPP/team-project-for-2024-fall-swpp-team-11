@@ -11,18 +11,19 @@ public class QuestOfferDialogueNode : QuestDialogueNode
 
 
     private void OnEnable()
-    {
+    {   
+        isSelfSpeak = true;
         options.Clear();
 
         QuestOfferAcceptOption yesOption = new QuestOfferAcceptOption(associatedQuest)
         {
-            optionText = "Yes",
+            optionText = "그래 뭐.. 알겠어.",
             nextNode = questAcceptedNode
         };
 
         DialogueOption noOption = new QuestOfferRejectOption(associatedQuest)
         {
-            optionText = "No",
+            optionText = "내가 왜 해야 하는데?",
             nextNode = questRejectedNode
         };
 

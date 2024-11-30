@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
-  m_Name: '[Ketrix]N2'
+  m_Script: {fileID: 11500000, guid: 53763bba51e4d4a2db46495c8ef910d5, type: 3}
+  m_Name: '[Ketrix]N1-4'
   m_EditorClassIdentifier: 
-  nodeID: 503
-  dialogueText: "\uD081\uD081.. \uBB54\uAC00 \uC88B\uC740 \uB0C4\uC0C8\uAC00 \uB098\uB294\uB370?"
+  nodeID: 504
+  dialogueText: "\uB1F8\uB1F8.. \uC774\uAC70 \uC8FC\uB824\uACE0 \uC654\uAD6C\uB098?"
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: a5b3e6125fab2458192390cba94c7883, type: 2}
+    nextNode: {fileID: 11400000, guid: 8298bccc12b9248ddb995a0348b99eb3, type: 2}
     fallbackNode: {fileID: 0}
-    conditions:
-    - {fileID: 0}
+    conditions: []
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
   isSelfSpeak: 0
-  nextNode: {fileID: 11400000, guid: de28cb1d9fe8e48beaadec02723085ad, type: 2}
+  nextNode: {fileID: 11400000, guid: 45611b74291b8498fa31340b05edf5ff, type: 2}
+  penaltyItem: {fileID: 11400000, guid: e9d7f4bbe0ca049ee8f324047781a53d, type: 2}

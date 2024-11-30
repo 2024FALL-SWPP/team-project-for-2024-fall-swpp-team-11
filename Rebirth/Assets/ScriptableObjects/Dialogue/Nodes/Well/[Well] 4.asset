@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: '[Well] 4'
   m_EditorClassIdentifier: 
   nodeID: 1004
-  dialogueText: "\uADF8\uB300\uAC00 \uBE60\uB728\uB9B0 \uAC83\uC774 \uC774 \uB4DC\uB798\uACE4
-    \uAE43\uD138\uC6A9 \uBE57\uC778\uAC00, \uC544\uB2C8\uBA74 \uACE0\uC591\uC774\uD138
-    \uC6A9 \uBE57\uC778\uAC00? \n\uC9C4\uC2E4\uD558\uAC8C \uB2F5\uD558\uBA74, \uADF8\uC5D0
-    \uB9DE\uB294 \uC0C1\uC744 \uB0B4\uB824\uC8FC\uB9AC\uB77C."
+  dialogueText: 
   options:
   - optionText: "\uB4DC\uB798\uACE4 \uAE43\uD138\uC6A9 \uBE57"
     nextNode: {fileID: 11400000, guid: a4168e3b7d2b647ad80d7c64ee0b2c93, type: 2}
@@ -43,6 +40,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uC6B0\uBB3C "
+  isSelfSpeak: 1
   associatedQuest: {fileID: 0}
   textNodePairs:
   - optionText: "\uB4DC\uB798\uACE4 \uAE43\uD138\uC6A9 \uBE57"

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6d0c1d868bc644beb05584e2785e6, type: 3}
+  m_Name: '[Ketrix]N0'
+  m_EditorClassIdentifier: 
+  nodeID: 222
+  dialogueText: ...
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 0}
+    fallbackNode: {fileID: 0}
+    conditions: []
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  isSelfSpeak: 0
+  conditionMetNextNode: {fileID: 11400000, guid: e8d2c41a94cc64446b6029f9f6580d1f, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: e6544ebfe7cf84e2abc341ecee1e60dd, type: 2}
+  conditions:
+  - {fileID: 11400000, guid: edbbff888e4f04050b35ba5f8ffa7034, type: 2}
