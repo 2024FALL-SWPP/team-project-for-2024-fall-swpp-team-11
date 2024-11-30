@@ -14,6 +14,9 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
 
+    // Addiction-related variables
+    public int PlayerState; // 1: Default, 2:isToxified, 3:isDetoxified
+
     private bool isInitialized = false;
 
     protected override void Awake()

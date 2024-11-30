@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: '[Karnas] C3'
   m_EditorClassIdentifier: 
   nodeID: 314
-  dialogueText: "\uC774\uAC74.. \uC544 \uC8FC \uD6CC\uB96D\uD55C \uBE57\uC774\uAD70.."
+  dialogueText: "\uC774\uAC74.. \uC544\uC8FC \uD6CC\uB96D\uD55C \uBE57\uC774\uAD70.."
   options:
   - optionText: Continue
     nextNode: {fileID: 11400000, guid: 94d49f9810ab54c7380e8f9b8367abf5, type: 2}
@@ -23,5 +23,6 @@ MonoBehaviour:
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: 
+  conversationNpcName: "\uCE74\uB974\uB098\uC2A4"
+  isSelfSpeak: 0
   nextNode: {fileID: 11400000, guid: 94d49f9810ab54c7380e8f9b8367abf5, type: 2}
