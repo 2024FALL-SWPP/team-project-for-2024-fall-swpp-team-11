@@ -19,13 +19,13 @@ public class ShopManager : SingletonManager<ShopManager>
             {
                 // Only include Shelve-specific items
                 itemsForDimension = itemsForDimension.FindAll(item =>
-                    item.itemName == "Dragon Comb" || item.itemName == "Pikachu Feather");
+                    item.itemName == "3DDragonComb" || item.itemName == "3DPikachuFeather");
             }
             else
             {
                 // Exclude Shelve-specific items from general shops
                 itemsForDimension = itemsForDimension.FindAll(item =>
-                    item.itemName != "Dragon Comb" && item.itemName != "Pikachu Feather");
+                    item.itemName != "3DDragonComb" && item.itemName != "3DPikachuFeather");
             }
         }
 
