@@ -49,7 +49,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
 
-        InventoryManager.Instance.HideInventory();
+        InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
 
         await SceneTransitionManager.Instance.FadeOutAsync();

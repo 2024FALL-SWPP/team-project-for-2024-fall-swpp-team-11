@@ -29,12 +29,10 @@ public class ItemDragHandler : DragHandler
 
         if (IsWithinViewport(eventData, eventCamera))
         {
-            Debug.Log("Inside Inventory");
             HandleDropWithinInventory(eventData);
         }
         else
         {
-            Debug.Log("Outside Inventory");
             HandleDropOutsideInventory(eventData);
         }
     }
@@ -82,6 +80,7 @@ public class ItemDragHandler : DragHandler
         {
             Instantiate(itemData.prefab, spawnPosition.Value, Quaternion.identity);
             InventoryManager.Instance.RemoveItem(itemData);
+            Destroy(gameObject);
         }
         else
         {
@@ -98,6 +97,7 @@ public class ItemDragHandler : DragHandler
         if (originalCell != null)
         {
             originalCell.AddItem(tmpObj);
+            InventoryEvents.ItemSwapped(originalCell, targetCell);
         }
     }
 

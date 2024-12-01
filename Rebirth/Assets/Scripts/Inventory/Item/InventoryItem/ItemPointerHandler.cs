@@ -12,4 +12,12 @@ public class ItemPointerHandler : PointerHandler
     {
         InventoryManager.Instance.HideTooltip();
     }
+
+    protected override void HandlePointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            InventoryManager.Instance.UseItem(itemData);
+        }
+    }
 }

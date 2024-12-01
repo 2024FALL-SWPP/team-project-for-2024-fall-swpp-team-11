@@ -1,16 +1,14 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : SingletonManager<InventoryManager>
 {
-    [SerializeField] private GameObject inventoryItemPrefab;
-    [SerializeField] private InventoryUI inventoryUI;
     private InventoryDataContainer inventoryDataContainer;
-    private int inventoryCapcity = 32;
+    private InventoryUI inventoryUI;
+    private int inventoryCapacity = 32;
 
-    private static string logPrefix = "[InventoryManager] ";
-
+    #region Unity Lifecycle
     protected override void Awake()
     {
         base.Awake();
@@ -19,7 +17,14 @@ public class InventoryManager : SingletonManager<InventoryManager>
         SaveManager.load += async () => await LoadInventoryAsync();
 
         inventoryDataContainer = new InventoryDataContainer();
-        inventoryUI.SetCapacity(inventoryCapcity);
+        
+        inventoryUI = GetComponent<InventoryUI>();
+        inventoryUI.SetCapacity(inventoryCapacity);
+    }
+
+    private void Start()
+    {
+        inventoryUI.RefreshInventoryDimension();
     }
 
     private void Update()
@@ -30,59 +35,64 @@ public class InventoryManager : SingletonManager<InventoryManager>
         }
     }
 
+    private void OnDestroy()
+    {
+        SaveManager.save -= SaveInventory;
+        SaveManager.load -= async () => await LoadInventoryAsync();
+    }
+    #endregion
+
     #region Inventory Data
     public void AddItem(ItemData itemData)
     {
-        if (inventoryDataContainer.GetTotalItemCount() > inventoryCapcity) return;
+        if (inventoryDataContainer.GetTotalItemCount() >= inventoryCapacity) return;
 
-        GameObject inventoryItemObj = Instantiate(inventoryItemPrefab);
-        InventoryItem inventoryItem = inventoryItemObj.GetComponent<InventoryItem>();
-        inventoryItem.Initialize(itemData);
-
-        inventoryDataContainer.AddItem(inventoryItemObj, itemData.dimension);
-        inventoryUI.AddItem(inventoryItemObj, itemData.dimension);
+        inventoryDataContainer.AddItem(itemData, itemData.dimension);
+        inventoryUI.AddItem(itemData, itemData.dimension);
     }
 
     public void RemoveItem(ItemData itemData)
     {
-        GameObject inventoryItemObj = inventoryDataContainer.FindItem(itemData);
-        if (inventoryItemObj)
-        {
-            inventoryDataContainer.RemoveItem(inventoryItemObj, itemData.dimension);
-            inventoryUI.RemoveItem(inventoryItemObj);
-            Destroy(inventoryItemObj);
-        }
+        inventoryDataContainer.RemoveItem(itemData, itemData.dimension);
+        inventoryUI.RemoveItem(itemData, itemData.dimension);
     }
 
     public bool HasItem(ItemData itemData)
     {
-        return inventoryDataContainer.HasItem(itemData);
+        return inventoryDataContainer.HasItem(itemData, itemData.dimension);
     }
 
-    public void RefreshInventoryUI()
+    public void UseItem(ItemData itemData)
     {
-        inventoryUI.RefreshInventoryDisplay();
+        if (itemData is IUsable usableItem)
+        {
+            usableItem.Use();
+            RemoveItem(itemData);
+        }
     }
+
     #endregion
 
     #region UI Management
-
-    public void HideInventory()
+    public void HandleSceneChange()
     {
         inventoryUI.HideInventory();
+        inventoryUI.HideTooltip();
+        inventoryUI.RefreshInventoryDimension();
     }
 
     public void SortInventory()
     {
-        // Sort InventoyDataContainer
+        Dimension currentDimension = DimensionManager.Instance.GetCurrentDimension();
+        inventoryDataContainer.SortItems(item => item.itemName, currentDimension);
+        RedrawUI(currentDimension);
+    }
 
-        // Iterate InventoryDataContainer
-
-            // From first cell, put InventoryItemObj
-
-            // Check last cell,
-
-        // Empty All the cells after last cell
+    public void RedrawUI(Dimension dimension)
+    {
+        List<ItemData> items = inventoryDataContainer.GetItems(dimension);
+        
+        inventoryUI.RedrawUI(items, dimension);
     }
 
     public void ShowTooltip(ItemData itemData, Vector2 position)
@@ -104,21 +114,16 @@ public class InventoryManager : SingletonManager<InventoryManager>
 
     public async Task LoadInventoryAsync()
     {
-        InventoryDataContainer loadedData = await DiskSaveSystem.LoadInventoryDataFromDiskAsync();
-        if (loadedData != null)
+        List<ItemData> loadedItems = await DiskSaveSystem.LoadInventoryDataFromDiskAsync();
+
+        inventoryDataContainer = new InventoryDataContainer();
+        foreach (ItemData item in loadedItems)
         {
-            inventoryDataContainer = loadedData;
-            // !LEGACY
-            // inventoryUI.Initialize(inventoryDataContainer);
-            // inventoryUI.RefreshInventoryDisplay();
-            Debug.Log("인벤토리가 로드되었습니다.");
+            inventoryDataContainer.AddItem(item, item.dimension);
         }
+
+        RedrawUI(Dimension.TWO_DIMENSION);
+        RedrawUI(Dimension.THREE_DIMENSION);
     }
     #endregion
-
-    private void OnDestroy()
-    {
-        SaveManager.save -= SaveInventory;
-        SaveManager.load -= async () => await LoadInventoryAsync();
-    }
 }
