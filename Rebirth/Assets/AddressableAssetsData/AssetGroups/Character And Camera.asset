@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Character And Camera
+  m_EditorClassIdentifier: 
+  m_GroupName: Character And Camera
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bd346dbf5ed7a9b4f835114d3333b5a0
+  m_SerializeEntries:
+  - m_GUID: a2ea0cd57b18b43e39a5b494d6d980a9
+    m_Address: Assets/Prefabs/GlobalPrefabs/Character/3D Hero.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Character
+  - m_GUID: e7981f126be6e4b4b98905a77221c484
+    m_Address: Assets/Prefabs/GlobalPrefabs/Camera/MainCamera3D.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Camera
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3a8cb2799d23c48e0947c44f93ce8718, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 38c7abe86982bac4b93d0146f908cf1e, type: 2}
+    - {fileID: 11400000, guid: 47ba6128fcdd7e241bb2dc979aaa46b0, type: 2}
