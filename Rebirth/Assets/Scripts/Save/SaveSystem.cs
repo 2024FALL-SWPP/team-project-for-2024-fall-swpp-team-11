@@ -6,8 +6,9 @@ using Newtonsoft.Json;
 public class SaveSystem
 {
     private static string InventorySavePath => Application.persistentDataPath + "/inventory.json";
+    // private static string SceneSavePath => Application.persistentDataPath + "/scene.json";
    
-   #region Inventory
+    #region Inventory
     public static void SaveInventoryData(InventoryDataContainer inventoryData)
     {
         List<string> itemNames = new List<string>();

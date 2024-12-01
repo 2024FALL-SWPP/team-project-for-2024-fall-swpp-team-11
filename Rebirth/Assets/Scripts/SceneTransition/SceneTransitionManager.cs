@@ -41,6 +41,10 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
     {
         playerTargetPosition = targetPosition; // 목표 위치 저장
         StartCoroutine(Transition(sceneName));
+
+        if (SceneSaveManager.Instance != null){
+            SceneSaveManager.Instance.LoadSceneState(sceneName); //실행됨. 확인했음.
+        }
     }
 
     private IEnumerator Transition(string sceneName)

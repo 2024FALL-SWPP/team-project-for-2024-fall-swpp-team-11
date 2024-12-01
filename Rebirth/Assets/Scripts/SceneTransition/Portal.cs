@@ -1,6 +1,7 @@
 // DoorTrigger.cs
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour, IInteractable
 {
@@ -14,7 +15,10 @@ public class Portal : MonoBehaviour, IInteractable
         if (!string.IsNullOrEmpty(targetScene))
         {
             if (SceneTransitionManager.Instance != null)
-            {
+            {   
+                if (SceneSaveManager.Instance != null){
+                    SceneSaveManager.Instance.SaveSceneState(SceneManager.GetActiveScene().name);
+                }
                 SceneTransitionManager.Instance.LoadScene(targetScene, targetPosition);
             }
             else
