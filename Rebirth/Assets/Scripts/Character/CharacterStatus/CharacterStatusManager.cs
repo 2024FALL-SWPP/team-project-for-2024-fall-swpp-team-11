@@ -6,11 +6,21 @@ public class CharacterStatusData
 {
     public int Money;
     public int Health;
+    public int PlayerState; // 1: Default, 2:isToxified, 3:isDetoxified
+    public bool CanAccessLibrary;
+    public bool IsPaperSfixed;
+    public bool IsPaperEfixed;
+    public bool IsPaperBfixed;
 
     public CharacterStatusData()
     {
         Money = 0;
         Health = 100;
+        PlayerState = 1;
+        CanAccessLibrary = false;
+        IsPaperSfixed = false;
+        IsPaperEfixed = false;
+        IsPaperBfixed = false;
     }
 }
 
@@ -26,8 +36,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
 
-    // Addiction-related variables
     public int PlayerState; // 1: Default, 2:isToxified, 3:isDetoxified
+    public bool CanAccessLibrary;
+    public bool IsPaperBfixed;
+    public bool IsPaperSfixed;
+    public bool IsPaperEfixed;
 
     private bool isInitialized = false;
 
@@ -50,6 +63,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
         Health = data.Health;
         Money = data.Money;
+        PlayerState = data.PlayerState;
+        CanAccessLibrary = data.CanAccessLibrary;
+        IsPaperBfixed = data.IsPaperBfixed;
+        IsPaperSfixed = data.IsPaperSfixed;
+        IsPaperEfixed = data.IsPaperEfixed;
 
         RefreshStatusUI();
     }
@@ -148,4 +166,56 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         SaveManager.save -= SaveCharacterStatusToDisk;
         SaveManager.load -= LoadCharacterStatusFromDisk;
     }
+
+    #region canAccessLibrary
+    public bool GetCanAccessLibrary()
+    {
+        return CanAccessLibrary;
+    }
+
+    public void SetCanAccessLibrary(bool canAccess)
+    {
+        CanAccessLibrary=canAccess;
+    }
+    #endregion
+
+    #region paper
+    public bool GetPaper(string sort)
+    {
+        if (sort == "s")
+        {  
+            return IsPaperSfixed;
+        }
+        else if (sort == "b")
+        {
+            return IsPaperBfixed;
+        }
+        else if (sort == "e")
+        {
+            return IsPaperEfixed;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
+    public void SetPaper(bool isFixed, string sort)
+    {
+        if (sort == "s")
+        {  
+            IsPaperSfixed = isFixed;
+        }
+        else if (sort == "b")
+        {
+            IsPaperBfixed = isFixed;
+        }
+        else if (sort == "e")
+        {
+            IsPaperEfixed = isFixed;
+        }
+    }
+    #endregion
+
 }
