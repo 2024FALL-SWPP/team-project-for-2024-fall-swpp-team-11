@@ -14,100 +14,73 @@ using UnityEngine.SceneManagement;
 public class CharacterTest : InputTestFixture
 {
     private static readonly string logPrefix = "[CharacterTest] ";
-    private static readonly string heroPrefabPath = "Assets/Prefabs/GlobalPrefabs/Character/3D Hero.prefab";
-    private static readonly string cameraPrefabPath = "Assets/Prefabs/GlobalPrefabs/Camera/MainCamera3D.prefab";
-    private static readonly string testSceneName = "Village3D";
+    private static readonly string testSceneName = "InputSystemTest3D";
 
     private GameObject hero;
 
-    private void MoveMouse(Vector2 position)
+    private Keyboard keyboard;
+    private Mouse mouse;
+
+    private void AddDevices()
     {
-        InputSystem.QueueStateEvent(Mouse.current, new MouseState
-        {
-            position = position
-        });
-        InputSystem.Update();
+        keyboard = InputSystem.AddDevice<Keyboard>();
+        mouse = InputSystem.AddDevice<Mouse>();
     }
 
-    private IEnumerator MoveMouseTime(Vector2 position, float time)
+    private IEnumerator LoadScene(string sceneName)
     {
-        // move mout to position linearly in time
-        Vector2 start = Mouse.current.position.ReadValue();
-        float elapsedTime = 0;
-        while (elapsedTime < time)
-        {
-            elapsedTime += Time.deltaTime;
-            MoveMouse(Vector2.Lerp(start, position, elapsedTime / time));
-            yield return null;
-        }
-    }
-
-    private IEnumerator MoveMouseTimeDelta(Vector2 position, float time)
-    {
-        // move mout to position linearly in time
-        Vector2 start = Mouse.current.position.ReadValue();
-        float elapsedTime = 0;
-        while (elapsedTime < time)
-        {
-            elapsedTime += Time.deltaTime;
-            MoveMouse(start + (position - start) * elapsedTime / time);
-            yield return null;
-        }
-    }
-
-    private void ResetMouse()
-    {
-        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-        InputSystem.QueueStateEvent(Mouse.current, new MouseState
-        {
-            position = screenCenter
-        });
-        InputSystem.Update();
-    }
-
-
-    [UnitySetUp]
-    public IEnumerator UnitySetup()
-    {
-        ResetMouse();
-
-        var loadOp = SceneManager.LoadSceneAsync(testSceneName, LoadSceneMode.Single);
+        var loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         while (!loadOp.isDone)
         {
             yield return null;
         }
-
-        hero = GameObject.FindWithTag("Player");
-
-        Debug.Log(logPrefix + "Setup complete");
     }
 
-    [UnityTearDown]
-    public void UnityTeardown()
+    private void SetupAfterLoad()
     {
-        SceneManager.LoadScene("MainMenu");
+        hero = GameObject.FindWithTag("Player");
+
+        var playerInput = hero.GetComponent<PlayerInput>();
+        if (playerInput == null)
+        {
+            playerInput.neverAutoSwitchControlSchemes = true;
+            playerInput.SwitchCurrentControlScheme("Keyboard&Mouse", keyboard, mouse);
+        }
+    }
+
+    private IEnumerator MySetUp()
+    {
+        AddDevices();
+        yield return LoadScene(testSceneName);
+        SetupAfterLoad();
+    }
+
+    private IEnumerator MyTearDown()
+    {
+        // SceneManager.UnloadSceneAsync(testSceneName);
+        yield return null;
     }
 
     [UnityTest]
     public IEnumerator TestPlayerMovement()
     {
-        // var keyboard = InputSystem.AddDevice<Keyboard>();
-        // var mouse = InputSystem.AddDevice<Mouse>();
+        yield return MySetUp();
 
-        // Vector3 oldPosition = hero.transform.position;
-        // Debug.Log(logPrefix + "Old position: " + oldPosition);
+        Vector3 oldPosition = hero.transform.position;
+        Debug.Log(logPrefix + "Old position: " + oldPosition);
 
-        // Press(keyboard.upArrowKey);
-        // yield return new WaitForSeconds(2f);
+        Press(keyboard.wKey);
+        InputSystem.Update();
+        yield return new WaitForSeconds(2f);
 
-        // yield return MoveMouseTimeDelta(new Vector2(100, 100), 2f);
+        Debug.Log(logPrefix + "New position: " + hero.transform.position);
 
-        // Debug.Log(logPrefix + "New position: " + hero.transform.position);
+        Assert.Greater(hero.transform.position.z, oldPosition.z, "Character did not move forward");
 
-        // Assert.Greater(hero.transform.position.z, oldPosition.z, "Character did not move forward");
-
-        // Release(keyboard.upArrowKey);
-
+        Release(keyboard.wKey);
+        InputSystem.Update();
         yield return null;
+
+        yield return MyTearDown();
     }
 }
