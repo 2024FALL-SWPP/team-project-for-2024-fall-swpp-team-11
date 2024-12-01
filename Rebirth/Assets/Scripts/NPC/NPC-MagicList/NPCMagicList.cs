@@ -8,8 +8,9 @@ public class NPCMagicList : NPC
     public override void HandleDialogueEnd()
     {
         base.HandleDialogueEnd();
-        if(true){ // 후에 명부데이터 처리가 가능해지면 수정
+        if(DialogueManager.Instance.getLastLeafNode().nodeID == "library11"){ 
             libraryPortal.Interact();
+            CharacterStatusManager.Instance.SetCanAccessLibrary(true);
         }
 
     }

@@ -20,14 +20,16 @@ MonoBehaviour:
     \uBA85\uBD80\uC5D0 \uAE30\uB85D\uB41C \uC874\uC7AC\uC778\uC9C0 \uD655\uC778\uD558\uACA0\uC18C."
   options:
   - optionText: Continue
-    nextNode: {fileID: 0}
-    fallbackNode: {fileID: 0}
-    conditions: []
+    nextNode: {fileID: 11400000, guid: 7584773a17b8e4aa09c059199fcf38d5, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 52a99c98cd7534fbab996997e3ba45de, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: aadcfcd7d950e4845a29d6504ffadb70, type: 2}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: 
+  conversationNpcName: "\uB9C8\uBC95 \uBA85\uBD80 "
+  isSelfSpeak: 0
   conditionMetNextNode: {fileID: 11400000, guid: 7584773a17b8e4aa09c059199fcf38d5, type: 2}
   conditionNotMetNextNode: {fileID: 11400000, guid: 52a99c98cd7534fbab996997e3ba45de, type: 2}
   conditions:
-  - {fileID: 11400000, guid: 0189957646a7f1244adf9dd131b6b37d, type: 2}
+  - {fileID: 11400000, guid: aadcfcd7d950e4845a29d6504ffadb70, type: 2}
