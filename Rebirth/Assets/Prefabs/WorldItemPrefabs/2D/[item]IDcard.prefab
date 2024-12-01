@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6120484373576610325}
   - component: {fileID: 1548599249644700199}
   - component: {fileID: 6378407001202047488}
+  - component: {fileID: 7941304185459188212}
   - component: {fileID: 7732884635429850541}
-  - component: {fileID: 2129215529853630756}
   m_Layer: 0
   m_Name: '[item]IDcard'
   m_TagString: Untagged
@@ -135,6 +135,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7941304185459188212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766087362372112511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7394d7e47d5fe428f9235fd7db74f8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: ...
+  questNodes: {fileID: 11400000, guid: ca4c3bccb33d6490ebfabaeff796ebd9, type: 2}
+  itemData: {fileID: 11400000, guid: e3402c44391e84aaf9e63bc63fa1ed1b, type: 2}
 --- !u!114 &7732884635429850541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,17 +163,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0.5
---- !u!114 &2129215529853630756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7766087362372112511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fcf76b8cd81f048bc211121587e44a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcName: ...
-  questNodes: {fileID: 11400000, guid: ca4c3bccb33d6490ebfabaeff796ebd9, type: 2}
