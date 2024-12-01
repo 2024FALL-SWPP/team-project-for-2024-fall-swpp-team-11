@@ -13,17 +13,20 @@ MonoBehaviour:
   m_Name: 00-E
   m_EditorClassIdentifier: 
   nodeID: 
-  dialogueText: 
+  dialogueText: "\uC9C0\uC6CC\uC9C4 \uD754\uC801\uC744 \uBCF5\uC6D0\uD558\uB824\uACE0
+    \uC2DC\uB3C4\uD55C\uB2E4.."
   options:
   - optionText: Continue
-    nextNode: {fileID: 0}
-    fallbackNode: {fileID: 0}
-    conditions: []
+    nextNode: {fileID: 11400000, guid: c2de3901c407041cda53a227c0312552, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 1ebe8e96c2b4f437bbdfc421287cfc38, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: 1e6b9e4c6b040416e8a99f2a71e5b296, type: 2}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: 
   isSelfSpeak: 0
-  conditionMetNextNode: {fileID: 0}
-  conditionNotMetNextNode: {fileID: 0}
-  conditions: []
+  conditionMetNextNode: {fileID: 11400000, guid: c2de3901c407041cda53a227c0312552, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 1ebe8e96c2b4f437bbdfc421287cfc38, type: 2}
+  conditions:
+  - {fileID: 11400000, guid: 1e6b9e4c6b040416e8a99f2a71e5b296, type: 2}
