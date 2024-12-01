@@ -5,6 +5,6 @@ public class WeirdPotion : UsableItem
 {
     public override void Use()
     {
-        Debug.Log($"Use Weird Potion");
+        CharacterStatusManager.Instance.SetIsDimensionSwitchable(true);
     }
 }

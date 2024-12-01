@@ -10,7 +10,7 @@ public abstract class PointerHandler : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
+        HandlePointerClick(eventData);
     } 
 
     public void OnPointerExit(PointerEventData eventData)

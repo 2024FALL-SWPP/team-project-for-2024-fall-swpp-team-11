@@ -117,7 +117,8 @@ public class DiskSaveSystem
         CharacterStatusData characterStatusData = new CharacterStatusData
         {
             Money = CharacterStatusManager.Instance.Money,
-            Health = CharacterStatusManager.Instance.Health
+            Health = CharacterStatusManager.Instance.Health,
+            IsDimensionSwitchable = CharacterStatusManager.Instance.IsDimensionSwitchable
         };
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);

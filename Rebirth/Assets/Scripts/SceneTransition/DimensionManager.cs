@@ -23,7 +23,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
     async void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && !isSwitching)
+        if (Input.GetKeyDown(KeyCode.T) && !isSwitching && CharacterStatusManager.Instance.IsDimensionSwitchable)
         {
             await SwitchDimension();
         }
