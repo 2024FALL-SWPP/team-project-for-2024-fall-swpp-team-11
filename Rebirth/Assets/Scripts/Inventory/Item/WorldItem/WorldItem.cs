@@ -22,26 +22,19 @@ public class WorldItem : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        // 이미 상호작용이 이루어진 경우 함수를 종료
+        if (!itemData) return;
+
         if (hasBeenInteracted)
             return;
 
-        // 상호작용이 이루어졌음을 표시
         hasBeenInteracted = true;
 
-        // 아이템 획득 소리 재생
         if (audioSource && PickingSound)
         {
             audioSource.Play();
         }
 
-        if (itemData)
-        {
-            InventoryManager.Instance.AddItem(itemData);
-        }
-
-
-        // 오브젝트 파괴 지연 (소리 재생 후 파괴되도록)
+        InventoryManager.Instance.AddItem(itemData);
         Destroy(gameObject, 0.3f);
     }
 
