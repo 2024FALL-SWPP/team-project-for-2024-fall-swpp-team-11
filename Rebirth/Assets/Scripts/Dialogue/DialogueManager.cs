@@ -8,6 +8,7 @@ public class DialogueManager : SingletonManager<DialogueManager>
 
     [HideInInspector]
     public DialogueNode currentNode;
+    public DialogueNode lastLeafNode;
     public DialogueUI dialogueUI;
     // public DialogueGraph activeDialogueGraph;
 
@@ -209,10 +210,17 @@ public class DialogueManager : SingletonManager<DialogueManager>
         currentNode = null;
     }
 
+    public DialogueNode getLastLeafNode()
+    {
+        return lastLeafNode;
+    }
+
     private void EndDialogue()
     {
+        lastLeafNode = currentNode;
         ResetCurrentNode();
         OnDialogueEnd?.Invoke();
         dialogueUI.HideDialogue();
+        
     }
 }
