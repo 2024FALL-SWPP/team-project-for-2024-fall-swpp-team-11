@@ -18,8 +18,9 @@ public class ShopInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        // Call the ShopUI's ToggleShopUI method to manage the shop
+        // Set the shop name based on this object's name
         ShopUI shopUIScript = shopUI.GetComponent<ShopUI>();
+        shopUIScript.SetShopName(gameObject.name);
         shopUIScript.ToggleShopUI();
     }
 

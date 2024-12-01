@@ -2,51 +2,75 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : SingletonManager<ShopManager>
 {
     [Header("Shop Items")]
     [SerializeField] private List<ItemData> allShopItems; // Master list of all items
 
-    public static ShopManager Instance { get; private set; }
-
-    private void Awake()
+    public List<ItemData> GetItemsForDimension(Dimension dimension, string shopName = null)
     {
-        if (Instance == null)
+        // Filter items by dimension first
+        List<ItemData> itemsForDimension = allShopItems.FindAll(item => item != null && item.dimension == dimension);
+
+        if (!string.IsNullOrEmpty(shopName))
         {
-            Instance = this;
+            shopName = shopName.ToLower();
+            if (shopName == "shelve")
+            {
+                // Only include Shelve-specific items
+                itemsForDimension = itemsForDimension.FindAll(item =>
+                    item.itemName == "Dragon Comb" || item.itemName == "Pikachu Feather");
+            }
+            else
+            {
+                // Exclude Shelve-specific items from general shops
+                itemsForDimension = itemsForDimension.FindAll(item =>
+                    item.itemName != "Dragon Comb" && item.itemName != "Pikachu Feather");
+            }
+        }
+
+        return itemsForDimension;
+    }
+
+    public bool PurchaseItem(ItemData itemData)
+    {
+        if (itemData == null)
+        {
+            return false;
+        }
+
+        if (CharacterStatusManager.Instance.Money >= itemData.value)
+        {
+            // Deduct money
+            CharacterStatusManager.Instance.UpdateMoney(-itemData.value);
+
+            // Add item to inventory
+            InventoryManager.Instance.AddItem(itemData);
+
+            return true; // Purchase successful
         }
         else
         {
-            Destroy(gameObject); // Enforce singleton
+            return false; // Purchase failed
         }
     }
 
-    /// <summary>
-    /// Returns a filtered list of items based on the current dimension.
-    /// </summary>
-    /// <param name="dimension">The current dimension (2D or 3D).</param>
-    /// <returns>List of filtered items for the dimension.</returns>
-    public List<ItemData> GetItemsForDimension(Dimension dimension)
+    public void AddItemToShop(ItemData itemData)
     {
-        return allShopItems.FindAll(item => item.dimension == dimension);
+        if (itemData != null && !allShopItems.Contains(itemData))
+        {
+            allShopItems.Add(itemData);
+        }
     }
 
-    /// <summary>
-    /// Handles the logic for purchasing an item.
-    /// </summary>
-    /// <param name="itemData">The item to purchase.</param>
-    /// <returns>True if the purchase was successful, otherwise false.</returns>
-    public bool PurchaseItem(ItemData itemData)
+    public void RemoveItemFromShop(ItemData itemData)
     {
-        CharacterStatusManager.Instance.UpdateMoney(-itemData.value);
-        InventoryManager.Instance.AddItem(itemData);
-        return true; // Purchase successful
+        if (itemData != null && allShopItems.Contains(itemData))
+        {
+            allShopItems.Remove(itemData);
+        }
     }
 
-    /// <summary>
-    /// Determines the current dimension based on the active scene name.
-    /// </summary>
-    /// <returns>The current dimension (2D or 3D).</returns>
     public Dimension GetCurrentDimension()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
@@ -55,9 +79,33 @@ public class ShopManager : MonoBehaviour
         {
             return Dimension.THREE_DIMENSION;
         }
+        else if (currentSceneName.EndsWith("2D"))
+        {
+            return Dimension.TWO_DIMENSION;
+        }
         else
         {
             return Dimension.TWO_DIMENSION; // Default to 2D
         }
+    }
+
+    public bool CanAffordItem(ItemData itemData)
+    {
+        if (itemData == null)
+        {
+            return false;
+        }
+
+        return CharacterStatusManager.Instance.Money >= itemData.value;
+    }
+
+    public bool IsItemInShop(ItemData itemData)
+    {
+        return allShopItems.Contains(itemData);
+    }
+
+    public List<ItemData> GetAllItems()
+    {
+        return new List<ItemData>(allShopItems);
     }
 }
