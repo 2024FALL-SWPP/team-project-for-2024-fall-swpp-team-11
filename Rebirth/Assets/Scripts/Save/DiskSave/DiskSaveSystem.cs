@@ -151,10 +151,10 @@ public class DiskSaveSystem
     public static void ResetFiles()
     {
         DeleteAllSaveFilesExceptCharacterStatus();
-        ResetCharacterStatusExceptIsDimensionSwitchable();
+        ResetCharacterStatusExceptPlayerState();
     }
 
-    public static void ResetCharacterStatusExceptIsDimensionSwitchable()
+    public static void ResetCharacterStatusExceptPlayerState()
     {
         if (!File.Exists(CharacterStatusSavePath)) return;
 
@@ -163,7 +163,7 @@ public class DiskSaveSystem
 
         CharacterStatusData resetData = new CharacterStatusData
         {
-            IsDimensionSwitchable = existingData.IsDimensionSwitchable,
+            PlayerState = existingData.PlayerState,
             Money = 0,
             Health = 100,
             LastScene = "HeroHouse2D"
@@ -183,6 +183,6 @@ public class DiskSaveSystem
             {
                 File.Delete(file);
             }
-        }        
+        }
     }
 }
