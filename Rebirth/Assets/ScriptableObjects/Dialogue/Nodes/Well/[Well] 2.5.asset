@@ -10,23 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fd6d0c1d868bc644beb05584e2785e6, type: 3}
-  m_Name: '[Well] 1'
+  m_Name: '[Well] 2.5'
   m_EditorClassIdentifier: 
   nodeID: 1000
-  dialogueText: "\uD3C9\uBC94\uD574 \uBCF4\uC774\uB294 \uC6B0\uBB3C\uC774\uB2E4...
-    \n\uD48D\uB369-"
+  dialogueText: "\uD638\uAE30\uC2EC\uC5D0 \uACE0\uAC1C\uB97C \uAE4A\uC774 \uC219\uC5EC
+    \uC6B0\uBB3C\uC758 \uBC14\uB2E5\uC744 \uC0B4\uD53C\uB824\uB2E4\uAC00 \uADF8\uB9CC
+    \uC8FC\uBA38\uB2C8 \uC18D\uC5D0 \uC788\uB358 [\uD3C9\uBC94\uD55C \uBE57]\uC744
+    \uBE60\uB728\uB9AC\uACE0 \uB9CC\uB2E4."
   options:
   - optionText: Continue
     nextNode: {fileID: 11400000, guid: b03e1df2bf6d04e19a95059a0117b4f9, type: 2}
     fallbackNode: {fileID: 11400000, guid: 02ab7a41252f84f3788fe6d954d6c978, type: 2}
     conditions:
-    - {fileID: 11400000, guid: a4955b7f30bde49a69bc65b6f73eaa3b, type: 2}
+    - {fileID: 11400000, guid: 5dffc2d71453a4fc8b437952bf51db1b, type: 2}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
   conversationNpcName: "\uC6B0\uBB3C "
   isSelfSpeak: 0
-  conditionMetNextNode: {fileID: 11400000, guid: 7322ffbd9774a4aefa615333500d7528, type: 2}
-  conditionNotMetNextNode: {fileID: 11400000, guid: 02ab7a41252f84f3788fe6d954d6c978, type: 2}
+  conditionMetNextNode: {fileID: 11400000, guid: bd7e04317ee464fb0ad9e2309dc8379d, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 3989661162ec14efeb29401622757c8d, type: 2}
   conditions:
-  - {fileID: 11400000, guid: a4955b7f30bde49a69bc65b6f73eaa3b, type: 2}
+  - {fileID: 11400000, guid: 5dffc2d71453a4fc8b437952bf51db1b, type: 2}

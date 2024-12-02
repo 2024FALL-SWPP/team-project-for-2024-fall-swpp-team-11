@@ -23,6 +23,7 @@ public class NPC : MonoBehaviour, IInteractable
         if (!string.IsNullOrEmpty(npcName))
         {
             NPCManager.Instance.RegisterNPC(npcName);
+            Debug.Log(npcName);
         }
         else
         {
