@@ -4,6 +4,12 @@ public class ActivateItem : MonoBehaviour
 {
     private bool isActive = false; // Track if the item is active
 
+    private void Start()
+    {
+        // Ensure the item is deactivated at the start
+        ResetItem();
+    }
+
     // Call this method to activate the item
     public void Activate()
     {

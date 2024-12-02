@@ -1784,19 +1784,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4548000161461949145, guid: 1daa2b1dbc50740b992a31d4b57ecbea, type: 3}
   m_PrefabInstance: {fileID: 1861948874}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &559918594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559918588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 5a00431b2786848ddb4389818c10c24b, type: 2}
 --- !u!114 &559918595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2561,19 +2548,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4586128174522566681, guid: 499567f3ffdc048939afeaf200e2bbbd, type: 3}
   m_PrefabInstance: {fileID: 1599735594}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &939225237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939225231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 1d2bfcdd366af4e1d87129188b30cade, type: 2}
 --- !u!114 &939225238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4332,6 +4306,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1627881936277465233, guid: f490095f2fc3a4a2cadee87074da6791, type: 3}
+      propertyPath: weirdPotion
+      value: 
+      objectReference: {fileID: 559918595}
+    - target: {fileID: 1627881936277465233, guid: f490095f2fc3a4a2cadee87074da6791, type: 3}
+      propertyPath: weirdPotionCure
+      value: 
+      objectReference: {fileID: 939225238}
+    - target: {fileID: 1627881936277465233, guid: f490095f2fc3a4a2cadee87074da6791, type: 3}
+      propertyPath: allShopItems.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d2bfcdd366af4e1d87129188b30cade, type: 2}
     - target: {fileID: 1627881936277465238, guid: f490095f2fc3a4a2cadee87074da6791, type: 3}
       propertyPath: m_RootOrder
       value: 21
