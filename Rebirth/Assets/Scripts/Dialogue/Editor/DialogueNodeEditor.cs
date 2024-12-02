@@ -36,6 +36,9 @@ public class DialogueNodeEditor : Editor
     SerializedProperty questAcceptedNodeProp;
     SerializedProperty questRejectedNodeProp;
 
+    // ConditionOptionDialogueNode properties
+    // SerializedProperty conditionalTextNodePairsProp; 
+
     private void OnEnable()
     {
         nodeIDProp = serializedObject.FindProperty("nodeID");
@@ -68,6 +71,9 @@ public class DialogueNodeEditor : Editor
         // QuestOfferDialogueNode properties
         questAcceptedNodeProp = serializedObject.FindProperty("questAcceptedNode");
         questRejectedNodeProp = serializedObject.FindProperty("questRejectedNode");
+
+        // ConditionOptionDialogueNode properties 
+        // conditionalTextNodePairsProp = serializedObject.FindProperty("conditionalTextNodePairs");
     }
 
     public override void OnInspectorGUI()
@@ -97,6 +103,11 @@ public class DialogueNodeEditor : Editor
         {
             EditorGUILayout.PropertyField(textNodePairsProp, true);
         }
+        // else if (target is ConditionOptionDialogueNode) 
+        // {
+        //     EditorGUILayout.PropertyField(conditionalTextNodePairsProp, true);
+        //     EditorGUILayout.HelpBox("Each option will only appear if its conditions are met.", MessageType.Info);
+        // }
         else if (target is LeafDialogueNode)
         {
             EditorGUILayout.Space();
