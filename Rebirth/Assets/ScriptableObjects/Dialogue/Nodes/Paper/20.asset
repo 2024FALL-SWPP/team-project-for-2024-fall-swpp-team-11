@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e18459eaf9874d48836c3d2da192f26, type: 3}
+  m_Name: 20
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: 
+  options:
+  - optionText: "\uC54C\uACA0\uC5B4. \uC5B4\uB5BB\uAC8C \uD558\uBA74 \uB418\uB294\uB370?"
+    nextNode: {fileID: 11400000, guid: cc6755dd4aa6d40eb98dee03a7e466af, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  isSelfSpeak: 1
+  associatedQuest: {fileID: 0}
+  textNodePairs:
+  - optionText: "\uC608\uC804\uC758 \uB098\uB97C.. \uC54C\uC544?"
+    nextNode: {fileID: 11400000, guid: 54fa1a3dbb54d4ce4864dae2c2923cc4, type: 2}

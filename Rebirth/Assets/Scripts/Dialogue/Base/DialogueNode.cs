@@ -13,4 +13,5 @@ public class DialogueNode : ScriptableObject
 
     [HideInInspector]
     public string conversationNpcName;
+    public bool isSelfSpeak;
 }

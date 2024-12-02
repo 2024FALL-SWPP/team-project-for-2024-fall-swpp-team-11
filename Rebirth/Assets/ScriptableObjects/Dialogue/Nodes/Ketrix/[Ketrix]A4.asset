@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5a05d94d315d14a8f42d9fba39860a, type: 3}
+  m_Name: '[Ketrix]A4'
+  m_EditorClassIdentifier: 
+  nodeID: 525
+  dialogueText: "\uD2B9\uBCC4\uD788 \uACE0\uB9D9\uB2E4\uACE0\uB294 \uC548 \uD560
+    \uAC70\uC57C. \n\uD558\uC9C0\uB9CC... \uBB50, \uC870\uAE08\uC740 \uB3C4\uC6C0\uC774
+    \uB410\uC73C\uB2C8\uAE4C."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 0518412dbe7e841a6aac5a1237fdd296, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  associatedQuest: {fileID: 11400000, guid: 634b6a10bc62847c089de2d85c5e4072, type: 2}
+  nextNode: {fileID: 11400000, guid: 0518412dbe7e841a6aac5a1237fdd296, type: 2}

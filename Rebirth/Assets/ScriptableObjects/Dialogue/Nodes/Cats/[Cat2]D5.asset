@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745979fd610664d58a49f621a049a433, type: 3}
+  m_Name: '[Cat2]D5'
+  m_EditorClassIdentifier: 
+  nodeID: 705
+  dialogueText: "\uBBF8\uC57C\uC639..! \uBA00\uC639.>.!\n(\uBB50\uB77C\uB294 \uC9C0
+    \uC798 \uBAA8\uB974\uACA0\uC9C0\uB9CC \uACE0\uB9D9\uB2E4\uB294 \uAC83 \uAC19\uB2E4.)"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 8a40afcf573a74f7b9d2f81189ca4296, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions: []
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: Cat1
+  nextNode: {fileID: 11400000, guid: 9b042c4a602b24e17bffa0a4a78b5451, type: 2}
+  rewardedItem: {fileID: 11400000, guid: 85e54f756338a4514a32599b43ebc4b2, type: 2}

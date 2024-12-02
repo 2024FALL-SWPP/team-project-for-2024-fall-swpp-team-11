@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 6120484373576610325}
   - component: {fileID: 1548599249644700199}
   - component: {fileID: 6378407001202047488}
+  - component: {fileID: 7941304185459188212}
   - component: {fileID: 7732884635429850541}
+  - component: {fileID: -5676341833589872212}
   m_Layer: 0
   m_Name: '[item]IDcard'
   m_TagString: Untagged
@@ -74,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 940620659
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6a82618cfc722479f85f3e3cb8b6e035, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -134,6 +136,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7941304185459188212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766087362372112511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7394d7e47d5fe428f9235fd7db74f8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: ...
+  questNodes: {fileID: 11400000, guid: ca4c3bccb33d6490ebfabaeff796ebd9, type: 2}
+  itemData: {fileID: 11400000, guid: e3402c44391e84aaf9e63bc63fa1ed1b, type: 2}
 --- !u!114 &7732884635429850541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +164,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0.5
+--- !u!114 &-5676341833589872212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766087362372112511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 6dd68c3a3cce8448289b0a7f907220aa, type: 2}

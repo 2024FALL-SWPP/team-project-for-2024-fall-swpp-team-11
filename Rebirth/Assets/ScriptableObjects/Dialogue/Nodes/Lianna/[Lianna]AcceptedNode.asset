@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6d0c1d868bc644beb05584e2785e6, type: 3}
+  m_Name: '[Lianna]AcceptedNode'
+  m_EditorClassIdentifier: 
+  nodeID: 921
+  dialogueText: "\uCC45\uC744 \uAC00\uC838\uC624\uC168\uB098\uC694?"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: f468d8de7d88648568424350a78109c3, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 986fadbd65429476d9a7700eb7ddcbf6, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: fc8eb69fba7c042fead70576798ab70a, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uB9AC\uC548\uB098"
+  conditionMetNextNode: {fileID: 11400000, guid: f468d8de7d88648568424350a78109c3, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 986fadbd65429476d9a7700eb7ddcbf6, type: 2}
+  conditions:
+  - {fileID: 11400000, guid: fc8eb69fba7c042fead70576798ab70a, type: 2}

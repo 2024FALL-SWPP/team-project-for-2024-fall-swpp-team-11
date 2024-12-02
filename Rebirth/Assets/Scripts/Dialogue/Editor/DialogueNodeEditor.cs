@@ -12,6 +12,15 @@ public class DialogueNodeEditor : Editor
     // PlainNextDialogueNode properties
     SerializedProperty nextNodeProp;
 
+    // RewardDialogueNode properties
+    SerializedProperty rewardedItemProp;
+
+    // PenaltyDialogueNode properties
+    SerializedProperty penaltyedItemProp;
+
+    // MarkNPCAsMetNode properties
+    SerializedProperty NPCnameProp;
+
     // ConditionDialogueNode properties
     SerializedProperty conditionMetNextNodeProp;
     SerializedProperty conditionNotMetNextNodeProp;
@@ -27,6 +36,9 @@ public class DialogueNodeEditor : Editor
     SerializedProperty questAcceptedNodeProp;
     SerializedProperty questRejectedNodeProp;
 
+    // ConditionOptionDialogueNode properties
+    // SerializedProperty conditionalTextNodePairsProp; 
+
     private void OnEnable()
     {
         nodeIDProp = serializedObject.FindProperty("nodeID");
@@ -35,6 +47,15 @@ public class DialogueNodeEditor : Editor
 
         // PlainNextDialogueNode properties
         nextNodeProp = serializedObject.FindProperty("nextNode");
+
+        // RewardDialogueNode properties
+        rewardedItemProp = serializedObject.FindProperty("rewardedItem");
+
+        // PenaltyDialogueNode properties
+        penaltyedItemProp = serializedObject.FindProperty("penaltyItem");
+
+        // MarkNPCAsMetNode properties
+        NPCnameProp = serializedObject.FindProperty("NPCName");
 
         // ConditionDialogueNode properties
         conditionMetNextNodeProp = serializedObject.FindProperty("conditionMetNextNode");
@@ -50,6 +71,9 @@ public class DialogueNodeEditor : Editor
         // QuestOfferDialogueNode properties
         questAcceptedNodeProp = serializedObject.FindProperty("questAcceptedNode");
         questRejectedNodeProp = serializedObject.FindProperty("questRejectedNode");
+
+        // ConditionOptionDialogueNode properties 
+        // conditionalTextNodePairsProp = serializedObject.FindProperty("conditionalTextNodePairs");
     }
 
     public override void OnInspectorGUI()
@@ -79,6 +103,11 @@ public class DialogueNodeEditor : Editor
         {
             EditorGUILayout.PropertyField(textNodePairsProp, true);
         }
+        // else if (target is ConditionOptionDialogueNode) 
+        // {
+        //     EditorGUILayout.PropertyField(conditionalTextNodePairsProp, true);
+        //     EditorGUILayout.HelpBox("Each option will only appear if its conditions are met.", MessageType.Info);
+        // }
         else if (target is LeafDialogueNode)
         {
             EditorGUILayout.Space();
@@ -97,6 +126,25 @@ public class DialogueNodeEditor : Editor
             {
                 EditorGUILayout.PropertyField(nextNodeProp);
             }
+        }
+        else if (target is RewardDialogueNode)
+        {
+            EditorGUILayout.PropertyField(nextNodeProp);
+            EditorGUILayout.PropertyField(rewardedItemProp);
+            EditorGUILayout.Space();
+            EditorGUILayout.HelpBox("Options are managed automatically for RewardDialogueNode.", MessageType.Info);
+        }
+        else if (target is PenaltyDialogueNode)
+        {
+            EditorGUILayout.PropertyField(nextNodeProp);
+            EditorGUILayout.PropertyField(penaltyedItemProp);
+            EditorGUILayout.Space();
+            EditorGUILayout.HelpBox("Options are managed automatically for PenaltyDialogueNode.", MessageType.Info);
+        }
+        else if (target is MarkNPCAsMetNode)
+        {
+            EditorGUILayout.PropertyField(nextNodeProp);
+            EditorGUILayout.PropertyField(NPCnameProp);
         }
         else
         {

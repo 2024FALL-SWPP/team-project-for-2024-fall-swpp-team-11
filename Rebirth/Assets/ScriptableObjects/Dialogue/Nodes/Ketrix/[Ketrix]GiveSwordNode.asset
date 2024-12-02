@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745979fd610664d58a49f621a049a433, type: 3}
+  m_Name: '[Ketrix]GiveSwordNode'
+  m_EditorClassIdentifier: 
+  nodeID: 514
+  dialogueText: "\uD760.. \uB2E8\uAC80?\n\uD558 \uC694\uC0C8 \uCCA0 \uAC12\uC774
+    \uB9CE\uC774 \uC62C\uB77C\uC11C \uAF64 \uADC0\uD55C \uAC74\uB370.."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: f782e37a995884e93865378a694db781, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions: []
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  nextNode: {fileID: 11400000, guid: f782e37a995884e93865378a694db781, type: 2}
+  rewardedItem: {fileID: 11400000, guid: 1c2b358b9874945b1aa8ddbc2418d734, type: 2}

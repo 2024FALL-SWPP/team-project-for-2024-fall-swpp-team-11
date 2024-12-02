@@ -6,14 +6,28 @@ public class CharacterStatusData
 {
     public int Money;
     public int Health;
-    public bool IsDimensionSwitchable;
+
+    public int PlayerState; // 1: Default, 2:Can use weird Potion, 3:isToxified, 4:Can use Cure Potion , 5:isDetoxified
+    public bool CanAccessLibrary;
+    public bool IsPaperSfixed;
+    public bool IsPaperEfixed;
+    public bool IsPaperBfixed;
+    public int EndingID;
+
     public string LastScene;
 
     public CharacterStatusData()
     {
         Money = 0;
         Health = 100;
-        IsDimensionSwitchable = false;
+
+        PlayerState = 1;
+        CanAccessLibrary = false;
+        IsPaperSfixed = false;
+        IsPaperEfixed = false;
+        IsPaperBfixed = false;
+        EndingID = 1;
+
         LastScene = "HeroHouse2D";
     }
 }
@@ -29,7 +43,17 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     // Money-related variables
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
-    public bool IsDimensionSwitchable { get; private set; }
+    // public bool IsDimensionSwitchable { get; private set; }
+
+    public int PlayerState { get; set; } // 1: Default, 2:isToxified, 3:isDetoxified
+    public bool CanAccessLibrary  { get; set; }
+    public bool IsPaperBfixed  { get; set; }
+    public bool IsPaperSfixed  { get; set; }
+    public bool IsPaperEfixed  { get;  set; }
+    public int EndingID { get; set; }
+
+    private bool isInitialized = false;
+
 
     protected override void Awake()
     {
@@ -49,7 +73,14 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
         Health = data.Health;
         Money = data.Money;
-        IsDimensionSwitchable = data.IsDimensionSwitchable;
+
+        PlayerState = data.PlayerState;
+        CanAccessLibrary = data.CanAccessLibrary;
+        IsPaperBfixed = data.IsPaperBfixed;
+        IsPaperSfixed = data.IsPaperSfixed;
+        IsPaperEfixed = data.IsPaperEfixed;
+        EndingID = data.EndingID;
+        // IsDimensionSwitchable = data.IsDimensionSwitchable;
 
         RefreshStatusUI();
     }
@@ -143,14 +174,71 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         NotifyMoneyChanged();
     }
 
-    public void SetIsDimensionSwitchable(bool val)
-    {
-        IsDimensionSwitchable = val;
-    }
+    // public void SetIsDimensionSwitchable(bool val)
+    // {
+    //     IsDimensionSwitchable = val;
+    // }
 
     private void OnDestroy()
     {
         SaveManager.save -= SaveCharacterStatusToDisk;
         SaveManager.load -= LoadCharacterStatusFromDisk;
     }
+    
+    public void SetPlayerState(int state)
+    {
+        PlayerState = state;
+    }
+
+    #region canAccessLibrary
+    public bool GetCanAccessLibrary()
+    {
+        return CanAccessLibrary;
+    }
+
+    public void SetCanAccessLibrary(bool canAccess)
+    {
+        CanAccessLibrary=canAccess;
+    }
+    #endregion
+
+    #region paper
+    public bool GetPaper(string sort)
+    {
+        if (sort == "s")
+        {  
+            return IsPaperSfixed;
+        }
+        else if (sort == "b")
+        {
+            return IsPaperBfixed;
+        }
+        else if (sort == "e")
+        {
+            return IsPaperEfixed;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
+    public void SetPaper(bool isFixed, string sort)
+    {
+        if (sort == "s")
+        {  
+            IsPaperSfixed = isFixed;
+        }
+        else if (sort == "b")
+        {
+            IsPaperBfixed = isFixed;
+        }
+        else if (sort == "e")
+        {
+            IsPaperEfixed = isFixed;
+        }
+    }
+    #endregion
+
 }
