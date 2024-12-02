@@ -7,27 +7,28 @@ public class CharacterStatusData
     public int Money;
     public int Health;
 
-    public int PlayerState; // 1: Default, 2:Can use weird Potion, 3:isToxified, 4:Can use Cure Potion , 5:isDetoxified
+    public PlayerState PlayerState; // 1: Default, 2:Can use weird Potion, 3:isToxified, 4:Can use Cure Potion , 5:isDetoxified
     public bool CanAccessLibrary;
     public bool IsPaperSfixed;
     public bool IsPaperEfixed;
     public bool IsPaperBfixed;
     public int EndingID;
-    // public bool IsDimensionSwitchable;
 
+    public string LastScene;
 
     public CharacterStatusData()
     {
         Money = 0;
         Health = 100;
 
-        PlayerState = 1;
+        PlayerState = PlayerState.Default;
         CanAccessLibrary = false;
         IsPaperSfixed = false;
         IsPaperEfixed = false;
         IsPaperBfixed = false;
         EndingID = 1;
-        // IsDimensionSwitchable = false;
+
+        LastScene = "HeroHouse2D";
     }
 }
 
@@ -44,7 +45,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public event Action<int> OnMoneyChanged;
     // public bool IsDimensionSwitchable { get; private set; }
 
-    public int PlayerState { get; set; } // 1: Default, 2:isToxified, 3:isDetoxified
+    public PlayerState PlayerState { get; set; } // 1: Default, 2:isToxified, 3:isDetoxified
     public bool CanAccessLibrary  { get; set; }
     public bool IsPaperBfixed  { get; set; }
     public bool IsPaperSfixed  { get; set; }
@@ -184,7 +185,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         SaveManager.load -= LoadCharacterStatusFromDisk;
     }
     
-    public void SetPlayerState(int state)
+    public void SetPlayerState(PlayerState state)
     {
         PlayerState = state;
     }

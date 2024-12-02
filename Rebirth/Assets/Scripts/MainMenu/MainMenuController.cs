@@ -15,24 +15,37 @@ public class MainMenuController : MonoBehaviour
     }
 
     [Header("Scene Management")]
-    [SerializeField] private string gameSceneName = "GameScene";
     [SerializeField] private bool useLoadingScreen;
     [SerializeField] private string loadingSceneName = "LoadingScene";
 
     [Header("Menu Panels")]
     [SerializeField] private MenuPanel[] menuPanels;
 
+    private string gameSceneName = "GameScene";
     private MenuPanel currentPanel;
+
+    private void Awake()
+    {
+        SaveManager.load += LoadStartSceneData;
+    }
 
     private void Start()
     {
-        CloseAllPanels();
+        GameStateManager.Instance.LockView();
 
-        // Update gameSceneName from stored data
+        CloseAllPanels();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseAllPanels();
+        }
     }
 
     #region Scene Management
-    public void StartGame()
+    public async void StartGame()
     {
         if (useLoadingScreen)
         {
@@ -40,14 +53,16 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(gameSceneName);
+            await SceneTransitionManager.Instance.SceneTransitionWithEffect(gameSceneName);
         }
     }
 
     public void RestartGame()
     {
         // Restart Logic
-
+        DiskSaveSystem.ResetFiles();
+        LoadStartSceneData();
+        
         // StartGame
         StartGame();
     }
@@ -110,14 +125,23 @@ public class MainMenuController : MonoBehaviour
     }
     #endregion
 
+    #region Load Data
+    public void LoadStartSceneData()
+    {
+        CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
+        gameSceneName = data.LastScene;
+    }
+
+    #endregion
+
     #region Application Management
     public void QuitGame()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
     #endregion
 }
