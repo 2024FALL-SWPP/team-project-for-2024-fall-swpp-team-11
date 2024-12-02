@@ -146,4 +146,82 @@ public class DiskSaveSystem
         return characterStatusData;
     }
     #endregion
+
+    #region NPC Met Status
+    private static string NpcMetStatusSavePath => Path.Combine(Application.persistentDataPath, "npc_met_status.json");
+
+    public static void SaveNPCMetStatusToDisk(ref Dictionary<string, bool> npcMetStatus)
+    {        
+        string json = JsonConvert.SerializeObject(npcMetStatus, Formatting.Indented);
+        File.WriteAllText(NpcMetStatusSavePath, json);
+    }
+
+    public static void LoadNPCMetStatusFromDisk(ref Dictionary<string, bool> npcMetStatus)
+    {
+        if (!File.Exists(NpcMetStatusSavePath))
+        {
+            npcMetStatus = new Dictionary<string, bool>();
+        }
+
+        string json = File.ReadAllText(NpcMetStatusSavePath);
+        npcMetStatus = JsonConvert.DeserializeObject<Dictionary<string, bool>>(json) ?? new Dictionary<string, bool>();
+    }
+    #endregion
+
+
+    #region  Quest Manager
+
+    [System.Serializable]
+    public class QuestSaveData
+    {
+        public int questID;
+        public QuestData questData;
+    }
+ 
+    private static string QuestSavePath => Path.Combine(Application.persistentDataPath, "quests.json");
+    private static string QuestStatusSavePath => Path.Combine(Application.persistentDataPath, "quest_statuses.json");
+
+    public static void SaveQuestManagerToDisk(Dictionary<int, QuestData> quests, Dictionary<int, QuestStatus> questStatuses)
+    {
+        // Save quests
+        var questList = new List<QuestSaveData>();
+        foreach (var quest in quests)
+        {
+            questList.Add(new QuestSaveData
+            {
+                questID = quest.Key,
+                questData = quest.Value
+            });
+        }
+        string questJson = JsonConvert.SerializeObject(questList, Formatting.Indented);
+        File.WriteAllText(QuestSavePath, questJson);
+
+        // Save quest statuses
+        string statusJson = JsonConvert.SerializeObject(questStatuses, Formatting.Indented);
+        File.WriteAllText(QuestStatusSavePath, statusJson);
+    }
+
+    public static void LoadQuestManagerFromDisk(out Dictionary<int, QuestData> quests, out Dictionary<int, QuestStatus> questStatuses)
+    {
+        quests = new Dictionary<int, QuestData>();
+        questStatuses = new Dictionary<int, QuestStatus>();
+
+        if (File.Exists(QuestSavePath))
+        {
+            string questJson = File.ReadAllText(QuestSavePath);
+            var questList = JsonConvert.DeserializeObject<List<QuestSaveData>>(questJson) ?? new List<QuestSaveData>();
+            foreach (var questData in questList)
+            {
+                quests.Add(questData.questID, questData.questData);
+            }
+        }
+
+        if (File.Exists(QuestStatusSavePath))
+        {
+            string statusJson = File.ReadAllText(QuestStatusSavePath);
+            questStatuses = JsonConvert.DeserializeObject<Dictionary<int, QuestStatus>>(statusJson) ?? new Dictionary<int, QuestStatus>();
+        }
+    }
+
+    #endregion
 }

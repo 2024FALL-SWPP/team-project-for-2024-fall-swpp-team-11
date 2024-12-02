@@ -8,6 +8,24 @@ public class NPCManager : SingletonManager<NPCManager>
 
     private static string logPrefix = "[NPCManager] ";
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        SaveManager.save += SaveNPCMetStatusToDisk;
+        SaveManager.load += LoadNPCMetStatusFromDisk;
+    }
+
+    private void SaveNPCMetStatusToDisk()
+    {
+        DiskSaveSystem.SaveNPCMetStatusToDisk(ref npcMetStatus);
+    }
+
+    private void LoadNPCMetStatusFromDisk()
+    {
+        DiskSaveSystem.LoadNPCMetStatusFromDisk(ref npcMetStatus);
+    }
+
     public void RegisterNPC(string npcName)
     {
         if (!npcMetStatus.ContainsKey(npcName))

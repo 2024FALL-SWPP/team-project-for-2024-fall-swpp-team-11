@@ -10,7 +10,6 @@ public enum QuestStatus
 
 public class QuestManager : SingletonManager<QuestManager>
 {
-
     public Dictionary<int, QuestData> quests = new Dictionary<int, QuestData>();
     private Dictionary<int, QuestStatus> questStatuses = new Dictionary<int, QuestStatus>();
 
@@ -22,10 +21,24 @@ public class QuestManager : SingletonManager<QuestManager>
     {
         base.Awake();
 
+        SaveManager.load += SaveQuestManagerToDisk;
+        SaveManager.save += LoadQuestManagerFromDisk;
+
         if (questUI == null)
         {
             Debug.LogError(logPrefix + "QuestUI not found.");
         }
+    }
+
+    private void SaveQuestManagerToDisk()
+    {
+        DiskSaveSystem.SaveQuestManagerToDisk(quests, questStatuses);
+    }
+
+    private void LoadQuestManagerFromDisk()
+    {
+        DiskSaveSystem.LoadQuestManagerFromDisk(out quests, out questStatuses);
+        questUI.RefreshQuestDisplay();
     }
 
     private void Update()
