@@ -12,6 +12,7 @@ public class CharacterStatusData
     public bool IsPaperSfixed;
     public bool IsPaperEfixed;
     public bool IsPaperBfixed;
+    public int EndingID;
     // public bool IsDimensionSwitchable;
 
 
@@ -25,6 +26,7 @@ public class CharacterStatusData
         IsPaperSfixed = false;
         IsPaperEfixed = false;
         IsPaperBfixed = false;
+        EndingID = 1;
         // IsDimensionSwitchable = false;
     }
 }
@@ -47,6 +49,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public bool IsPaperBfixed  { get; private set; }
     public bool IsPaperSfixed  { get; private set; }
     public bool IsPaperEfixed  { get; private set; }
+    public int EndingID { get; private set; }
 
     private bool isInitialized = false;
 
@@ -75,6 +78,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         IsPaperBfixed = data.IsPaperBfixed;
         IsPaperSfixed = data.IsPaperSfixed;
         IsPaperEfixed = data.IsPaperEfixed;
+        EndingID = data.EndingID;
         // IsDimensionSwitchable = data.IsDimensionSwitchable;
 
         RefreshStatusUI();

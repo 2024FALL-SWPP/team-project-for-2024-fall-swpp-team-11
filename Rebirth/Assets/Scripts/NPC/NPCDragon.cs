@@ -15,7 +15,7 @@ public class NPCDragon : NPC
         }
 
         gameObject.SetActive(false); 
-        
+
         if(is2DAlive && CharacterStatusManager.Instance.PlayerState != 5){
             gameObject.SetActive(true);
         }
@@ -29,13 +29,15 @@ public class NPCDragon : NPC
         base.HandleDialogueEnd();
         
         if(DialogueManager.Instance.getLastLeafNode().nodeID == "ending1"){ 
-     
+            CharactersStatusManager.Instance.EndingID = 1;
         } else if(DialogueManager.Instance.getLastLeafNode().nodeID == "ending2"){ 
-     
+            CharactersStatusManager.Instance.EndingID = 2;
         } else if(DialogueManager.Instance.getLastLeafNode().nodeID == "ending3"){ 
-     
+            CharactersStatusManager.Instance.EndingID = 3;
         } else if(DialogueManager.Instance.getLastLeafNode().nodeID == "ending4"){ 
-     
+            CharactersStatusManager.Instance.EndingID = 4;
+        } else if(DialogueManager.Instance.getLastLeafNode().nodeID == "ending5"){ 
+            CharactersStatusManager.Instance.EndingID = 5;
         }
 
         portal.Interact();
