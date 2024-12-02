@@ -8,10 +8,10 @@ public class GameStateManager : SingletonManager<GameStateManager>
 
     void Start()
     {
-        UnlockView();
-        UnlockMovement();
-        UnlockMovement();
+        LockView();
+        LockMovement();
     }
+
     public void LockView()
     {
         IsViewLocked = true;

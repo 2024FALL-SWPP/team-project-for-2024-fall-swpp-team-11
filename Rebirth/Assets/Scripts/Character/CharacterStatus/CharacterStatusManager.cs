@@ -7,12 +7,14 @@ public class CharacterStatusData
     public int Money;
     public int Health;
     public bool IsDimensionSwitchable;
+    public string LastScene;
 
     public CharacterStatusData()
     {
         Money = 0;
         Health = 100;
         IsDimensionSwitchable = false;
+        LastScene = "HeroHouse2D";
     }
 }
 

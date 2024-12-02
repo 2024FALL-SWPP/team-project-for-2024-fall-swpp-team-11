@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.AddressableAssets;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DiskSaveSystem
 {
@@ -118,7 +119,8 @@ public class DiskSaveSystem
         {
             Money = CharacterStatusManager.Instance.Money,
             Health = CharacterStatusManager.Instance.Health,
-            IsDimensionSwitchable = CharacterStatusManager.Instance.IsDimensionSwitchable
+            IsDimensionSwitchable = CharacterStatusManager.Instance.IsDimensionSwitchable,
+            LastScene = SceneManager.GetActiveScene().name
         };
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);
@@ -140,4 +142,42 @@ public class DiskSaveSystem
         return characterStatusData;
     }
     #endregion
+
+    public static void ResetFiles()
+    {
+        DeleteAllSaveFilesExceptCharacterStatus();
+        ResetCharacterStatusExceptIsDimensionSwitchable();
+    }
+
+    public static void ResetCharacterStatusExceptIsDimensionSwitchable()
+    {
+        if (!File.Exists(CharacterStatusSavePath)) return;
+
+        string json = File.ReadAllText(CharacterStatusSavePath);
+        CharacterStatusData existingData = JsonConvert.DeserializeObject<CharacterStatusData>(json);
+
+        CharacterStatusData resetData = new CharacterStatusData
+        {
+            IsDimensionSwitchable = existingData.IsDimensionSwitchable,
+            Money = 0,
+            Health = 100,
+            LastScene = "HeroHouse2D"
+        };
+
+        string updatedJson = JsonConvert.SerializeObject(resetData, Formatting.Indented);
+        File.WriteAllText(CharacterStatusSavePath, updatedJson);
+    }
+
+    public static void DeleteAllSaveFilesExceptCharacterStatus()
+    {
+        string[] files = Directory.GetFiles(Application.persistentDataPath);
+
+        foreach (string file in files)
+        {
+            if (file != CharacterStatusSavePath)
+            {
+                File.Delete(file);
+            }
+        }        
+    }
 }
