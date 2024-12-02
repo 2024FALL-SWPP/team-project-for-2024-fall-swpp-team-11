@@ -1,12 +1,18 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class PointerHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public abstract class PointerHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
         HandlePointerEnter(eventData);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        HandlePointerClick(eventData);
     } 
+
     public void OnPointerExit(PointerEventData eventData)
     {
         HandlePointerExit();
@@ -14,4 +20,5 @@ public abstract class PointerHandler : MonoBehaviour, IPointerEnterHandler, IPoi
 
     protected virtual void HandlePointerEnter(PointerEventData eventData) { }
     protected virtual void HandlePointerExit() { }
+    protected virtual void HandlePointerClick(PointerEventData eventData) { }
 }

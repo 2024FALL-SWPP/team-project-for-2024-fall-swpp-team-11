@@ -1,47 +1,55 @@
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class InventoryDataContainer
 {   
-    public IReadOnlyList<ItemData> TwoDimensionalItems => twoDimensionalItems;
-    public IReadOnlyList<ItemData> ThreeDimensionalItems => threeDimensionalItems;
-
     private List<ItemData> twoDimensionalItems = new List<ItemData>();
     private List<ItemData> threeDimensionalItems = new List<ItemData>();
 
-    public InventoryDataContainer(List<ItemData> saved2DItems, List<ItemData> saved3DItems)
+    public void AddItem(ItemData itemData, Dimension dimension)
     {
-        twoDimensionalItems = new List<ItemData>(saved2DItems);
-        threeDimensionalItems = new List<ItemData>(saved3DItems);
-    }
-
-    public InventoryDataContainer()
-    {
-        twoDimensionalItems = new List<ItemData>();
-        threeDimensionalItems = new List<ItemData>();
-    }
-
-    public void AddItem(ItemData item)
-    {
-        if (item.dimension == Dimension.THREE_DIMENSION)
-            threeDimensionalItems.Add(item);
+        if (dimension == Dimension.TWO_DIMENSION)
+            twoDimensionalItems.Add(itemData);
         else
-            twoDimensionalItems.Add(item);
+            threeDimensionalItems.Add(itemData);
     }
 
-    public void RemoveItem(ItemData item)
+    public void RemoveItem(ItemData itemData, Dimension dimension)
     {
-        if (item.dimension == Dimension.THREE_DIMENSION)
-            threeDimensionalItems.Remove(item);
+        if (dimension == Dimension.TWO_DIMENSION)
+            twoDimensionalItems.Remove(itemData);
         else
-            twoDimensionalItems.Remove(item);
+            threeDimensionalItems.Remove(itemData);
     }
 
-    public bool HasItem(ItemData item)
+    public List<ItemData> GetItems(Dimension dimension)
     {
-        if (item.dimension == Dimension.THREE_DIMENSION)
-            return threeDimensionalItems.Contains(item);
+        return dimension == Dimension.TWO_DIMENSION ? twoDimensionalItems : threeDimensionalItems;
+    }
+
+    public bool HasItem(ItemData itemData, Dimension dimension)
+    {
+        if (dimension == Dimension.THREE_DIMENSION)
+            return threeDimensionalItems.Contains(itemData);
         else
-            return twoDimensionalItems.Contains(item);
+            return twoDimensionalItems.Contains(itemData);
+    }
+
+    public int GetTotalItemCount()
+    {
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.THREE_DIMENSION)
+            return threeDimensionalItems.Count;
+        else
+            return twoDimensionalItems.Count;
+    }
+
+    public void SortItems(Func<ItemData, object> keySelector, Dimension dimension, bool ascending = true)
+    {
+        List<ItemData> items = GetItems(dimension);
+
+        if (ascending)
+            items.Sort((a, b) => Comparer<object>.Default.Compare(keySelector(a), keySelector(b)));
+        else
+            items.Sort((a, b) => Comparer<object>.Default.Compare(keySelector(b), keySelector(a)));
     }
 }
