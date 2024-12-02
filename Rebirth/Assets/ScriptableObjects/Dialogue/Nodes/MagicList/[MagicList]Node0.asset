@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6d0c1d868bc644beb05584e2785e6, type: 3}
+  m_Name: '[MagicList]Node0'
+  m_EditorClassIdentifier: 
+  nodeID: 01
+  dialogueText: "\uC7A0\uC2DC \uBA48\uCD94\uC2DC\uC624, \uBC29\uB791\uC790\uC5EC.
+    \n\uC774 \uB3C4\uC11C\uAD00\uC740 \uC138\uC0C1\uC758 \uC9C4\uB9AC\uB97C \uD488\uC740
+    \uACF3. \n\uAE30\uB85D\uC5D0 \uB530\uB77C\uC57C\uB9CC \uC774 \uBB38\uD131\uC744
+    \uB118\uC744 \uC218 \uC788\uC18C. \n\uB2F9\uC2E0\uC758 \uC5BC\uAD74\uC744 \uBE44\uCD94\uC2DC\uC624.
+    \uBA85\uBD80\uC5D0 \uAE30\uB85D\uB41C \uC874\uC7AC\uC778\uC9C0 \uD655\uC778\uD558\uACA0\uC18C."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 7584773a17b8e4aa09c059199fcf38d5, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 52a99c98cd7534fbab996997e3ba45de, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: aadcfcd7d950e4845a29d6504ffadb70, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uB9C8\uBC95 \uBA85\uBD80 "
+  isSelfSpeak: 0
+  conditionMetNextNode: {fileID: 11400000, guid: 7584773a17b8e4aa09c059199fcf38d5, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 52a99c98cd7534fbab996997e3ba45de, type: 2}
+  conditions:
+  - {fileID: 11400000, guid: aadcfcd7d950e4845a29d6504ffadb70, type: 2}

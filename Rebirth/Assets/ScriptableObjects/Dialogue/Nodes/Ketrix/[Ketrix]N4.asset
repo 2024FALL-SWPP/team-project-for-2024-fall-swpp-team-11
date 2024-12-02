@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: '[Ketrix]N4'
+  m_EditorClassIdentifier: 
+  nodeID: 504
+  dialogueText: "\uC6C0\uB0E0\uB0E0.. \uADF8\uB798 \uB098\uC058\uC9C4 \uC54A\uB124.
+    \n\uB09C \uC6D0\uB798 \uACE0\uB4F1\uC5B4\uB9DB \uBCF4\uB2E4\uB294 \uCC38\uCE58\uB9DB\uC744
+    \uB354 \uC88B\uC544\uD558\uAE34 \uD558\uC9C0\uB9CC \uB9D0\uC774\uC57C. \uC544\uC2A4\uD0C8\uB860\uC5D0\uC120
+    \uB9DB\uC774 \uB2E4\uC591\uD558\uAC8C \uC788\uC5B4\uC11C \uC88B\uC558\uB294\uB370..
+    \n\uC694 \uB3D9\uB124\uB294 \uC9D1\uC5D0\uC11C \uACE0\uC591\uC774\uB97C \uC798
+    \uC548 \uD0A4\uC6B0\uB098\uBD10?"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 8298bccc12b9248ddb995a0348b99eb3, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  nextNode: {fileID: 11400000, guid: 8298bccc12b9248ddb995a0348b99eb3, type: 2}

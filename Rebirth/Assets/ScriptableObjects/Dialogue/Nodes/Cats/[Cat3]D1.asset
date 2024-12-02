@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6d0c1d868bc644beb05584e2785e6, type: 3}
+  m_Name: '[Cat3]D1'
+  m_EditorClassIdentifier: 
+  nodeID: 801
+  dialogueText: "\uBBF8\uC57C\uC544\uC639 "
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 943a30e18b5324bbb8dfb7b2f262531a, type: 2}
+    fallbackNode: {fileID: 11400000, guid: ad247bc17b2f04a06bb205bcfb7d9bf8, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: f5609f4d353c54395a2d7513c06c467a, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  conditionMetNextNode: {fileID: 11400000, guid: 88546a245c6964cd4a4b116e422ab0a4, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 390e953f2426443a39d7dc10995e57fe, type: 2}
+  conditions:
+  - {fileID: 11400000, guid: f5609f4d353c54395a2d7513c06c467a, type: 2}
