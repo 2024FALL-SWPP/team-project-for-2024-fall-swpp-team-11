@@ -16,10 +16,10 @@ public class NPCDragon : NPC
 
         gameObject.SetActive(false); 
 
-        if(is2DAlive && CharacterStatusManager.Instance.PlayerState != 5){
+        if(is2DAlive && CharacterStatusManager.Instance.PlayerState != PlayerState.IsDetoxified){
             gameObject.SetActive(true);
         }
-        if(is2DKilled && CharacterStatusManager.Instance.PlayerState == 5){
+        if(is2DKilled && CharacterStatusManager.Instance.PlayerState == PlayerState.IsDetoxified){
             gameObject.SetActive(true);
         }
     }
