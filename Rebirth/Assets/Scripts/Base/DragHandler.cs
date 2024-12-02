@@ -6,22 +6,22 @@ public abstract class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandl
     protected RectTransform rectTransform;
     protected Canvas canvas;
     protected CanvasGroup canvasGroup;
-    protected Vector2 originalPosition;
-    protected Transform originalParent;
+    protected GameObject originalParent;
 
     protected virtual void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        originalParent = transform.parent;
-        originalPosition = rectTransform.anchoredPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        canvas = canvas == null ? GetComponentInParent<Canvas>() : canvas;
+        
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
+
+        originalParent = transform.parent.gameObject;
         rectTransform.SetParent(canvas.transform, true);
 
         HandleDragStart(eventData);
@@ -30,23 +30,14 @@ public abstract class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandl
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-
         HandleDragging(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (ShouldReturnToOriginalPosition(eventData))
-        {
-            rectTransform.anchoredPosition = originalPosition;
-            rectTransform.SetParent(originalParent, true);
-            canvasGroup.alpha = 1f;
-            canvasGroup.blocksRaycasts = true;
-        }
-        else
-        {
-            HandleDragEnd(eventData);
-        }
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+        HandleDragEnd(eventData);
     }
 
     protected virtual void HandleDragStart(PointerEventData eventData) { }
