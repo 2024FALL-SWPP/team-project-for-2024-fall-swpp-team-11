@@ -36,7 +36,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
 
-    public int PlayerState; // 1: Default, 2:isToxified, 3:isDetoxified
+    public int PlayerState { get; private set; }; // 1: Default, 2:isToxified, 3:isDetoxified
     public bool CanAccessLibrary;
     public bool IsPaperBfixed;
     public bool IsPaperSfixed;
