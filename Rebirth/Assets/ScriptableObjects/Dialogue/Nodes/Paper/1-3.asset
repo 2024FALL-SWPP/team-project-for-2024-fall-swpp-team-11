@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e18459eaf9874d48836c3d2da192f26, type: 3}
+  m_Name: 1-3
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: 
+  options:
+  - optionText: "\uAC80\uAC8C \uBD88\uC5D0 \uD0C4 \uD754\uC801"
+    nextNode: {fileID: 11400000, guid: 3a7086cf078e444178eee69976e41c52, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uCC22\uC5B4\uC9C4 \uD754\uC801"
+    nextNode: {fileID: 11400000, guid: 0454d7fb7582b4607b8c431b8b50f6c3, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uAE00\uC528\uAC00 \uC9C0\uC6CC\uC9C4 \uD754\uC801"
+    nextNode: {fileID: 11400000, guid: e3d78d7953f5541378441be5974d88b7, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uB9C8\uBC95\uC758 \uC591\uD53C\uC9C0"
+  isSelfSpeak: 1
+  associatedQuest: {fileID: 0}
+  textNodePairs:
+  - optionText: "\uAC80\uAC8C \uBD88\uC5D0 \uD0C4 \uD754\uC801"
+    nextNode: {fileID: 11400000, guid: 3a7086cf078e444178eee69976e41c52, type: 2}
+  - optionText: "\uCC22\uC5B4\uC9C4 \uD754\uC801"
+    nextNode: {fileID: 11400000, guid: 0454d7fb7582b4607b8c431b8b50f6c3, type: 2}
+  - optionText: "\uAE00\uC528\uAC00 \uC9C0\uC6CC\uC9C4 \uD754\uC801"
+    nextNode: {fileID: 11400000, guid: e3d78d7953f5541378441be5974d88b7, type: 2}

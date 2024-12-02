@@ -23,7 +23,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
     async void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && !isSwitching)
+        if (Input.GetKeyDown(KeyCode.T) && !isSwitching && (CharacterStatusManager.Instance.PlayerState == 3 || CharacterStatusManager.Instance.PlayerState == 4 ))
         {
             await SwitchDimension();
         }
@@ -49,7 +49,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
 
-        InventoryManager.Instance.HideInventory();
+        InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
 
         await SceneTransitionManager.Instance.FadeOutAsync();

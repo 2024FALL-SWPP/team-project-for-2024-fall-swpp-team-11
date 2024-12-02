@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7958966548297796622}
   - component: {fileID: 3501724886799098350}
   - component: {fileID: 4297447736100176692}
+  - component: {fileID: 6389640194633933389}
   m_Layer: 0
   m_Name: '[item]dungeon-key'
   m_TagString: Untagged
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 940620659
-  m_SortingLayer: 6
+  m_SortingLayerID: 560475063
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4875df9de25714d15b78d558b88cf5ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -137,3 +138,16 @@ CircleCollider2D:
   m_Offset: {x: -0.057245493, y: 0.07338971}
   serializedVersion: 2
   m_Radius: 0.9461865
+--- !u!114 &6389640194633933389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9217977475950915972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 6dd68c3a3cce8448289b0a7f907220aa, type: 2}

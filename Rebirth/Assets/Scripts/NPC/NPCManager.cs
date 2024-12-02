@@ -13,6 +13,7 @@ public class NPCManager : SingletonManager<NPCManager>
         if (!npcMetStatus.ContainsKey(npcName))
         {
             npcMetStatus.Add(npcName, false);
+            // Debug.Log(npcMetStatus["우물"]);
         }
     }
 

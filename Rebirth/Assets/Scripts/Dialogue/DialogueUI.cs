@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
+    public DialogueTyper dialogueTyper;
     public GameObject dialoguePanel;
-    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI dialogueNPCNameText;
+    // public TextMeshProUGUI dialogueText;
     public Transform optionsContainer;
     public GameObject optionButtonPrefab;
+    public Transform nextContainer;
+    public GameObject nextButtonPrefab;
 
     public Color selectedColor = Color.yellow;
     public Color defaultColor = Color.white;
@@ -22,13 +26,24 @@ public class DialogueUI : MonoBehaviour
     {
         Debug.Log(logPrefix + "ShowDialogue " + node.dialogueText + " with " + node.options.Count + " options");
         dialoguePanel.SetActive(true);
-        dialogueText.text = node.dialogueText;
+        dialogueNPCNameText.text = node.conversationNpcName;
+        // dialogueText.text = node.dialogueText;
+        dialogueTyper.ShowDialogue(node.dialogueText);
         ClearOptions();
 
-        foreach (DialogueOption option in node.options)
-        {
-            CreateOptionButton(option);
+        if(node.isSelfSpeak){
+            foreach (DialogueOption option in node.options)
+            {
+                CreateOptionButton(option);
+            }
+        } else {
+            foreach (DialogueOption option in node.options)
+            {
+                CreateNextButton(option);
+            }
         }
+
+        
         selectedOptionIndex = initialSelectedIndex;
         UpdateOptionSelection();
 
@@ -82,6 +97,16 @@ public class DialogueUI : MonoBehaviour
         //     OnOptionSelected(option);
         // });
 
+        currentOptionButtons.Add(buttonObj);
+    }
+
+     private void CreateNextButton(DialogueOption option)
+    {
+        GameObject buttonObj = Instantiate(nextButtonPrefab, nextContainer);
+        Button button = buttonObj.GetComponent<Button>();
+        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+
+        buttonText.text = option.optionText;
         currentOptionButtons.Add(buttonObj);
     }
 
