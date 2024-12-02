@@ -124,7 +124,7 @@ public class DiskSaveSystem
             IsPaperSfixed = CharacterStatusManager.Instance.IsPaperSfixed,
             IsPaperEfixed = CharacterStatusManager.Instance.IsPaperEfixed,
             IsPaperBfixed = CharacterStatusManager.Instance.IsPaperBfixed,
-            EndingID = CharactersStatusManager.Instance.EndingID,
+            EndingID = CharacterStatusManager.Instance.EndingID,
         };
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);

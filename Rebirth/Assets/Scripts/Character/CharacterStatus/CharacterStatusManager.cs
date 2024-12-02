@@ -44,12 +44,12 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public event Action<int> OnMoneyChanged;
     // public bool IsDimensionSwitchable { get; private set; }
 
-    public int PlayerState { get; private set; } // 1: Default, 2:isToxified, 3:isDetoxified
-    public bool CanAccessLibrary  { get; private set; }
-    public bool IsPaperBfixed  { get; private set; }
-    public bool IsPaperSfixed  { get; private set; }
-    public bool IsPaperEfixed  { get; private set; }
-    public int EndingID { get; private set; }
+    public int PlayerState { get; set; } // 1: Default, 2:isToxified, 3:isDetoxified
+    public bool CanAccessLibrary  { get; set; }
+    public bool IsPaperBfixed  { get; set; }
+    public bool IsPaperSfixed  { get; set; }
+    public bool IsPaperEfixed  { get;  set; }
+    public int EndingID { get; set; }
 
     private bool isInitialized = false;
 
