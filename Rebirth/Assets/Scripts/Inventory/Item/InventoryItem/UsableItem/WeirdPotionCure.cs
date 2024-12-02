@@ -5,6 +5,6 @@ public class WeirdPotionCure : UsableItem
 {
     public override void Use()
     {
-        CharacterStatusManager.Instance.SetPlayerState(5);
+        CharacterStatusManager.Instance.SetPlayerState(PlayerState.IsDetoxified);
     }
 }
