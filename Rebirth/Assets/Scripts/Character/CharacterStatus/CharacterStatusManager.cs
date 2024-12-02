@@ -6,11 +6,13 @@ public class CharacterStatusData
 {
     public int Money;
     public int Health;
+    public bool IsDimensionSwitchable;
 
     public CharacterStatusData()
     {
         Money = 0;
         Health = 100;
+        IsDimensionSwitchable = false;
     }
 }
 
@@ -25,6 +27,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     // Money-related variables
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
+    public bool IsDimensionSwitchable { get; private set; }
 
     protected override void Awake()
     {
@@ -44,6 +47,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
         Health = data.Health;
         Money = data.Money;
+        IsDimensionSwitchable = data.IsDimensionSwitchable;
 
         RefreshStatusUI();
     }
@@ -135,6 +139,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     {
         Money = Mathf.Max(0, startingAmount); // Reset money to a specific amount
         NotifyMoneyChanged();
+    }
+
+    public void SetIsDimensionSwitchable(bool val)
+    {
+        IsDimensionSwitchable = val;
     }
 
     private void OnDestroy()
