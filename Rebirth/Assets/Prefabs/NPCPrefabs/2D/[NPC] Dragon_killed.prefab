@@ -113,9 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad87d0cc2f6324e01acf45ded6f2c3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: 
-  questNodes: {fileID: 0}
+  npcName: ...
+  questNodes: {fileID: 11400000, guid: d651c5462a3b943f081604bbc27815e2, type: 2}
   portal: {fileID: 0}
+  is2DKilled: 1
+  is2DAlive: 0
 --- !u!61 &5260972555283738661
 BoxCollider2D:
   m_ObjectHideFlags: 0
