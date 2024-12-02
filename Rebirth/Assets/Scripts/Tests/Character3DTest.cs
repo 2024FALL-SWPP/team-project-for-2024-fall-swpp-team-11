@@ -11,9 +11,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 
-public class CharacterTest : InputTestFixture
+public class Character3DTest : InputTestFixture
 {
-    private static readonly string logPrefix = "[CharacterTest] ";
+    private static readonly string logPrefix = "[CharacterTest3D] ";
     private static readonly string testSceneName = "InputSystemTest3D";
 
     private GameObject hero;
