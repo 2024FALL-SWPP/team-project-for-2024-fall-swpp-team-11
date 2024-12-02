@@ -6,7 +6,7 @@ public class ShopManager : SingletonManager<ShopManager>
 {
     [Header("Shop Items")]
     [SerializeField] private List<ItemData> allShopItems; // Master list of all items
-    private List<ItemData> availableShopItems = new List<ItemData>(); // Current available shop items
+    private Dictionary<string, ActivateItem> itemActivators = new Dictionary<string, ActivateItem>(); // Map of items and their activators
 
     private ShopUI shopUI; 
     private bool shopUIActivated = false;
@@ -16,7 +16,7 @@ public class ShopManager : SingletonManager<ShopManager>
         base.Awake();
         DontDestroyOnLoad(gameObject);
         InitializeShopUI();
-        UpdateAvailableShopItems();
+        InitializeItemActivators();
     }
 
     private void InitializeShopUI()
@@ -32,21 +32,14 @@ public class ShopManager : SingletonManager<ShopManager>
         }
     }
 
-    private void UpdateAvailableShopItems()
+    private void InitializeItemActivators()
     {
-        availableShopItems.Clear();
-        int playerState = CharacterStatusManager.Instance.PlayerState;
-
-        foreach (ItemData item in allShopItems)
+        foreach (var item in FindObjectsOfType<ActivateItem>())
         {
-            // Add logic for filtering based on player state
-            if (playerState == 1 && item.itemName == "2Dweirdpotion")
+            if (!itemActivators.ContainsKey(item.name))
             {
-                availableShopItems.Add(item);
-            }
-            else if (item.dimension == GetCurrentDimension())
-            {
-                availableShopItems.Add(item);
+                itemActivators.Add(item.name, item);
+                item.Deactivate(); // Ensure all items are deactivated initially
             }
         }
     }
@@ -73,8 +66,11 @@ public class ShopManager : SingletonManager<ShopManager>
 
     private void OpenShop()
     {
-        UpdateAvailableShopItems(); // Update the items before opening the shop
-        shopUI.DisplayItems(availableShopItems);
+        Dimension currentDimension = GetCurrentDimension();
+        List<ItemData> itemsToDisplay = GetItemsForDimension(currentDimension);
+
+        shopUI.DisplayItems(itemsToDisplay);
+
         shopUI.gameObject.SetActive(true); // Show shop UI
         GameStateManager.Instance.LockView(); // Lock camera movement
     }
@@ -103,6 +99,60 @@ public class ShopManager : SingletonManager<ShopManager>
         }
     }
 
+    public List<ItemData> GetItemsForDimension(Dimension dimension)
+    {
+        List<ItemData> itemsForDimension = new List<ItemData>();
+        PlayerState currentState = CharacterStatusManager.Instance.PlayerState;
+
+        foreach (var item in allShopItems)
+        {
+            if (item != null && item.dimension == dimension)
+            {
+                // Check conditions based on PlayerState
+                if (currentState == PlayerState.CanUseWeirdPotion && item.itemName == "2DWeirdPotion")
+                {
+                    ActivateItem(item.itemName);
+                    itemsForDimension.Add(item);
+                }
+                else if (currentState == PlayerState.CanUseWeirdPotionCure && item.itemName == "2DWeirdPotion-Cure")
+                {
+                    ActivateItem(item.itemName);
+                    itemsForDimension.Add(item);
+                }
+                else if (item.itemName != "2DWeirdPotion" && item.itemName != "2DWeirdPotion-Cure") // General items
+                {
+                    itemsForDimension.Add(item);
+                }
+                else
+                {
+                    DeactivateItem(item.itemName); // Deactivate items not meeting the condition
+                }
+            }
+        }
+
+        return itemsForDimension;
+    }
+
+    public void ActivateItem(string itemName)
+    {
+        if (itemActivators.TryGetValue(itemName, out var activator))
+        {
+            activator.Activate();
+        }
+        else
+        {
+            Debug.LogWarning($"Activator for item {itemName} not found.");
+        }
+    }
+
+    public void DeactivateItem(string itemName)
+    {
+        if (itemActivators.TryGetValue(itemName, out var activator))
+        {
+            activator.Deactivate();
+        }
+    }
+
     public bool PurchaseItem(ItemData itemData)
     {
         if (itemData == null) return false;
@@ -112,12 +162,29 @@ public class ShopManager : SingletonManager<ShopManager>
             CharacterStatusManager.Instance.UpdateMoney(-itemData.price);
             InventoryManager.Instance.AddItem(itemData);
 
-            // Remove the purchased item from the available shop items
-            availableShopItems.Remove(itemData);
+            // Handle specific items based on their name
+            if (itemData.itemName == "2DWeirdPotion")
+            {
+                MarkItemAsUsed("2DWeirdPotion");
+                DeactivateItem("2DWeirdPotion");
+            }
+            else if (itemData.itemName == "2DWeirdPotion-Cure")
+            {
+                MarkItemAsUsed("2DWeirdPotion-Cure");
+                DeactivateItem("2DWeirdPotion-Cure");
+            }
 
             return true; // Purchase successful
         }
 
         return false; // Purchase failed
+    }
+
+    private void MarkItemAsUsed(string itemName)
+    {
+        if (itemActivators.ContainsKey(itemName))
+        {
+            itemActivators[itemName].Deactivate();
+        }
     }
 }
