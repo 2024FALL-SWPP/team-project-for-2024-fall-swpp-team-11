@@ -6,21 +6,27 @@ public class CharacterStatusData
 {
     public int Money;
     public int Health;
+
     public int PlayerState; // 1: Default, 2:isToxified, 3:isDetoxified
     public bool CanAccessLibrary;
     public bool IsPaperSfixed;
     public bool IsPaperEfixed;
     public bool IsPaperBfixed;
+    public bool IsDimensionSwitchable;
+
 
     public CharacterStatusData()
     {
         Money = 0;
         Health = 100;
+
         PlayerState = 1;
         CanAccessLibrary = false;
         IsPaperSfixed = false;
         IsPaperEfixed = false;
         IsPaperBfixed = false;
+        IsDimensionSwitchable = false;
+
     }
 }
 
@@ -35,6 +41,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     // Money-related variables
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
+    public bool IsDimensionSwitchable { get; private set; }
 
     public int PlayerState { get; private set; }; // 1: Default, 2:isToxified, 3:isDetoxified
     public bool CanAccessLibrary;
@@ -63,11 +70,14 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         CharacterStatusData data = DiskSaveSystem.LoadCharacterStatusFromDisk();
         Health = data.Health;
         Money = data.Money;
+
         PlayerState = data.PlayerState;
         CanAccessLibrary = data.CanAccessLibrary;
         IsPaperBfixed = data.IsPaperBfixed;
         IsPaperSfixed = data.IsPaperSfixed;
         IsPaperEfixed = data.IsPaperEfixed;
+        IsDimensionSwitchable = data.IsDimensionSwitchable;
+
 
         RefreshStatusUI();
     }
@@ -159,6 +169,11 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     {
         Money = Mathf.Max(0, startingAmount); // Reset money to a specific amount
         NotifyMoneyChanged();
+    }
+
+    public void SetIsDimensionSwitchable(bool val)
+    {
+        IsDimensionSwitchable = val;
     }
 
     private void OnDestroy()
