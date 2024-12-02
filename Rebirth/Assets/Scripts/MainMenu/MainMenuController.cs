@@ -31,6 +31,8 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
+        GameStateManager.Instance.LockView();
+
         CloseAllPanels();
     }
 
