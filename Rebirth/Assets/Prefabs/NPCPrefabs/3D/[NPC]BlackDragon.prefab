@@ -629,7 +629,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184817802816597789}
-  m_LocalRotation: {x: -0.020881211, y: -0.5543762, z: 0.062008344, w: 0.82969034}
+  m_LocalRotation: {x: -0.020880999, y: -0.5543778, z: 0.062003396, w: 0.82968956}
   m_LocalPosition: {x: 5.7, y: -4.36, z: -2.25}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
@@ -4335,8 +4335,8 @@ GameObject:
   - component: {fileID: 1187022893073981753}
   - component: {fileID: 1269674483878147539}
   - component: {fileID: 1186518732888632396}
-  - component: {fileID: 1186518732888632243}
   - component: {fileID: 1186518732888632242}
+  - component: {fileID: 9001408680172976334}
   m_Layer: 0
   m_Name: DragonMesh
   m_TagString: Untagged
@@ -4542,20 +4542,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1296903, y: 0.159558, z: 0.3070382}
   m_Center: {x: 0.0062091053, y: 0.30286002, z: -0.050046086}
---- !u!114 &1186518732888632243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1185804512726735005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fcf76b8cd81f048bc211121587e44a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcName: "\uB4DC\uB798\uACE4 "
-  questNodes: {fileID: 11400000, guid: f7b52b6a6394a4c9cadf37aee9ffe7b2, type: 2}
 --- !u!114 &1186518732888632242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4574,6 +4560,21 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &9001408680172976334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185804512726735005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad87d0cc2f6324e01acf45ded6f2c3de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: "\uB4DC\uB798\uACE4"
+  questNodes: {fileID: 11400000, guid: 03e5ace3552ef4dab85826a775f01e98, type: 2}
+  portal: {fileID: 0}
 --- !u!1 &1185823946119666789
 GameObject:
   m_ObjectHideFlags: 0
