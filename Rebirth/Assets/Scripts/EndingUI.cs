@@ -8,6 +8,7 @@ public class EndingUI : MonoBehaviour
     void Start()
     {
         UpdateText(CharacterStatusManager.Instance.EndingID.ToString());
+        GameStateManager.Instance.LockView();
     }
 
     public void UpdateText(string newText)
