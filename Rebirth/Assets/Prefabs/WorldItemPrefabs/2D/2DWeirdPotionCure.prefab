@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3018800657040093067}
   - component: {fileID: 8544087296955339914}
   - component: {fileID: 5071229031231790047}
+  - component: {fileID: 2943614962076202248}
   m_Layer: 0
-  m_Name: '[item]weird-potion'
+  m_Name: 2DWeirdPotionCure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,10 +74,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 940620659
-  m_SortingLayer: 0
+  m_SortingLayerID: 560475063
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: de74efd1c997b4f62b01746ca0956be4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4def26b4a83424158ab84c659562b6b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,3 +138,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 2
+--- !u!114 &2943614962076202248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586128174522566681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 1d2bfcdd366af4e1d87129188b30cade, type: 2}
