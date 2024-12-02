@@ -8,7 +8,7 @@ public class CraftRecipe
     public WorldItem result;
 }
 
-public class MagicCircle : MonoBehaviour
+public class MagicCircle3D : MonoBehaviour
 {
     public List<CraftRecipe> craftRecipes;
 

@@ -47,9 +47,11 @@ MonoBehaviour:
   successEffectPrefab: {fileID: 100008, guid: be7d9c7b953f9b143861af17cf32d4ca, type: 3}
   successEffectScale: 0.6
   successEffectDuration: 1.2
+  successSound: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
   failureEffectPrefab: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
   failureEffectScale: 2
   failureEffectDuration: 2
+  failureSound: {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
 --- !u!1 &53001341744544861
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +458,7 @@ GameObject:
   - component: {fileID: 3604401329426827646}
   - component: {fileID: 3604401329426827647}
   m_Layer: 0
-  m_Name: MagicCircle
+  m_Name: MagicCircle3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
