@@ -31,6 +31,14 @@ public class MainMenuController : MonoBehaviour
         // Update gameSceneName from stored data
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseAllPanels();
+        }
+    }
+
     #region Scene Management
     public void StartGame()
     {
