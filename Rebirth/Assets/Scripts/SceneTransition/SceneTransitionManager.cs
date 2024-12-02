@@ -27,6 +27,13 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         }
     }
 
+    public async Task SceneTransitionWithEffect(string sceneName)
+    {
+        await FadeInAsync();
+        await LoadSceneAsync(sceneName);
+        await FadeOutAsync();
+    }
+
     public async Task FadeInAsync()
     {
         GameStateManager.Instance.LockView();
