@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine.EventSystems;
 
 public class ItemPointerHandler : PointerHandler
@@ -11,5 +12,13 @@ public class ItemPointerHandler : PointerHandler
     protected override void HandlePointerExit()
     {
         InventoryManager.Instance.HideTooltip();
+    }
+
+    protected override void HandlePointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            InventoryManager.Instance.UseItem(itemData);
+        }
     }
 }

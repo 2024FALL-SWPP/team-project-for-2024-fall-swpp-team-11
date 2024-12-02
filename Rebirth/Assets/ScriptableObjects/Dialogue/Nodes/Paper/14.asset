@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: 14
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: "\uADF8\uAC74, \u25A1\u25A1\u25A1 \u25A1\u25A1..\n\uC73C\uC73C..
+    \uC815\uD655\uD788 \uB9D0\uD560 \uC218\uB294 \uC5C6\uC9C0\uB9CC, \uB2E4 \uB110
+    \uC704\uD55C \uAC70\uB77C\uB2C8\uAE4C? \uC815\uB9D0\uC774\uC57C!! \n\uB108 \uC591\uD53C\uC9C0\uAC00
+    \uAC70\uC9D3\uB9D0 \uD558\uB294 \uAC70 \uBD24\uC5B4?"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: 94ea46bb65bf14705bda5d53aaa89200, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  isSelfSpeak: 0
+  nextNode: {fileID: 11400000, guid: fbfbafedba703426da63501a75cc5672, type: 2}

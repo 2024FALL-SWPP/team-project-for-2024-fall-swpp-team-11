@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6d0c1d868bc644beb05584e2785e6, type: 3}
+  m_Name: '[Karnas]firstmeetConditionNode'
+  m_EditorClassIdentifier: 
+  nodeID: 301
+  dialogueText: "\uB09C \uCE74\uB974\uB098\uC2A4. \uC544\uC8FC \uC704\uB300\uD55C
+    \uB4DC\uB798\uACE0, ...\uC778\uAC04\uC774\uC9C0."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: e1bc3a9de5cc64e23ad5533a2d021b1b, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 50809f8ebb16b4351b76bdb9d4471eaa, type: 2}
+    conditions:
+    - {fileID: 11400000, guid: ae5a9aa9268124928b9cd56fef404f10, type: 2}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: Librarian
+  isSelfSpeak: 0
+  conditionMetNextNode: {fileID: 11400000, guid: 6a7d6f29c83624dcdad55285d0106fb0, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 50809f8ebb16b4351b76bdb9d4471eaa, type: 2}
+  conditions:
+  - {fileID: 11400000, guid: ae5a9aa9268124928b9cd56fef404f10, type: 2}

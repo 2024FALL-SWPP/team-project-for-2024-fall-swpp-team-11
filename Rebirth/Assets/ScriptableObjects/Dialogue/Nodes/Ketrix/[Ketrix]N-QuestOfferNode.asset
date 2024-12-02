@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4853014ce9283488495d1f03d394b4, type: 3}
+  m_Name: '[Ketrix]N-QuestOfferNode'
+  m_EditorClassIdentifier: 
+  nodeID: 234
+  dialogueText: 
+  options:
+  - optionText: "\uADF8\uB798 \uBB50.. \uC54C\uACA0\uC5B4."
+    nextNode: {fileID: 11400000, guid: 75d94279383ac400dab4c5b673ce6a38, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uB0B4\uAC00 \uC65C \uD574\uC57C \uD558\uB294\uB370?"
+    nextNode: {fileID: 11400000, guid: f0823366d39434180a9a7fd5d9721f98, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  isSelfSpeak: 1
+  associatedQuest: {fileID: 11400000, guid: 634b6a10bc62847c089de2d85c5e4072, type: 2}
+  questAcceptedNode: {fileID: 11400000, guid: 75d94279383ac400dab4c5b673ce6a38, type: 2}
+  questRejectedNode: {fileID: 11400000, guid: f0823366d39434180a9a7fd5d9721f98, type: 2}

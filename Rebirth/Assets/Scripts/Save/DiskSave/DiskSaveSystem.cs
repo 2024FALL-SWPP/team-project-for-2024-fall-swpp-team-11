@@ -6,37 +6,39 @@ using System.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.AddressableAssets;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DiskSaveSystem
 {
-    private static string InventorySavePath => Application.persistentDataPath + "/inventory.json";
-   
-    #region Inventory
+    #region Inventory Management
     public static void SaveInventoryDataToDisk(InventoryDataContainer inventoryData)
     {
+        string savePath = Path.Combine(Application.persistentDataPath, "inventory.json");
+
         List<string> itemNames = new List<string>();
-        foreach (var item in inventoryData.ThreeDimensionalItems)
-        {
+        foreach (var item in inventoryData.GetItems(Dimension.TWO_DIMENSION))
             itemNames.Add(item.itemName);
-        }
-        foreach (var item in inventoryData.TwoDimensionalItems)
-        {
+        foreach (var item in inventoryData.GetItems(Dimension.THREE_DIMENSION))
             itemNames.Add(item.itemName);
-        }
 
         string json = JsonConvert.SerializeObject(itemNames, Formatting.Indented);
 
-        File.WriteAllText(InventorySavePath, json);
+        File.WriteAllText(savePath, json);
+        Debug.Log($"Inventory saved to {savePath}");
     }
-    
-    public static async Task<InventoryDataContainer> LoadInventoryDataFromDiskAsync()
+
+    public static async Task<List<ItemData>> LoadInventoryDataFromDiskAsync()
     {
-        if (!File.Exists(InventorySavePath))
+        string savePath = Path.Combine(Application.persistentDataPath, "inventory.json");
+
+        if (!File.Exists(savePath))
         {
-            return null;
+            Debug.LogWarning("No inventory save file found. Returning empty list.");
+            return new List<ItemData>();
         }
 
-        string json = File.ReadAllText(InventorySavePath);
+        string json = File.ReadAllText(savePath);
+
         List<string> itemNames = JsonConvert.DeserializeObject<List<string>>(json);
 
         AsyncOperationHandle<IList<ItemData>> handle = Addressables.LoadAssetsAsync<ItemData>(
@@ -49,34 +51,29 @@ public class DiskSaveSystem
         if (handle.Status != AsyncOperationStatus.Succeeded)
         {
             Debug.LogError("Failed to load ItemData from Addressables.");
-            return null;
+            return new List<ItemData>();
         }
 
         IList<ItemData> allItems = handle.Result;
+        List<ItemData> loadedItems = new List<ItemData>();
 
-        List<ItemData> loaded2DItems = new List<ItemData>();
-        List<ItemData> loaded3DItems = new List<ItemData>();
-        foreach (var itemName in itemNames)
+        foreach (string itemName in itemNames)
         {
-            ItemData foundItem = System.Array.Find(allItems.ToArray(), item => item.itemName == itemName);
-            if (foundItem != null)
-            {
-                if (foundItem.dimension == Dimension.THREE_DIMENSION)
-                    loaded3DItems.Add(foundItem);
-                else
-                    loaded2DItems.Add(foundItem);
-            }
+            ItemData item = allItems.FirstOrDefault(i => i.itemName == itemName);
+            if (item != null)
+                loadedItems.Add(item);
+            else
+                Debug.LogWarning($"Item with name '{itemName}' not found in Addressables.");
         }
-
-        InventoryDataContainer inventoryData = new InventoryDataContainer(loaded2DItems, loaded3DItems);
 
         Addressables.Release(handle);
 
-        return inventoryData;
+        Debug.Log("Inventory loaded successfully.");
+        return loadedItems;
     }
-
     #endregion
 
+    #region Scene Management
     public static string GetSceneDataPath(string sceneName) =>
         Path.Combine(Application.persistentDataPath, $"{sceneName}_sceneData.json");
 
@@ -84,6 +81,7 @@ public class DiskSaveSystem
     {
         var json = JsonUtility.ToJson(sceneData);
         File.WriteAllText(path, json);
+        Debug.Log($"Scene data saved to {path}");
     }
 
     public static async Task<Dictionary<string, SceneData>> LoadAllSceneDataFromDisk()
@@ -107,18 +105,27 @@ public class DiskSaveSystem
         }
         await Task.WhenAll(tasks);
 
+        Debug.Log("All scene data loaded.");
         return sceneDatas;
     }
+    #endregion
 
-    private static string CharacterStatusSavePath => Application.persistentDataPath + "/character_status.json";
+    #region Character Status Management
+    private static string CharacterStatusSavePath => Path.Combine(Application.persistentDataPath, "character_status.json");
 
-    #region CharacterStatus
     public static void SaveCharacterStatusToDisk()
     {
         CharacterStatusData characterStatusData = new CharacterStatusData
         {
             Money = CharacterStatusManager.Instance.Money,
-            Health = CharacterStatusManager.Instance.Health
+            Health = CharacterStatusManager.Instance.Health,
+            PlayerState = CharacterStatusManager.Instance.PlayerState,
+            CanAccessLibrary = CharacterStatusManager.Instance.CanAccessLibrary,
+            IsPaperSfixed = CharacterStatusManager.Instance.IsPaperSfixed,
+            IsPaperEfixed = CharacterStatusManager.Instance.IsPaperEfixed,
+            IsPaperBfixed = CharacterStatusManager.Instance.IsPaperBfixed,
+            EndingID = CharacterStatusManager.Instance.EndingID,
+            LastScene = SceneManager.GetActiveScene().name
         };
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);
@@ -131,7 +138,7 @@ public class DiskSaveSystem
         if (!File.Exists(CharacterStatusSavePath))
         {
             Debug.LogWarning("Character status file not found. Returning default values.");
-            return new CharacterStatusData(); // 기본값 반환
+            return new CharacterStatusData();
         }
 
         string json = File.ReadAllText(CharacterStatusSavePath);
@@ -140,4 +147,42 @@ public class DiskSaveSystem
         return characterStatusData;
     }
     #endregion
+
+    public static void ResetFiles()
+    {
+        DeleteAllSaveFilesExceptCharacterStatus();
+        ResetCharacterStatusExceptPlayerState();
+    }
+
+    public static void ResetCharacterStatusExceptPlayerState()
+    {
+        if (!File.Exists(CharacterStatusSavePath)) return;
+
+        string json = File.ReadAllText(CharacterStatusSavePath);
+        CharacterStatusData existingData = JsonConvert.DeserializeObject<CharacterStatusData>(json);
+
+        CharacterStatusData resetData = new CharacterStatusData
+        {
+            PlayerState = existingData.PlayerState,
+            Money = 0,
+            Health = 100,
+            LastScene = "HeroHouse2D"
+        };
+
+        string updatedJson = JsonConvert.SerializeObject(resetData, Formatting.Indented);
+        File.WriteAllText(CharacterStatusSavePath, updatedJson);
+    }
+
+    public static void DeleteAllSaveFilesExceptCharacterStatus()
+    {
+        string[] files = Directory.GetFiles(Application.persistentDataPath);
+
+        foreach (string file in files)
+        {
+            if (file != CharacterStatusSavePath)
+            {
+                File.Delete(file);
+            }
+        }
+    }
 }

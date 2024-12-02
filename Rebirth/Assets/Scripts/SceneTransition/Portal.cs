@@ -37,7 +37,7 @@ public class Portal : MonoBehaviour, IInteractable
         await SceneTransitionManager.Instance.FadeInAsync();
         await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
         
-        InventoryManager.Instance.HideInventory();
+        InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
         
         await SceneTransitionManager.Instance.FadeOutAsync();
