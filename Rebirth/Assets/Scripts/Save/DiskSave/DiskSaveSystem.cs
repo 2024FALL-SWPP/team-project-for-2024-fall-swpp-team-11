@@ -23,7 +23,6 @@ public class DiskSaveSystem
         string json = JsonConvert.SerializeObject(itemNames, Formatting.Indented);
 
         File.WriteAllText(savePath, json);
-        Debug.Log($"Inventory saved to {savePath}");
     }
 
     public static async Task<List<ItemData>> LoadInventoryDataFromDiskAsync()
@@ -67,7 +66,6 @@ public class DiskSaveSystem
 
         Addressables.Release(handle);
 
-        Debug.Log("Inventory loaded successfully.");
         return loadedItems;
     }
     #endregion
@@ -80,7 +78,6 @@ public class DiskSaveSystem
     {
         var json = JsonUtility.ToJson(sceneData);
         File.WriteAllText(path, json);
-        Debug.Log($"Scene data saved to {path}");
     }
 
     public static async Task<Dictionary<string, SceneData>> LoadAllSceneDataFromDisk()
@@ -104,7 +101,6 @@ public class DiskSaveSystem
         }
         await Task.WhenAll(tasks);
 
-        Debug.Log("All scene data loaded.");
         return sceneDatas;
     }
     #endregion
@@ -129,7 +125,6 @@ public class DiskSaveSystem
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);
         File.WriteAllText(CharacterStatusSavePath, json);
-        Debug.Log("Character status saved to disk.");
     }
 
     public static CharacterStatusData LoadCharacterStatusFromDisk()
@@ -142,7 +137,6 @@ public class DiskSaveSystem
 
         string json = File.ReadAllText(CharacterStatusSavePath);
         CharacterStatusData characterStatusData = JsonConvert.DeserializeObject<CharacterStatusData>(json);
-        Debug.Log("Character status loaded from disk.");
         return characterStatusData;
     }
     #endregion
@@ -156,15 +150,16 @@ public class DiskSaveSystem
         File.WriteAllText(NpcMetStatusSavePath, json);
     }
 
-    public static void LoadNPCMetStatusFromDisk(ref Dictionary<string, bool> npcMetStatus)
+    public static Dictionary<string, bool> LoadNPCMetStatusFromDisk()
     {
         if (!File.Exists(NpcMetStatusSavePath))
         {
-            npcMetStatus = new Dictionary<string, bool>();
+            Debug.LogWarning("No NPC met status save file found.");
+            return new Dictionary<string, bool>();
         }
 
         string json = File.ReadAllText(NpcMetStatusSavePath);
-        npcMetStatus = JsonConvert.DeserializeObject<Dictionary<string, bool>>(json) ?? new Dictionary<string, bool>();
+        return JsonConvert.DeserializeObject<Dictionary<string, bool>>(json) ?? new Dictionary<string, bool>();
     }
     #endregion
 
