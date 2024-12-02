@@ -6,69 +6,83 @@ public class ShopManager : SingletonManager<ShopManager>
 {
     [Header("Shop Items")]
     [SerializeField] private List<ItemData> allShopItems; // Master list of all items
+    private List<ItemData> availableShopItems = new List<ItemData>(); // Current available shop items
 
-    public List<ItemData> GetItemsForDimension(Dimension dimension, string shopName = null)
+    private ShopUI shopUI; 
+    private bool shopUIActivated = false;
+
+    protected override void Awake()
     {
-        // Filter items by dimension first
-        List<ItemData> itemsForDimension = allShopItems.FindAll(item => item != null && item.dimension == dimension);
-
-        if (!string.IsNullOrEmpty(shopName))
-        {
-            shopName = shopName.ToLower();
-            if (shopName == "shelve")
-            {
-                // Only include Shelve-specific items
-                itemsForDimension = itemsForDimension.FindAll(item =>
-                    item.itemName == "3DDragonComb" || item.itemName == "3DPikachuFeather");
-            }
-            else
-            {
-                // Exclude Shelve-specific items from general shops
-                itemsForDimension = itemsForDimension.FindAll(item =>
-                    item.itemName != "3DDragonComb" && item.itemName != "3DPikachuFeather");
-            }
-        }
-
-        return itemsForDimension;
+        base.Awake();
+        DontDestroyOnLoad(gameObject);
+        InitializeShopUI();
+        UpdateAvailableShopItems();
     }
 
-    public bool PurchaseItem(ItemData itemData)
+    private void InitializeShopUI()
     {
-        if (itemData == null)
+        shopUI = FindObjectOfType<ShopUI>();
+        if (shopUI == null)
         {
-            return false;
-        }
-
-        if (CharacterStatusManager.Instance.Money >= itemData.value)
-        {
-            // Deduct money
-            CharacterStatusManager.Instance.UpdateMoney(-itemData.value);
-
-            // Add item to inventory
-            InventoryManager.Instance.AddItem(itemData);
-
-            return true; // Purchase successful
+            Debug.LogError("ShopUI component not found in the scene.");
         }
         else
         {
-            return false; // Purchase failed
+            shopUI.gameObject.SetActive(false); // Start with shop UI hidden
         }
     }
 
-    public void AddItemToShop(ItemData itemData)
+    private void UpdateAvailableShopItems()
     {
-        if (itemData != null && !allShopItems.Contains(itemData))
+        availableShopItems.Clear();
+        int playerState = CharacterStatusManager.Instance.PlayerState;
+
+        foreach (ItemData item in allShopItems)
         {
-            allShopItems.Add(itemData);
+            // Add logic for filtering based on player state
+            if (playerState == 1 && item.itemName == "2Dweirdpotion")
+            {
+                availableShopItems.Add(item);
+            }
+            else if (item.dimension == GetCurrentDimension())
+            {
+                availableShopItems.Add(item);
+            }
         }
     }
 
-    public void RemoveItemFromShop(ItemData itemData)
+    public void ToggleShopUI()
     {
-        if (itemData != null && allShopItems.Contains(itemData))
+        if (shopUI != null)
         {
-            allShopItems.Remove(itemData);
+            shopUIActivated = !shopUIActivated;
+            if (shopUIActivated)
+            {
+                OpenShop();
+            }
+            else
+            {
+                CloseShop();
+            }
         }
+        else
+        {
+            Debug.LogError("ShopUI is not initialized.");
+        }
+    }
+
+    private void OpenShop()
+    {
+        UpdateAvailableShopItems(); // Update the items before opening the shop
+        shopUI.DisplayItems(availableShopItems);
+        shopUI.gameObject.SetActive(true); // Show shop UI
+        GameStateManager.Instance.LockView(); // Lock camera movement
+    }
+
+    private void CloseShop()
+    {
+        shopUI.gameObject.SetActive(false); // Hide shop UI
+        GameStateManager.Instance.UnlockView(); // Unlock camera movement
     }
 
     public Dimension GetCurrentDimension()
@@ -89,23 +103,21 @@ public class ShopManager : SingletonManager<ShopManager>
         }
     }
 
-    public bool CanAffordItem(ItemData itemData)
+    public bool PurchaseItem(ItemData itemData)
     {
-        if (itemData == null)
+        if (itemData == null) return false;
+
+        if (CharacterStatusManager.Instance.Money >= itemData.price)
         {
-            return false;
+            CharacterStatusManager.Instance.UpdateMoney(-itemData.price);
+            InventoryManager.Instance.AddItem(itemData);
+
+            // Remove the purchased item from the available shop items
+            availableShopItems.Remove(itemData);
+
+            return true; // Purchase successful
         }
 
-        return CharacterStatusManager.Instance.Money >= itemData.value;
-    }
-
-    public bool IsItemInShop(ItemData itemData)
-    {
-        return allShopItems.Contains(itemData);
-    }
-
-    public List<ItemData> GetAllItems()
-    {
-        return new List<ItemData>(allShopItems);
+        return false; // Purchase failed
     }
 }

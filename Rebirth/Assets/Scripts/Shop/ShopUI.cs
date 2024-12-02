@@ -9,61 +9,48 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private Transform container; // Parent for item buttons
     [SerializeField] private Transform shopItemTemplate; // Template for buttons
     [SerializeField] private GameObject shopPanel; // Shop panel for showing UI
-    [SerializeField] private string shopName; // Name of the shop interactable
-
-    private List<ItemData> filteredItems = new List<ItemData>();
-    private bool isShopOpen = false;
 
     private void Awake()
     {
-        shopItemTemplate.gameObject.SetActive(false); 
-    }
-
-    public void SetShopName(string name)
-    {
-        shopName = name;
-    }
-
-    public void ToggleShopUI()
-    {
-        if (isShopOpen)
-            CloseShop();
+        if (shopItemTemplate != null)
+        {
+            shopItemTemplate.gameObject.SetActive(false);
+        }
         else
-            OpenShop();
+        {
+            Debug.LogError("Shop Item Template is not assigned in the inspector.");
+        }
+
+        if (shopPanel == null)
+        {
+            Debug.LogError("Shop Panel is not assigned in the inspector.");
+        }
     }
 
-    public void OpenShop()
+    public void DisplayItems(List<ItemData> items)
     {
-        isShopOpen = true;
-        RefreshShopItems(ShopManager.Instance.GetCurrentDimension(), shopName); // Pass shop name
-        shopPanel.SetActive(true); // Show shop UI
-        GameStateManager.Instance.LockView(); // Lock camera movement
+        if (items == null || items.Count == 0)
+        {
+            Debug.LogWarning("No items to display in the shop.");
+            return;
+        }
+
+        ClearItems();
+
+        foreach (ItemData item in items)
+        {
+            CreateItemButton(item);
+        }
     }
 
-    public void CloseShop()
+    private void ClearItems()
     {
-        isShopOpen = false;
-        shopPanel.SetActive(false); // Hide shop UI
-        GameStateManager.Instance.UnlockView(); // Unlock camera movement
-    }
-
-    private void RefreshShopItems(Dimension currentDimension, string shopName)
-    {
-        filteredItems = ShopManager.Instance.GetItemsForDimension(currentDimension, shopName);
-
-        // Clear old items
         foreach (Transform child in container)
         {
             if (child != shopItemTemplate)
             {
                 Destroy(child.gameObject);
             }
-        }
-
-        // Create buttons for filtered items
-        foreach (ItemData item in filteredItems)
-        {
-            CreateItemButton(item);
         }
     }
 
@@ -72,7 +59,7 @@ public class ShopUI : MonoBehaviour
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
 
         shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(itemData.itemName);
-        shopItemTransform.Find("costText").GetComponent<TextMeshProUGUI>().SetText(itemData.value.ToString());
+        shopItemTransform.Find("costText").GetComponent<TextMeshProUGUI>().SetText(itemData.price.ToString());
         shopItemTransform.Find("itemImage").GetComponent<Image>().sprite = itemData.icon;
         shopItemTransform.Find("descriptionText").GetComponent<TextMeshProUGUI>().SetText(itemData.description);
 
