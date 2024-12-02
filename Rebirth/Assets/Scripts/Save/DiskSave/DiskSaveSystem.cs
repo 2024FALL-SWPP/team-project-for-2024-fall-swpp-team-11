@@ -118,7 +118,12 @@ public class DiskSaveSystem
         {
             Money = CharacterStatusManager.Instance.Money,
             Health = CharacterStatusManager.Instance.Health,
-            IsDimensionSwitchable = CharacterStatusManager.Instance.IsDimensionSwitchable
+            // IsDimensionSwitchable = CharactersStatusManager.Instance.IsDimensionSwitchable
+            PlayerState = CharacterStatusManager.Instance.PlayerState,
+            CanAccessLibrary = CharacterStatusManager.Instance.CanAccessLibrary,
+            IsPaperSfixed = CharacterStatusManager.Instance.IsPaperSfixed,
+            IsPaperEfixed = CharacterStatusManager.Instance.IsPaperEfixed,
+            IsPaperBfixed = CharacterStatusManager.Instance.IsPaperBfixed,
         };
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);

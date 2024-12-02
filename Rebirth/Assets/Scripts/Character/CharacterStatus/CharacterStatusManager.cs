@@ -7,12 +7,12 @@ public class CharacterStatusData
     public int Money;
     public int Health;
 
-    public int PlayerState; // 1: Default, 2:isToxified, 3:isDetoxified
+    public int PlayerState; // 1: Default, 2:Can use weird Potion, 3:isToxified, 4:Can use Cure Potion , 5:isDetoxified
     public bool CanAccessLibrary;
     public bool IsPaperSfixed;
     public bool IsPaperEfixed;
     public bool IsPaperBfixed;
-    public bool IsDimensionSwitchable;
+    // public bool IsDimensionSwitchable;
 
 
     public CharacterStatusData()
@@ -25,8 +25,7 @@ public class CharacterStatusData
         IsPaperSfixed = false;
         IsPaperEfixed = false;
         IsPaperBfixed = false;
-        IsDimensionSwitchable = false;
-
+        // IsDimensionSwitchable = false;
     }
 }
 
@@ -41,13 +40,13 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     // Money-related variables
     public int Money { get; private set; }
     public event Action<int> OnMoneyChanged;
-    public bool IsDimensionSwitchable { get; private set; }
+    // public bool IsDimensionSwitchable { get; private set; }
 
-    public int PlayerState { get; private set; }; // 1: Default, 2:isToxified, 3:isDetoxified
-    public bool CanAccessLibrary;
-    public bool IsPaperBfixed;
-    public bool IsPaperSfixed;
-    public bool IsPaperEfixed;
+    public int PlayerState { get; private set; } // 1: Default, 2:isToxified, 3:isDetoxified
+    public bool CanAccessLibrary  { get; private set; }
+    public bool IsPaperBfixed  { get; private set; }
+    public bool IsPaperSfixed  { get; private set; }
+    public bool IsPaperEfixed  { get; private set; }
 
     private bool isInitialized = false;
 
@@ -76,8 +75,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         IsPaperBfixed = data.IsPaperBfixed;
         IsPaperSfixed = data.IsPaperSfixed;
         IsPaperEfixed = data.IsPaperEfixed;
-        IsDimensionSwitchable = data.IsDimensionSwitchable;
-
+        // IsDimensionSwitchable = data.IsDimensionSwitchable;
 
         RefreshStatusUI();
     }
@@ -171,15 +169,20 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
         NotifyMoneyChanged();
     }
 
-    public void SetIsDimensionSwitchable(bool val)
-    {
-        IsDimensionSwitchable = val;
-    }
+    // public void SetIsDimensionSwitchable(bool val)
+    // {
+    //     IsDimensionSwitchable = val;
+    // }
 
     private void OnDestroy()
     {
         SaveManager.save -= SaveCharacterStatusToDisk;
         SaveManager.load -= LoadCharacterStatusFromDisk;
+    }
+    
+    public void SetPlayerState(int state)
+    {
+        PlayerState = state;
     }
 
     #region canAccessLibrary

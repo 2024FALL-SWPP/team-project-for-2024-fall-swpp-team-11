@@ -9,8 +9,18 @@ public class NPCDragon : NPC
     public bool is2DAlive = false;
 
     public void Update() {
-        if(is2DAlive && CharacterStatusManager.Instance.PlayerState == ){
+        if(!is2DAlive && !is2DKilled)
+        {
+            return;
+        }
 
+        gameObject.SetActive(false); 
+        
+        if(is2DAlive && CharacterStatusManager.Instance.PlayerState != 5){
+            gameObject.SetActive(true);
+        }
+        if(is2DKilled && CharacterStatusManager.Instance.PlayerState == 5){
+            gameObject.SetActive(true);
         }
     }
 
