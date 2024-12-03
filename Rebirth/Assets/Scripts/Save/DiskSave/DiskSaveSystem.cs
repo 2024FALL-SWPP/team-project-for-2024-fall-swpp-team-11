@@ -142,7 +142,17 @@ public class DiskSaveSystem
     }
     #endregion
 
-    public static void ResetFiles()
+    public static void ResetAllFiles()
+    {
+        string[] files = Directory.GetFiles(Application.persistentDataPath);
+
+        foreach (string file in files)
+        {
+            File.Delete(file);
+        }
+    }
+
+    public static void ResetFilesExceptPlayerState()
     {
         DeleteAllSaveFilesExceptCharacterStatus();
         ResetCharacterStatusExceptPlayerState();
