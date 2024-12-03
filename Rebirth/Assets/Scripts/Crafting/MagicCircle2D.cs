@@ -15,7 +15,6 @@ public class MagicCircle2D : MonoBehaviour
     [SerializeField] private KeyCode triggerKey = KeyCode.C; 
     [SerializeField] private float craftCooldown = 2f;       // Crafting cooldown time
     [SerializeField] private float activationRange = 5f;     
-    [SerializeField] private Transform player;               // Player transform for distance checking
     [SerializeField] private SpecialEffect specialEffect;  
     private float lastCraftTime = -Mathf.Infinity;           // Tracks last craft time
     
@@ -28,14 +27,31 @@ public class MagicCircle2D : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(triggerKey) && Vector2.Distance(player.position, transform.position) <= activationRange)
+        if (Input.GetKeyDown(triggerKey))
         {
-            if (Time.time >= lastCraftTime + craftCooldown)
+            if (IsPlayerInRange())
             {
-                Craft();
-                lastCraftTime = Time.time; // Update last craft time
+                if (Time.time >= lastCraftTime + craftCooldown)
+                {
+                    Craft();
+                    lastCraftTime = Time.time; // Update last craft time
+                }
             }
         }
+    }
+
+    private bool IsPlayerInRange()
+    {
+        Vector2 colliderCenter = craftingTableCollider.bounds.center;
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(colliderCenter, activationRange);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private List<WorldItem> GetItemsOnTable()

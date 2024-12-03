@@ -16,7 +16,6 @@ public class MagicCircle3D : MonoBehaviour
     [SerializeField] private KeyCode triggerKey = KeyCode.C;
     [SerializeField] private float craftCooldown = 2f; // Cooldown
     [SerializeField] private float activationRange = 5f; // craft dist
-    [SerializeField] private Transform player; // player pos
     private float lastCraftTime = -Mathf.Infinity; // track time
     private Collider detectionCollider;
 
@@ -32,18 +31,13 @@ public class MagicCircle3D : MonoBehaviour
         {
             Debug.LogError("Special effect not found.");
         }
-
-        if (player == null)
-        {
-            Debug.LogError("Player transform not found.");
-        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(triggerKey))
         {
-            if (Vector3.Distance(player.position, transform.position) <= activationRange)
+            if (IsPlayerInRange())
             {
                 // Check cooldown
                 if (Time.time >= lastCraftTime + craftCooldown)
@@ -53,6 +47,20 @@ public class MagicCircle3D : MonoBehaviour
                 }
             }
         }
+    }
+
+    private bool IsPlayerInRange()
+    {
+        Vector3 colliderCenter = detectionCollider.bounds.center;
+        Collider[] hitColliders = Physics.OverlapSphere(colliderCenter, activationRange);
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private List<WorldItem> GetItemsOnTable()
