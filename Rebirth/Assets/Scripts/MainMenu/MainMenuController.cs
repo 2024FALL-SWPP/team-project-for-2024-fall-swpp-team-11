@@ -60,8 +60,8 @@ public class MainMenuController : MonoBehaviour
     public void RestartGame()
     {
         // Restart Logic
-        DiskSaveSystem.ResetFiles();
-        LoadStartSceneData();
+        DiskSaveSystem.ResetAllFiles();
+        SaveManager.Instance.LoadGame();
         
         // StartGame
         StartGame();
