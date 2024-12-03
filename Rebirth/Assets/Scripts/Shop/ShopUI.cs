@@ -64,6 +64,8 @@ public class ShopUI : MonoBehaviour
         shopItemTransform.Find("descriptionText").GetComponent<TextMeshProUGUI>().SetText(itemData.description);
 
         Button button = shopItemTransform.Find("Button").GetComponent<Button>();
+
+        // Add listener to purchase the item when the button is clicked
         button.onClick.AddListener(() =>
         {
             ShopManager.Instance.PurchaseItem(itemData);

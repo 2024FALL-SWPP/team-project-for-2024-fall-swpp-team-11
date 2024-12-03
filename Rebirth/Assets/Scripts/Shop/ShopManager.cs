@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 public class ShopManager : SingletonManager<ShopManager>
 {
     [Header("Shop Items")]
-    [SerializeField] private List<ItemData> allShopItems; // Master list of all items]
+    [SerializeField] private List<ItemData> allShopItems; // Master list of all items
 
-    private readonly string weirdPotion2DName = "2DWeirdPotion";
-    private readonly string weirdPotionCure2DName = "2DWeirdPotionCure";
-    private readonly string weirdPotionCure3DName = "3DWeirdPotionCure";
+    public readonly string weirdPotion2DName = "2DWeirdPotion";
+    public readonly string weirdPotionCure2DName = "2DWeirdPotionCure";
+    public readonly string weirdPotionCure3DName = "3DWeirdPotionCure";
 
     private ShopUI shopUI; 
     private bool shopUIActivated = false;
 
-    // Track purchased items
     private HashSet<string> purchasedItems = new HashSet<string>();
 
     protected override void Awake()
@@ -104,6 +103,7 @@ public class ShopManager : SingletonManager<ShopManager>
     public bool IsItemPurchased(string itemName)
     {
         if (string.IsNullOrEmpty(itemName)) return false;
+
         if (itemName == weirdPotionCure2DName || itemName == weirdPotionCure3DName)
         {
             return IsWeirdPotionCurePurchased();
@@ -112,47 +112,55 @@ public class ShopManager : SingletonManager<ShopManager>
         {
             return IsWeirdPotionPurchased();
         }
-        return purchasedItems.Contains(itemName);
+        // For other items, allow multiple purchases
+        return false;
     }
 
-    public List<ItemData> GetItemsForDimension(Dimension dimension)
-    {
-        PlayerState currentState = CharacterStatusManager.Instance.PlayerState;
-        List<ItemData> itemsInDimension = allShopItems.FindAll(item => item != null && item.dimension == dimension);
-        List<ItemData> itemsToDisplay = new List<ItemData>();
 
-        foreach (var item in itemsInDimension)
+    public List<ItemData> GetItemsForDimension(Dimension dimension)
+{
+    PlayerState currentState = CharacterStatusManager.Instance.PlayerState;
+    List<ItemData> itemsInDimension = allShopItems.FindAll(item => item != null && item.dimension == dimension);
+    List<ItemData> itemsToDisplay = new List<ItemData>();
+
+    foreach (var item in itemsInDimension)
+    {
+        if (item.itemName == weirdPotion2DName)
         {
-            if (item.itemName == weirdPotion2DName)
+            if (currentState == PlayerState.CanUseWeirdPotion && !IsWeirdPotionPurchased())
             {
-                if (currentState == PlayerState.CanUseWeirdPotion && !IsWeirdPotionPurchased())
-                {
-                    itemsToDisplay.Add(item);
-                }
-            }
-            else if (item.itemName == weirdPotionCure2DName || item.itemName == weirdPotionCure3DName)
-            {
-                // weirdPotionCure is available in both 2D and 3D dimensions, but only if the player has not purchased any of them
-                if (currentState == PlayerState.CanUseWeirdPotionCure && !IsWeirdPotionCurePurchased())
-                {
-                    itemsToDisplay.Add(item);
-                }
-            }
-            else
-            {
-                // Add general items
                 itemsToDisplay.Add(item);
             }
         }
-
-        return itemsToDisplay;
+        else if (item.itemName == weirdPotionCure2DName || item.itemName == weirdPotionCure3DName)
+        {
+            if (currentState == PlayerState.CanUseWeirdPotionCure && !IsWeirdPotionCurePurchased())
+            {
+                itemsToDisplay.Add(item);
+            }
+        }
+        else
+        {
+            // Add general items
+            itemsToDisplay.Add(item);
+        }
     }
+
+    return itemsToDisplay;
+}
+
 
     public bool PurchaseItem(ItemData itemData)
     {
         if (itemData == null) return false;
 
-        // Ensure sufficient funds before attempting to purchase
+        // Check if the item is a single-purchase item and has already been purchased
+        if (IsItemPurchased(itemData.itemName))
+        {
+            Debug.LogWarning($"Item {itemData.itemName} has already been purchased and cannot be bought again.");
+            return false;
+        }
+
         if (CharacterStatusManager.Instance.Money >= itemData.price)
         {
             // Check if the inventory has space
@@ -166,10 +174,19 @@ public class ShopManager : SingletonManager<ShopManager>
             CharacterStatusManager.Instance.UpdateMoney(-itemData.price);
             InventoryManager.Instance.AddItem(itemData);
 
-            // Optionally track purchased items for reference (not restricting repeats)
-            purchasedItems.Add(itemData.itemName);
+            // For single-purchase items, track them as purchased
+            if (itemData.itemName == weirdPotion2DName ||
+                itemData.itemName == weirdPotionCure2DName ||
+                itemData.itemName == weirdPotionCure3DName)
+            {
+                purchasedItems.Add(itemData.itemName);
+            }
 
             Debug.Log($"Item {itemData.itemName} purchased successfully.");
+
+            // Refresh the shop UI to reflect the purchase
+            RefreshShopUI();
+
             return true; // Purchase successful
         }
 
@@ -177,8 +194,15 @@ public class ShopManager : SingletonManager<ShopManager>
         return false; // Purchase failed due to insufficient funds
     }
 
-
-
+    private void RefreshShopUI()
+    {
+        if (shopUI != null && shopUIActivated)
+        {
+            Dimension currentDimension = GetCurrentDimension();
+            List<ItemData> itemsToDisplay = GetItemsForDimension(currentDimension);
+            shopUI.DisplayItems(itemsToDisplay);
+        }
+    }
 
     private void Update()
     {
