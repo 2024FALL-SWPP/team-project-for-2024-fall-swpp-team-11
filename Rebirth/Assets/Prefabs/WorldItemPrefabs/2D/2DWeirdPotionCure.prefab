@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8631507821935469846}
   - component: {fileID: 8381486001824288591}
   - component: {fileID: 3018800657040093067}
-  - component: {fileID: 8544087296955339914}
+  - component: {fileID: 6017183882992937641}
   - component: {fileID: 5071229031231790047}
   - component: {fileID: 2943614962076202248}
   m_Layer: 0
@@ -104,7 +104,7 @@ CircleCollider2D:
   m_Offset: {x: -0.30657145, y: -0.39998043}
   serializedVersion: 2
   m_Radius: 1.0911791
---- !u!50 &8544087296955339914
+--- !u!50 &6017183882992937641
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f498abccc1fb454faa531c73d294630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 2
+  yOffset: 0.5
 --- !u!114 &2943614962076202248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,4 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 1d2bfcdd366af4e1d87129188b30cade, type: 2}
+  itemData: {fileID: 11400000, guid: 5365bf994fdaf4c54a8501f08939fe68, type: 2}
+  PickingSound: {fileID: 8300000, guid: 0fdfdb087d2214176a57c3aa1eb07300, type: 3}

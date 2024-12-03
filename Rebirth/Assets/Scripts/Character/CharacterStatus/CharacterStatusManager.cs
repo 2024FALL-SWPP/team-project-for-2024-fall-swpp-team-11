@@ -13,8 +13,8 @@ public class CharacterStatusData
     public bool IsPaperEfixed;
     public bool IsPaperBfixed;
     public int EndingID;
-    // public bool IsDimensionSwitchable;
 
+    public string LastScene;
 
     public CharacterStatusData()
     {
@@ -27,7 +27,8 @@ public class CharacterStatusData
         IsPaperEfixed = false;
         IsPaperBfixed = false;
         EndingID = 1;
-        // IsDimensionSwitchable = false;
+
+        LastScene = "HeroHouse2D";
     }
 }
 
