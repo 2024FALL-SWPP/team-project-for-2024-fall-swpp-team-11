@@ -1,4 +1,4 @@
-// DoorTrigger.cs
+// Portal.cs
 using UnityEngine;
 using System.Collections;
 using System.Threading.Tasks;
@@ -9,6 +9,7 @@ public class Portal : MonoBehaviour, IInteractable
     public Vector3 targetPosition;
 
     public float animationDelay = 0.5f; // 씬 전환 전에 지연 시간
+    public AudioClip interactionSound;
 
     public async void Interact()
     {
@@ -16,6 +17,11 @@ public class Portal : MonoBehaviour, IInteractable
         {
             if (SceneTransitionManager.Instance != null)
             {
+                if (interactionSound != null)
+                {
+                    AudioSource.PlayClipAtPoint(interactionSound, transform.position);
+                }
+                
                 await InteractWithSceneTransitionAsync();
             }
         }
@@ -36,6 +42,7 @@ public class Portal : MonoBehaviour, IInteractable
         
         await SceneTransitionManager.Instance.FadeOutAsync();
     }
+
 
     public virtual void OnFocus()
     {
