@@ -7,5 +7,7 @@ public class ItemData : ScriptableObject
     public string description;
     public Dimension dimension;
     public Sprite icon;
+    
+    public int price;
     public GameObject prefab;
 }

@@ -71,6 +71,12 @@ public class InventoryManager : SingletonManager<InventoryManager>
         }
     }
 
+    public bool IsInventoryFull()
+    {
+        return inventoryDataContainer.GetTotalItemCount() >= inventoryCapacity;
+    }
+
+
     #endregion
 
     #region UI Management
