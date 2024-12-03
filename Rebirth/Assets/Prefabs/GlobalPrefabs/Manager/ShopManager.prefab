@@ -46,17 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allShopItems:
+  - {fileID: 11400000, guid: 5a00431b2786848ddb4389818c10c24b, type: 2}
+  - {fileID: 11400000, guid: 5365bf994fdaf4c54a8501f08939fe68, type: 2}
+  - {fileID: 11400000, guid: 7182364cf70984d22a382a81257bc3a3, type: 2}
+  - {fileID: 11400000, guid: df7a1a0a648c44e05a3823a53cc5c420, type: 2}
+  - {fileID: 11400000, guid: 1c2b358b9874945b1aa8ddbc2418d734, type: 2}
   - {fileID: 11400000, guid: d179d6e6f5572449a95349e98b7c0613, type: 2}
   - {fileID: 11400000, guid: 0b4ace43c5b4848ef97cf67fd443a852, type: 2}
   - {fileID: 11400000, guid: 7cc197d15763040d1af6efd8d54376cf, type: 2}
   - {fileID: 11400000, guid: e9d7f4bbe0ca049ee8f324047781a53d, type: 2}
   - {fileID: 11400000, guid: f4cc81d6e8e7b49f199aef9c01754caf, type: 2}
   - {fileID: 11400000, guid: c4024d56972f74fb6abe1e7c8a9816ed, type: 2}
-  - {fileID: 11400000, guid: 1c2b358b9874945b1aa8ddbc2418d734, type: 2}
-  - {fileID: 11400000, guid: f4966e0686d134ac28b4fe8965a8061d, type: 2}
-  - {fileID: 11400000, guid: 7182364cf70984d22a382a81257bc3a3, type: 2}
-  - {fileID: 11400000, guid: 5a00431b2786848ddb4389818c10c24b, type: 2}
-  - {fileID: 11400000, guid: 056cfb715d7954dcf8759b9a05639dec, type: 2}
 --- !u!1 &1627881936411731322
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 1627881936411731326}
   - component: {fileID: 1627881936411731321}
   - component: {fileID: 1627881936411731320}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 1627881936412785619}
   - component: {fileID: 1627881936412785617}
   - component: {fileID: 1627881936412785616}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StoreName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 1627881936568039374}
   - component: {fileID: 1627881936568039372}
   - component: {fileID: 1627881936568039375}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: itemImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 1627881936609588322}
   - component: {fileID: 1627881936609588333}
   - component: {fileID: 1627881936609588332}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 1627881936716495181}
   - component: {fileID: 1627881936716495171}
   - component: {fileID: 1627881936716495170}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: descriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 1627881936734620371}
   - component: {fileID: 1627881936734620369}
   - component: {fileID: 1627881936734620368}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: itemName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 1627881936736739906}
   - component: {fileID: 1627881936736739917}
   - component: {fileID: 1627881936736739916}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 1627881936768135502}
   - component: {fileID: 1627881936768135500}
   - component: {fileID: 1627881936768135503}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +911,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627881936833240337}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ShopItemTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,7 +957,7 @@ GameObject:
   - component: {fileID: 1627881937052065192}
   - component: {fileID: 1627881937052065195}
   - component: {fileID: 1627881937052065194}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1079,8 +1079,8 @@ GameObject:
   - component: {fileID: 1627881937245127092}
   - component: {fileID: 1627881937245127095}
   - component: {fileID: 1627881937245127094}
-  - component: {fileID: 1627881937245127089}
-  m_Layer: 0
+  - component: {fileID: 5928647662232836324}
+  m_Layer: 5
   m_Name: ShopCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1627881937245127089
+--- !u!114 &5928647662232836324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1197,7 +1197,7 @@ GameObject:
   - component: {fileID: 1627881937334574266}
   - component: {fileID: 1627881937334574264}
   - component: {fileID: 1627881937334574267}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1270,7 @@ GameObject:
   - component: {fileID: 1627881937337982053}
   - component: {fileID: 1627881937337982075}
   - component: {fileID: 1627881937337982074}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1405,7 @@ GameObject:
   - component: {fileID: 1627881937619392285}
   - component: {fileID: 1627881937619392275}
   - component: {fileID: 1627881937619392274}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1478,7 +1478,7 @@ GameObject:
   - component: {fileID: 1627881937708842796}
   - component: {fileID: 1627881937708842786}
   - component: {fileID: 1627881937708842797}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: costText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1611,7 +1611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627881937881820584}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1626,7 +1626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627881937881820587}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 199, y: -80.872284, z: 644.85974}
+  m_LocalPosition: {x: 199, y: -80.872284, z: 0}
   m_LocalScale: {x: 1.5686278, y: 1.5686278, z: 1.5686278}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1646,7 +1646,7 @@ GameObject:
   - component: {fileID: 1627881937948104779}
   - component: {fileID: 1627881937948104777}
   - component: {fileID: 1627881937948104776}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CoinIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

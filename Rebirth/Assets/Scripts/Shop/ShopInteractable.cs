@@ -26,7 +26,5 @@ public class ShopInteractable : MonoBehaviour, IInteractable
     public void OnDefocus()
     {
         outline.enabled = false;
-        // shopUI.SetActive(false);
-        GameStateManager.Instance.UnlockView();
     }
 }

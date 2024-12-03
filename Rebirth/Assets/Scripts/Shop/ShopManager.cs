@@ -6,8 +6,10 @@ public class ShopManager : SingletonManager<ShopManager>
 {
     [Header("Shop Items")]
     [SerializeField] private List<ItemData> allShopItems; // Master list of all items]
-    [SerializeField] private ActivateItem weirdPotion; // Reference to the 2DWeirdPotion ActivateItem
-    [SerializeField] private ActivateItem weirdPotionCure; // Reference to the 2DWeirdPotionCure ActivateItem
+
+    private readonly string weirdPotion2DName = "2DWeirdPotion";
+    private readonly string weirdPotionCure2DName = "2DWeirdPotionCure";
+    private readonly string weirdPotionCure3DName = "3DWeirdPotionCure";
 
     private ShopUI shopUI; 
     private bool shopUIActivated = false;
@@ -18,7 +20,6 @@ public class ShopManager : SingletonManager<ShopManager>
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(gameObject);
         InitializeShopUI();
     }
 
@@ -90,29 +91,61 @@ public class ShopManager : SingletonManager<ShopManager>
         }
     }
 
+    public bool IsWeirdPotionCurePurchased()
+    {
+        return purchasedItems.Contains(weirdPotionCure2DName) || purchasedItems.Contains(weirdPotionCure3DName);
+    }
+
+    public bool IsWeirdPotionPurchased()
+    {
+        return purchasedItems.Contains(weirdPotion2DName);
+    }
+
+    public bool IsItemPurchased(string itemName)
+    {
+        if (string.IsNullOrEmpty(itemName)) return false;
+        if (itemName == weirdPotionCure2DName || itemName == weirdPotionCure3DName)
+        {
+            return IsWeirdPotionCurePurchased();
+        }
+        else if (itemName == weirdPotion2DName)
+        {
+            return IsWeirdPotionPurchased();
+        }
+        return purchasedItems.Contains(itemName);
+    }
+
     public List<ItemData> GetItemsForDimension(Dimension dimension)
     {
-        List<ItemData> itemsForDimension = new List<ItemData>();
         PlayerState currentState = CharacterStatusManager.Instance.PlayerState;
+        List<ItemData> itemsInDimension = allShopItems.FindAll(item => item != null && item.dimension == dimension);
+        List<ItemData> itemsToDisplay = new List<ItemData>();
 
-        foreach (var item in allShopItems)
+        foreach (var item in itemsInDimension)
         {
-            if (item != null && item.dimension == dimension)
+            if (item.itemName == weirdPotion2DName)
             {
-                // Check conditions based on PlayerState and if the item is already purchased
-                if ((currentState == PlayerState.CanUseWeirdPotion && item.itemName == "2DWeirdPotion" && !purchasedItems.Contains(item.itemName)) ||
-                    (currentState == PlayerState.CanUseWeirdPotionCure && item.itemName == "2DWeirdPotionCure" && !purchasedItems.Contains(item.itemName)))
+                if (currentState == PlayerState.CanUseWeirdPotion && !IsWeirdPotionPurchased())
                 {
-                    itemsForDimension.Add(item); // Add item based on state and if not purchased
+                    itemsToDisplay.Add(item);
                 }
-                else if (item.itemName != "2DWeirdPotion" && item.itemName != "2DWeirdPotionCure")
+            }
+            else if (item.itemName == weirdPotionCure2DName || item.itemName == weirdPotionCure3DName)
+            {
+                // weirdPotionCure is available in both 2D and 3D dimensions, but only if the player has not purchased any of them
+                if (currentState == PlayerState.CanUseWeirdPotionCure && !IsWeirdPotionCurePurchased())
                 {
-                    itemsForDimension.Add(item); // Add general items
+                    itemsToDisplay.Add(item);
                 }
+            }
+            else
+            {
+                // Add general items
+                itemsToDisplay.Add(item);
             }
         }
 
-        return itemsForDimension;
+        return itemsToDisplay;
     }
 
     public bool PurchaseItem(ItemData itemData)
@@ -156,34 +189,6 @@ public class ShopManager : SingletonManager<ShopManager>
         }
     }
 
-    public void HandleItemStateChange(PlayerState newState)
-    {
-        if (weirdPotion != null)
-        {
-            if (newState == PlayerState.CanUseWeirdPotion)
-            {
-                weirdPotion.Activate(); // Activate Weird Potion
-            }
-            else
-            {
-                weirdPotion.Deactivate(); // Deactivate Weird Potion
-            }
-        }
-
-        if (weirdPotionCure != null)
-        {
-            if (newState == PlayerState.CanUseWeirdPotionCure)
-            {
-                weirdPotionCure.Activate(); // Activate Weird Potion Cure
-            }
-            else
-            {
-                weirdPotionCure.Deactivate(); // Deactivate Weird Potion Cure
-                Debug.Log($"Deactivated: {weirdPotionCure.gameObject.name}");
-            }
-        }
-    }
-
     private void UpdatePlayerState()
     {
         PlayerState currentState = CharacterStatusManager.Instance.PlayerState;
@@ -194,8 +199,5 @@ public class ShopManager : SingletonManager<ShopManager>
         CharacterStatusManager.Instance.SetPlayerState(nextState);
 
         Debug.Log($"Player state updated to: {nextState}");
-
-        // Handle the activation/deactivation of items
-        HandleItemStateChange(nextState);
     }
 }
