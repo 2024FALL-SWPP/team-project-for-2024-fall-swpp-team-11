@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using UnityEditorInternal;
 
 public class DialogueManager : SingletonManager<DialogueManager>
 {
@@ -9,8 +8,9 @@ public class DialogueManager : SingletonManager<DialogueManager>
 
     [HideInInspector]
     public DialogueNode currentNode;
+    public DialogueNode lastLeafNode;
     public DialogueUI dialogueUI;
-    public DialogueGraph activeDialogueGraph;
+    // public DialogueGraph activeDialogueGraph;
 
     public event Action OnDialogueStart;
     public event Action OnDialogueEnd;
@@ -35,10 +35,10 @@ public class DialogueManager : SingletonManager<DialogueManager>
         // dialogueUI = GetComponent<DialogueUI>(); // DialogueUI를 어디에 둘 것인가
 
         // TODO default graph
-        if (activeDialogueGraph == null)
-        {
-            LoadDefaultDialogueGraph();
-        }
+        // if (activeDialogueGraph == null)
+        // {
+        //     LoadDefaultDialogueGraph();
+        // }
     }
 
     public void NavigateOption(int direction)
@@ -72,55 +72,55 @@ public class DialogueManager : SingletonManager<DialogueManager>
         SelectOption(currentOptionIndex);
     }
 
-    private void LoadDefaultDialogueGraph()
-    {
-        DialogueGraph defaultGraph = Resources.Load<DialogueGraph>("DefaultDialogueGraph");
-        if (defaultGraph != null)
-        {
-            LoadDialogueGraph(defaultGraph);
-        }
-        else
-        {
-            Debug.LogWarning(logPrefix + "DefaultDialogueGraph not found.");
-        }
-    }
+    // private void LoadDefaultDialogueGraph()
+    // {
+    //     DialogueGraph defaultGraph = Resources.Load<DialogueGraph>("DefaultDialogueGraph");
+    //     if (defaultGraph != null)
+    //     {
+    //         LoadDialogueGraph(defaultGraph);
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning(logPrefix + "DefaultDialogueGraph not found.");
+    //     }
+    // }
 
-    public void LoadDialogueGraph(DialogueGraph graph)
-    {
-        activeDialogueGraph = graph;
-        Debug.Log(logPrefix + "Loaded dialogue graph.");
-        // TODO validate graph
-    }
+    // public void LoadDialogueGraph(DialogueGraph graph)
+    // {
+    //     activeDialogueGraph = graph;
+    //     Debug.Log(logPrefix + "Loaded dialogue graph.");
+    //     // TODO validate graph
+    // }
 
-    public static void EditorLoadDialogueGraph(DialogueGraph graph)
-    {
-#if UNITY_EDITOR
-        if (Instance != null)
-        {
-            Instance.LoadDialogueGraph(graph);
-            Debug.Log(logPrefix + "Editor loaded dialogue graph.");
-        }
-        else
-        {
-            Debug.LogWarning(logPrefix + "DialogueManager not found.");
-        }
-#endif
-    }
+//     public static void EditorLoadDialogueGraph(DialogueGraph graph)
+//     {
+// #if UNITY_EDITOR
+//         if (Instance != null)
+//         {
+//             Instance.LoadDialogueGraph(graph);
+//             Debug.Log(logPrefix + "Editor loaded dialogue graph.");
+//         }
+//         else
+//         {
+//             Debug.LogWarning(logPrefix + "DialogueManager not found.");
+//         }
+// #endif
+//     }
 
     public void StartDialogue(NPC npc)
     {
-        if (activeDialogueGraph == null)
-        {
-            Debug.LogError(logPrefix + "No active dialogue graph.");
-            return;
-        }
+        // if (activeDialogueGraph == null)
+        // {
+        //     Debug.LogError(logPrefix + "No active dialogue graph.");
+        //     return;
+        // }
 
         DialogueNode startingNode = GetDialogueNodeFromNPC(npc);
 
-        if (!activeDialogueGraph.dialogueNodes.Contains(startingNode))
-        {
-            Debug.LogWarning(logPrefix + "Starting node not in active dialogue graph.");
-        }
+        // if (!activeDialogueGraph.dialogueNodes.Contains(startingNode))
+        // {
+        //     Debug.LogWarning(logPrefix + "Starting node not in active dialogue graph.");
+        // }
 
         SetCurrentNode(startingNode);
         OnDialogueStart?.Invoke();
@@ -210,10 +210,17 @@ public class DialogueManager : SingletonManager<DialogueManager>
         currentNode = null;
     }
 
+    public DialogueNode getLastLeafNode()
+    {
+        return lastLeafNode;
+    }
+
     private void EndDialogue()
     {
+        lastLeafNode = currentNode;
         ResetCurrentNode();
         OnDialogueEnd?.Invoke();
         dialogueUI.HideDialogue();
+        
     }
 }

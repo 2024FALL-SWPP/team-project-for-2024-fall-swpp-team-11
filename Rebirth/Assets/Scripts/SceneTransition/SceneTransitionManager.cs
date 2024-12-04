@@ -1,29 +1,21 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System;
 
 public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 {
-
-    public Animator fadeAnimator; // FadePanel의 Animator
-    public Canvas canvas; // FadePanel의 Canvas
-    public float fadeDuration = 1f; // 페이드 애니메이션 길이
-
-    private Vector3 playerTargetPosition; // 플레이어의 목표 위치 저장
+    public Animator fadeAnimator;
+    public Canvas canvas;
+    public float fadeDuration = 1f;
+    private Vector3 playerTargetPosition;
 
     private void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
         canvas.enabled = false;
-        FadeOut();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void SetPlayerPosition()
     {
-        GameStateManager.Instance.UnlockView();
-        GameStateManager.Instance.UnlockMovement();
-
         Transform player = GameObject.FindWithTag("Player")?.transform;
         if (player != null)
         {
@@ -33,59 +25,64 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         {
             Debug.LogError("플레이어를 찾을 수 없습니다.");
         }
-
-        FadeOut();
     }
 
-    public void LoadScene(string sceneName, Vector3 targetPosition)
+    public async Task SceneTransitionWithEffect(string sceneName)
     {
-        playerTargetPosition = targetPosition; // 목표 위치 저장
-        StartCoroutine(Transition(sceneName));
+        await FadeInAsync();
+        await LoadSceneAsync(sceneName);
+        await FadeOutAsync();
     }
 
-    private IEnumerator Transition(string sceneName)
+    public async Task FadeInAsync()
     {
         GameStateManager.Instance.LockView();
         GameStateManager.Instance.LockMovement();
-        Debug.Log("Transition to " + sceneName);
-        FadeIn();
-        yield return new WaitForSeconds(fadeDuration);
 
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeInTrigger");
+
+        // 비동기 대기
+        await Task.Delay((int)(fadeDuration * 1000));
+        canvas.enabled = false;
+    }
+
+    public async Task LoadSceneAsync(string sceneName)
+    {
+        // 현재 씬 데이터 저장
+        await SceneDataManager.Instance.SaveCurrentSceneDataAsync();
+
+        // 씬 전환 처리
+        await TransitionAsync(sceneName);
+    }
+
+    public async Task FadeOutAsync()
+    {
+        canvas.enabled = true;
+        fadeAnimator.SetTrigger("FadeOutTrigger");
+
+        // 비동기 대기
+        await Task.Delay((int)(fadeDuration * 1000));
+        canvas.enabled = false;
+
+        GameStateManager.Instance.UnlockView();
+        GameStateManager.Instance.UnlockMovement();
+    }
+
+    private async Task TransitionAsync(string sceneName)
+    {
+        // 비동기로 씬 로드
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
 
+        // 로드 완료 대기
         while (!asyncLoad.isDone)
         {
             if (asyncLoad.progress >= 0.9f)
             {
                 asyncLoad.allowSceneActivation = true;
             }
-            yield return null;
+            await Task.Yield();
         }
-    }
-
-    public void FadeIn()
-    {
-        canvas.enabled = true;
-        fadeAnimator.SetTrigger("FadeInTrigger");
-        StartCoroutine(DisableCanvasAfterDelay());
-    }
-
-    public void FadeOut()
-    {
-        canvas.enabled = true;
-        fadeAnimator.SetTrigger("FadeOutTrigger");
-        StartCoroutine(DisableCanvasAfterDelay());
-    }
-    
-    private IEnumerator DisableCanvasAfterDelay()
-    {
-        yield return new WaitForSeconds(fadeDuration);
-        canvas.enabled = false;
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e18459eaf9874d48836c3d2da192f26, type: 3}
+  m_Name: '[Ketrix]N3'
+  m_EditorClassIdentifier: 
+  nodeID: 503
+  dialogueText: 
+  options:
+  - optionText: "\uC774\uAC70 \uB9D0\uC774\uC57C? \uC904\uAE4C?"
+    nextNode: {fileID: 11400000, guid: df15fa4ad6be34abfb1a0af3c44c865e, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uCF00\uD2B8\uB9AD\uC2A4"
+  isSelfSpeak: 1
+  associatedQuest: {fileID: 0}
+  textNodePairs:
+  - optionText: "\uC774\uAC70 \uB9D0\uC774\uC57C? \uC904\uAE4C?"
+    nextNode: {fileID: 11400000, guid: df15fa4ad6be34abfb1a0af3c44c865e, type: 2}

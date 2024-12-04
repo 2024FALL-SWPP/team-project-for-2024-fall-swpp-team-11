@@ -23,6 +23,7 @@ public class NPC : MonoBehaviour, IInteractable
         if (!string.IsNullOrEmpty(npcName))
         {
             NPCManager.Instance.RegisterNPC(npcName);
+            Debug.Log(npcName);
         }
         else
         {
@@ -30,18 +31,18 @@ public class NPC : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
         DialogueManager.Instance.OnDialogueEnd += HandleDialogueEnd;
 
         DialogueManager.Instance.StartDialogue(this);
     }
 
-    private void HandleDialogueEnd()
+    public virtual void HandleDialogueEnd()
     {
         DialogueManager.Instance.OnDialogueEnd -= HandleDialogueEnd;
 
-        NPCManager.Instance.MarkNPCAsMet(npcName);
+        // NPCManager.Instance.MarkNPCAsMet(npcName);
     }
 
 
