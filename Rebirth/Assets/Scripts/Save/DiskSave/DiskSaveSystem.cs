@@ -219,7 +219,11 @@ public class DiskSaveSystem
     public class QuestSaveData
     {
         public int questID;
-        public QuestData questData;
+        public string questTitle;
+        public string questDescription;
+        public string rewardItemName;
+        public string abilityUnlocked;
+        public string requiredItemName;
     }
  
     private static string QuestSavePath => Path.Combine(Application.persistentDataPath, "quests.json");
@@ -228,16 +232,20 @@ public class DiskSaveSystem
     public static void SaveQuestManagerToDisk(Dictionary<int, QuestData> quests, Dictionary<int, QuestStatus> questStatuses)
     {
         // Save quests
-        var questList = new List<QuestSaveData>();
+        var questSaveData = new Dictionary<int, QuestSaveData>();
         foreach (var quest in quests)
         {
-            questList.Add(new QuestSaveData
+            questSaveData[quest.Key] = new QuestSaveData
             {
                 questID = quest.Key,
-                questData = quest.Value
-            });
+                questTitle = quest.Value.questTitle,
+                questDescription = quest.Value.questDescription,
+                rewardItemName = quest.Value.rewardItem?.itemName,
+                abilityUnlocked = quest.Value.abilityUnlocked,
+                requiredItemName = quest.Value.requiredItem?.itemName
+            };
         }
-        string questJson = JsonConvert.SerializeObject(questList, Formatting.Indented);
+        string questJson = JsonConvert.SerializeObject(questSaveData, Formatting.Indented);
         File.WriteAllText(QuestSavePath, questJson);
 
         // Save quest statuses
@@ -245,26 +253,72 @@ public class DiskSaveSystem
         File.WriteAllText(QuestStatusSavePath, statusJson);
     }
 
-    public static void LoadQuestManagerFromDisk(out Dictionary<int, QuestData> quests, out Dictionary<int, QuestStatus> questStatuses)
+    public static async Task<(Dictionary<int, QuestData>, Dictionary<int, QuestStatus>)> LoadQuestManagerFromDiskAsync()
     {
-        quests = new Dictionary<int, QuestData>();
-        questStatuses = new Dictionary<int, QuestStatus>();
+        var quests = new Dictionary<int, QuestData>();
+        var questStatuses = new Dictionary<int, QuestStatus>();
 
         if (File.Exists(QuestSavePath))
         {
             string questJson = File.ReadAllText(QuestSavePath);
-            var questList = JsonConvert.DeserializeObject<List<QuestSaveData>>(questJson) ?? new List<QuestSaveData>();
-            foreach (var questData in questList)
+            var questSaveData = JsonConvert.DeserializeObject<Dictionary<int, QuestSaveData>>(questJson) 
+                ?? new Dictionary<int, QuestSaveData>();
+
+            // Load all ItemData assets
+            AsyncOperationHandle<IList<ItemData>> handle = Addressables.LoadAssetsAsync<ItemData>(
+                "ItemData",
+                null
+            );
+
+            await handle.Task;
+
+            if (handle.Status != AsyncOperationStatus.Succeeded)
             {
-                quests.Add(questData.questID, questData.questData);
+                Debug.LogError("Failed to load ItemData from Addressables.");
+                Addressables.Release(handle);
+                return (quests, questStatuses);
             }
+
+            IList<ItemData> allItems = handle.Result;
+
+            foreach (var kvp in questSaveData)
+            {
+                // Create a new ScriptableObject instance
+                QuestData loadedQuest = ScriptableObject.CreateInstance<QuestData>();
+
+                // Populate quest data
+                loadedQuest.questID = kvp.Key;
+                loadedQuest.questTitle = kvp.Value.questTitle;
+                loadedQuest.questDescription = kvp.Value.questDescription;
+                loadedQuest.abilityUnlocked = kvp.Value.abilityUnlocked;
+
+                // Find and assign items by name
+                loadedQuest.rewardItem = allItems.FirstOrDefault(i => i.itemName == kvp.Value.rewardItemName);
+                loadedQuest.requiredItem = allItems.FirstOrDefault(i => i.itemName == kvp.Value.requiredItemName);
+
+                quests[kvp.Key] = loadedQuest;
+            }
+
+            Addressables.Release(handle);
         }
 
         if (File.Exists(QuestStatusSavePath))
         {
             string statusJson = File.ReadAllText(QuestStatusSavePath);
-            questStatuses = JsonConvert.DeserializeObject<Dictionary<int, QuestStatus>>(statusJson) ?? new Dictionary<int, QuestStatus>();
+            questStatuses = JsonConvert.DeserializeObject<Dictionary<int, QuestStatus>>(statusJson) 
+                ?? new Dictionary<int, QuestStatus>();
         }
+
+        return (quests, questStatuses);
+    }
+
+    // 동기 버전의 로드 메서드 (필요한 경우)
+    public static void LoadQuestManagerFromDisk(out Dictionary<int, QuestData> quests, out Dictionary<int, QuestStatus> questStatuses)
+    {
+        var loadTask = LoadQuestManagerFromDiskAsync();
+        loadTask.Wait();
+
+        (quests, questStatuses) = loadTask.Result;
     }
 
     #endregion

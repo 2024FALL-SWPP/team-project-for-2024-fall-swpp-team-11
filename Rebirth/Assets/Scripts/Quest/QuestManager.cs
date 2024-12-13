@@ -27,8 +27,8 @@ public class QuestManager : SingletonManager<QuestManager>
     {
         base.Awake();
 
-        SaveManager.load += SaveQuestManagerToDisk;
-        SaveManager.save += LoadQuestManagerFromDisk;
+        SaveManager.load += LoadQuestManagerFromDisk;
+        SaveManager.save += SaveQuestManagerToDisk;
 
         if (questUI == null)
         {
@@ -54,9 +54,9 @@ public class QuestManager : SingletonManager<QuestManager>
         DiskSaveSystem.SaveQuestManagerToDisk(quests, questStatuses);
     }
 
-    private void LoadQuestManagerFromDisk()
+    private async void LoadQuestManagerFromDisk()
     {
-        DiskSaveSystem.LoadQuestManagerFromDisk(out quests, out questStatuses);
+        (quests, questStatuses) = await DiskSaveSystem.LoadQuestManagerFromDiskAsync();
         questUI.RefreshQuestDisplay();
     }
 
