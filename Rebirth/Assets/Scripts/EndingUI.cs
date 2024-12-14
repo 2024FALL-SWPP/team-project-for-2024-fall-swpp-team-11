@@ -18,6 +18,10 @@ public class EndingUI : MonoBehaviour
     public List<TextMeshProUGUI> EndingThreeTexts; 
     public NPC EndingThreeNPC;
 
+    public List<GameObject> EndingFourImages; 
+    public List<TextMeshProUGUI> EndingFourTexts; 
+    public NPC EndingFourNPC;
+
     public AudioSource audioSource;
     public AudioClip eventMusic;
 
@@ -32,8 +36,11 @@ public class EndingUI : MonoBehaviour
         else if(CharacterStatusManager.Instance.EndingID == 2) {
             StartCoroutine(EnableImagesSequentially(EndingTwoImages, EndingTwoTexts, EndingTwoNPC));
         }
-        else if(CharacterStatusManager.Instance.EndingID == 0) {
+        else if(CharacterStatusManager.Instance.EndingID == 3) {
             StartCoroutine(EnableImagesSequentiallyAndHideText(EndingThreeImages, EndingThreeTexts, EndingThreeNPC));
+        }
+        else if(CharacterStatusManager.Instance.EndingID == 0) {
+            StartCoroutine(EnableImagesSequentiallyAndHideText(EndingFourImages, EndingFourTexts, EndingFourNPC));
         }
     }
     
