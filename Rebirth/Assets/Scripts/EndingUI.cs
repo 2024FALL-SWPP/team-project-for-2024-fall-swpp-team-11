@@ -23,24 +23,47 @@ public class EndingUI : MonoBehaviour
     public NPC EndingFourNPC;
 
     public AudioSource audioSource;
-    public AudioClip eventMusic;
+    public AudioClip eventMusic1;
+    public AudioClip eventMusic2;
+    public AudioClip eventMusic3;
+    public AudioClip eventMusic4;
+    public AudioClip eventMusic5;
+
+    public Button ToMainMenu;
 
     public float typingSpeed = 0.05f; 
 
     void Start()
     {
         GameStateManager.Instance.LockView();
-        if(CharacterStatusManager.Instance.EndingID == 1) {
+        DiskSaveSystem.ResetFilesExceptPlayerState();
+        SaveManager.Instance.LoadGame();
+
+        if(CharacterStatusManager.Instance.EndingID == 1) { // Victory 
+            audioSource.clip = eventMusic1; 
+            CharacterStatusManager.Instance.SetPlayerState(PlayerState.CanUseWeirdPotion);
             StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingOneNPC));
         }
-        else if(CharacterStatusManager.Instance.EndingID == 2) {
+        else if(CharacterStatusManager.Instance.EndingID == 2) { // Happy Ending?
+            audioSource.clip = eventMusic2; 
+            CharacterStatusManager.Instance.SetPlayerState(PlayerState.CanUseWeirdPotionCure);
             StartCoroutine(EnableImagesSequentially(EndingTwoImages, EndingTwoTexts, EndingTwoNPC));
         }
-        else if(CharacterStatusManager.Instance.EndingID == 3) {
+        else if(CharacterStatusManager.Instance.EndingID == 3) { // Truth
+            audioSource.clip = eventMusic3; 
             StartCoroutine(EnableImagesSequentiallyAndHideText(EndingThreeImages, EndingThreeTexts, EndingThreeNPC));
         }
-        else if(CharacterStatusManager.Instance.EndingID == 0) {
+        else if(CharacterStatusManager.Instance.EndingID == 4) { // Happily Ever After..
+            audioSource.clip = eventMusic4; 
             StartCoroutine(EnableImagesSequentiallyAndHideText(EndingFourImages, EndingFourTexts, EndingFourNPC));
+        }
+        else if(CharacterStatusManager.Instance.EndingID == 5) { // Victory with WeirdPotion
+            audioSource.clip = eventMusic5; 
+            StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingFourNPC));
+        }
+        else if(CharacterStatusManager.Instance.EndingID == 6) { // Victory with WeirdPotionCure
+            audioSource.clip = eventMusic5; 
+            StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingFourNPC));
         }
     }
     
@@ -51,7 +74,6 @@ public class EndingUI : MonoBehaviour
         audioSource.Play(); 
         for (int i = 0; i < count; i++)
         {
-            // if(i==1) audioSource.Play(); 
             if (images[i] != null)
             {
                 images[i].SetActive(true);
@@ -68,6 +90,7 @@ public class EndingUI : MonoBehaviour
         if (npc){
             npc.Interact();
         }
+        ToMainMenu.gameObject.SetActive(true);
     }
 
     IEnumerator EnableImagesSequentiallyAndHideText(List<GameObject> images, List<TextMeshProUGUI> texts, NPC npc)
@@ -95,6 +118,7 @@ public class EndingUI : MonoBehaviour
         if (npc){
             npc.Interact();
         }
+        ToMainMenu.gameObject.SetActive(true);
     }
 
     IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText)
