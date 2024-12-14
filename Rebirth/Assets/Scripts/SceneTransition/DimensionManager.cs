@@ -49,6 +49,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
         Anchor matchingAnchor;
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
+        Debug.Log("Successfully transitioned to anchor with ID: " + currentAnchor.anchorID + matchingAnchor.anchorID);
 
         InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
