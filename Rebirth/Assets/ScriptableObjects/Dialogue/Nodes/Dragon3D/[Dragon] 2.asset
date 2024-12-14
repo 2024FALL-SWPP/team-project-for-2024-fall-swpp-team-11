@@ -17,16 +17,16 @@ MonoBehaviour:
     \uB358\uC804 \uC548\uC5D0 \uC6B8\uB824\uD37C\uC9C4\uB2E4."
   options:
   - optionText: Continue
-    nextNode: {fileID: 0}
-    fallbackNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: c9fef78e4b48e4f57aa3bfa3acbfdfbe, type: 2}
+    fallbackNode: {fileID: 11400000, guid: 59ebe6e09bc554a76b4a08ec3e5f493f, type: 2}
     conditions:
-    - {fileID: 11400000, guid: c596292099a2b48dab0ac901fcf1e615, type: 2}
+    - {fileID: 11400000, guid: fb65c4f866fdb4d0dab80f4fe858cd16, type: 2}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: 
+  conversationNpcName: "\uB4DC\uB798\uACE4"
   isSelfSpeak: 0
-  conditionMetNextNode: {fileID: 11400000, guid: a30779b01ed13468ebcec5901ec0fadf, type: 2}
-  conditionNotMetNextNode: {fileID: 11400000, guid: 77138f9e4a74f403cbb8c4811109d317, type: 2}
+  conditionMetNextNode: {fileID: 11400000, guid: c9fef78e4b48e4f57aa3bfa3acbfdfbe, type: 2}
+  conditionNotMetNextNode: {fileID: 11400000, guid: 59ebe6e09bc554a76b4a08ec3e5f493f, type: 2}
   conditions:
-  - {fileID: 11400000, guid: c596292099a2b48dab0ac901fcf1e615, type: 2}
+  - {fileID: 11400000, guid: fb65c4f866fdb4d0dab80f4fe858cd16, type: 2}

@@ -35,9 +35,8 @@ public class EndingUI : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(CharacterStatusManager.Instance.EndingID);
         GameStateManager.Instance.LockView();
-        DiskSaveSystem.ResetFilesExceptPlayerState();
-        SaveManager.Instance.LoadGame();
 
         if(CharacterStatusManager.Instance.EndingID == 1) { // Victory 
             audioSource.clip = eventMusic1; 
@@ -61,10 +60,8 @@ public class EndingUI : MonoBehaviour
             audioSource.clip = eventMusic5; 
             StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingFourNPC));
         }
-        else if(CharacterStatusManager.Instance.EndingID == 6) { // Victory with WeirdPotionCure
-            audioSource.clip = eventMusic5; 
-            StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingFourNPC));
-        }
+        DiskSaveSystem.ResetFilesExceptPlayerState();
+        SaveManager.Instance.LoadGame();
     }
     
 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
-  m_Name: '[Dragon] 5-1'
+  m_Name: '[Dragon3D] 5-1'
   m_EditorClassIdentifier: 
   nodeID: 
   dialogueText: "\uAC70\uB300\uD55C \uB4DC\uB798\uACE4 \uC55E\uC5D0, \uC791\uC740
@@ -21,7 +21,7 @@ MonoBehaviour:
     \uB2F4\uACA8 \uC788\uC5C8\uB2E4."
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: d8145929ee6be4cc9b7b1a2147c2c86c, type: 2}
+    nextNode: {fileID: 11400000, guid: d1ad92e4e32624bee8904396752a11d4, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
@@ -30,4 +30,4 @@ MonoBehaviour:
         m_Calls: []
   conversationNpcName: "\uB4DC\uB798\uACE4"
   isSelfSpeak: 0
-  nextNode: {fileID: 11400000, guid: c4d366f849ae5444898010878107db63, type: 2}
+  nextNode: {fileID: 11400000, guid: d1ad92e4e32624bee8904396752a11d4, type: 2}

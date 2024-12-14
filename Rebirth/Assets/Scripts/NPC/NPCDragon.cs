@@ -38,7 +38,10 @@ public class NPCDragon : NPC
             CharacterStatusManager.Instance.EndingID = 4;
         } else if(DialogueManager.Instance.getLastLeafNode().nodeID == "ending5"){ 
             CharacterStatusManager.Instance.EndingID = 5;
+        } else if(DialogueManager.Instance.getLastLeafNode().nodeID == "ending6"){ 
+            CharacterStatusManager.Instance.EndingID = 6;
         }
+        Debug.Log(CharacterStatusManager.Instance.EndingID);
 
         portal.Interact();
     }
