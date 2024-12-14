@@ -6,10 +6,14 @@ using TMPro;
 
 public class EndingUI : MonoBehaviour
 {
-    public TextMeshProUGUI uiText; 
     public List<GameObject> EndingOneImages; 
     public List<TextMeshProUGUI> EndingOneTexts; 
     public NPC EndingOneNPC;
+
+    public List<GameObject> EndingTwoImages; 
+    public List<TextMeshProUGUI> EndingTwoTexts; 
+    public NPC EndingTwoNPC;
+
     public AudioSource audioSource;
     public AudioClip eventMusic;
 
@@ -18,10 +22,14 @@ public class EndingUI : MonoBehaviour
     void Start()
     {
         GameStateManager.Instance.LockView();
-        if(CharacterStatusManager.Instance.EndingID == 0) {
+        if(CharacterStatusManager.Instance.EndingID == 1) {
             StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingOneNPC));
         }
+        else if(CharacterStatusManager.Instance.EndingID == 0) {
+            StartCoroutine(EnableImagesSequentially(EndingTwoImages, EndingTwoTexts, EndingTwoNPC));
+        }
     }
+    
 
     IEnumerator EnableImagesSequentially(List<GameObject> images, List<TextMeshProUGUI> texts, NPC npc)
     {
