@@ -57,7 +57,6 @@ public class Character3DTest : InputTestFixture
 
     private IEnumerator MyTearDown()
     {
-        // SceneManager.UnloadSceneAsync(testSceneName);
         yield return null;
     }
 
