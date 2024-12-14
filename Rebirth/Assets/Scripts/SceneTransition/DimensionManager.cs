@@ -101,7 +101,8 @@ public class DimensionManager : SingletonManager<DimensionManager>
         matchingAnchor = FindAnchorByID(anchorID);
         if (matchingAnchor == null)
         {
-            Debug.LogError("Matching anchor not found in the target scene.");
+            Debug.LogError("Matching anchor not found in the target scene." + currentAnchor.anchorID);
+
             isSwitching = false;
             return false;
         }
