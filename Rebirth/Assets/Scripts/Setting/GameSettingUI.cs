@@ -1,16 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameSettingUI : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject settingsPanel;
+    public GameObject UserUiCanvas;
+
+    private bool isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
+    || SceneManager.GetActiveScene().name == "Narration"
+    || SceneManager.GetActiveScene().name == "EndingScene";
 
     private void Start()
-    {
+    {   
+        if(isOutGame){
+            UserUiCanvas.SetActive(false);
+        } 
+        else {
+            UserUiCanvas.SetActive(true);
+        }
         settingsPanel.SetActive(false);
+        
 
         volumeSlider.value = AudioListener.volume;
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
@@ -36,7 +49,7 @@ public class GameSettingUI : MonoBehaviour
         }
     }
 
-    private void ShowSetting()
+    public void ShowSetting()
     {
         settingsPanel.SetActive(true);
         GameStateManager.Instance.LockView();

@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 
 public class TutorialManager : MonoBehaviour
 {
@@ -12,8 +14,16 @@ public class TutorialManager : MonoBehaviour
 
     public GameObject tutorialModal;
 
+    private bool isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
+    || SceneManager.GetActiveScene().name == "Narration"
+    || SceneManager.GetActiveScene().name == "EndingScene";
+
     void Start()
     {
+        if(isOutGame){
+            return; 
+        }
+
         if (tutorialModal != null)
         {
             tutorialModal.SetActive(false);
@@ -30,6 +40,10 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
+        if(isOutGame) {
+            return; 
+        }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             if(CharacterStatusManager.Instance.PlayerState ==  PlayerState.Default){
