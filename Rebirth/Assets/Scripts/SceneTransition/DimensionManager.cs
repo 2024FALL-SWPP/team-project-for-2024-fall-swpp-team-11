@@ -23,7 +23,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
     async void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && !isSwitching && (CharacterStatusManager.Instance.PlayerState == PlayerState.IsToxified || CharacterStatusManager.Instance.PlayerState == PlayerState.CanUseWeirdPotionCure ))
+        if (Input.GetKeyDown(KeyCode.T) && !isSwitching && (CharacterStatusManager.Instance.PlayerState == PlayerState.IsToxified || CharacterStatusManager.Instance.PlayerState == PlayerState.CanUseWeirdPotionCure))
         {
             await SwitchDimension();
         }
@@ -48,6 +48,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
         Anchor matchingAnchor;
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
+        Debug.Log("Successfully transitioned to anchor with ID: " + currentAnchor.anchorID + matchingAnchor.anchorID);
 
         InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
@@ -99,7 +100,8 @@ public class DimensionManager : SingletonManager<DimensionManager>
         matchingAnchor = FindAnchorByID(anchorID);
         if (matchingAnchor == null)
         {
-            Debug.LogError("Matching anchor not found in the target scene.");
+            Debug.LogError("Matching anchor not found in the target scene." + currentAnchor.anchorID);
+
             isSwitching = false;
             return false;
         }
