@@ -1930,10 +1930,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8530025366287050059, guid: 54adb95d2a7acc24588681f0692e4b68, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54adb95d2a7acc24588681f0692e4b68, type: 3}
 --- !u!1 &821187205
@@ -3272,6 +3268,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 644892366, guid: b6abeceb095d94977a4d830fdcfecf8a, type: 3}
+      propertyPath: randomDialogues.Array.data[1]
+      value: "\uC5B4\uB5A4 NPC\uB4E4\uC740 \uD2B9\uC815\uD55C \uC544\uC774\uD15C\uC774
+        \uC788\uC5B4\uC57C \n\uB354 \uAE4A\uC740 \uB300\uD654\uB97C \uB098\uB20C
+        \uC218 \uC788\uC5B4\uC694. \n\uADF8\uB4E4\uC758 \uB300\uC0AC\uB97C \uC798
+        \uBCF4\uACE0, \uD544\uC694\uD55C \uC544\uC774\uD15C\uC744 \uC720\uCD94\uD574\uBCF4\uC138\uC694!"
+      objectReference: {fileID: 0}
     - target: {fileID: 550463245362496022, guid: b6abeceb095d94977a4d830fdcfecf8a, type: 3}
       propertyPath: m_Name
       value: SettingsManager

@@ -9,6 +9,7 @@ public class GameSettingUI : SingletonManager<GameSettingUI>
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject settingsPanel;
     public GameObject UserUiCanvas;
+    public GameObject DescriptionCanvas;
 
     private bool isOutGame;
 
@@ -20,9 +21,11 @@ public class GameSettingUI : SingletonManager<GameSettingUI>
 
         if(isOutGame){
             UserUiCanvas.SetActive(false);
+            DescriptionCanvas.SetActive(false);
         } 
         else {
             UserUiCanvas.SetActive(true);
+            DescriptionCanvas.SetActive(true);
         }
         settingsPanel.SetActive(false);
         
@@ -42,11 +45,13 @@ public class GameSettingUI : SingletonManager<GameSettingUI>
 
         if(isOutGame){
             UserUiCanvas.SetActive(false);
+            DescriptionCanvas.SetActive(false);
         } 
         else {
             UserUiCanvas.SetActive(true);
+            DescriptionCanvas.SetActive(true);
         }
-        
+
         // G 키 입력 감지
         if (Input.GetKeyDown(KeyCode.G))
         {
