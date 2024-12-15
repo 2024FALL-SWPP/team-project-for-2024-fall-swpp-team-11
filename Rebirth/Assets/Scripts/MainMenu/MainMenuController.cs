@@ -21,7 +21,7 @@ public class MainMenuController : MonoBehaviour
     [Header("Menu Panels")]
     [SerializeField] private MenuPanel[] menuPanels;
 
-    private string gameSceneName = "GameScene";
+    private string gameSceneName = "HeroHouse2D";
     private MenuPanel currentPanel;
 
     private void Awake()

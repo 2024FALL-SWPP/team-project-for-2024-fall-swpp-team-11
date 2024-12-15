@@ -17,6 +17,7 @@ public class ItemDataHandler : ISceneDataHandler
     {
         foreach (var item in Object.FindObjectsOfType<WorldItem>(true))
         {
+            Debug.Log($"Capturing data for item: {item.itemData.itemName}");
             sceneData.itemSceneDatas.Add(new ItemSceneData
             {
                 itemName = item.itemData.itemName,
@@ -68,6 +69,7 @@ public class ItemDataHandler : ISceneDataHandler
         {
             foreach (var prefab in handle.Result)
             {
+                Debug.Log($"Loaded prefab: {prefab.name}, target: {itemName}");
                 if (prefab.name == itemName) // 이름 비교
                 {                
                     return prefab;

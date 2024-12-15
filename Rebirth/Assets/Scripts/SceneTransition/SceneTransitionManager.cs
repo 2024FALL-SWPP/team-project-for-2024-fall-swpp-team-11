@@ -7,19 +7,19 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
     public Animator fadeAnimator;
     public Canvas canvas;
     public float fadeDuration = 1f;
-    private Vector3 playerTargetPosition;
 
     private void Start()
     {
         canvas.enabled = false;
     }
 
-    private void SetPlayerPosition()
+    public void SetPlayerPosition(Vector3 position)
     {
         Transform player = GameObject.FindWithTag("Player")?.transform;
         if (player != null)
         {
-            player.position = playerTargetPosition;
+            player.position = position;
+
         }
         else
         {

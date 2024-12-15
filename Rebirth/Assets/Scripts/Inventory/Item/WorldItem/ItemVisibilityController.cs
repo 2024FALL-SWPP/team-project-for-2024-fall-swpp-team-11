@@ -6,7 +6,6 @@ public class ItemVisibilityController : MonoBehaviour
     public List<PlayerState> playerStatesWantToShow;
     void Update()
     {
-        Debug.Log(CharacterStatusManager.Instance.PlayerState);
         if (playerStatesWantToShow.Contains(CharacterStatusManager.Instance.PlayerState))
         {
             SetVisibility(true);

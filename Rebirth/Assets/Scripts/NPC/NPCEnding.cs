@@ -8,7 +8,7 @@ public class NPCEnding : NPC
     public AudioClip eventMusic;
     public Portal portal;
 
-    public virtual void Interact()
+    public override void Interact()
     {
         audioSource.Play();
         base.Interact();

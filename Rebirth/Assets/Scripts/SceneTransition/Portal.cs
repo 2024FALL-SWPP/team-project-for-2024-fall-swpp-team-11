@@ -27,8 +27,7 @@ public class Portal : MonoBehaviour, IInteractable
         }
         else
         {
-            Transform player = GameObject.FindWithTag("Player").transform;
-            StartCoroutine(MovePlayerAfterDelay(player, targetPosition, animationDelay));
+            Debug.LogWarning("Target scene is not set.");
         }
     }
 
@@ -37,6 +36,8 @@ public class Portal : MonoBehaviour, IInteractable
         await SceneTransitionManager.Instance.FadeInAsync();
         await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
         
+        
+        SceneTransitionManager.Instance.SetPlayerPosition(targetPosition);
         InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
         
