@@ -3,19 +3,21 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameSettingUI : MonoBehaviour
+public class GameSettingUI : SingletonManager<GameSettingUI>
 {
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject settingsPanel;
     public GameObject UserUiCanvas;
 
-    private bool isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
-    || SceneManager.GetActiveScene().name == "Narration"
-    || SceneManager.GetActiveScene().name == "EndingScene";
+    private bool isOutGame;
 
     private void Start()
     {   
+        isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
+                || SceneManager.GetActiveScene().name == "Narration"
+                || SceneManager.GetActiveScene().name == "EndingScene";
+
         if(isOutGame){
             UserUiCanvas.SetActive(false);
         } 
@@ -34,6 +36,17 @@ public class GameSettingUI : MonoBehaviour
 
     private void Update()
     {
+        isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
+                || SceneManager.GetActiveScene().name == "Narration"
+                || SceneManager.GetActiveScene().name == "EndingScene";
+
+        if(isOutGame){
+            UserUiCanvas.SetActive(false);
+        } 
+        else {
+            UserUiCanvas.SetActive(true);
+        }
+        
         // G 키 입력 감지
         if (Input.GetKeyDown(KeyCode.G))
         {

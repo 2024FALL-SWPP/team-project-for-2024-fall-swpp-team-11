@@ -13,13 +13,14 @@ public class TutorialManager : MonoBehaviour
     private int currentTutorialIndex = 0;
 
     public GameObject tutorialModal;
-
-    private bool isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
-    || SceneManager.GetActiveScene().name == "Narration"
-    || SceneManager.GetActiveScene().name == "EndingScene";
+    private bool isOutGame;
 
     void Start()
     {
+       isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
+                || SceneManager.GetActiveScene().name == "Narration"
+                || SceneManager.GetActiveScene().name == "EndingScene";
+
         if(isOutGame){
             return; 
         }
