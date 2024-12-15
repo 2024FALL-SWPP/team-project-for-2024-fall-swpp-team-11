@@ -18,7 +18,6 @@ public class InventoryUI : MonoBehaviour
     private Dictionary<ItemData, int> itemToCellIndex3D = new Dictionary<ItemData, int>();
     private InventoryItemPool itemPool;
     private ItemTooltip itemTooltip;
-    private bool isVisible;
     private int inventoryCapacity;
 
     #region Unity Lifecycle
@@ -177,7 +176,7 @@ public class InventoryUI : MonoBehaviour
     #region Toggle Inventory
     public void ToggleInventory()
     {
-        if (!isVisible)
+        if (!inventoryUI.activeSelf)
             ShowInventory();
         else
             HideInventory();
@@ -185,15 +184,15 @@ public class InventoryUI : MonoBehaviour
 
     public void ShowInventory()
     {
-        isVisible = true;
         inventoryUI.gameObject.SetActive(true);
+        UIManager.Instance.AddToUIStack(inventoryUI);
         GameStateManager.Instance.LockView();
     }
 
     public void HideInventory()
     {
-        isVisible = false;
         inventoryUI.gameObject.SetActive(false);
+        UIManager.Instance.RemoveFromUIStack(inventoryUI);
         GameStateManager.Instance.UnlockView();
     }
     #endregion
