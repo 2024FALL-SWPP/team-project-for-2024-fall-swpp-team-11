@@ -57,6 +57,26 @@ public class InventoryManager : SingletonManager<InventoryManager>
         inventoryUI.RemoveItem(itemData, itemData.dimension);
     }
 
+    public void RemoveItemByName(string itemName)
+    {
+        Dimension currentDimension = DimensionManager.Instance.GetCurrentDimension();
+        List<ItemData> items = inventoryDataContainer.GetItems(currentDimension);
+
+        // 이름이 itemName과 일치하는 아이템 검색
+        ItemData targetItem = items.Find(item => item.itemName == itemName);
+
+        if (targetItem != null)
+        {
+            // 아이템 삭제
+            RemoveItem(targetItem);
+            Debug.Log($"{itemName} 아이템이 인벤토리에서 삭제되었습니다.");
+        }
+        else
+        {
+            Debug.LogWarning($"{itemName} 아이템이 인벤토리에 없습니다.");
+        }
+    }
+
     public bool HasItem(ItemData itemData)
     {
         return inventoryDataContainer.HasItem(itemData, itemData.dimension);

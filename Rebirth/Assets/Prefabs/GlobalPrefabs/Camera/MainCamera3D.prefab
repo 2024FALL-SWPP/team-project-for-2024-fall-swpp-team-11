@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0dbb48b4bf3d4896b2fefe725bd450e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSensitivity: 5
+  verticalSensitivity: 10
+  minVerticalAngle: -20
+  maxVerticalAngle: 80
 --- !u!114 &7071609448720121584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,3 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 119
+  minDistanceFromObstacle: 0.1
