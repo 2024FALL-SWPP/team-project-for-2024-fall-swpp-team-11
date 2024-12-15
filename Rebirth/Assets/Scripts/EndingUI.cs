@@ -87,7 +87,10 @@ public class EndingUI : MonoBehaviour
         if (npc){
             npc.Interact();
         }
+
+        
         ToMainMenu.gameObject.SetActive(true);
+        GameStateManager.Instance.LockView();
     }
 
     IEnumerator EnableImagesSequentiallyAndHideText(List<GameObject> images, List<TextMeshProUGUI> texts, NPC npc)
@@ -115,7 +118,10 @@ public class EndingUI : MonoBehaviour
         if (npc){
             npc.Interact();
         }
+
+        
         ToMainMenu.gameObject.SetActive(true);
+        GameStateManager.Instance.LockView();
     }
 
     IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText)
