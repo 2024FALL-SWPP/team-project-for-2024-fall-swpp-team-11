@@ -53,6 +53,7 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
+            DimensionManager.Instance.RefreshDimension(gameSceneName);
             await SceneTransitionManager.Instance.SceneTransitionWithEffect(gameSceneName);
         }
     }

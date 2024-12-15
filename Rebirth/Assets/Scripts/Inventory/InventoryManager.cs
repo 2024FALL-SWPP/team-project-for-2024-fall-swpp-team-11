@@ -20,13 +20,11 @@ public class InventoryManager : SingletonManager<InventoryManager>
         
         inventoryUI = GetComponent<InventoryUI>();
         inventoryUI.SetCapacity(inventoryCapacity);
-    }
 
-    private void Start()
-    {
+        Debug.Log($"Current inventory from dimension : {DimensionManager.Instance.GetCurrentDimension()}");
         inventoryUI.RefreshInventoryDimension();
     }
-
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -150,6 +148,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
 
         RedrawUI(Dimension.TWO_DIMENSION);
         RedrawUI(Dimension.THREE_DIMENSION);
+        inventoryUI.RefreshInventoryDimension();
     }
     #endregion
 }

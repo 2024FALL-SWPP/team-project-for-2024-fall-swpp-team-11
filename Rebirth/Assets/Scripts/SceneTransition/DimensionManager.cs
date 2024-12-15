@@ -17,8 +17,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
     {
         base.Awake();
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
+        RefreshDimension(SceneManager.GetActiveScene().name);
     }
 
     async void Update()
@@ -27,6 +26,11 @@ public class DimensionManager : SingletonManager<DimensionManager>
         {
             await SwitchDimension();
         }
+    }
+
+    public void RefreshDimension(string sceneName)
+    {
+        dimension = sceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
     }
 
     public async Task SwitchDimension()
