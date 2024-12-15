@@ -45,14 +45,26 @@ public class DialogueInputHandler : MonoBehaviour
 
     private void Update()
     {
-        if (!isDialogueActive)
+        if (!isDialogueActive || !canProcessInput)
             return;
 
-        if (!canProcessInput)
-            return;
-        
         if (Time.time - lastInputTime < debounceTime)
             return;
+
+        // 스페이스바 입력 처리
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (DialogueManager.Instance.dialogueUI.dialogueTyper.IsTyping())
+            {
+                DialogueManager.Instance.dialogueUI.dialogueTyper.CompleteTyping();
+            }
+            else
+            {
+                DialogueManager.Instance.SelectCurrentOption();
+            }
+            OnInputChanged();
+            return; // 스페이스바 입력이 처리되었으므로 추가 입력 처리하지 않음
+        }
 
         HandleNavigationInput();
         HandleSelectionInput();
@@ -81,7 +93,7 @@ public class DialogueInputHandler : MonoBehaviour
 
     private void HandleSelectionInput()
     {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             DialogueManager.Instance.SelectCurrentOption();
             OnInputChanged();

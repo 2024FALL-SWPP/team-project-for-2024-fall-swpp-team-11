@@ -64,12 +64,16 @@ public class ShopManager : SingletonManager<ShopManager>
 
         shopUI.gameObject.SetActive(true); // Show shop UI
         GameStateManager.Instance.LockView(); // Lock camera movement
+
+        UIManager.Instance.AddToUIStack(shopUI.gameObject);
     }
 
     private void CloseShop()
     {
         shopUI.gameObject.SetActive(false); // Hide shop UI
         GameStateManager.Instance.UnlockView(); // Unlock camera movement
+
+        UIManager.Instance.RemoveFromUIStack(shopUI.gameObject);
     }
 
     public Dimension GetCurrentDimension()
