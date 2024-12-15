@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: '[Dragon3D] 5-1'
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: "\uAC70\uB300\uD55C \uB4DC\uB798\uACE4 \uC55E\uC5D0, \uC791\uC740
+    \uC6A9\uC0AC\uB294 \uB9E8\uC190\uC73C\uB85C \uB9DE\uC130\uB2E4.\n\uCE7C\uB0A0\uB3C4,
+    \uBC29\uD328\uB3C4 \uC5C6\uB294 \uC6A9\uC0AC\uC758 \uB450 \uC190\uC740 \uBBF8\uC57D\uD574
+    \uBCF4\uC600\uC9C0\uB9CC,\n\uC6A9\uC0AC\uC758 \uB208 \uC18D\uC5D0\uB294 \uB728\uAC70\uC6B4
+    \uACB0\uC758\uC640 \uAD7D\uD788\uC9C0 \uC54A\uB294 \uBD88\uAD74\uC758 \uC758\uC9C0\uAC00
+    \uB2F4\uACA8 \uC788\uC5C8\uB2E4."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 11400000, guid: d1ad92e4e32624bee8904396752a11d4, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: "\uB4DC\uB798\uACE4"
+  isSelfSpeak: 0
+  nextNode: {fileID: 11400000, guid: d1ad92e4e32624bee8904396752a11d4, type: 2}
