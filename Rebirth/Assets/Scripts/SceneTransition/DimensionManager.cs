@@ -13,6 +13,9 @@ public class DimensionManager : SingletonManager<DimensionManager>
     private bool isSwitching = false;
     private Dimension dimension;
 
+    // Holds the currently triggered Maze Anchor if any
+    private Anchor currentMazeAnchor;
+
     protected override void Awake()
     {
         base.Awake();
@@ -23,7 +26,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
     async void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.T) && !isSwitching && (CharacterStatusManager.Instance.PlayerState == PlayerState.IsToxified || CharacterStatusManager.Instance.PlayerState == PlayerState.CanUseWeirdPotionCure))
+        // Press T to switch dimension (example)
         if (Input.GetKeyDown(KeyCode.T) && !isSwitching)
         {
             await SwitchDimension();
@@ -36,10 +39,13 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
         string targetSceneName;
         if (!FindTargetSceneName(out targetSceneName)) return;
+
         GameObject currentPlayer;
         if (!FindCurrentPlayer(out currentPlayer)) return;
+
         Anchor currentAnchor;
         if (!FindCurrentAnchor(currentPlayer, out currentAnchor)) return;
+
         GameObject playerPrefab;
         if (!FindPlayerPrefab(targetSceneName, out playerPrefab)) return;
 
@@ -48,8 +54,9 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
         Anchor matchingAnchor;
         if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
+
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
-        Debug.Log("Successfully transitioned to anchor with ID: " + currentAnchor.anchorID + matchingAnchor.anchorID);
+        Debug.Log("Successfully transitioned to anchor with ID: " + currentAnchor.anchorID + " and matched " + matchingAnchor.anchorID);
 
         InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
@@ -95,14 +102,14 @@ public class DimensionManager : SingletonManager<DimensionManager>
         }
         return true;
     }
+
     private bool FindMatchingAnchor(Anchor currentAnchor, out Anchor matchingAnchor)
     {
         anchorID = currentAnchor.anchorID;
         matchingAnchor = FindAnchorByID(anchorID);
         if (matchingAnchor == null)
         {
-            Debug.LogError("Matching anchor not found in the target scene." + currentAnchor.anchorID);
-
+            Debug.LogError("Matching anchor not found in the target scene: " + currentAnchor.anchorID);
             isSwitching = false;
             return false;
         }
@@ -146,8 +153,14 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
     Anchor FindClosestAnchor(Vector3 position)
     {
-        Anchor[] anchors = FindObjectsOfType<Anchor>();
+        // If we have a current maze anchor (zone-based), use that
+        if (currentMazeAnchor != null)
+        {
+            Debug.Log("Using the current maze anchor: " + currentMazeAnchor.anchorID);
+            return currentMazeAnchor;
+        }
 
+        Anchor[] anchors = FindObjectsOfType<Anchor>();
         if (anchors.Length == 0)
             return null;
 
@@ -156,6 +169,10 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
         foreach (Anchor anchor in anchors)
         {
+            // Skip maze anchors if one hasn't been triggered
+            if (anchor.isMazeAnchor)
+                continue;
+
             float distance = Vector3.Distance(position, anchor.transform.position);
             if (distance < closestDistance)
             {
@@ -170,7 +187,6 @@ public class DimensionManager : SingletonManager<DimensionManager>
     Anchor FindAnchorByID(string anchorID)
     {
         Anchor[] anchors = FindObjectsOfType<Anchor>();
-
         foreach (Anchor anchor in anchors)
         {
             if (anchor.anchorID == anchorID)
@@ -178,7 +194,6 @@ public class DimensionManager : SingletonManager<DimensionManager>
                 return anchor;
             }
         }
-
         return null;
     }
 
@@ -199,5 +214,15 @@ public class DimensionManager : SingletonManager<DimensionManager>
     public Dimension GetCurrentDimension()
     {
         return dimension;
+    }
+
+    // Called by Maze Anchors when the player enters their trigger zone
+    public void SetCurrentMazeAnchor(Anchor anchor)
+    {
+        if (anchor != null && anchor.isMazeAnchor)
+        {
+            currentMazeAnchor = anchor;
+            Debug.Log("Maze Anchor updated to: " + anchor.anchorID);
+        }
     }
 }
