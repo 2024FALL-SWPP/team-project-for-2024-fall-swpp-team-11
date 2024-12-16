@@ -1,16 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class GameSettingUI : MonoBehaviour
+public class GameSettingUI : SingletonManager<GameSettingUI>
 {
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject settingsPanel;
+    public GameObject UserUiCanvas;
+    public GameObject DescriptionCanvas;
+
+    private bool isOutGame;
 
     private void Start()
-    {
+    {   
+        isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
+                || SceneManager.GetActiveScene().name == "Narration"
+                || SceneManager.GetActiveScene().name == "EndingScene";
+
+        if(isOutGame){
+            UserUiCanvas.SetActive(false);
+            DescriptionCanvas.SetActive(false);
+        } 
+        else {
+            UserUiCanvas.SetActive(true);
+            DescriptionCanvas.SetActive(true);
+        }
         settingsPanel.SetActive(false);
+        
 
         volumeSlider.value = AudioListener.volume;
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
@@ -21,6 +39,19 @@ public class GameSettingUI : MonoBehaviour
 
     private void Update()
     {
+        isOutGame = SceneManager.GetActiveScene().name == "MainMenu"
+                || SceneManager.GetActiveScene().name == "Narration"
+                || SceneManager.GetActiveScene().name == "EndingScene";
+
+        if(isOutGame){
+            UserUiCanvas.SetActive(false);
+            DescriptionCanvas.SetActive(false);
+        } 
+        else {
+            UserUiCanvas.SetActive(true);
+            DescriptionCanvas.SetActive(true);
+        }
+
         // G 키 입력 감지
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -36,7 +67,7 @@ public class GameSettingUI : MonoBehaviour
         }
     }
 
-    private void ShowSetting()
+    public void ShowSetting()
     {
         settingsPanel.SetActive(true);
         UIManager.Instance.AddToUIStack(settingsPanel);
