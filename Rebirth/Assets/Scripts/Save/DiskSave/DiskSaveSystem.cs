@@ -186,7 +186,7 @@ public class DiskSaveSystem
             PlayerState = existingData.PlayerState,
             Money = 0,
             Health = 100,
-            LastScene = "HeroHouse2D"
+            LastScene = "Narration"
         };
 
         string updatedJson = JsonConvert.SerializeObject(resetData, Formatting.Indented);

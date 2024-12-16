@@ -28,7 +28,7 @@ public class CharacterStatusData
         IsPaperBfixed = false;
         EndingID = 1;
 
-        LastScene = "HeroHouse2D";
+        LastScene = "Narration";
     }
 }
 
