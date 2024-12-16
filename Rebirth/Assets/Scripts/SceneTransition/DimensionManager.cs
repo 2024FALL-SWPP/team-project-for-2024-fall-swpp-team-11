@@ -24,10 +24,10 @@ public class DimensionManager : SingletonManager<DimensionManager>
 
     async void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.T) && !isSwitching &&
-            (CharacterStatusManager.Instance.PlayerState == PlayerState.IsToxified ||
-             CharacterStatusManager.Instance.PlayerState == PlayerState.CanUseWeirdPotionCure))
+        if (Input.GetKeyDown(KeyCode.T) && !isSwitching)
+        // if (Input.GetKeyDown(KeyCode.T) && !isSwitching &&
+        //     (CharacterStatusManager.Instance.PlayerState == PlayerState.IsToxified ||
+        //      CharacterStatusManager.Instance.PlayerState == PlayerState.CanUseWeirdPotionCure))
         {
             await SwitchDimension();
         }
