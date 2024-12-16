@@ -9,6 +9,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class DiskSaveSystem
 {
@@ -114,7 +115,11 @@ public class DiskSaveSystem
     public static void SaveCharacterStatusToDisk()
     {
         string lastScene;
-        lastScene = GetLastScene();
+        lastScene = SceneManager.GetActiveScene().name;
+        Debug.Log("[SaveCharacterStatusToDisk] Last Scene: " + lastScene);
+
+        if (lastScene == "MainMenu" || lastScene == "EndingScene" || lastScene == "Narration")
+            lastScene = "HeroHouse2D";
 
         CharacterStatusData characterStatusData = new CharacterStatusData
         {
@@ -187,7 +192,6 @@ public class DiskSaveSystem
             PlayerState = existingData.PlayerState,
             Money = 0,
             Health = 100,
-            LastScene = "Narration"
         };
 
         string updatedJson = JsonConvert.SerializeObject(resetData, Formatting.Indented);

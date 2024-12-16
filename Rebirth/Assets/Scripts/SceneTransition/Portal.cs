@@ -39,8 +39,16 @@ public class Portal : MonoBehaviour, IInteractable
 
         await SceneTransitionManager.Instance.FadeInAsync();
         await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
+        
+        AfterSceneLoad();
+
         SceneTransitionManager.Instance.SetPlayerPosition(targetPosition);
         await SceneTransitionManager.Instance.FadeOutAsync();
+    }
+
+    protected virtual void AfterSceneLoad()
+    {
+        // 씬 로드 후 추가 작업 (선택 사항)
     }
 
 

@@ -14,6 +14,28 @@ public class GameStateManager : SingletonManager<GameStateManager>
         UnlockMovement();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            Respawn();
+        }
+    }
+
+    public Vector3 GetAnchorPosition()
+    {
+        GameObject player;
+        DimensionManager.Instance.FindCurrentPlayer(out player);
+        Anchor anchor;
+        DimensionManager.Instance.FindCurrentAnchor(player, out anchor);
+        return anchor.transform.position;
+    }
+
+    public void Respawn()
+    {
+        SceneTransitionManager.Instance.SetPlayerPosition(GetAnchorPosition());
+    }
+
     public void LockView()
     {
         IsViewLocked = true;
