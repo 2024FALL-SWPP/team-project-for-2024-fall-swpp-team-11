@@ -6,7 +6,7 @@ public class GameStateManager : SingletonManager<GameStateManager>
     public bool IsMovementLocked { get; private set; }
     private Vector2 savedMousePosition;
 
-    void Start()
+    protected override void Awake()
     {
         UnlockView();
         UnlockMovement();

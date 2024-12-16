@@ -162,11 +162,13 @@ public class InventoryUI : MonoBehaviour
     {
         if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
         {
+            Debug.Log("Current Inventory Set to 2D");
             contentPanel2D.gameObject.SetActive(true);
             contentPanel3D.gameObject.SetActive(false);
         }
         else
         {
+            Debug.Log("Current Inventory Set to 3D");
             contentPanel2D.gameObject.SetActive(false);
             contentPanel3D.gameObject.SetActive(true);
         }

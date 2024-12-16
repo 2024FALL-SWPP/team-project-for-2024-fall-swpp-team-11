@@ -7,6 +7,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.AddressableAssets;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using JetBrains.Annotations;
+using UnityEditor;
 
 public class DiskSaveSystem
 {
@@ -111,6 +113,9 @@ public class DiskSaveSystem
 
     public static void SaveCharacterStatusToDisk()
     {
+        string lastScene;
+        lastScene = GetLastScene();
+
         CharacterStatusData characterStatusData = new CharacterStatusData
         {
             Money = CharacterStatusManager.Instance.Money,
@@ -121,11 +126,22 @@ public class DiskSaveSystem
             IsPaperEfixed = CharacterStatusManager.Instance.IsPaperEfixed,
             IsPaperBfixed = CharacterStatusManager.Instance.IsPaperBfixed,
             EndingID = CharacterStatusManager.Instance.EndingID,
-            LastScene = SceneManager.GetActiveScene().name
+            LastScene = lastScene
         };
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);
         File.WriteAllText(CharacterStatusSavePath, json);
+    }
+
+    private static string GetLastScene()
+    {
+        string lastScene;
+        CharacterStatusData data = LoadCharacterStatusFromDisk();
+        if (data.LastScene == "MainMenu" || data.LastScene == "Dungeon2D" || data.LastScene == "Dungeon3D")
+            lastScene = "Village2D";
+        else
+            lastScene = data.LastScene;
+        return lastScene;
     }
 
     public static CharacterStatusData LoadCharacterStatusFromDisk()

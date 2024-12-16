@@ -36,7 +36,6 @@ public class EndingUI : MonoBehaviour
     void Start()
     {
         Debug.Log(CharacterStatusManager.Instance.EndingID);
-        GameStateManager.Instance.LockView();
 
         if(CharacterStatusManager.Instance.EndingID == 1) { // Victory 
             audioSource.clip = eventMusic1; 
@@ -60,8 +59,10 @@ public class EndingUI : MonoBehaviour
             audioSource.clip = eventMusic5; 
             StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingFourNPC));
         }
+
+        SaveManager.Instance.SaveGame();
         DiskSaveSystem.ResetFilesExceptPlayerState();
-        SaveManager.Instance.LoadGame();
+        GameStateManager.Instance.LockView();
     }
     
 
