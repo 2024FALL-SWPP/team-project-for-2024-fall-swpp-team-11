@@ -21,19 +21,21 @@ public class MainMenuController : MonoBehaviour
     [Header("Menu Panels")]
     [SerializeField] private MenuPanel[] menuPanels;
 
-    private string gameSceneName = "GameScene";
+    private string gameSceneName = "Narration";
     private MenuPanel currentPanel;
 
     private void Awake()
     {
         SaveManager.load += LoadStartSceneData;
+     
+        GameStateManager.Instance.LockView();
+
+        CloseAllPanels();
     }
 
     private void Start()
     {
         GameStateManager.Instance.LockView();
-
-        CloseAllPanels();
     }
 
     private void Update()
@@ -53,6 +55,7 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
+            DimensionManager.Instance.RefreshDimension(gameSceneName);
             await SceneTransitionManager.Instance.SceneTransitionWithEffect(gameSceneName);
         }
     }
