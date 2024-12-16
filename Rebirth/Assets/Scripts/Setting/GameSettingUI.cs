@@ -70,12 +70,14 @@ public class GameSettingUI : SingletonManager<GameSettingUI>
     public void ShowSetting()
     {
         settingsPanel.SetActive(true);
+        UIManager.Instance.AddToUIStack(settingsPanel);
         GameStateManager.Instance.LockView();
     }
 
     private void HideSetting()
     {
         settingsPanel.SetActive(false);
+        UIManager.Instance.RemoveFromUIStack(settingsPanel);
         GameStateManager.Instance.UnlockView();
     }
 

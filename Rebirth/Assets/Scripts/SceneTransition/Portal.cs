@@ -34,12 +34,12 @@ public class Portal : MonoBehaviour, IInteractable
 
     private async Task InteractWithSceneTransitionAsync()
     {
-        await SceneTransitionManager.Instance.FadeInAsync();
-        await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
-        
+        DimensionManager.Instance.RefreshDimension(targetScene);
         InventoryManager.Instance.HandleSceneChange();
         CharacterStatusManager.Instance.RefreshStatusUI();
-        
+
+        await SceneTransitionManager.Instance.FadeInAsync();
+        await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
         await SceneTransitionManager.Instance.FadeOutAsync();
     }
 

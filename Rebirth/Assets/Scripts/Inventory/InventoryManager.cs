@@ -20,10 +20,8 @@ public class InventoryManager : SingletonManager<InventoryManager>
         
         inventoryUI = GetComponent<InventoryUI>();
         inventoryUI.SetCapacity(inventoryCapacity);
-    }
 
-    private void Start()
-    {
+        Debug.Log($"Current inventory from dimension : {DimensionManager.Instance.GetCurrentDimension()}");
         inventoryUI.RefreshInventoryDimension();
     }
 

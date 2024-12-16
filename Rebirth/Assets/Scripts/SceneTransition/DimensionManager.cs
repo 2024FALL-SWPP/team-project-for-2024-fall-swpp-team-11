@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Threading.Tasks;
-using System.Data.Common;
 
 public class DimensionManager : SingletonManager<DimensionManager>
 {
@@ -17,36 +16,73 @@ public class DimensionManager : SingletonManager<DimensionManager>
     {
         base.Awake();
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        dimension = currentSceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
+        RefreshDimension(SceneManager.GetActiveScene().name);
     }
 
     async void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && !isSwitching && (CharacterStatusManager.Instance.PlayerState == PlayerState.IsToxified || CharacterStatusManager.Instance.PlayerState == PlayerState.CanUseWeirdPotionCure))
+        if (Input.GetKeyDown(KeyCode.T) && !isSwitching &&
+            (CharacterStatusManager.Instance.PlayerState == PlayerState.IsToxified ||
+             CharacterStatusManager.Instance.PlayerState == PlayerState.CanUseWeirdPotionCure))
         {
             await SwitchDimension();
         }
     }
 
+    public void RefreshDimension(string sceneName)
+    {
+        dimension = sceneName.EndsWith("2D") ? Dimension.TWO_DIMENSION : Dimension.THREE_DIMENSION;
+    }
+
     public async Task SwitchDimension()
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "Dungeon2D" || currentSceneName == "Dungeon3D")
+        {
+            Debug.Log("SwitchDimension is disabled in Dungeon2D or Dungeon3D scenes.");
+            return;
+        }
+
         isSwitching = true;
 
         string targetSceneName;
-        if (!FindTargetSceneName(out targetSceneName)) return;
+        if (!FindTargetSceneName(out targetSceneName))
+        {
+            isSwitching = false;
+            return;
+        }
+
         GameObject currentPlayer;
-        if (!FindCurrentPlayer(out currentPlayer)) return;
+        if (!FindCurrentPlayer(out currentPlayer))
+        {
+            isSwitching = false;
+            return;
+        }
+
         Anchor currentAnchor;
-        if (!FindCurrentAnchor(currentPlayer, out currentAnchor)) return;
+        if (!FindCurrentAnchor(currentPlayer, out currentAnchor))
+        {
+            isSwitching = false;
+            return;
+        }
+
         GameObject playerPrefab;
-        if (!FindPlayerPrefab(targetSceneName, out playerPrefab)) return;
+        if (!FindPlayerPrefab(targetSceneName, out playerPrefab))
+        {
+            isSwitching = false;
+            return;
+        }
 
         await SceneTransitionManager.Instance.FadeInAsync();
         await SceneTransitionManager.Instance.LoadSceneAsync(targetSceneName);
 
         Anchor matchingAnchor;
-        if (!FindMatchingAnchor(currentAnchor, out matchingAnchor)) return;
+        if (!FindMatchingAnchor(currentAnchor, out matchingAnchor))
+        {
+            isSwitching = false;
+            return;
+        }
+
         MoveOrSpawnPlayer(matchingAnchor, playerPrefab);
         Debug.Log("Successfully transitioned to anchor with ID: " + currentAnchor.anchorID + matchingAnchor.anchorID);
 
@@ -94,6 +130,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
         }
         return true;
     }
+
     private bool FindMatchingAnchor(Anchor currentAnchor, out Anchor matchingAnchor)
     {
         anchorID = currentAnchor.anchorID;
@@ -101,7 +138,6 @@ public class DimensionManager : SingletonManager<DimensionManager>
         if (matchingAnchor == null)
         {
             Debug.LogError("Matching anchor not found in the target scene." + currentAnchor.anchorID);
-
             isSwitching = false;
             return false;
         }

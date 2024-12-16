@@ -27,13 +27,15 @@ public class MainMenuController : MonoBehaviour
     private void Awake()
     {
         SaveManager.load += LoadStartSceneData;
+     
+        GameStateManager.Instance.LockView();
+
+        CloseAllPanels();
     }
 
     private void Start()
     {
         GameStateManager.Instance.LockView();
-
-        CloseAllPanels();
     }
 
     private void Update()
@@ -53,6 +55,7 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
+            DimensionManager.Instance.RefreshDimension(gameSceneName);
             await SceneTransitionManager.Instance.SceneTransitionWithEffect(gameSceneName);
         }
     }

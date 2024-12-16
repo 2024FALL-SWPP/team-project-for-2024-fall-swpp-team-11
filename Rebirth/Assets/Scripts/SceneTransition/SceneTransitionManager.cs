@@ -45,6 +45,10 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         // 비동기 대기
         await Task.Delay((int)(fadeDuration * 1000));
         canvas.enabled = false;
+        
+        GameStateManager.Instance.UnlockView();
+        GameStateManager.Instance.UnlockMovement();
+
     }
 
     public async Task LoadSceneAsync(string sceneName)
@@ -61,12 +65,10 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         canvas.enabled = true;
         fadeAnimator.SetTrigger("FadeOutTrigger");
 
+
         // 비동기 대기
         await Task.Delay((int)(fadeDuration * 1000));
         canvas.enabled = false;
-
-        GameStateManager.Instance.UnlockView();
-        GameStateManager.Instance.UnlockMovement();
     }
 
     private async Task TransitionAsync(string sceneName)

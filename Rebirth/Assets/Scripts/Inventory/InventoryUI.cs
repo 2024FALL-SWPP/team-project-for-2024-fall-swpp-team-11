@@ -18,7 +18,6 @@ public class InventoryUI : MonoBehaviour
     private Dictionary<ItemData, int> itemToCellIndex3D = new Dictionary<ItemData, int>();
     private InventoryItemPool itemPool;
     private ItemTooltip itemTooltip;
-    private bool isVisible;
     private int inventoryCapacity;
 
     #region Unity Lifecycle
@@ -163,11 +162,13 @@ public class InventoryUI : MonoBehaviour
     {
         if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
         {
+            Debug.Log("Current Inventory Set to 2D");
             contentPanel2D.gameObject.SetActive(true);
             contentPanel3D.gameObject.SetActive(false);
         }
         else
         {
+            Debug.Log("Current Inventory Set to 3D");
             contentPanel2D.gameObject.SetActive(false);
             contentPanel3D.gameObject.SetActive(true);
         }
@@ -177,7 +178,7 @@ public class InventoryUI : MonoBehaviour
     #region Toggle Inventory
     public void ToggleInventory()
     {
-        if (!isVisible)
+        if (!inventoryUI.activeSelf)
             ShowInventory();
         else
             HideInventory();
@@ -185,15 +186,15 @@ public class InventoryUI : MonoBehaviour
 
     public void ShowInventory()
     {
-        isVisible = true;
         inventoryUI.gameObject.SetActive(true);
+        UIManager.Instance.AddToUIStack(inventoryUI);
         GameStateManager.Instance.LockView();
     }
 
     public void HideInventory()
     {
-        isVisible = false;
         inventoryUI.gameObject.SetActive(false);
+        UIManager.Instance.RemoveFromUIStack(inventoryUI);
         GameStateManager.Instance.UnlockView();
     }
     #endregion
