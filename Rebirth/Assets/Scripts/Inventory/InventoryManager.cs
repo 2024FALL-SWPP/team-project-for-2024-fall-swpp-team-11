@@ -58,7 +58,13 @@ public class InventoryManager : SingletonManager<InventoryManager>
     public void RemoveItemByName(string itemName)
     {
         Dimension currentDimension = DimensionManager.Instance.GetCurrentDimension();
-        List<ItemData> items = inventoryDataContainer.GetItems(currentDimension);
+        List<ItemData> items2D = inventoryDataContainer.GetItems(Dimension.TWO_DIMENSION);
+        List<ItemData> items3D = inventoryDataContainer.GetItems(Dimension.THREE_DIMENSION);
+        
+        // concatenate two lists
+        List<ItemData> items = new List<ItemData>();
+        items.AddRange(items2D);
+        items.AddRange(items3D);
 
         // 이름이 itemName과 일치하는 아이템 검색
         ItemData targetItem = items.Find(item => item.itemName == itemName);

@@ -13,6 +13,12 @@ public class SaveManager : SingletonManager<SaveManager>
     {
         if (!isSaveMangerEnabled) return;
 
+        // LoadGame();
+        // StartCoroutine(AutoSaveCoroutine());
+    }
+
+    public void StartSaving()
+    {
         LoadGame();
         StartCoroutine(AutoSaveCoroutine());
     }

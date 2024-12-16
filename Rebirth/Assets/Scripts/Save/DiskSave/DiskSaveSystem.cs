@@ -164,6 +164,7 @@ public class DiskSaveSystem
 
         foreach (string file in files)
         {
+            // Debug.Log($"Deleting file: {file}");
             File.Delete(file);
         }
     }

@@ -43,7 +43,6 @@ public class CharacterStatusUI : MonoBehaviour, ICharacterStatusUI
 
             currentCharacterStatusUI = characterStatusUI3D;
         }
-        Debug.Log(logPrefix + "currentCharacterStatusUI: " + currentCharacterStatusUI);
     }
     
     public void UpdateMoneyUI(int currentMoney)

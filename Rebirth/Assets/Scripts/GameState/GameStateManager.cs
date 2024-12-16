@@ -8,6 +8,8 @@ public class GameStateManager : SingletonManager<GameStateManager>
 
     protected override void Awake()
     {
+        base.Awake();
+        
         UnlockView();
         UnlockMovement();
     }

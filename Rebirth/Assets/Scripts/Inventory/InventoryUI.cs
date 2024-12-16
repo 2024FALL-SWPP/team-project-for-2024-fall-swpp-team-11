@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Transform contentPanel2D;
     [SerializeField] private Transform contentPanel3D;
     [SerializeField] private GameObject tooltip;
+
+    [SerializeField] private TMP_Text inventoryTitleText;
 
     [Header("Grid")]
     [SerializeField] private GameObject gridCellPrefab;
@@ -165,12 +168,14 @@ public class InventoryUI : MonoBehaviour
             Debug.Log("Current Inventory Set to 2D");
             contentPanel2D.gameObject.SetActive(true);
             contentPanel3D.gameObject.SetActive(false);
+            inventoryTitleText.text = "Inventory (2D)";
         }
         else
         {
             Debug.Log("Current Inventory Set to 3D");
             contentPanel2D.gameObject.SetActive(false);
             contentPanel3D.gameObject.SetActive(true);
+            inventoryTitleText.text = "Inventory (3D)";
         }
     }
     #endregion

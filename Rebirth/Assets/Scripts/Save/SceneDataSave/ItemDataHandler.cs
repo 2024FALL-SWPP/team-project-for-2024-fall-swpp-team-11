@@ -32,6 +32,7 @@ public class ItemDataHandler : ISceneDataHandler
 
         foreach (var itemSceneData in sceneData.itemSceneDatas)
         {
+            Debug.Log("itemSceneData: " + itemSceneData.itemName);
             tasks.Add(LoadAndInstantiateAsync(itemSceneData));
         }
 
@@ -68,6 +69,7 @@ public class ItemDataHandler : ISceneDataHandler
         {
             foreach (var prefab in handle.Result)
             {
+                // Debug.Log("prefab name: " + prefab.name + " itemName: " + itemName);
                 if (prefab.name == itemName) // 이름 비교
                 {                
                     return prefab;

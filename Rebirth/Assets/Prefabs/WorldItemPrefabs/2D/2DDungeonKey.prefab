@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3501724886799098350}
   - component: {fileID: 4297447736100176692}
   - component: {fileID: 6389640194633933389}
+  - component: {fileID: 1231921921}
   m_Layer: 0
   m_Name: 2DDungeonKey
   m_TagString: Untagged
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f498abccc1fb454faa531c73d294630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 0.5
+  yOffset: 2
 --- !u!50 &3501724886799098350
 Rigidbody2D:
   serializedVersion: 4
@@ -152,3 +153,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 6dd68c3a3cce8448289b0a7f907220aa, type: 2}
   PickingSound: {fileID: 8300000, guid: 0fdfdb087d2214176a57c3aa1eb07300, type: 3}
+--- !u!114 &1231921921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9217977475950915972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78ec2ec00604a34f9c5684e57d20ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatesWantToShow: 0000000004000000

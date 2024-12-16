@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 560475063
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6a82618cfc722479f85f3e3cb8b6e035, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: ...
   questNodes: {fileID: 11400000, guid: ca4c3bccb33d6490ebfabaeff796ebd9, type: 2}
-  itemData: {fileID: 11400000, guid: e3402c44391e84aaf9e63bc63fa1ed1b, type: 2}
+  itemData: {fileID: 11400000, guid: e86d2dbdc487422479e7b59c85542c73, type: 2}
 --- !u!114 &7732884635429850541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f498abccc1fb454faa531c73d294630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 1
+  yOffset: 2
 --- !u!114 &-5676341833589872212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,5 +176,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a8dfbc2bffb4d41822d16dfdfd4b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 6dd68c3a3cce8448289b0a7f907220aa, type: 2}
+  itemData: {fileID: 11400000, guid: e86d2dbdc487422479e7b59c85542c73, type: 2}
   PickingSound: {fileID: 8300000, guid: 0fdfdb087d2214176a57c3aa1eb07300, type: 3}
