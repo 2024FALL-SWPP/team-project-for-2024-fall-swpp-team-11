@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterInteract3D : MonoBehaviour
 {
     private IInteractable currentInteractable;
-    [SerializeField] private float interactionRange = 1f;
+    [SerializeField] private float interactionRange = 2f;
 
     private void Update()
     {

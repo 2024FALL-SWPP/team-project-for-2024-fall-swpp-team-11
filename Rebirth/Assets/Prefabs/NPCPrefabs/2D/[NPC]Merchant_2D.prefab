@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3873088043181399338}
   - component: {fileID: 3873088043181399333}
   - component: {fileID: 3873088043181399339}
+  - component: {fileID: -7004160052355799381}
   m_Layer: 0
-  m_Name: '[NPC]Merchant'
+  m_Name: '[NPC]Merchant_2D'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,3 +141,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0.5
+--- !u!114 &-7004160052355799381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873088043181399334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0c85f3971f34f52985029f8e264997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 1

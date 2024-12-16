@@ -1582,7 +1582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8969176116129782605, guid: 820da94ffced44620a649a75a8370314, type: 3}
       propertyPath: m_Name
-      value: '[NPC}Lianna'
+      value: '[NPC}Lianna_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 8969176116129782607, guid: 820da94ffced44620a649a75a8370314, type: 3}
       propertyPath: m_RootOrder
@@ -1959,7 +1959,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 837712843672237638, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
       propertyPath: m_Name
-      value: '[NPC]Cat1'
+      value: '[NPC]Cat1_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 837712843672237752, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
       propertyPath: m_RootOrder
@@ -4038,7 +4038,7 @@ PrefabInstance:
       objectReference: {fileID: 327044537}
     - target: {fileID: 8991676091619463635, guid: a194d3930fb504aa9afd2dc6ed464c80, type: 3}
       propertyPath: m_Name
-      value: '[NPC]MagicList'
+      value: '[NPC]MagicList_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 8991676091619463645, guid: a194d3930fb504aa9afd2dc6ed464c80, type: 3}
       propertyPath: m_RootOrder
@@ -8077,7 +8077,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8117907124579544576, guid: 8a4b1c97c3ede49649dac7bf4025a27a, type: 3}
       propertyPath: m_Name
-      value: '[NPC]Cat2'
+      value: '[NPC]Cat2_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 8117907124579544582, guid: 8a4b1c97c3ede49649dac7bf4025a27a, type: 3}
       propertyPath: m_RootOrder
@@ -15184,11 +15184,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2861734299226394124, guid: 77dfddfce89c44616b014b63f6912a32, type: 3}
       propertyPath: isSaveMangerEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2861734299226394125, guid: 77dfddfce89c44616b014b63f6912a32, type: 3}
       propertyPath: m_Name
       value: SaveManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861734299226394125, guid: 77dfddfce89c44616b014b63f6912a32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2861734299226394127, guid: 77dfddfce89c44616b014b63f6912a32, type: 3}
       propertyPath: m_RootOrder
@@ -16557,7 +16561,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2852439586546416449, guid: db488a1e9456f4e8196866f8bf31eca8, type: 3}
       propertyPath: m_Name
-      value: '[NPC]Well'
+      value: '[NPC]Well_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 2852439586546416463, guid: db488a1e9456f4e8196866f8bf31eca8, type: 3}
       propertyPath: m_RootOrder
@@ -20401,7 +20405,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4165497788340963817, guid: 0800f8cf156ea4e8695c385f0693afae, type: 3}
       propertyPath: m_Name
-      value: '[NPC]Ketrix'
+      value: '[NPC]Ketrix_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 4165497788340963819, guid: 0800f8cf156ea4e8695c385f0693afae, type: 3}
       propertyPath: m_RootOrder
@@ -29964,14 +29968,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7571446395881418895, guid: 4ac6129ecb86749498fd125c8d2af552, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7571446395881418895, guid: 4ac6129ecb86749498fd125c8d2af552, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -17
-      objectReference: {fileID: 0}
-    - target: {fileID: 7571446395881418895, guid: 4ac6129ecb86749498fd125c8d2af552, type: 3}
-      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7571446395881418895, guid: 4ac6129ecb86749498fd125c8d2af552, type: 3}
@@ -35567,7 +35563,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6010920041750485359, guid: 332047050b92f455cbb439f6a99898e9, type: 3}
       propertyPath: m_Name
-      value: '[NPC]Cat3'
+      value: '[NPC]Cat3_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 6010920041750485361, guid: 332047050b92f455cbb439f6a99898e9, type: 3}
       propertyPath: m_RootOrder
@@ -40168,63 +40164,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1969439610
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1575655407109434942, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_Name
-      value: 2DCrystalBinding
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_RootOrder
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575655407109434943, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b326b27434d8743f98f61e90dfcc678c, type: 3}
 --- !u!1 &1971701342
 GameObject:
   m_ObjectHideFlags: 0
@@ -41590,6 +41529,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6250874569761941023, guid: cf9fb869f696544a1a432e8fc2b0cc05, type: 3}
+      propertyPath: m_Size.y
+      value: 0.23090255
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250874569761941023, guid: cf9fb869f696544a1a432e8fc2b0cc05, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.25339997
+      objectReference: {fileID: 0}
     - target: {fileID: 6250874569761941217, guid: cf9fb869f696544a1a432e8fc2b0cc05, type: 3}
       propertyPath: m_Name
       value: 2D Hero
@@ -42315,7 +42262,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4603557581571659380, guid: eb19bf09f8743462b83ab274ecf06245, type: 3}
       propertyPath: m_Name
-      value: '[NPC]Karnas'
+      value: '[NPC]Karnas_2D'
       objectReference: {fileID: 0}
     - target: {fileID: 4603557581571659382, guid: eb19bf09f8743462b83ab274ecf06245, type: 3}
       propertyPath: m_RootOrder

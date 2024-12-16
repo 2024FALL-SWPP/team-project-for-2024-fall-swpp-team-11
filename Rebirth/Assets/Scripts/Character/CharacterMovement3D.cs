@@ -42,6 +42,11 @@ public class CharacterMovement3D : MonoBehaviour
                 }
             }
         }
+
+        if (rb && rb.velocity.y < 0 && !IsGrounded())
+        {
+            rb.AddForce(Vector3.down * 2f); // 중력을 추가로 강화
+        }
     }
 
     public void Move(Vector3 moveDir)
