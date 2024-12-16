@@ -50,6 +50,7 @@ public class GameSettingUI : SingletonManager<GameSettingUI>
         else {
             UserUiCanvas.SetActive(true);
             DescriptionCanvas.SetActive(true);
+            // GameStateManager.Instance.LockView();
         }
 
         // G 키 입력 감지
