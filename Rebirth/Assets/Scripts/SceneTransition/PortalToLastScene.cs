@@ -31,5 +31,6 @@ public class PortalToLastScene : Portal
     {
         base.AfterSceneLoad();
         targetPosition = GameStateManager.Instance.GetAnchorPosition();
+        CharacterStatusManager.Instance.RefreshStatusUI();
     }
 }
