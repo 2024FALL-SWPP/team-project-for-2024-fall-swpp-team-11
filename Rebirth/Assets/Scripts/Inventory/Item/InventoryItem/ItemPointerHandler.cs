@@ -1,11 +1,12 @@
-using System.Diagnostics;
 using UnityEngine.EventSystems;
+using UnityEngine;
 
 public class ItemPointerHandler : PointerHandler
 {
     public ItemData itemData;
     protected override void HandlePointerEnter(PointerEventData eventData)
     {
+        Debug.Log("[ItemPointerHandler] HandlePointerEnter / itemData : " + itemData + ".");
         InventoryManager.Instance.ShowTooltip(itemData, eventData.position);
     }
 

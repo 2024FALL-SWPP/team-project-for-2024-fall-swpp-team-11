@@ -104,6 +104,7 @@ public class InventoryUI : MonoBehaviour
         emptyCell.AddItem(itemObj);
 
         InventoryItem inventoryItem = itemObj.GetComponent<InventoryItem>();
+        Debug.Log(logPrefix + " / AddItem / item: " + item + ", inventoryItem: " + inventoryItem);
         inventoryItem.Initialize(item);
 
         // 상태 저장
@@ -156,6 +157,7 @@ public class InventoryUI : MonoBehaviour
             cell.AddItem(itemObj);
 
             InventoryItem inventoryItem = itemObj.GetComponent<InventoryItem>();
+            Debug.Log(logPrefix + " / RedrawUI / item: " + item + ", inventoryItem: " + inventoryItem);
             inventoryItem.Initialize(item);
 
             itemToCellIndex[item] = cell.index;
@@ -209,6 +211,7 @@ public class InventoryUI : MonoBehaviour
     #region Tooltip
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
+        Debug.Log(logPrefix + "Show Tooltip / itemData: " + itemData + ", position: " + position);
         itemTooltip.Show();
         itemTooltip.Initialize(itemData);
     }
