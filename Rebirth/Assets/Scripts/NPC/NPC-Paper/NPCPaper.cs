@@ -19,7 +19,7 @@ public class NPCPaper : NPC
     private bool isImageShown = false;
     private bool isUDImageShown = false;
 
-    // private bool hasInteractedWithNPC = false;
+    private bool hasInteractedWithNPC = false;
 
     public override void HandleDialogueEnd()
     {
@@ -29,6 +29,7 @@ public class NPCPaper : NPC
             ShowDImage();
             isImageShown = true;
             isUDImageShown = false;
+            
         }
 
         if( DialogueManager.Instance.getLastLeafNode().nodeID == "B"){
@@ -49,20 +50,15 @@ public class NPCPaper : NPC
                 {
                     if(CharacterStatusManager.Instance.GetPaper("e"))
                     {
-                        ShowUDImage(currentPage);
-                        isImageShown = true;
-                        isUDImageShown = true;
-
-                        NPC newNPC = Instantiate(PaperCompleteNPC) as NPC;
-                        if (newNPC != null)
-                        {
+                        if(!hasInteractedWithNPC) {
+                            hasInteractedWithNPC = true;
+                            NPC newNPC = Instantiate(PaperCompleteNPC) as NPC;
                             newNPC.Interact();
                         }
-                        else
-                        {
-                            Debug.LogError("NPC 프리팹이 제대로 할당되지 않았습니다.");
-                            return;
-                        }
+
+                        ShowUDImage(currentPage);
+                        isImageShown = true;
+                        isUDImageShown = true;                        
                     }
                     else
                     {
@@ -198,7 +194,6 @@ public class NPCPaper : NPC
     private void ShowUDImage(int index)
     {
         unDamaged[index].SetActive(true);
-
     }
 
 

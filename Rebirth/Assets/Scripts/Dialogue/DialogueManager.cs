@@ -219,8 +219,8 @@ public class DialogueManager : SingletonManager<DialogueManager>
     {
         lastLeafNode = currentNode;
         ResetCurrentNode();
-        OnDialogueEnd?.Invoke();
         dialogueUI.HideDialogue();
+        OnDialogueEnd?.Invoke();
         
     }
 }
