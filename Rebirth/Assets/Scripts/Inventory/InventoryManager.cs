@@ -47,14 +47,20 @@ public class InventoryManager : SingletonManager<InventoryManager>
     {
         if (inventoryDataContainer.GetTotalItemCount() >= inventoryCapacity) return;
 
-        inventoryDataContainer.AddItem(itemData, itemData.dimension);
-        inventoryUI.AddItem(itemData, itemData.dimension);
+        inventoryDataContainer.AddItem(itemData);
+        inventoryUI.AddItem(itemData);
     }
 
     public void RemoveItem(ItemData itemData)
     {
-        inventoryDataContainer.RemoveItem(itemData, itemData.dimension);
-        inventoryUI.RemoveItem(itemData, itemData.dimension);
+        inventoryDataContainer.RemoveItem(itemData);
+        inventoryUI.RemoveItem(itemData);
+    }
+
+    public void RemoveItem(ItemData itemData, GameObject inventoryItemObj)
+    {
+        inventoryDataContainer.RemoveItem(itemData);
+        inventoryUI.RemoveItem(itemData.dimension, inventoryItemObj);
     }
 
     public void RemoveItemByName(string itemName)
@@ -151,7 +157,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
         inventoryDataContainer = new InventoryDataContainer();
         foreach (ItemData item in loadedItems)
         {
-            inventoryDataContainer.AddItem(item, item.dimension);
+            inventoryDataContainer.AddItem(item);
         }
 
         RedrawUI(Dimension.TWO_DIMENSION);

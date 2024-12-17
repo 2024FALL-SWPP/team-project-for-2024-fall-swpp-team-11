@@ -79,7 +79,7 @@ public class ItemDragHandler : DragHandler
         if (spawnPosition.HasValue)
         {
             Instantiate(itemData.prefab, spawnPosition.Value, Quaternion.identity);
-            InventoryManager.Instance.RemoveItem(itemData);
+            InventoryManager.Instance.RemoveItem(itemData, gameObject);
             Destroy(gameObject);
         }
         else
@@ -88,17 +88,13 @@ public class ItemDragHandler : DragHandler
         }
     }
 
-    private void SwapItemsWithTargetCell(GridCell targetCell)
+    private void SwapItemsWithTargetCell(GridCell thatCell)
     {
-        GameObject tmpObj = targetCell.inventoryItemObj;
-        targetCell.AddItem(gameObject);
+        GameObject thatObj = thatCell.inventoryItemObj;
+        thatCell.AddItem(gameObject);
 
-        GridCell originalCell = originalParent.GetComponent<GridCell>();
-        if (originalCell != null)
-        {
-            originalCell.AddItem(tmpObj);
-            InventoryEvents.ItemSwapped(originalCell, targetCell);
-        }
+        GridCell thisCell = originalParent.GetComponent<GridCell>();
+        thisCell.AddItem(thatObj);
     }
 
     private void ResetToOriginalCell()
