@@ -47,35 +47,25 @@ public class DiskSaveSystem
 
         List<string> itemNames = JsonConvert.DeserializeObject<List<string>>(json);
 
-        AsyncOperationHandle<IList<ItemData>> handle = Addressables.LoadAssetsAsync<ItemData>(
-            "ItemData",
-            null
-        );
+        ItemData[] allItems = Resources.LoadAll<ItemData>("ItemData");
 
-        await handle.Task;
-
-        if (handle.Status != AsyncOperationStatus.Succeeded)
+        if (allItems == null || allItems.Length == 0)
         {
-            Debug.LogError(logPrefix + "Failed to load ItemData from Addressables.");
+            Debug.LogError(logPrefix + "Failed to load ItemData from Resources.");
             return new List<ItemData>();
         }
 
-        IList<ItemData> allItems = handle.Result;
         List<ItemData> loadedItems = new List<ItemData>();
 
+        // itemNames 리스트에 있는 아이템 찾기
         foreach (string itemName in itemNames)
         {
             ItemData item = allItems.FirstOrDefault(i => i.itemName == itemName);
             if (item != null)
                 loadedItems.Add(item);
             else
-                Debug.LogWarning(logPrefix + $"Item with name '{itemName}' not found in Addressables.");
+                Debug.LogWarning(logPrefix + $"Item with name '{itemName}' not found in Resources.");
         }
-
-        Addressables.Release(handle);
-
-        Debug.Log(logPrefix + "Loaded inventory data from disk.");
-        // Debug.Log(logPrefix + "Inventory data: " + json);
 
         return loadedItems;
     }
@@ -321,22 +311,8 @@ public class DiskSaveSystem
             var questSaveData = JsonConvert.DeserializeObject<Dictionary<int, QuestSaveData>>(questJson) 
                 ?? new Dictionary<int, QuestSaveData>();
 
-            // Load all ItemData assets
-            AsyncOperationHandle<IList<ItemData>> handle = Addressables.LoadAssetsAsync<ItemData>(
-                "ItemData",
-                null
-            );
+            ItemData[] allItems = Resources.LoadAll<ItemData>("ItemData");
 
-            await handle.Task;
-
-            if (handle.Status != AsyncOperationStatus.Succeeded)
-            {
-                Debug.LogError(logPrefix + "Failed to load ItemData from Addressables.");
-                Addressables.Release(handle);
-                return (quests, questStatuses);
-            }
-
-            IList<ItemData> allItems = handle.Result;
 
             foreach (var kvp in questSaveData)
             {
@@ -355,8 +331,6 @@ public class DiskSaveSystem
 
                 quests[kvp.Key] = loadedQuest;
             }
-
-            Addressables.Release(handle);
         }
 
         if (File.Exists(QuestStatusSavePath))
