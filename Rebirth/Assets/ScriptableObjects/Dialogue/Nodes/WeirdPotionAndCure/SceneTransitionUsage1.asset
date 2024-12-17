@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
-  m_Name: WeirdPotionUsage1 1
+  m_Name: SceneTransitionUsage1
   m_EditorClassIdentifier: 
   nodeID: 
-  dialogueText: "\uC548\uC804\uC131\uC740 \uC7A5\uB2F4\uD560 \uC218 \uC5C6\uC9C0\uB9CC,
-    \n\uD55C \uBAA8\uAE08 \uB9C8\uC2DC\uBA74 \uBB34\uC5B8\uAC00 \uBD84\uBA85 \uC77C\uC5B4\uB098\uAE34
-    \uD560 \uAC81\uB2C8\uB2E4."
+  dialogueText: "\uBB18\uC57D\uC744 \uC0AC\uC6A9\uD588\uC9C0\uB9CC, \uBCC4\uB2E4\uB978
+    \uBCC0\uD654\uB294 \uB290\uAEF4\uC9C0\uC9C0 \uC54A\uB294\uB2E4. \n\uD639\uC2DC
+    \uBD88\uB7C9\uD488\uC774\uC5C8\uB358 \uAC78\uAE4C?\n"
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: cae1134f8ab6d41d99fb5ed7a1c61015, type: 2}
+    nextNode: {fileID: 0}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: ...
+  conversationNpcName: 
   isSelfSpeak: 0
-  nextNode: {fileID: 11400000, guid: cae1134f8ab6d41d99fb5ed7a1c61015, type: 2}
+  nextNode: {fileID: 11400000, guid: 4fc24c973208f49bbbae289a3ac47438, type: 2}
