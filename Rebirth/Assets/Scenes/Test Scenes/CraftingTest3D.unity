@@ -807,6 +807,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1404057813}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  minDistanceFromObstacle: 0.1
 --- !u!1 &1672990787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,6 +1187,26 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1404057813}
+    - target: {fileID: 3604401329426827646, guid: 7718b96123f6c2a439194324cc0d5395, type: 3}
+      propertyPath: craftRecipes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604401329426827646, guid: 7718b96123f6c2a439194324cc0d5395, type: 3}
+      propertyPath: craftRecipes.Array.data[3].result
+      value: 
+      objectReference: {fileID: 1617397553625182106, guid: a2a25baaeadf3411c9f2507be145892e, type: 3}
+    - target: {fileID: 3604401329426827646, guid: 7718b96123f6c2a439194324cc0d5395, type: 3}
+      propertyPath: craftRecipes.Array.data[3].ingredientsItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604401329426827646, guid: 7718b96123f6c2a439194324cc0d5395, type: 3}
+      propertyPath: craftRecipes.Array.data[3].ingredientsItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 20fa8adf2e4524239805dd0e5b033740, type: 2}
+    - target: {fileID: 3604401329426827646, guid: 7718b96123f6c2a439194324cc0d5395, type: 3}
+      propertyPath: craftRecipes.Array.data[3].ingredientsItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7943f5111cff448d98bfce465a97bf33, type: 2}
     - target: {fileID: 3859548135331927478, guid: 7718b96123f6c2a439194324cc0d5395, type: 3}
       propertyPath: m_RootOrder
       value: 5
