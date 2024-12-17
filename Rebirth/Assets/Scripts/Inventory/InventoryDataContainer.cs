@@ -6,17 +6,17 @@ public class InventoryDataContainer
     private List<ItemData> twoDimensionalItems = new List<ItemData>();
     private List<ItemData> threeDimensionalItems = new List<ItemData>();
 
-    public void AddItem(ItemData itemData, Dimension dimension)
+    public void AddItem(ItemData itemData)
     {
-        if (dimension == Dimension.TWO_DIMENSION)
+        if (itemData.dimension == Dimension.TWO_DIMENSION)
             twoDimensionalItems.Add(itemData);
         else
             threeDimensionalItems.Add(itemData);
     }
 
-    public void RemoveItem(ItemData itemData, Dimension dimension)
+    public void RemoveItem(ItemData itemData)
     {
-        if (dimension == Dimension.TWO_DIMENSION)
+        if (itemData.dimension == Dimension.TWO_DIMENSION)
             twoDimensionalItems.Remove(itemData);
         else
             threeDimensionalItems.Remove(itemData);

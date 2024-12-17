@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: SceneTransitionUsage 1
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: "\uBB18\uC57D\uC744 \uC0AC\uC6A9\uD558\uB2C8, \uBB54\uAC00 \uBD95
+    \uB728\uB294 \uAE30\uBD84\uC774 \uB4E4\uBA70 \uAE30\uBD84\uC774 \uC57D\uAC04
+    \uC88B\uC544\uC9C4\uB2E4.\n\uADF8\uB7EC\uB098 \uD2B9\uBCC4\uD55C \uBCC0\uD654\uB294
+    \uB290\uAEF4\uC9C0\uC9C0 \uC54A\uB294\uB2E4.\n\uD639\uC2DC \uBD88\uB7C9\uD488\uC774\uC5C8\uB358
+    \uAC78\uAE4C?"
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 0}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  isSelfSpeak: 0
+  nextNode: {fileID: 11400000, guid: 071d7249180ec441abce7fe54d9e0bd7, type: 2}

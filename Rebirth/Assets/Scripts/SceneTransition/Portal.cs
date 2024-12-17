@@ -19,9 +19,9 @@ public class Portal : MonoBehaviour, IInteractable
             {
                 if (interactionSound != null)
                 {
-                    AudioSource.PlayClipAtPoint(interactionSound, transform.position);
+                    AudioSource.PlayClipAtPoint(interactionSound, transform.position, 0.2f);
                 }
-                
+
                 await InteractWithSceneTransitionAsync();
             }
         }
@@ -39,7 +39,7 @@ public class Portal : MonoBehaviour, IInteractable
 
         await SceneTransitionManager.Instance.FadeInAsync();
         await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
-        
+
         AfterSceneLoad();
 
         SceneTransitionManager.Instance.SetPlayerPosition(targetPosition);

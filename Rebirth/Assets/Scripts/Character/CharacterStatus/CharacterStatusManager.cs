@@ -36,7 +36,7 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 {
     // Health-related variables
     public int maxHealth { get; private set; } = 100;
-    public int maxMoney { get; private set; } = 1000;
+    public int maxMoney { get; private set; } = 10;
     public int Health { get; private set; }
     public event Action<int> OnHealthChanged;
 

@@ -1253,6 +1253,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432715782}
   m_CullTransparentMesh: 1
+--- !u!1 &456093049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 456093051}
+  - component: {fileID: 456093050}
+  m_Layer: 0
+  m_Name: '[NPC]Restart'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &456093050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456093049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c683ee5cfa5b4714acf930e239296f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: restart
+  questNodes: {fileID: 11400000, guid: 01adcae4d22c949ab887dd42ab95b0bb, type: 2}
+  MainMenuController: {fileID: 2022184261}
+--- !u!4 &456093051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456093049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.2440047, y: 0.24008456, z: -8.462176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &456182320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,17 +2453,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Credit
+  m_text: "\uD06C\uB808\uB527"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65b74263fd4c44cbfbc1af142a3d577f, type: 2}
-  m_sharedMaterial: {fileID: 4861336190535754749, guid: 65b74263fd4c44cbfbc1af142a3d577f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: be37dd412c52c486eaabc13c0c62c7bd, type: 2}
+  m_sharedMaterial: {fileID: 3543856299336951867, guid: be37dd412c52c486eaabc13c0c62c7bd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280563571
+  m_fontColor: {r: 0.4528302, g: 0.2159023, b: 0.14311142, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3119,17 +3166,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: "\uC0C8\uB85C \uD558\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65b74263fd4c44cbfbc1af142a3d577f, type: 2}
-  m_sharedMaterial: {fileID: 4861336190535754749, guid: 65b74263fd4c44cbfbc1af142a3d577f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: be37dd412c52c486eaabc13c0c62c7bd, type: 2}
+  m_sharedMaterial: {fileID: 3543856299336951867, guid: be37dd412c52c486eaabc13c0c62c7bd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280563571
+  m_fontColor: {r: 0.4528302, g: 0.2159023, b: 0.14311142, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3757,9 +3804,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2022184262}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: RestartGame
+      - m_Target: {fileID: 456093050}
+        m_TargetAssemblyTypeName: NPC, Scripts
+        m_MethodName: Interact
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4036,17 +4083,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Start
+  m_text: "\uC774\uC5B4 \uD558\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65b74263fd4c44cbfbc1af142a3d577f, type: 2}
-  m_sharedMaterial: {fileID: 4861336190535754749, guid: 65b74263fd4c44cbfbc1af142a3d577f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: be37dd412c52c486eaabc13c0c62c7bd, type: 2}
+  m_sharedMaterial: {fileID: 3543856299336951867, guid: be37dd412c52c486eaabc13c0c62c7bd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280563571
+  m_fontColor: {r: 0.4528302, g: 0.2159023, b: 0.14311142, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
