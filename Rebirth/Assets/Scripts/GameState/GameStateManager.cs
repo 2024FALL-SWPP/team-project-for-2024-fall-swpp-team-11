@@ -19,7 +19,9 @@ public class GameStateManager : SingletonManager<GameStateManager>
         // Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
         // Application.SetStackTraceLogType(LogType.Assert, StackTraceLogType.Full);
         // Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.Full);
-            
+
+        savedMousePosition = new Vector2(0.5f, 0.5f);
+        
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
             UnlockView();

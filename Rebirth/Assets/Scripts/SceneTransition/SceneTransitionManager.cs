@@ -29,7 +29,7 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         }
         else
         {
-            Debug.LogError(logPrefix + "플레이어를 찾을 수 없습니다." + " Current Scene: " + SceneManager.GetActiveScene().name);
+            Debug.LogWarning(logPrefix + "플레이어를 찾을 수 없습니다." + " Current Scene: " + SceneManager.GetActiveScene().name);
         }
     }
 

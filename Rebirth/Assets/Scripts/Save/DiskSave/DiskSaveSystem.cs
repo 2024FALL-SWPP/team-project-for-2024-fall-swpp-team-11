@@ -306,8 +306,8 @@ public class DiskSaveSystem
         File.WriteAllText(QuestStatusSavePath, statusJson);
 
         Debug.Log(logPrefix + "Saving quest manager to disk.");
-        // Debug.Log(logPrefix + "Quest data: " + questJson);
-        // Debug.Log(logPrefix + "Quest status data: " + statusJson);
+        Debug.Log(logPrefix + "Quest data: " + questJson);
+        Debug.Log(logPrefix + "Quest status data: " + statusJson);
     }
 
     public static async Task<(Dictionary<int, QuestData>, Dictionary<int, QuestStatus>)> LoadQuestManagerFromDiskAsync()
@@ -367,8 +367,6 @@ public class DiskSaveSystem
         }
 
         Debug.Log(logPrefix + "Loaded quest manager from disk.");
-        // Debug.Log(logPrefix + "Quest data: " + JsonConvert.SerializeObject(quests, Formatting.Indented));
-        // Debug.Log(logPrefix + "Quest status data: " + JsonConvert.SerializeObject(questStatuses, Formatting.Indented));
 
         return (quests, questStatuses);
     }

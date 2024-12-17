@@ -26,7 +26,12 @@ public class ItemSpawner : MonoBehaviour
 
         if (requiredStates.Contains(CharacterStatusManager.Instance.PlayerState))
         {
-            Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
+            // instantiate only if the item is not already in the scene
+            // TODO also should check inventory
+            if (GameObject.Find(itemPrefab.name) == null)
+            {
+                Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
+            }
         }
     }
 }

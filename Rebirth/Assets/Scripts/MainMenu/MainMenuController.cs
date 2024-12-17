@@ -57,6 +57,7 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
+            SaveManager.Instance.LoadGame();
             await SceneTransitionManager.Instance.SceneTransitionWithEffect(gameSceneName);
             if (gameSceneName == NARRATION_SCENE_NAME)
             {
