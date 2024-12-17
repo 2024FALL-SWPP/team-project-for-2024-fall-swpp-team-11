@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
-  m_Name: SceneTransitionUsage2
+  m_Name: PaperComplete2
   m_EditorClassIdentifier: 
   nodeID: 
-  dialogueText: "\uC74C... \uC544\uB2CC\uAC00? \n\uBB54\uAC00 \uC0AC\uBB3C\uC774
-    \uC785\uCCB4\uC801\uC73C\uB85C \uBCF4\uC774\uB294 \uAC83 \uAC19\uAE30\uB3C4 \uD558\uACE0...?\n\n"
+  dialogueText: "\uC624\uB798\uB41C \uAE00\uC790\uB4E4\uC774 \uBD80\uB4DC\uB7FD\uAC8C
+    \uB5A0\uC62C\uB77C, \uB9C8\uCE68\uB0B4 \uC78A\uD600\uC9C4 \uC774\uC57C\uAE30\uAC00
+    \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0B8\uB2E4."
   options:
   - optionText: Continue
-    nextNode: {fileID: 11400000, guid: 2e33530ad994d45d4a941ccb308938ca, type: 2}
+    nextNode: {fileID: 0}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
     onSelectActions:
       m_PersistentCalls:
         m_Calls: []
-  conversationNpcName: ...
+  conversationNpcName: 
   isSelfSpeak: 0
-  nextNode: {fileID: 11400000, guid: 2e33530ad994d45d4a941ccb308938ca, type: 2}
+  nextNode: {fileID: 11400000, guid: d67b151a3759e4fc6921631855702147, type: 2}

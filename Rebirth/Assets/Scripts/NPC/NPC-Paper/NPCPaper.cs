@@ -13,9 +13,13 @@ public class NPCPaper : NPC
     public GameObject Damaged_BE;
     public GameObject Damaged_ES;
 
+    public NPC PaperCompleteNPC;
+
     private int currentPage = 0;
     private bool isImageShown = false;
     private bool isUDImageShown = false;
+
+    // private bool hasInteractedWithNPC = false;
 
     public override void HandleDialogueEnd()
     {
@@ -48,6 +52,17 @@ public class NPCPaper : NPC
                         ShowUDImage(currentPage);
                         isImageShown = true;
                         isUDImageShown = true;
+
+                        NPC newNPC = Instantiate(PaperCompleteNPC) as NPC;
+                        if (newNPC != null)
+                        {
+                            newNPC.Interact();
+                        }
+                        else
+                        {
+                            Debug.LogError("NPC 프리팹이 제대로 할당되지 않았습니다.");
+                            return;
+                        }
                     }
                     else
                     {
