@@ -470,8 +470,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[NPC]Merchant'
       objectReference: {fileID: 0}
+    - target: {fileID: 3873088043181399335, guid: d396cb073e8db42a2ad62963bbc372a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d396cb073e8db42a2ad62963bbc372a0, type: 3}
+--- !u!1 &144621405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3873088043181399334, guid: d396cb073e8db42a2ad62963bbc372a0, type: 3}
+  m_PrefabInstance: {fileID: 144621404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &144621406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144621405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 1
 --- !u!1 &186802184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3608,6 +3630,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6828025526430622433, guid: 4c0d1ad9ce6b0b5468dee3e29c8ad577, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828025526430622433, guid: 4c0d1ad9ce6b0b5468dee3e29c8ad577, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c0d1ad9ce6b0b5468dee3e29c8ad577, type: 3}
 --- !u!1 &1261629376
@@ -4939,6 +4969,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8435974003649339348, guid: 04a9d17bfc9e3104d9fa20d5df1a4c4a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 8435974003775026022, guid: 04a9d17bfc9e3104d9fa20d5df1a4c4a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4987,7 +5021,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stand2D
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8435974003649339177, guid: 04a9d17bfc9e3104d9fa20d5df1a4c4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 04a9d17bfc9e3104d9fa20d5df1a4c4a, type: 3}
 --- !u!1 &1844525215
 GameObject:

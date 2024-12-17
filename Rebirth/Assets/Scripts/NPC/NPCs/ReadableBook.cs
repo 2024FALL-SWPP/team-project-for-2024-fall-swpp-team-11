@@ -3,6 +3,7 @@ using UnityEngine;
 public class ReadableBook : MonoBehaviour, IInteractable
 {
     private Outline outline;
+    private Outline2D outline2D;
 
     public GameObject[] imagesToShow; // 표시할 이미지 배열
     private int currentPage = 0; // 현재 페이지 인덱스
@@ -11,6 +12,7 @@ public class ReadableBook : MonoBehaviour, IInteractable
     private void Awake()
     {
         outline = GetComponent<Outline>();
+        outline2D = GetComponent<Outline2D>();
         HideAllImages();
     }
 
@@ -48,16 +50,30 @@ public class ReadableBook : MonoBehaviour, IInteractable
 
     public void OnFocus()
     {
-        if (!outline) return;
-
-        outline.enabled = true;
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.THREE_DIMENSION)
+        {
+            if (!outline) return;
+            outline.enabled = true;
+        }
+        else
+        {
+            if (!outline2D) return;
+            outline2D.SetOutline();
+        }
     }
 
     public void OnDefocus()
     {
-        if (!outline) return;
-
-        outline.enabled = false;
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.THREE_DIMENSION)
+        {
+            if (!outline) return;
+            outline.enabled = false;
+        }
+        else
+        {
+            if (!outline2D) return;
+            outline2D.UnsetOutline();
+        }
     }
 
     private void ShowImage(int index)

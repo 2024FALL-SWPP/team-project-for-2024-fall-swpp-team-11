@@ -1583,6 +1583,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8969176116129782604, guid: 820da94ffced44620a649a75a8370314, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 8969176116129782605, guid: 820da94ffced44620a649a75a8370314, type: 3}
       propertyPath: m_Name
       value: '[NPC}Lianna'
@@ -1638,6 +1642,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8969176116129782607, guid: 820da94ffced44620a649a75a8370314, type: 3}
   m_PrefabInstance: {fileID: 75340118}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &75340120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8969176116129782605, guid: 820da94ffced44620a649a75a8370314, type: 3}
+  m_PrefabInstance: {fileID: 75340118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &75340121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75340120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 3
 --- !u!1 &87446137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,6 +1986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[NPC]Cat1'
       objectReference: {fileID: 0}
+    - target: {fileID: 837712843672237639, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 837712843672237752, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2015,6 +2041,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 837712843672237752, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
   m_PrefabInstance: {fileID: 105950613}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &105950615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 837712843672237638, guid: 46b59ad30e4264535b159f9a65ce55c7, type: 3}
+  m_PrefabInstance: {fileID: 105950613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &105950616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105950615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 3
 --- !u!1 &107306331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4030,6 +4074,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[NPC]MagicList'
       objectReference: {fileID: 0}
+    - target: {fileID: 8991676091619463644, guid: a194d3930fb504aa9afd2dc6ed464c80, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 8991676091619463645, guid: a194d3930fb504aa9afd2dc6ed464c80, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -8131,6 +8179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[NPC]Cat2'
       objectReference: {fileID: 0}
+    - target: {fileID: 8117907124579544577, guid: 8a4b1c97c3ede49649dac7bf4025a27a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 8117907124579544582, guid: 8a4b1c97c3ede49649dac7bf4025a27a, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8182,6 +8234,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8117907124579544582, guid: 8a4b1c97c3ede49649dac7bf4025a27a, type: 3}
   m_PrefabInstance: {fileID: 383591988}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &383591990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8117907124579544576, guid: 8a4b1c97c3ede49649dac7bf4025a27a, type: 3}
+  m_PrefabInstance: {fileID: 383591988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &383591991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383591990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 3
 --- !u!1 &384575690
 GameObject:
   m_ObjectHideFlags: 0
@@ -16654,6 +16724,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 654298847}
     m_Modifications:
+    - target: {fileID: 2852439586546416448, guid: db488a1e9456f4e8196866f8bf31eca8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 2852439586546416449, guid: db488a1e9456f4e8196866f8bf31eca8, type: 3}
       propertyPath: m_Name
       value: '[NPC]Well'
@@ -16709,6 +16783,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2852439586546416463, guid: db488a1e9456f4e8196866f8bf31eca8, type: 3}
   m_PrefabInstance: {fileID: 830921775}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &830921777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2852439586546416449, guid: db488a1e9456f4e8196866f8bf31eca8, type: 3}
+  m_PrefabInstance: {fileID: 830921775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &830921778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830921777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 1
 --- !u!1 &832529367
 GameObject:
   m_ObjectHideFlags: 0
@@ -20494,6 +20586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[NPC]Ketrix'
       objectReference: {fileID: 0}
+    - target: {fileID: 4165497788340963818, guid: 0800f8cf156ea4e8695c385f0693afae, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 4165497788340963819, guid: 0800f8cf156ea4e8695c385f0693afae, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -20545,6 +20641,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4165497788340963819, guid: 0800f8cf156ea4e8695c385f0693afae, type: 3}
   m_PrefabInstance: {fileID: 996894082}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &996894084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4165497788340963817, guid: 0800f8cf156ea4e8695c385f0693afae, type: 3}
+  m_PrefabInstance: {fileID: 996894082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &996894085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996894084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 3
 --- !u!1 &999944857
 GameObject:
   m_ObjectHideFlags: 0
@@ -27605,6 +27719,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1342855925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8991676091619463635, guid: a194d3930fb504aa9afd2dc6ed464c80, type: 3}
+  m_PrefabInstance: {fileID: 203846077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1342855930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342855925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 3
 --- !u!1 &1359842867
 GameObject:
   m_ObjectHideFlags: 0
@@ -35739,6 +35871,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 654298847}
     m_Modifications:
+    - target: {fileID: 6010920041750485358, guid: 332047050b92f455cbb439f6a99898e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 6010920041750485359, guid: 332047050b92f455cbb439f6a99898e9, type: 3}
       propertyPath: m_Name
       value: '[NPC]Cat3'
@@ -35794,6 +35930,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6010920041750485361, guid: 332047050b92f455cbb439f6a99898e9, type: 3}
   m_PrefabInstance: {fileID: 1755923621}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1755923623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6010920041750485359, guid: 332047050b92f455cbb439f6a99898e9, type: 3}
+  m_PrefabInstance: {fileID: 1755923621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1755923624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755923623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 3
 --- !u!1 &1761475162
 GameObject:
   m_ObjectHideFlags: 0
@@ -42358,6 +42512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[NPC]Karnas'
       objectReference: {fileID: 0}
+    - target: {fileID: 4603557581571659381, guid: eb19bf09f8743462b83ab274ecf06245, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 4603557581571659382, guid: eb19bf09f8743462b83ab274ecf06245, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -42409,6 +42567,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4603557581571659382, guid: eb19bf09f8743462b83ab274ecf06245, type: 3}
   m_PrefabInstance: {fileID: 2044629870}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2044629872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4603557581571659380, guid: eb19bf09f8743462b83ab274ecf06245, type: 3}
+  m_PrefabInstance: {fileID: 2044629870}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2044629873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044629872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 5
 --- !u!1 &2046856994
 GameObject:
   m_ObjectHideFlags: 0

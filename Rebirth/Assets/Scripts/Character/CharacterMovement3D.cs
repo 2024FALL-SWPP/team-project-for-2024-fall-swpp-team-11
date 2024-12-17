@@ -44,6 +44,12 @@ public class CharacterMovement3D : MonoBehaviour
                 }
             }
         }
+
+        // add falling force
+        if (rb && rb.velocity.y < 0 && !IsGrounded())
+        {
+            rb.AddForce(Vector3.down * 2f, ForceMode.Acceleration);
+        }
     }
 
     public void Move(Vector3 moveDir)

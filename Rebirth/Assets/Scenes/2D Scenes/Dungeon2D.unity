@@ -6000,6 +6000,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterStatusManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6828025526430622433, guid: 4c0d1ad9ce6b0b5468dee3e29c8ad577, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828025526430622433, guid: 4c0d1ad9ce6b0b5468dee3e29c8ad577, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c0d1ad9ce6b0b5468dee3e29c8ad577, type: 3}
 --- !u!1 &1352297595
@@ -9160,6 +9168,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5260972555283738648, guid: 4553bd77ae85e40afb401a4e482cc8d4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 5260972555283738649, guid: 4553bd77ae85e40afb401a4e482cc8d4, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -9222,6 +9234,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4553bd77ae85e40afb401a4e482cc8d4, type: 3}
+--- !u!1 &5260972555609694587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5260972555283738663, guid: 4553bd77ae85e40afb401a4e482cc8d4, type: 3}
+  m_PrefabInstance: {fileID: 5260972555609694586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5260972555609694588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260972555609694587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 2
 --- !u!1001 &6787222668915651533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9363,6 +9393,10 @@ PrefabInstance:
       propertyPath: portal
       value: 
       objectReference: {fileID: 31290713}
+    - target: {fileID: 7638303132967511292, guid: 53560a8279d4849e5876c7497d808985, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
     - target: {fileID: 7638303132967511293, guid: 53560a8279d4849e5876c7497d808985, type: 3}
       propertyPath: m_Name
       value: '[NPC]Dragon'
@@ -9417,3 +9451,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53560a8279d4849e5876c7497d808985, type: 3}
+--- !u!1 &7638303131501870084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638303132967511293, guid: 53560a8279d4849e5876c7497d808985, type: 3}
+  m_PrefabInstance: {fileID: 7638303131501870083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7638303131501870085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7638303131501870084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 1.5

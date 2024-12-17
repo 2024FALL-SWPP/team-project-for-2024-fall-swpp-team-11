@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7133965538522453269}
   - component: {fileID: 7133965538522453268}
   - component: {fileID: 7133965538522453258}
+  - component: {fileID: 4456757879697955279}
   m_Layer: 0
   m_Name: 2DDragonComb
   m_TagString: Untagged
@@ -56,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5ea5e69bac2288f49a20f21894e5d475, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,3 +163,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 0d9892b4e008343acb8e23a4b8efb868, type: 2}
   PickingSound: {fileID: 8300000, guid: 0fdfdb087d2214176a57c3aa1eb07300, type: 3}
+--- !u!114 &4456757879697955279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133965538522453256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b0af2537aad59499a82b981b084a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusThickness: 5
