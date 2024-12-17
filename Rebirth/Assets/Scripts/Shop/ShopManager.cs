@@ -7,6 +7,12 @@ public class ShopManager : SingletonManager<ShopManager>
     [Header("Shop Items")]
     [SerializeField] private List<ItemData> allShopItems; // Master list of all items
 
+    [SerializeField] private NPC weirdPotionUsageNPC; 
+    [SerializeField] private NPC weirdPotionCureUsageNPC; 
+
+    private bool hasInteractedWithPotion = false;
+    private bool hasInteractedWithPotionCure = false;
+
     public readonly string weirdPotion2DName = "2DWeirdPotion";
     public readonly string weirdPotionCure2DName = "2DWeirdPotionCure";
     public readonly string weirdPotionCure3DName = "3DWeirdPotionCure";
@@ -100,7 +106,7 @@ public class ShopManager : SingletonManager<ShopManager>
     }
 
     public bool IsWeirdPotionPurchased()
-    {
+    {      
         return purchasedItems.Contains(weirdPotion2DName);
     }
 
@@ -214,6 +220,25 @@ public class ShopManager : SingletonManager<ShopManager>
         if (Input.GetKeyDown(KeyCode.K))
         {
             UpdatePlayerState();
+        }
+        // Explain Weird Potion Usage with dialogue
+        if(IsWeirdPotionPurchased()){
+            if (!hasInteractedWithPotion) 
+            {
+                hasInteractedWithPotion = true;
+
+                NPC newNPC = Instantiate(weirdPotionUsageNPC) as NPC;
+                if (newNPC != null)
+                {
+                    newNPC.Interact();
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("NPC 프리팹이 제대로 할당되지 않았습니다.");
+                    return;
+                }
+            }  
         }
     }
 
