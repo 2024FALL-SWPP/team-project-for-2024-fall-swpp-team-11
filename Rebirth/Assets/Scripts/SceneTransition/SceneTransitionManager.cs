@@ -15,6 +15,11 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         canvas.enabled = false;
     }
 
+    public string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
     public void SetPlayerPosition(Vector3 position)
     {
         Transform player = GameObject.FindWithTag("Player")?.transform;
@@ -54,6 +59,8 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 
     public async Task LoadSceneAsync(string sceneName)
     {
+        Debug.Log(logPrefix + "Scene Transition: " + GetCurrentScene() + " -> " + sceneName);
+
         // 현재 씬 데이터 저장
         await SceneDataManager.Instance.SaveCurrentSceneDataAsync();
 

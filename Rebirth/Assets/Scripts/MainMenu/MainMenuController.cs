@@ -29,11 +29,10 @@ public class MainMenuController : MonoBehaviour
     private void Awake()
     {
         // SaveManager.load += LoadStartSceneData;
-        Debug.Log(Application.persistentDataPath);
-     
-        GameStateManager.Instance.LockView();
 
         CloseAllPanels();
+     
+        GameStateManager.Instance.LockView();
     }
 
     private void Start()

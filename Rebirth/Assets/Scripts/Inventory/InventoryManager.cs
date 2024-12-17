@@ -23,7 +23,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
         inventoryUI = GetComponent<InventoryUI>();
         inventoryUI.SetCapacity(inventoryCapacity);
 
-        Debug.Log($"Current inventory from dimension : {DimensionManager.Instance.GetCurrentDimension()}");
+        Debug.Log(logPrefix + $"Awake // Current inventory from dimension : {DimensionManager.Instance.GetCurrentDimension()}");
         inventoryUI.RefreshInventoryDimension();
     }
 

@@ -36,11 +36,13 @@ public class SaveManager : SingletonManager<SaveManager>
 
     public void SaveGame()
     {
+        Debug.Log(logPrefix + "Game Save Event Triggered");
         save?.Invoke();
     }
 
     public void LoadGame()
     {
+        Debug.Log(logPrefix + "Game Load Event Triggered");
         load?.Invoke();
     }
 }

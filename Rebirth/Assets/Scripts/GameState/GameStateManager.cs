@@ -1,7 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 public class GameStateManager : SingletonManager<GameStateManager>
 {
+    private static string logPrefix = "[GameStateManager] ";
+
     public bool IsViewLocked { get; private set; }
     public bool IsMovementLocked { get; private set; }
     private Vector2 savedMousePosition;
@@ -9,9 +13,18 @@ public class GameStateManager : SingletonManager<GameStateManager>
     protected override void Awake()
     {
         base.Awake();
-        
-        UnlockView();
-        UnlockMovement();
+
+        // Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.Full);
+        // Application.SetStackTraceLogType(LogType.Warning, StackTraceLogType.Full);
+        // Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
+        // Application.SetStackTraceLogType(LogType.Assert, StackTraceLogType.Full);
+        // Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.Full);
+            
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            UnlockView();
+            UnlockMovement();
+        }
     }
 
     private void Update()
@@ -47,6 +60,8 @@ public class GameStateManager : SingletonManager<GameStateManager>
             savedMousePosition.y * Screen.height
         );
         Mouse.current.WarpCursorPosition(screenPosition);
+
+        // Debug.Log(logPrefix + "LockView");
     }
 
     public void UnlockView()
@@ -57,15 +72,21 @@ public class GameStateManager : SingletonManager<GameStateManager>
 
         Vector2 currentPos = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
         savedMousePosition = currentPos;
+
+        // Debug.Log(logPrefix + "UnlockView");
     }
 
     public void LockMovement()
     {
         IsMovementLocked = true;
+
+        // Debug.Log(logPrefix + "LockMovement");
     }
 
     public void UnlockMovement()
     {
         IsMovementLocked = false;
+
+        // Debug.Log(logPrefix + "UnlockMovement");
     }
 }
