@@ -15633,6 +15633,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000859159143041934, guid: 2e4e96960984d1245952b7ba3cf62110, type: 3}
   m_PrefabInstance: {fileID: 1498098540}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1510260265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2155225628346552150, guid: 44dcbae73bbaf134f9f3ac12bd723417, type: 3}
+  m_PrefabInstance: {fileID: 1652714396}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1510260270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510260265}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &1510260271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510260265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41071126c126da43a8528e084a0d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 1498403948531744, guid: acdc5d9785f14f64f86e8d0e7c4f2039, type: 3}
+  coinAmount: 1
+  interactCooldown: 0.05
+  spawnRangeX: 1
+  spawnRangeZ: 1
 --- !u!1001 &1515549550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17122,6 +17162,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 482541376}
     m_Modifications:
+    - target: {fileID: 2155225628346552150, guid: 44dcbae73bbaf134f9f3ac12bd723417, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467396543618631028, guid: 44dcbae73bbaf134f9f3ac12bd723417, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5103478392131331291, guid: 44dcbae73bbaf134f9f3ac12bd723417, type: 3}
       propertyPath: m_RootOrder
       value: 46
@@ -17168,7 +17216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5591467574973890145, guid: 44dcbae73bbaf134f9f3ac12bd723417, type: 3}
       propertyPath: m_Name
-      value: EM_Tree2b_PRE
+      value: MoneyTree3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 5610986447839918521, guid: 44dcbae73bbaf134f9f3ac12bd723417, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44dcbae73bbaf134f9f3ac12bd723417, type: 3}
