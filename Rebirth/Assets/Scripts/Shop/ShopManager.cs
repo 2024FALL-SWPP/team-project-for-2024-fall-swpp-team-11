@@ -240,6 +240,26 @@ public class ShopManager : SingletonManager<ShopManager>
                 }
             }  
         }
+
+         // Explain Weird Potion Cure Usage with dialogue
+        if(IsWeirdPotionCurePurchased()){
+            if (!hasInteractedWithPotionCure) 
+            {
+                hasInteractedWithPotionCure = true;
+
+                NPC newNPC = Instantiate(weirdPotionCureUsageNPC) as NPC;
+                if (newNPC != null)
+                {
+                    newNPC.Interact();
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("NPC 프리팹이 제대로 할당되지 않았습니다.");
+                    return;
+                }
+            }  
+        }
     }
 
     private void UpdatePlayerState()

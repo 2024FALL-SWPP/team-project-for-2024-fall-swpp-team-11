@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SceneTransitionExitUsage2
   m_EditorClassIdentifier: 
   nodeID: 
-  dialogueText: "\uBB18\uC57D\uC744 \uC0AC\uC6A9\uD588\uC9C0\uB9CC, \uBCC4\uB2E4\uB978
-    \uBCC0\uD654\uB294 \uB290\uAEF4\uC9C0\uC9C0 \uC54A\uB294\uB2E4. \n\uD639\uC2DC
-    \uBD88\uB7C9\uD488\uC774\uC5C8\uB358 \uAC78\uAE4C?\n"
+  dialogueText: "\uB300\uCCB4... \uC774\uAC8C \uBB50\uC9C0? \n\uBB18\uC57D\uC744
+    \uB9C8\uC2E0 \uB4A4, \uB098\uC5D0\uAC8C \uBB34\uC2A8 \uC77C\uC774 \uC77C\uC5B4\uB0AC\uB358
+    \uAC70\uC57C?\n"
   options:
   - optionText: Continue
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: 4fc24c973208f49bbbae289a3ac47438, type: 2}
     fallbackNode: {fileID: 0}
     conditions:
     - {fileID: 0}
@@ -27,4 +27,4 @@ MonoBehaviour:
         m_Calls: []
   conversationNpcName: 
   isSelfSpeak: 0
-  nextNode: {fileID: 11400000, guid: 4fc24c973208f49bbbae289a3ac47438, type: 2}
+  nextNode: {fileID: 11400000, guid: 4fa421ed7ef5942d7b4cf72e44980f78, type: 2}
