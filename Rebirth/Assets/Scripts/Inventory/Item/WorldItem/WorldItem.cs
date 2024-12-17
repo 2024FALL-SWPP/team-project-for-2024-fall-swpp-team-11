@@ -4,6 +4,7 @@ public class WorldItem : MonoBehaviour, IInteractable
 {
     public ItemData itemData;
     private Outline outline;
+    private Outline2D outline2D;
     public AudioClip PickingSound;
     private AudioSource audioSource;
 
@@ -13,6 +14,7 @@ public class WorldItem : MonoBehaviour, IInteractable
     private void Awake()
     {
         outline = GetComponent<Outline>();
+        outline2D = GetComponent<Outline2D>();
 
         // AudioSource 초기화
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -40,15 +42,29 @@ public class WorldItem : MonoBehaviour, IInteractable
 
     public void OnFocus()
     {
-        if (!outline) return;
-
-        outline.enabled = true;
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.THREE_DIMENSION)
+        {
+            if (!outline) return;
+            outline.enabled = true;
+        }
+        else
+        {
+            if (!outline2D) return;
+            outline2D.SetOutline();
+        }
     }
 
     public void OnDefocus()
     {
-        if (!outline) return;
-
-        outline.enabled = false;
+        if (DimensionManager.Instance.GetCurrentDimension() == Dimension.THREE_DIMENSION)
+        {
+            if (!outline) return;
+            outline.enabled = false;
+        }
+        else
+        {
+            if (!outline2D) return;
+            outline2D.UnsetOutline();
+        }
     }
 }

@@ -40,6 +40,7 @@ public class EndingUI : MonoBehaviour
         if(CharacterStatusManager.Instance.EndingID == 1) { // Victory 
             audioSource.clip = eventMusic1; 
             CharacterStatusManager.Instance.SetPlayerState(PlayerState.CanUseWeirdPotion);
+            InventoryManager.Instance.RemoveItemByName("2DDungeonKey");
             StartCoroutine(EnableImagesSequentially(EndingOneImages, EndingOneTexts, EndingOneNPC));
         }
         else if(CharacterStatusManager.Instance.EndingID == 2) { // Happy Ending?

@@ -57,25 +57,17 @@ public class ItemDataHandler : ISceneDataHandler
 
     private async Task<GameObject> LoadPrefabAsync(string itemName)
     {
-        AsyncOperationHandle<IList<GameObject>> handle = Addressables.LoadAssetsAsync<GameObject>(
-            "WorldItem", // Label 기반 검색
-            null
-        );
+        IList<GameObject> allItems = Resources.LoadAll<GameObject>("WorldItem");
 
-        await handle.Task;
-
-        if (handle.Status == AsyncOperationStatus.Succeeded)
+        foreach (var prefab in allItems)
         {
-            foreach (var prefab in handle.Result)
-            {
-                if (prefab.name == itemName) // 이름 비교
-                {                
-                    return prefab;
-                }
+            // Debug.Log("prefab name: " + prefab.name + " itemName: " + itemName);
+            if (prefab.name == itemName) // 이름 비교
+            {                
+                return prefab;
             }
         }
 
-        Debug.LogError($"Prefab with name {itemName} not found in Addressables Group with label 'WorldItem'.");
         return null;
     }
 }

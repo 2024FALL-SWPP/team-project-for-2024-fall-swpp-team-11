@@ -1,21 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
+    private static string logPrefix = "[InventoryUI] ";
+
     [Header("UI References")]
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private Transform contentPanel2D;
     [SerializeField] private Transform contentPanel3D;
     [SerializeField] private GameObject tooltip;
 
+    [SerializeField] private TMP_Text inventoryTitleText;
+
     [Header("Grid")]
     [SerializeField] private GameObject gridCellPrefab;
     private List<GridCell> gridCells2D = new List<GridCell>();
     private List<GridCell> gridCells3D = new List<GridCell>();
 
-    private Dictionary<ItemData, int> itemToCellIndex2D = new Dictionary<ItemData, int>();
-    private Dictionary<ItemData, int> itemToCellIndex3D = new Dictionary<ItemData, int>();
     private InventoryItemPool itemPool;
     private ItemTooltip itemTooltip;
     private int inventoryCapacity;
@@ -26,35 +29,6 @@ public class InventoryUI : MonoBehaviour
         InitializeGridCells();
         itemTooltip = new ItemTooltip(tooltip);
         itemPool = GetComponent<InventoryItemPool>();
-    }
-
-    private void OnEnable()
-    {
-        InventoryEvents.OnItemSwapped += UpdateCellMapping;
-    }
-
-    private void OnDisable()
-    {
-        InventoryEvents.OnItemSwapped -= UpdateCellMapping;
-    }
-
-    private void UpdateCellMapping(GridCell originalCell, GridCell targetCell)
-    {
-        Dictionary<ItemData, int> itemToCellIndex = DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION
-            ? itemToCellIndex2D
-            : itemToCellIndex3D;
-
-        // 매핑 업데이트
-        ItemData originalItemData = originalCell.inventoryItemObj?.GetComponent<InventoryItem>().itemData;
-        ItemData targetItemData = targetCell.inventoryItemObj?.GetComponent<InventoryItem>().itemData;
-
-        if (originalItemData != null)
-            itemToCellIndex[originalItemData] = originalCell.index;
-
-        if (targetItemData != null)
-            itemToCellIndex[targetItemData] = targetCell.index;
-
-        Debug.Log("Cell mapping updated via event.");
     }
     #endregion
 
@@ -81,18 +55,14 @@ public class InventoryUI : MonoBehaviour
     #endregion
 
     #region UI Refresh
-    public void AddItem(ItemData item, Dimension dimension)
+    public void AddItem(ItemData item)
     {
-        List<GridCell> gridCells = dimension == Dimension.TWO_DIMENSION ? gridCells2D : gridCells3D;
-        Dictionary<ItemData, int> itemToCellIndex = dimension == Dimension.TWO_DIMENSION ? itemToCellIndex2D : itemToCellIndex3D;
+        List<GridCell> gridCells = item.dimension == Dimension.TWO_DIMENSION ? gridCells2D : gridCells3D;
 
         // 빈 셀 찾기
         GridCell emptyCell = gridCells.Find(cell => cell.IsEmpty());
         if (emptyCell == null)
-        {
-            Debug.LogWarning("No empty cell available.");
             return;
-        }
 
         // 아이템 추가
         GameObject itemObj = itemPool.GetItem();
@@ -100,39 +70,48 @@ public class InventoryUI : MonoBehaviour
 
         InventoryItem inventoryItem = itemObj.GetComponent<InventoryItem>();
         inventoryItem.Initialize(item);
-
-        // 상태 저장
-        itemToCellIndex[item] = emptyCell.index;
     }
 
-    public void RemoveItem(ItemData item, Dimension dimension)
+    public void RemoveItem(ItemData item)
     {
-        Dictionary<ItemData, int> itemToCellIndex = dimension == Dimension.TWO_DIMENSION ? itemToCellIndex2D : itemToCellIndex3D;
+        List<GridCell> gridCells = item.dimension == Dimension.TWO_DIMENSION ? gridCells2D : gridCells3D;
 
-        if (!itemToCellIndex.TryGetValue(item, out int cellIndex))
+        foreach (GridCell cell in gridCells)
         {
-            Debug.LogWarning("Item not found in UI.");
-            return;
+            if (cell.inventoryItemObj != null)
+            {
+                InventoryItem inventoryItem = cell.inventoryItemObj.GetComponent<InventoryItem>();
+                if (inventoryItem != null && inventoryItem.itemData.name == item.name)
+                {
+                    itemPool.ReturnItem(cell.inventoryItemObj);
+                    cell.RemoveItem();
+                    return;
+                }
+            }
         }
+    }
 
-        // 셀에서 아이템 제거
-        GridCell cell = dimension == Dimension.TWO_DIMENSION ? gridCells2D[cellIndex] : gridCells3D[cellIndex];
-        if (cell.inventoryItemObj != null)
+    public void RemoveItem(Dimension dimension, GameObject inventoryItemObj)
+    {
+        List<GridCell> gridCells = dimension == Dimension.TWO_DIMENSION ? gridCells2D : gridCells3D;
+
+        foreach (GridCell cell in gridCells)
         {
-            itemPool.ReturnItem(cell.inventoryItemObj);
-            cell.RemoveItem();
+            if (cell.inventoryItemObj != null)
+            {
+                if (cell.inventoryItemObj == inventoryItemObj)
+                {
+                    itemPool.ReturnItem(cell.inventoryItemObj);
+                    cell.RemoveItem();
+                    return;
+                }
+            }
         }
-
-        // 상태 삭제
-        itemToCellIndex.Remove(item);
     }
 
     public void RedrawUI(List<ItemData> items, Dimension dimension)
     {
         List<GridCell> gridCells = dimension == Dimension.TWO_DIMENSION ? gridCells2D : gridCells3D;
-        Dictionary<ItemData, int> itemToCellIndex = dimension == Dimension.TWO_DIMENSION ? itemToCellIndex2D : itemToCellIndex3D;
-
-        itemToCellIndex.Clear();
 
         foreach (GridCell cell in gridCells)
         {
@@ -152,25 +131,24 @@ public class InventoryUI : MonoBehaviour
 
             InventoryItem inventoryItem = itemObj.GetComponent<InventoryItem>();
             inventoryItem.Initialize(item);
-
-            itemToCellIndex[item] = cell.index;
         }
     }
-
 
     public void RefreshInventoryDimension()
     {
         if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
         {
-            Debug.Log("Current Inventory Set to 2D");
+            Debug.Log(logPrefix + "Current Inventory Set to 2D");
             contentPanel2D.gameObject.SetActive(true);
             contentPanel3D.gameObject.SetActive(false);
+            inventoryTitleText.text = "Inventory (2D)";
         }
         else
         {
-            Debug.Log("Current Inventory Set to 3D");
+            Debug.Log(logPrefix + "Current Inventory Set to 3D");
             contentPanel2D.gameObject.SetActive(false);
             contentPanel3D.gameObject.SetActive(true);
+            inventoryTitleText.text = "Inventory (3D)";
         }
     }
     #endregion
@@ -202,6 +180,7 @@ public class InventoryUI : MonoBehaviour
     #region Tooltip
     public void ShowTooltip(ItemData itemData, Vector2 position)
     {
+        Debug.Log(logPrefix + "Show Tooltip / itemData: " + itemData + ", position: " + position);
         itemTooltip.Show();
         itemTooltip.Initialize(itemData);
     }

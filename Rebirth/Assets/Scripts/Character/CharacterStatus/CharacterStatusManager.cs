@@ -18,8 +18,8 @@ public class CharacterStatusData
 
     public CharacterStatusData()
     {
-        Money = 0;
-        Health = 100;
+        Money = CharacterStatusManager.Instance ? CharacterStatusManager.Instance.maxMoney : 100;
+        Health = CharacterStatusManager.Instance ? CharacterStatusManager.Instance.maxHealth : 100;
 
         PlayerState = PlayerState.Default;
         CanAccessLibrary = false;
@@ -28,15 +28,15 @@ public class CharacterStatusData
         IsPaperBfixed = false;
         EndingID = 1;
 
-        LastScene = "Narration";
+        LastScene = "HeroHouse2D";
     }
 }
 
 public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
 {
     // Health-related variables
-    private int maxHealth = 100;
-    private int maxMoney = 99999;
+    public int maxHealth { get; private set; } = 100;
+    public int maxMoney { get; private set; } = 10;
     public int Health { get; private set; }
     public event Action<int> OnHealthChanged;
 
@@ -51,8 +51,6 @@ public class CharacterStatusManager : SingletonManager<CharacterStatusManager>
     public bool IsPaperSfixed  { get; set; }
     public bool IsPaperEfixed  { get;  set; }
     public int EndingID { get; set; }
-
-    private bool isInitialized = false;
 
 
     protected override void Awake()

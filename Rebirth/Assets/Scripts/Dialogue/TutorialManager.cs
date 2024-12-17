@@ -5,6 +5,8 @@ using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
+    private static string logPrefix = "[TutorialManager] ";
+
     public TextMeshProUGUI tutorialText; 
     [TextArea(3, 5)]
     public string[] tutorials; 
@@ -73,7 +75,7 @@ public class TutorialManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("튜토리얼이 끝났습니다.");
+            Debug.Log(logPrefix + "튜토리얼이 끝났습니다.");
             tutorialText.text = "";
             if (tutorialModal != null)
             {
@@ -95,7 +97,7 @@ public class TutorialManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("랜덤 대사가 없습니다.");
+            Debug.Log(logPrefix + "랜덤 대사가 없습니다.");
         }
     }
 }

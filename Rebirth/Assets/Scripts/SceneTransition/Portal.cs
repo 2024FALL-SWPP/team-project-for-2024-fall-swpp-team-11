@@ -19,16 +19,15 @@ public class Portal : MonoBehaviour, IInteractable
             {
                 if (interactionSound != null)
                 {
-                    AudioSource.PlayClipAtPoint(interactionSound, transform.position);
+                    AudioSource.PlayClipAtPoint(interactionSound, transform.position, 0.2f);
                 }
-                
+
                 await InteractWithSceneTransitionAsync();
             }
         }
         else
         {
-            Transform player = GameObject.FindWithTag("Player").transform;
-            StartCoroutine(MovePlayerAfterDelay(player, targetPosition, animationDelay));
+            Debug.LogWarning("Target scene is not set.");
         }
     }
 
@@ -40,7 +39,16 @@ public class Portal : MonoBehaviour, IInteractable
 
         await SceneTransitionManager.Instance.FadeInAsync();
         await SceneTransitionManager.Instance.LoadSceneAsync(targetScene);
+
+        AfterSceneLoad();
+
+        SceneTransitionManager.Instance.SetPlayerPosition(targetPosition);
         await SceneTransitionManager.Instance.FadeOutAsync();
+    }
+
+    protected virtual void AfterSceneLoad()
+    {
+        // 씬 로드 후 추가 작업 (선택 사항)
     }
 
 

@@ -85,4 +85,10 @@ public class NPCManager : SingletonManager<NPCManager>
         Debug.LogWarning(logPrefix + $"NPC '{npcName}' not found.");
         return null;
     }
+
+    private void OnDestroy()
+    {
+        SaveManager.save -= SaveNPCMetStatusToDisk;
+        SaveManager.load -= LoadNPCMetStatusFromDisk;
+    }
 }

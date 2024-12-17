@@ -5,6 +5,8 @@ public class CharacterInteract3D : MonoBehaviour
     private IInteractable currentInteractable;
     [SerializeField] private float interactionRange = 1f;
 
+    private bool isInteracting;
+
     private void Update()
     {
         FindClosestInteractable();
@@ -34,9 +36,9 @@ public class CharacterInteract3D : MonoBehaviour
         {
             if (currentInteractable != null)
                 currentInteractable.OnDefocus();
-            
+
             currentInteractable = closestInteractable;
-            
+
             if (currentInteractable != null)
                 currentInteractable.OnFocus();
         }
@@ -44,9 +46,11 @@ public class CharacterInteract3D : MonoBehaviour
 
     public void TryInteract()
     {
-        if (currentInteractable != null)
+        if (currentInteractable != null && !isInteracting)
         {
+            isInteracting = true;
             currentInteractable.Interact();
+            isInteracting = false;
         }
     }
 }

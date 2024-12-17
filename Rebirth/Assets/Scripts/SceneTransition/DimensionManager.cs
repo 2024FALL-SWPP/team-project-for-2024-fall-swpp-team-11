@@ -119,7 +119,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
         return true;
     }
 
-    private bool FindCurrentAnchor(GameObject currentPlayer, out Anchor currentAnchor)
+    public bool FindCurrentAnchor(GameObject currentPlayer, out Anchor currentAnchor)
     {
         currentAnchor = FindClosestAnchor(currentPlayer.transform.position);
         if (currentAnchor == null)
@@ -144,7 +144,7 @@ public class DimensionManager : SingletonManager<DimensionManager>
         return true;
     }
 
-    private bool FindCurrentPlayer(out GameObject currentPlayer)
+    public bool FindCurrentPlayer(out GameObject currentPlayer)
     {
         currentPlayer = GameObject.FindGameObjectWithTag("Player");
         if (currentPlayer == null)

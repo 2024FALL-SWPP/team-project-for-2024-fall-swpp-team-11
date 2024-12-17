@@ -13,6 +13,9 @@ public class NPCPaper : NPC
     public GameObject Damaged_BE;
     public GameObject Damaged_ES;
 
+    public NPC paperCompleteNPC;
+    private bool hasInteractedWithPaperNPC;
+
     private int currentPage = 0;
     private bool isImageShown = false;
     private bool isUDImageShown = false;
@@ -45,6 +48,13 @@ public class NPCPaper : NPC
                 {
                     if(CharacterStatusManager.Instance.GetPaper("e"))
                     {
+                        if(!hasInteractedWithPaperNPC){
+                            hasInteractedWithPaperNPC = true;
+                            NPC newNPC = Instantiate(paperCompleteNPC);
+                            if(newNPC != null){
+                                newNPC.Interact();
+                            }
+                        }
                         ShowUDImage(currentPage);
                         isImageShown = true;
                         isUDImageShown = true;

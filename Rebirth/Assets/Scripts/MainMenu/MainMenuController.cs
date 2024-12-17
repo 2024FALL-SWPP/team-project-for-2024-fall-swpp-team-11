@@ -21,16 +21,18 @@ public class MainMenuController : MonoBehaviour
     [Header("Menu Panels")]
     [SerializeField] private MenuPanel[] menuPanels;
 
-    private string gameSceneName = "Narration";
+    private static readonly string NARRATION_SCENE_NAME = "Narration";
+
+    private string gameSceneName = NARRATION_SCENE_NAME;
     private MenuPanel currentPanel;
 
     private void Awake()
     {
-        SaveManager.load += LoadStartSceneData;
-     
-        GameStateManager.Instance.LockView();
+        // SaveManager.load += LoadStartSceneData;
 
         CloseAllPanels();
+     
+        GameStateManager.Instance.LockView();
     }
 
     private void Start()
@@ -55,18 +57,23 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
-            DimensionManager.Instance.RefreshDimension(gameSceneName);
+            SaveManager.Instance.LoadGame();
             await SceneTransitionManager.Instance.SceneTransitionWithEffect(gameSceneName);
+            if (gameSceneName == NARRATION_SCENE_NAME)
+            {
+                GameStateManager.Instance.LockView();
+            }
         }
     }
 
     public void RestartGame()
     {
         // Restart Logic
+        SceneDataManager.Instance.ClearSceneData();
         DiskSaveSystem.ResetAllFiles();
-        SaveManager.Instance.LoadGame();
         
         // StartGame
+        gameSceneName = NARRATION_SCENE_NAME;
         StartGame();
     }
 

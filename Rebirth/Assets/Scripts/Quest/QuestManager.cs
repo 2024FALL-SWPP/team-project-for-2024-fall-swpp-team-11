@@ -202,4 +202,10 @@ public class QuestManager : SingletonManager<QuestManager>
             Debug.Log(logPrefix + $"ID: {q.Value.questID}, 제목: {q.Value.questTitle}, 상태: {qStatus}");
         }
     }
+
+    private void OnDestroy()
+    {
+        SaveManager.load -= LoadQuestManagerFromDisk;
+        SaveManager.save -= SaveQuestManagerToDisk;
+    }
 }

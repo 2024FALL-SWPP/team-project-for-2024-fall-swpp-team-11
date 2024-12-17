@@ -4,26 +4,32 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 {
+    private static string logPrefix = "[SceneTransitionManager] ";
+
     public Animator fadeAnimator;
     public Canvas canvas;
     public float fadeDuration = 1f;
-    private Vector3 playerTargetPosition;
 
     private void Start()
     {
         canvas.enabled = false;
     }
 
-    private void SetPlayerPosition()
+    public string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
+    public void SetPlayerPosition(Vector3 position)
     {
         Transform player = GameObject.FindWithTag("Player")?.transform;
         if (player != null)
         {
-            player.position = playerTargetPosition;
+            player.position = position;
         }
         else
         {
-            Debug.LogError("플레이어를 찾을 수 없습니다.");
+            Debug.LogWarning(logPrefix + "플레이어를 찾을 수 없습니다." + " Current Scene: " + SceneManager.GetActiveScene().name);
         }
     }
 
@@ -53,6 +59,8 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 
     public async Task LoadSceneAsync(string sceneName)
     {
+        Debug.Log(logPrefix + "Scene Transition: " + GetCurrentScene() + " -> " + sceneName);
+
         // 현재 씬 데이터 저장
         await SceneDataManager.Instance.SaveCurrentSceneDataAsync();
 

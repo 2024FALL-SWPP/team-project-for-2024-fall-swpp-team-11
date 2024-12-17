@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: PaperComplete 2
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: "\uC624\uB798\uB41C \uAE00\uC790\uB4E4\uC774 \uBD80\uB4DC\uB7FD\uAC8C
+    \uB5A0\uC62C\uB77C, \uB9C8\uCE68\uB0B4 \uC78A\uD600\uC9C4 \uC774\uC57C\uAE30\uAC00
+    \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0B8\uB2E4."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 0}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  isSelfSpeak: 0
+  nextNode: {fileID: 11400000, guid: 847989ebe4fc842bdbcd4c1b9c13d2e9, type: 2}
