@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SaveManager : SingletonManager<SaveManager>
 {
+    private static string logPrefix = "[SaveManager] ";
     public static event System.Action save;
     public static event System.Action load;
     public float autoSaveInterval = 300f;
@@ -29,7 +30,7 @@ public class SaveManager : SingletonManager<SaveManager>
         {
             yield return new WaitForSeconds(autoSaveInterval);
             SaveGame();
-            Debug.Log("자동저장 되었습니다.");
+            Debug.Log(logPrefix + "자동저장 되었습니다.");
         }
     }
 

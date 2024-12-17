@@ -5,11 +5,11 @@ public class Portal3D : Portal
 {
     public override void OnFocus()
     {
-        Debug.Log("3D focus");
+        // Debug.Log("3D focus");
     }
 
     public override void OnDefocus()
     {
-        Debug.Log("3D defocus");
+        // Debug.Log("3D defocus");
     }
 }

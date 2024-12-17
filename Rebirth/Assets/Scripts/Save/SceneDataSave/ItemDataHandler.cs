@@ -32,7 +32,6 @@ public class ItemDataHandler : ISceneDataHandler
 
         foreach (var itemSceneData in sceneData.itemSceneDatas)
         {
-            Debug.Log("itemSceneData: " + itemSceneData.itemName);
             tasks.Add(LoadAndInstantiateAsync(itemSceneData));
         }
 

@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
 {
+    private static string logPrefix = "[SceneTransitionManager] ";
+
     public Animator fadeAnimator;
     public Canvas canvas;
     public float fadeDuration = 1f;
@@ -22,7 +24,7 @@ public class SceneTransitionManager : SingletonManager<SceneTransitionManager>
         }
         else
         {
-            Debug.LogError("플레이어를 찾을 수 없습니다.");
+            Debug.LogError(logPrefix + "플레이어를 찾을 수 없습니다." + " Current Scene: " + SceneManager.GetActiveScene().name);
         }
     }
 

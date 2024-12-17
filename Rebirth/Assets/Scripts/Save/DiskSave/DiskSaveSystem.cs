@@ -9,10 +9,11 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using UnityEditor;
-using UnityEngine.SceneManagement;
 
 public class DiskSaveSystem
 {
+    private static string logPrefix = "[DiskSaveSystem] ";
+
     #region Inventory Management
     public static void SaveInventoryDataToDisk(InventoryDataContainer inventoryData)
     {
@@ -27,6 +28,9 @@ public class DiskSaveSystem
         string json = JsonConvert.SerializeObject(itemNames, Formatting.Indented);
 
         File.WriteAllText(savePath, json);
+    
+        Debug.Log(logPrefix + "Saving inventory data to disk.");
+        Debug.Log(logPrefix + "Inventory data: " + json);
     }
 
     public static async Task<List<ItemData>> LoadInventoryDataFromDiskAsync()
@@ -70,6 +74,9 @@ public class DiskSaveSystem
 
         Addressables.Release(handle);
 
+        Debug.Log(logPrefix + "Loaded inventory data from disk.");
+        Debug.Log(logPrefix + "Inventory data: " + json);
+
         return loadedItems;
     }
     #endregion
@@ -82,6 +89,9 @@ public class DiskSaveSystem
     {
         var json = JsonUtility.ToJson(sceneData);
         File.WriteAllText(path, json);
+
+        Debug.Log(logPrefix + $"Saving scene data to disk: {path}");
+        Debug.Log(logPrefix + $"Scene data: {json}");
     }
 
     public static async Task<Dictionary<string, SceneData>> LoadAllSceneDataFromDisk()
@@ -105,6 +115,12 @@ public class DiskSaveSystem
         }
         await Task.WhenAll(tasks);
 
+        Debug.Log(logPrefix + "Loaded all scene data from disk.");
+        for (int i = 0; i < sceneDatas.Count; i++)
+        {
+            Debug.Log(logPrefix + $"Scene data {i}: {JsonUtility.ToJson(sceneDatas.ElementAt(i).Value)}");
+        }
+
         return sceneDatas;
     }
     #endregion
@@ -116,7 +132,6 @@ public class DiskSaveSystem
     {
         string lastScene;
         lastScene = SceneManager.GetActiveScene().name;
-        Debug.Log("[SaveCharacterStatusToDisk] Last Scene: " + lastScene);
 
         if (lastScene == "MainMenu" || lastScene == "EndingScene" || lastScene == "Narration")
             lastScene = "HeroHouse2D";
@@ -136,6 +151,9 @@ public class DiskSaveSystem
 
         string json = JsonConvert.SerializeObject(characterStatusData, Formatting.Indented);
         File.WriteAllText(CharacterStatusSavePath, json);
+
+        Debug.Log(logPrefix + "Saving character status to disk.");
+        Debug.Log(logPrefix + "Character status: " + json);
     }
 
     private static string GetLastScene()
@@ -159,6 +177,9 @@ public class DiskSaveSystem
 
         string json = File.ReadAllText(CharacterStatusSavePath);
         CharacterStatusData characterStatusData = JsonConvert.DeserializeObject<CharacterStatusData>(json);
+
+        Debug.Log(logPrefix + "Loaded character status from disk.");
+        Debug.Log(logPrefix + "Character status: " + json);
         return characterStatusData;
     }
     #endregion
@@ -172,12 +193,16 @@ public class DiskSaveSystem
             // Debug.Log($"Deleting file: {file}");
             File.Delete(file);
         }
+
+        Debug.Log(logPrefix + "All save files deleted.");
     }
 
     public static void ResetFilesExceptPlayerState()
     {
         DeleteAllSaveFilesExceptCharacterStatus();
         ResetCharacterStatusExceptPlayerState();
+        
+        Debug.Log(logPrefix + "All save files except player state deleted.");
     }
 
     public static void ResetCharacterStatusExceptPlayerState()
@@ -218,6 +243,9 @@ public class DiskSaveSystem
     {        
         string json = JsonConvert.SerializeObject(npcMetStatus, Formatting.Indented);
         File.WriteAllText(NpcMetStatusSavePath, json);
+
+        Debug.Log(logPrefix + "Saving NPC met status to disk.");
+        Debug.Log(logPrefix + "NPC met status: " + json);
     }
 
     public static Dictionary<string, bool> LoadNPCMetStatusFromDisk()
@@ -229,6 +257,10 @@ public class DiskSaveSystem
         }
 
         string json = File.ReadAllText(NpcMetStatusSavePath);
+
+        Debug.Log(logPrefix + "Loaded NPC met status from disk.");
+        Debug.Log(logPrefix + "NPC met status: " + json);
+
         return JsonConvert.DeserializeObject<Dictionary<string, bool>>(json) ?? new Dictionary<string, bool>();
     }
     #endregion
@@ -272,6 +304,10 @@ public class DiskSaveSystem
         // Save quest statuses
         string statusJson = JsonConvert.SerializeObject(questStatuses, Formatting.Indented);
         File.WriteAllText(QuestStatusSavePath, statusJson);
+
+        Debug.Log(logPrefix + "Saving quest manager to disk.");
+        Debug.Log(logPrefix + "Quest data: " + questJson);
+        Debug.Log(logPrefix + "Quest status data: " + statusJson);
     }
 
     public static async Task<(Dictionary<int, QuestData>, Dictionary<int, QuestStatus>)> LoadQuestManagerFromDiskAsync()
@@ -329,6 +365,10 @@ public class DiskSaveSystem
             questStatuses = JsonConvert.DeserializeObject<Dictionary<int, QuestStatus>>(statusJson) 
                 ?? new Dictionary<int, QuestStatus>();
         }
+
+        Debug.Log(logPrefix + "Loaded quest manager from disk.");
+        Debug.Log(logPrefix + "Quest data: " + JsonConvert.SerializeObject(quests, Formatting.Indented));
+        Debug.Log(logPrefix + "Quest status data: " + JsonConvert.SerializeObject(questStatuses, Formatting.Indented));
 
         return (quests, questStatuses);
     }
