@@ -17,7 +17,7 @@ public class ShopManager : SingletonManager<ShopManager>
     public readonly string weirdPotionCure2DName = "2DWeirdPotionCure";
     public readonly string weirdPotionCure3DName = "3DWeirdPotionCure";
 
-    private ShopUI shopUI; 
+    public ShopUI shopUI; 
     private bool shopUIActivated = false;
 
     private HashSet<string> purchasedItems = new HashSet<string>();
@@ -30,7 +30,7 @@ public class ShopManager : SingletonManager<ShopManager>
 
     private void InitializeShopUI()
     {
-        shopUI = FindObjectOfType<ShopUI>();
+        // shopUI = FindObjectOfType<ShopUI>();
         if (shopUI == null)
         {
             Debug.LogError("ShopUI component not found in the scene.");

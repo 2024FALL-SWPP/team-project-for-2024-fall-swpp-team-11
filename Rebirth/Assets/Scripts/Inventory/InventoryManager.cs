@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InventoryManager : SingletonManager<InventoryManager>
 {
+    private static string logPrefix = "[InventoryManager] ";
+
     private InventoryDataContainer inventoryDataContainer;
     private InventoryUI inventoryUI;
     private int inventoryCapacity = 32;
@@ -21,7 +23,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
         inventoryUI = GetComponent<InventoryUI>();
         inventoryUI.SetCapacity(inventoryCapacity);
 
-        Debug.Log($"Current inventory from dimension : {DimensionManager.Instance.GetCurrentDimension()}");
+        Debug.Log(logPrefix + $"Awake // Current inventory from dimension : {DimensionManager.Instance.GetCurrentDimension()}");
         inventoryUI.RefreshInventoryDimension();
     }
 
@@ -73,11 +75,11 @@ public class InventoryManager : SingletonManager<InventoryManager>
         {
             // 아이템 삭제
             RemoveItem(targetItem);
-            Debug.Log($"{itemName} 아이템이 인벤토리에서 삭제되었습니다.");
+            Debug.Log(logPrefix + $"{itemName} 아이템이 인벤토리에서 삭제되었습니다.");
         }
         else
         {
-            Debug.LogWarning($"{itemName} 아이템이 인벤토리에 없습니다.");
+            Debug.LogWarning(logPrefix + $"{itemName} 아이템이 인벤토리에 없습니다.");
         }
     }
 

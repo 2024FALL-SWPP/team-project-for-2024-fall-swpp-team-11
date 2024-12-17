@@ -4,6 +4,8 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
+    private static string logPrefix = "[InventoryUI] ";
+
     [Header("UI References")]
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private Transform contentPanel2D;
@@ -57,7 +59,7 @@ public class InventoryUI : MonoBehaviour
         if (targetItemData != null)
             itemToCellIndex[targetItemData] = targetCell.index;
 
-        Debug.Log("Cell mapping updated via event.");
+        Debug.Log(logPrefix + "Cell mapping updated via event.");
     }
     #endregion
 
@@ -93,7 +95,7 @@ public class InventoryUI : MonoBehaviour
         GridCell emptyCell = gridCells.Find(cell => cell.IsEmpty());
         if (emptyCell == null)
         {
-            Debug.LogWarning("No empty cell available.");
+            Debug.LogWarning(logPrefix + "No empty cell available.");
             return;
         }
 
@@ -114,7 +116,7 @@ public class InventoryUI : MonoBehaviour
 
         if (!itemToCellIndex.TryGetValue(item, out int cellIndex))
         {
-            Debug.LogWarning("Item not found in UI.");
+            Debug.LogWarning(logPrefix + "Item not found in UI.");
             return;
         }
 
@@ -165,14 +167,14 @@ public class InventoryUI : MonoBehaviour
     {
         if (DimensionManager.Instance.GetCurrentDimension() == Dimension.TWO_DIMENSION)
         {
-            Debug.Log("Current Inventory Set to 2D");
+            Debug.Log(logPrefix + "Current Inventory Set to 2D");
             contentPanel2D.gameObject.SetActive(true);
             contentPanel3D.gameObject.SetActive(false);
             inventoryTitleText.text = "Inventory (2D)";
         }
         else
         {
-            Debug.Log("Current Inventory Set to 3D");
+            Debug.Log(logPrefix + "Current Inventory Set to 3D");
             contentPanel2D.gameObject.SetActive(false);
             contentPanel3D.gameObject.SetActive(true);
             inventoryTitleText.text = "Inventory (3D)";

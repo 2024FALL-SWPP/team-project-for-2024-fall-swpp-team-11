@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4024d56972f74fb6abe1e7c8a9816ed, type: 2}
   weirdPotionUsageNPC: {fileID: 1151777695009496591, guid: f5c82c2af432545b2a09805667f8a59b, type: 3}
   weirdPotionCureUsageNPC: {fileID: 6325163789450842266, guid: 8774140ff69d8462ea0727f3fca457af, type: 3}
+  shopUI: {fileID: 5928647662232836324}
 --- !u!1 &1627881936411731322
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 800}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1627881936411731326
 CanvasRenderer:
@@ -1088,7 +1089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1627881937245127093
 RectTransform:
   m_ObjectHideFlags: 0
