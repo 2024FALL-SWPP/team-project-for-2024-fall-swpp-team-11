@@ -58,7 +58,7 @@ public class ShopUI : MonoBehaviour
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
 
-        shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(itemData.itemName);
+        shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(itemData.displayName);
         shopItemTransform.Find("costText").GetComponent<TextMeshProUGUI>().SetText(itemData.price.ToString());
         shopItemTransform.Find("itemImage").GetComponent<Image>().sprite = itemData.icon;
         shopItemTransform.Find("descriptionText").GetComponent<TextMeshProUGUI>().SetText(itemData.description);

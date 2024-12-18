@@ -6,24 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/MovementTestScene.unity
-    guid: aff3859b653144d358b2976741c7affc
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 948550376a7ae5d4e87fed1009343b0d
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/MovementTestScene.unity
+    guid: aff3859b653144d358b2976741c7affc
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/InventoryTestScene.unity
     guid: 51cf462f466d74c01af7d0337ab2ca96
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/NPC Test.unity
     guid: 70a91573cb85ede44bf2b2af6fb87192
   - enabled: 1
     path: Assets/Scenes/3D Scenes/Village3D.unity
     guid: 32b7b11009abe446bb5401078b7542de
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/MultiTest2D.unity
     guid: d326c738eee9641558d0caefae4b9b77
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/MultiTest3D.unity
     guid: d1f273755124c4869a32ee0c47093a34
   - enabled: 1
@@ -47,10 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/2D Scenes/Library2D.unity
     guid: b3e65b7857c290f4e852292cdd0403a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/InventoryTest2D.unity
     guid: 826f0eab1862e420cb8838a3310a65a8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/InventoryTest3D.unity
     guid: 42c9d7e0898ac4155b9a120e4f19be4e
   - enabled: 1
@@ -59,10 +59,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/2D Scenes/Dungeon2D.unity
     guid: fdad1e44abd894ee8832e0be27060160
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/TestCharacterStatus3D.unity
     guid: e3929dc9f721c4472a2b5d8dc70c7367
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/TestCharacterStatus2D.unity
     guid: 08f3b174f99504ce69e32ed40006a0ef
   - enabled: 1
@@ -74,18 +74,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndingScene.unity
     guid: 5a53f53fdcbd54c65938d88e504f5bc6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/InputSystemTest3D.unity
     guid: 2837d0bf14950034e836c75be05e2f91
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/InputSystemTest2D.unity
     guid: 331a73fdea469e34abd8ea2ba946bf62
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/StoreTest2D.unity
     guid: 6aa06f30273a344eaa384aea93cc6b86
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/StoreTest3D.unity
     guid: 3c4f5dd08d85a43829bdcba6df1cef43
+  - enabled: 1
+    path: Assets/Scenes/2D Scenes/Maze2D.unity
+    guid: e2d498709f6d64558bb58a737ef805d2
+  - enabled: 1
+    path: Assets/Scenes/Narration.unity
+    guid: 2c8ddaba1eb494551b33514825a5761f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 0a079d54ac52e44458f2c7389d972a26, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 97ccc6d6107f7f741b70835aa600e053, type: 2}

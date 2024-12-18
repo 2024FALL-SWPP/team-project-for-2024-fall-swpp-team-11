@@ -7,11 +7,17 @@ public class ShopManager : SingletonManager<ShopManager>
     [Header("Shop Items")]
     [SerializeField] private List<ItemData> allShopItems; // Master list of all items
 
+    [SerializeField] private NPC weirdPotionUsageNPC;
+    [SerializeField] private NPC weirdPotionCureUsageNPC;
+
+    private bool hasInteractedWithPotion = false;
+    private bool hasInteractedWithPotionCure = false;
+
     public readonly string weirdPotion2DName = "2DWeirdPotion";
     public readonly string weirdPotionCure2DName = "2DWeirdPotionCure";
     public readonly string weirdPotionCure3DName = "3DWeirdPotionCure";
 
-    private ShopUI shopUI; 
+    public ShopUI shopUI; 
     private bool shopUIActivated = false;
 
     private HashSet<string> purchasedItems = new HashSet<string>();
@@ -24,7 +30,7 @@ public class ShopManager : SingletonManager<ShopManager>
 
     private void InitializeShopUI()
     {
-        shopUI = FindObjectOfType<ShopUI>();
+        // shopUI = FindObjectOfType<ShopUI>();
         if (shopUI == null)
         {
             Debug.LogError("ShopUI component not found in the scene.");
@@ -64,12 +70,16 @@ public class ShopManager : SingletonManager<ShopManager>
 
         shopUI.gameObject.SetActive(true); // Show shop UI
         GameStateManager.Instance.LockView(); // Lock camera movement
+
+        UIManager.Instance.AddToUIStack(shopUI.gameObject);
     }
 
     private void CloseShop()
     {
         shopUI.gameObject.SetActive(false); // Hide shop UI
         GameStateManager.Instance.UnlockView(); // Unlock camera movement
+
+        UIManager.Instance.RemoveFromUIStack(shopUI.gameObject);
     }
 
     public Dimension GetCurrentDimension()
@@ -211,6 +221,32 @@ public class ShopManager : SingletonManager<ShopManager>
         {
             UpdatePlayerState();
         }
+        if(IsWeirdPotionPurchased()){
+            if(!hasInteractedWithPotion){
+                hasInteractedWithPotion = true;
+                NPC newNPC = Instantiate(weirdPotionUsageNPC) as NPC;
+                if (newNPC != null)
+                {
+                    newNPC.Interact();
+                    return;
+                }
+            }
+        }
+        if(IsWeirdPotionCurePurchased()){
+            if(!hasInteractedWithPotionCure){
+                hasInteractedWithPotionCure = true;
+                NPC newNPC = Instantiate(weirdPotionCureUsageNPC) as NPC;
+                if (newNPC != null)
+                {
+                    newNPC.Interact();
+                    return;
+                }
+            }
+        }
+
+
+
+       
     }
 
     private void UpdatePlayerState()

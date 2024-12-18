@@ -7,6 +7,7 @@ public class CharacterMovement3D : MonoBehaviour
     public float jumpForce = 500f;
     private Rigidbody rb;
     private bool canJump = true;
+    private Collider characterCollider;
 
     [Header("Audio Clips")]
     public AudioClip footstepSound;
@@ -26,6 +27,7 @@ public class CharacterMovement3D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        characterCollider = GetComponent<Collider>();
     }
 
     void Update()
@@ -41,6 +43,12 @@ public class CharacterMovement3D : MonoBehaviour
                     audioSource.PlayOneShot(landSound); // 착지 소리 재생
                 }
             }
+        }
+
+        // add falling force
+        if (rb && rb.velocity.y < 0 && !IsGrounded())
+        {
+            rb.AddForce(Vector3.down * 2f, ForceMode.Acceleration);
         }
     }
 
@@ -94,7 +102,7 @@ public class CharacterMovement3D : MonoBehaviour
     private bool IsGrounded()
     {
         Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
-        float rayDist = 0.2f;
+        float rayDist = 0.8f;
 
         return Physics.Raycast(rayOrigin, -Vector3.up, rayDist);
     }

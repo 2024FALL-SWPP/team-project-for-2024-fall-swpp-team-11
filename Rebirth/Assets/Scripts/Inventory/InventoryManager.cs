@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InventoryManager : SingletonManager<InventoryManager>
 {
+    private static string logPrefix = "[InventoryManager] ";
+
     private InventoryDataContainer inventoryDataContainer;
     private InventoryUI inventoryUI;
     private int inventoryCapacity = 32;
@@ -20,10 +22,8 @@ public class InventoryManager : SingletonManager<InventoryManager>
         
         inventoryUI = GetComponent<InventoryUI>();
         inventoryUI.SetCapacity(inventoryCapacity);
-    }
 
-    private void Start()
-    {
+        Debug.Log(logPrefix + $"Awake // Current inventory from dimension : {DimensionManager.Instance.GetCurrentDimension()}");
         inventoryUI.RefreshInventoryDimension();
     }
 
@@ -47,14 +47,46 @@ public class InventoryManager : SingletonManager<InventoryManager>
     {
         if (inventoryDataContainer.GetTotalItemCount() >= inventoryCapacity) return;
 
-        inventoryDataContainer.AddItem(itemData, itemData.dimension);
-        inventoryUI.AddItem(itemData, itemData.dimension);
+        inventoryDataContainer.AddItem(itemData);
+        inventoryUI.AddItem(itemData);
     }
 
     public void RemoveItem(ItemData itemData)
     {
-        inventoryDataContainer.RemoveItem(itemData, itemData.dimension);
-        inventoryUI.RemoveItem(itemData, itemData.dimension);
+        inventoryDataContainer.RemoveItem(itemData);
+        inventoryUI.RemoveItem(itemData);
+    }
+
+    public void RemoveItem(ItemData itemData, GameObject inventoryItemObj)
+    {
+        inventoryDataContainer.RemoveItem(itemData);
+        inventoryUI.RemoveItem(itemData.dimension, inventoryItemObj);
+    }
+
+    public void RemoveItemByName(string itemName)
+    {
+        Dimension currentDimension = DimensionManager.Instance.GetCurrentDimension();
+        List<ItemData> items2D = inventoryDataContainer.GetItems(Dimension.TWO_DIMENSION);
+        List<ItemData> items3D = inventoryDataContainer.GetItems(Dimension.THREE_DIMENSION);
+        
+        // concatenate two lists
+        List<ItemData> items = new List<ItemData>();
+        items.AddRange(items2D);
+        items.AddRange(items3D);
+
+        // 이름이 itemName과 일치하는 아이템 검색
+        ItemData targetItem = items.Find(item => item.itemName == itemName);
+
+        if (targetItem != null)
+        {
+            // 아이템 삭제
+            RemoveItem(targetItem);
+            Debug.Log(logPrefix + $"{itemName} 아이템이 인벤토리에서 삭제되었습니다.");
+        }
+        else
+        {
+            Debug.LogWarning(logPrefix + $"{itemName} 아이템이 인벤토리에 없습니다.");
+        }
     }
 
     public bool HasItem(ItemData itemData)
@@ -125,7 +157,7 @@ public class InventoryManager : SingletonManager<InventoryManager>
         inventoryDataContainer = new InventoryDataContainer();
         foreach (ItemData item in loadedItems)
         {
-            inventoryDataContainer.AddItem(item, item.dimension);
+            inventoryDataContainer.AddItem(item);
         }
 
         RedrawUI(Dimension.TWO_DIMENSION);

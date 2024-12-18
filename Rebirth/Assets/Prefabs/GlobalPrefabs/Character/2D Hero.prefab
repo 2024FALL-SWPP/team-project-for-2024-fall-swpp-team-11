@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -5776478172385105242}
   - component: {fileID: 8307887120053942512}
   - component: {fileID: -7734398499249470903}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 2D Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8998401ecb46c4bf3a77a5941333b1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionRange: 4
 --- !u!114 &-6637424358512917164
 MonoBehaviour:
   m_ObjectHideFlags: 0

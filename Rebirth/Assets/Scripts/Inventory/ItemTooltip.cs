@@ -20,7 +20,8 @@ public class ItemTooltip
     public void Initialize(ItemData itemData)
     {
         itemIcon.sprite = itemData.icon;
-        itemName.text = itemData.itemName;
+        // itemName.text = itemData.itemName;
+        itemName.text = itemData.displayName;
         itemDescription.text = itemData.description;
     }
 

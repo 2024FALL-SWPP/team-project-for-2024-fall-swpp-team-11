@@ -3,6 +3,9 @@ using UnityEngine;
 public class CharacterInteract3D : MonoBehaviour
 {
     private IInteractable currentInteractable;
+    [SerializeField] private float interactionRange = 1f;
+
+    private bool isInteracting;
 
     private void Update()
     {
@@ -11,7 +14,7 @@ public class CharacterInteract3D : MonoBehaviour
 
     private void FindClosestInteractable()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactionRange);
         IInteractable closestInteractable = null;
         float closestDistance = Mathf.Infinity;
 
@@ -33,9 +36,9 @@ public class CharacterInteract3D : MonoBehaviour
         {
             if (currentInteractable != null)
                 currentInteractable.OnDefocus();
-            
+
             currentInteractable = closestInteractable;
-            
+
             if (currentInteractable != null)
                 currentInteractable.OnFocus();
         }
@@ -43,9 +46,11 @@ public class CharacterInteract3D : MonoBehaviour
 
     public void TryInteract()
     {
-        if (currentInteractable != null)
+        if (currentInteractable != null && !isInteracting)
         {
+            isInteracting = true;
             currentInteractable.Interact();
+            isInteracting = false;
         }
     }
 }

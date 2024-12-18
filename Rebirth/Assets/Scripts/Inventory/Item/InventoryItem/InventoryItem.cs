@@ -27,5 +27,7 @@ public class InventoryItem : MonoBehaviour
         itemIcon.sprite = data.icon;
         itemdragHandler.itemData = data;
         itemPointerHandler.itemData = data;
+        
+        Debug.Log("[InventoryItem] Initialize / itemData : " + itemData + ".");
     }
 }

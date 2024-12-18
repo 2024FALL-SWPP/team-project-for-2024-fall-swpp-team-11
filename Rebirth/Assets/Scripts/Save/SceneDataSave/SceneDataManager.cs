@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+// using System.Diagnostics;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class SceneDataManager : SingletonManager<SceneDataManager>
 {
@@ -33,6 +35,7 @@ public class SceneDataManager : SingletonManager<SceneDataManager>
     {
         if (sceneDatas.TryGetValue(scene.name, out var sceneData))
         {
+            // Debug.Log($"Restoring scene data for {scene.name}");
             CleanUpScene();
 
             var tasks = new List<Task>();
@@ -84,6 +87,7 @@ public class SceneDataManager : SingletonManager<SceneDataManager>
             }
         }
         await Task.WhenAll(tasks);
+        dirtySceneNames.Clear();
     }
 
     public async Task LoadSceneDatasFromDisk()
@@ -101,5 +105,16 @@ public class SceneDataManager : SingletonManager<SceneDataManager>
         {
             Destroy(item.gameObject);
         }
+    }
+
+    public async void ClearSceneData()
+    {
+        sceneDatas.Clear();
+        if (dirtySceneNames.Count > 0)
+        {
+            // flush
+            await SaveSceneDatasToDisk();
+        }
+        dirtySceneNames.Clear();
     }
 }

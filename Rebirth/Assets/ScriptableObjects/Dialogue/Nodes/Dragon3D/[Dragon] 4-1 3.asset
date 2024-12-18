@@ -14,14 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeID: 
   dialogueText: 
-  options: []
+  options:
+  - optionText: "\uB9E8\uC190\uC73C\uB85C \uC2F8\uC6B4\uB2E4."
+    nextNode: {fileID: 11400000, guid: 08790291c1e6541ecaf204395c4851f1, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uB2E8\uAC80\uC73C\uB85C \uC2F8\uC6B4\uB2E4."
+    nextNode: {fileID: 11400000, guid: 4a3ba052c1fa24582920f5dc96aa27c6, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  - optionText: "\uCE58\uC720\uC758 \uBB3C\uC57D\uC744 \uC0AC\uC6A9\uD55C\uB2E4."
+    nextNode: {fileID: 11400000, guid: 4695b726ce7734f4db74d77d99fedbe5, type: 2}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
   conversationNpcName: 
   isSelfSpeak: 1
   associatedQuest: {fileID: 0}
   textNodePairs:
   - optionText: "\uB9E8\uC190\uC73C\uB85C \uC2F8\uC6B4\uB2E4."
-    nextNode: {fileID: 11400000, guid: c5238ea330ee14492bffbb8149a24271, type: 2}
+    nextNode: {fileID: 11400000, guid: 08790291c1e6541ecaf204395c4851f1, type: 2}
   - optionText: "\uB2E8\uAC80\uC73C\uB85C \uC2F8\uC6B4\uB2E4."
-    nextNode: {fileID: 11400000, guid: 5cdbd51a553e740f2bdc28d96c13765a, type: 2}
+    nextNode: {fileID: 11400000, guid: 4a3ba052c1fa24582920f5dc96aa27c6, type: 2}
   - optionText: "\uCE58\uC720\uC758 \uBB3C\uC57D\uC744 \uC0AC\uC6A9\uD55C\uB2E4."
-    nextNode: {fileID: 11400000, guid: 02a4273596edf443f8f42340e1ce7c4d, type: 2}
+    nextNode: {fileID: 11400000, guid: 4695b726ce7734f4db74d77d99fedbe5, type: 2}

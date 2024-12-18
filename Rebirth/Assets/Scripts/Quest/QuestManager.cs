@@ -27,6 +27,9 @@ public class QuestManager : SingletonManager<QuestManager>
     {
         base.Awake();
 
+        SaveManager.load += LoadQuestManagerFromDisk;
+        SaveManager.save += SaveQuestManagerToDisk;
+
         if (questUI == null)
         {
             Debug.LogError(logPrefix + "QuestUI not found.");
@@ -44,6 +47,17 @@ public class QuestManager : SingletonManager<QuestManager>
         {
             Debug.LogWarning(logPrefix + "Accept Quest Sound is not assigned.");
         }
+    }
+
+    private void SaveQuestManagerToDisk()
+    {
+        DiskSaveSystem.SaveQuestManagerToDisk(quests, questStatuses);
+    }
+
+    private async void LoadQuestManagerFromDisk()
+    {
+        (quests, questStatuses) = await DiskSaveSystem.LoadQuestManagerFromDiskAsync();
+        questUI.RefreshQuestDisplay();
     }
 
     private void Update()
@@ -187,5 +201,11 @@ public class QuestManager : SingletonManager<QuestManager>
             QuestStatus qStatus = questStatuses[q.Key];
             Debug.Log(logPrefix + $"ID: {q.Value.questID}, 제목: {q.Value.questTitle}, 상태: {qStatus}");
         }
+    }
+
+    private void OnDestroy()
+    {
+        SaveManager.load -= LoadQuestManagerFromDisk;
+        SaveManager.save -= SaveQuestManagerToDisk;
     }
 }

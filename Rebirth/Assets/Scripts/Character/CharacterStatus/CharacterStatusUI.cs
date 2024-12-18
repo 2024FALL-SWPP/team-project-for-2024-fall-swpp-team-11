@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterStatusUI : MonoBehaviour, ICharacterStatusUI
 {
@@ -21,10 +22,13 @@ public class CharacterStatusUI : MonoBehaviour, ICharacterStatusUI
         CharacterStatusManager.Instance.OnMoneyChanged += UpdateMoneyUI;
         CharacterStatusManager.Instance.OnHealthChanged += UpdateHealthUI;
 
-        UpdateCurrentCharacterStatusUI();
+        // UpdateCurrentCharacterStatusUI();
         SetMaxHealth(CharacterStatusManager.Instance.GetMaxHealth());   
         UpdateMoneyUI(CharacterStatusManager.Instance.Money);
         UpdateHealthUI(CharacterStatusManager.Instance.Health);
+
+        characterStatusPanel2D.SetActive(false);
+        characterStatusPanel3D.SetActive(false);
     }
 
     private void UpdateCurrentCharacterStatusUI()
@@ -43,7 +47,6 @@ public class CharacterStatusUI : MonoBehaviour, ICharacterStatusUI
 
             currentCharacterStatusUI = characterStatusUI3D;
         }
-        Debug.Log(logPrefix + "currentCharacterStatusUI: " + currentCharacterStatusUI);
     }
     
     public void UpdateMoneyUI(int currentMoney)

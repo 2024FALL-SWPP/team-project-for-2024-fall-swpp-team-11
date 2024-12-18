@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfd2277d71457f4d89dfa4e3df1cea0, type: 3}
+  m_Name: WeirdPotionUsage 2
+  m_EditorClassIdentifier: 
+  nodeID: 
+  dialogueText: "\uC548\uC804\uC131\uC740 \uC7A5\uB2F4\uD560 \uC218 \uC5C6\uC9C0\uB9CC,\n\uD55C
+    \uBAA8\uAE08 \uB9C8\uC2DC\uBA74 \uBB34\uC5B8\uAC00 \uBD84\uBA85 \uC77C\uC5B4\uB098\uAE34
+    \uD560\uAC81\uB2C8\uB2E4."
+  options:
+  - optionText: Continue
+    nextNode: {fileID: 0}
+    fallbackNode: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    onSelectActions:
+      m_PersistentCalls:
+        m_Calls: []
+  conversationNpcName: 
+  isSelfSpeak: 0
+  nextNode: {fileID: 11400000, guid: e0619085cfcdd4b7f96c28c466c1ec33, type: 2}
